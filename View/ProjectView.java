@@ -52,8 +52,8 @@ public class ProjectView extends JFrame{
         assignStudentButton.setVisible(true);
     }
 
-    public void getStudentID(){
-        JOptionPane.showInputDialog("Enter the Student's ID");
+    public String getStudentID(){
+        return JOptionPane.showInputDialog("Enter the Student's ID");
     }
     
     public void setProjectNameLabel(String name){
