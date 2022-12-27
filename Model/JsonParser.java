@@ -25,12 +25,12 @@ public class JsonParser<T> {
     }
 
     public void serialize() throws StreamWriteException, DatabindException, IOException{
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = Mapper.INSTANCE.getMapper();
         mapper.writerWithDefaultPrettyPrinter().writeValue(dataFile, list);;
     }
     
     public ArrayList<T> deserialize() throws StreamReadException, DatabindException, IOException{
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = Mapper.INSTANCE.getMapper();
         CollectionType collectionType = mapper.getTypeFactory().constructCollectionType(ArrayList.class, this.type);
         this.list = mapper.readValue(dataFile, collectionType);
         return this.list;
