@@ -14,7 +14,6 @@ public class Viewboard {
         " " + projects.getLecturer().getUsername() + 
         " " + projects.getStudentAssigned().getUsername() + 
         " " + projects.getIsAssigned() + 
-        " " + projects.getIsActive() +
-        " " + projects.getFavourite());
+        " " + projects.getIsActive());
     }
 }
