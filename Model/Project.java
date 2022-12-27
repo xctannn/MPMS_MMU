@@ -10,12 +10,11 @@ public class Project{
     private Student studentAssigned;
     private boolean isAssigned = false;
     private boolean isActive = false;
-    private boolean favourite = false;
 
 
     //Constructor
     public Project(String id, String name, String specialization, String content, Lecturer lecturer, 
-    Student studentAssigned, boolean isAssigned, boolean isActive, boolean favourite){
+    Student studentAssigned, boolean isAssigned, boolean isActive){
         this.id = id;
         this.name = name;
         this.specialization = specialization;
@@ -80,9 +79,6 @@ public class Project{
         return isActive;
     }
     
-    public boolean getFavourite() {
-        return favourite;
-    }
 
     public void setId(String id){
         this.id = id;
@@ -120,7 +116,4 @@ public class Project{
         this.isActive = isActive;
     }
 
-    public void setFavourite(boolean favourite) {
-        this.favourite = favourite;
-    }
 }
