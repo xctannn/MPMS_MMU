@@ -4,6 +4,9 @@ public class Student extends User{
     private String specialization;
     private Project projectAssigned;
 
+    // no-arg constructor for jsonParser
+    private Student(){}
+    
     public Student(String id, String username, String password, String specialization, Project projectAssigned){
         super(id, username, password);
         this.specialization = specialization;

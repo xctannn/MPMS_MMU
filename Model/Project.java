@@ -1,5 +1,6 @@
 package Model;
 
+
 public class Project{
     private String id;
     private String name;
@@ -10,6 +11,28 @@ public class Project{
     private boolean isAssigned;
     private boolean isActive;
 
+    public Project(){};
+    
+    public Project(String id, String name, String specialization, String content, Lecturer lecturer){
+        this.id = id;
+        this.name = name;
+        this.specialization = specialization;
+        this.content = content;
+        this.lecturer = lecturer;
+        this.studentAssigned = null;
+        this.isAssigned = false;
+        this.isActive = true;
+
+    }
+    
+    
+
+    // GETTERS AND SETTERS
+
+    // get object from json
+    public Project getProject(String id){
+        return this;
+    }
     public String getId(){
         return id;
     }
@@ -61,6 +84,10 @@ public class Project{
     public void setLecturer(Lecturer lecturer){
         this.lecturer = lecturer;
     }
+
+    // public void setLecturer(String lecturer){
+    //     this.lecturer = lecturer;
+    // }
 
     public void setStudent(Student studentAssigned){
         this.studentAssigned = studentAssigned;
