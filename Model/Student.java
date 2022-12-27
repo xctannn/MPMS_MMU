@@ -1,8 +1,11 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class Student extends User{
     private String specialization;
     private Project projectAssigned;
+    private ArrayList<Project> favourites;
 
     // no-arg constructor for jsonParser
     private Student(){}
@@ -11,6 +14,7 @@ public class Student extends User{
         super(id, username, password);
         this.specialization = specialization;
         this.projectAssigned =projectAssigned;
+        this.favourites = new ArrayList<>();
     }
     
     public String getSpecialization(){
@@ -19,6 +23,10 @@ public class Student extends User{
 
     public Project getProjectAssigned(){
         return projectAssigned;
+    }
+    
+    public ArrayList<Project> getFavourites(){
+        return favourites;
     }
 
     public void setSpecialization(String specialization){

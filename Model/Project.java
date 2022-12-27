@@ -24,7 +24,6 @@ public class Project{
         this.studentAssigned = studentAssigned;
         this.isAssigned = isAssigned;
         this.isActive = isActive;
-        this.favourite = favourite;
     }
 
     public Project(){};
