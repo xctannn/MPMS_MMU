@@ -8,8 +8,24 @@ public class Project{
     private String content;
     private Lecturer lecturer;
     private Student studentAssigned;
-    private boolean isAssigned;
-    private boolean isActive;
+    private boolean isAssigned = false;
+    private boolean isActive = false;
+    private boolean favourite = false;
+
+
+    //Constructor
+    public Project(String id, String name, String specialization, String content, Lecturer lecturer, 
+    Student studentAssigned, boolean isAssigned, boolean isActive, boolean favourite){
+        this.id = id;
+        this.name = name;
+        this.specialization = specialization;
+        this.content = content;
+        this.lecturer = lecturer;
+        this.studentAssigned = studentAssigned;
+        this.isAssigned = isAssigned;
+        this.isActive = isActive;
+        this.favourite = favourite;
+    }
 
     public Project(){};
     
@@ -64,6 +80,10 @@ public class Project{
     public boolean getIsActive(){
         return isActive;
     }
+    
+    public boolean getFavourite() {
+        return favourite;
+    }
 
     public void setId(String id){
         this.id = id;
@@ -99,5 +119,9 @@ public class Project{
 
     public void setIsActive(boolean isActive){
         this.isActive = isActive;
+    }
+
+    public void setFavourite(boolean favourite) {
+        this.favourite = favourite;
     }
 }
