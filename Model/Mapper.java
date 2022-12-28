@@ -14,7 +14,7 @@ public enum Mapper {
     }
 
     public ObjectMapper getMapper(){
-        return this.mapper;
+        return mapper;
     }
 
     private static ObjectMapper create(){

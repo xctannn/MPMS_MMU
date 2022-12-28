@@ -8,21 +8,16 @@ public class ProjectList implements JsonList<Project>{
     private ArrayList<Project> projects;
     public Object getProjects;
     
-    public ProjectList(){
-        
+    public ProjectList(){   
         try {
             this.projects = parser.deserialize();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        for (int i = 0; i < projects.size(); i++){
-            System.out.println(projects.get(i).getName());
-        }
     }
 
     public ArrayList<Project> getProjects(){
-        return this.projects;
+        return projects;
     }
 
     @Override
