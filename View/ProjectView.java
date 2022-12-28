@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -12,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
 
 public class ProjectView {
 
@@ -25,21 +27,25 @@ public class ProjectView {
     private JLabel projectName = new JLabel("Project"); 
     private JLabel projectLecturer = new JLabel("By ");
     private JLabel projectSpecialization = new JLabel("Specialization: ");
-    private JTextArea projectContent = (new JTextArea(5,10));
+    private JTextArea projectContent = (new JTextArea(25, 50));
     private JLabel projectStudent = new JLabel("Assigned to: ");
     private JButton assignStudentButton = new JButton("Assign");
     private JTable projectTable = new JTable(); 
 
     public ProjectView(){
-
         wrapper.setLayout(new GridLayout(1,2));
 
-        tableView.add(new JScrollPane(projectTable), BorderLayout.CENTER);
+        // Project Table View Initial Setup 
+        JPanel tableWrapper = new JPanel();
+        tableWrapper.add(new JScrollPane(projectTable));
+        projectTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableView.add(tableWrapper, BorderLayout.CENTER);
+        
+        // Disable all texts on Project Panel on startup
+        disableAllTextsInPanel();
 
         // Project Panel Title Setup
-        projectName.setFont(new Font(projectName.getFont().toString(), Font.BOLD, 25));
-        projectLecturer.setEnabled(false);
-
+        resizePanelTextsFont();
         JPanel projectPanelTitle = new JPanel();
         projectPanelTitle.setLayout(new BoxLayout(projectPanelTitle, BoxLayout.PAGE_AXIS));
         projectPanelTitle.add(projectName);
@@ -48,18 +54,45 @@ public class ProjectView {
         projectPanel.add(projectPanelTitle, BorderLayout.NORTH);
 
         //Project Panel Content Setup
-        projectPanel.add(projectContent, BorderLayout.CENTER);
-        projectContent.setEditable(false);
-        projectPanel.add(projectStudent, BorderLayout.CENTER);
+        JPanel projectPanelContent = new JPanel(new BorderLayout());
+        JPanel projectContentWrapper = new JPanel();
+        projectContentWrapper.setBorder( BorderFactory.createEmptyBorder(30,20,20,20));
+        projectContentWrapper.add(projectContent);
+        setupProjectContentProperties();
+        projectPanelContent.add(projectContentWrapper, BorderLayout.CENTER);
+        projectPanelContent.add(projectStudent, BorderLayout.SOUTH);
+        projectPanel.add(projectPanelContent);
 
         // Project Panel Buttons Setup
-        projectPanel.add(assignStudentButton, BorderLayout.SOUTH);
+        JPanel projectPanelButtons = new JPanel();
+        projectPanelButtons.add(assignStudentButton);
+        projectPanel.add(projectPanelButtons, BorderLayout.SOUTH);
         assignStudentButton.setVisible(true);
 
         wrapper.add(tableView);
         wrapper.add(projectPanel);
     }
 
+    private void resizePanelTextsFont(){
+        projectName.setFont(new Font(projectName.getFont().toString(), Font.BOLD, 35));
+        projectLecturer.setFont(new Font(projectLecturer.getFont().toString(), Font.BOLD, 18));
+        projectSpecialization.setFont(new Font(projectSpecialization.getFont().toString(), Font.BOLD, 13));
+        projectStudent.setFont(new Font(projectStudent.getFont().toString(), Font.BOLD, 13));
+    }
+
+    private void setupProjectContentProperties(){
+        projectContent.setEditable(false);
+        projectContent.setLineWrap(true);
+        projectContent.setOpaque(false);
+    }
+
+    private void disableAllTextsInPanel(){
+        projectLecturer.setEnabled(false);
+        projectName.setEnabled(false);
+        projectStudent.setEnabled(false);
+        projectSpecialization.setEnabled(false);
+        assignStudentButton.setEnabled(false);
+    }
 
     public void addAssignButtonListener(ActionListener listenforAssignButton){
         assignStudentButton.addActionListener(listenforAssignButton);
@@ -83,14 +116,17 @@ public class ProjectView {
     
     public void setProjectNameLabel(String name){
         projectName.setText(name);
+        projectName.setEnabled(true);
     }
 
     public void setProjectLecturerLabel(String lecturer){
         projectLecturer.setText(lecturer);
+        projectLecturer.setEnabled(true);
     }
 
     public void setProjectSpecializationLabel(String specialization){
         projectSpecialization.setText(specialization);
+        projectSpecialization.setEnabled(true);
     }
 
     public void setProjectContentArea(String content){

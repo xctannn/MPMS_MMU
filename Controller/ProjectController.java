@@ -24,15 +24,14 @@ public class ProjectController {
         projectView.addAssignButtonListener(new AssignButtonListener());
         populateTable();
     }
-
-    // public void populateModelView(){
-    //     projectView.setProjectNameLabel(projectModel.getName());
-    //     projectView.setProjectLecturerLabel(projectModel.getLecturer().getUsername());
-    //     projectView.setProjectSpecializationLabel(projectModel.getSpecialization());
-    //     projectView.setProjectContentArea(projectModel.getContent());
-    //     projectView.setProjectStudentLabel(projectModel.getStudentAssigned().getUsername());
+    public void populateModelView(){
+        projectView.setProjectNameLabel(projectModel.getName());
+        projectView.setProjectLecturerLabel(projectModel.getLecturer().getUsername());
+        projectView.setProjectSpecializationLabel(projectModel.getSpecialization());
+        projectView.setProjectContentArea(projectModel.getContent());
+        projectView.setProjectStudentLabel(projectModel.getStudentAssigned().getUsername());
         
-    // }
+    }
 
     // public void populateTable(){
     //     // TableColumnModel columnModel = new TableColumnModel();
@@ -56,7 +55,7 @@ public class ProjectController {
 
         TableColumnModel columnModel = viewTable.getColumnModel();
         columnModel.getColumn(0).setPreferredWidth(50);
-        columnModel.getColumn(1).setPreferredWidth(180);
+        columnModel.getColumn(1).setPreferredWidth(200);
         columnModel.getColumn(2).setPreferredWidth(100);
 
         // projectView.getTableView().add(viewTable);
