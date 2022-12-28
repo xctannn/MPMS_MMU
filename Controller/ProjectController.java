@@ -21,7 +21,6 @@ public class ProjectController {
         this.projectModel = model;
         this.projectView = view;
         this.projectList = new ProjectList();
-        projectView.addReturnButtonListener(new ReturnButtonListener());
         projectView.addAssignButtonListener(new AssignButtonListener());
         populateTable();
     }
@@ -57,7 +56,7 @@ public class ProjectController {
 
         TableColumnModel columnModel = viewTable.getColumnModel();
         columnModel.getColumn(0).setPreferredWidth(50);
-        columnModel.getColumn(1).setPreferredWidth(200);
+        columnModel.getColumn(1).setPreferredWidth(180);
         columnModel.getColumn(2).setPreferredWidth(100);
 
         // projectView.getTableView().add(viewTable);
