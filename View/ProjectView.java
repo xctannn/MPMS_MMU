@@ -1,16 +1,24 @@
 package View;
-
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
-import javax.swing.Action;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 
-public class ProjectView extends JFrame{
+public class ProjectView {
+
+    // Projects Table View Components
+    public JPanel wrapper = new JPanel();
+    JPanel tableView = new JPanel();
+    private String[] columnNames = {"ID", "Name", "Lecturer"};
+
+    // Project Detail View Components
+    JPanel projectPanel = new JPanel();
     private JLabel projectName = new JLabel(); 
     private JLabel projectLecturer = new JLabel("By ");
     private JLabel projectSpecialization = new JLabel();
@@ -18,25 +26,26 @@ public class ProjectView extends JFrame{
     private JLabel projectStudent = new JLabel("Assigned to: ");
     private JButton returnButton = new JButton("Return");
     private JButton assignStudentButton = new JButton("Assign");
+    private JTable projectTable = new JTable(); 
 
     public ProjectView(){
-        JPanel ProjectPanel = new JPanel();
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(600, 200);
+        wrapper.setLayout(new GridLayout(1,2));
 
-        ProjectPanel.add(projectName);
-        ProjectPanel.add(projectLecturer);
-        ProjectPanel.add(projectSpecialization);
-        ProjectPanel.add(projectContent);
+        tableView.add(new JScrollPane(projectTable));
+
+        projectPanel.add(projectName);
+        projectPanel.add(projectLecturer);
+        projectPanel.add(projectSpecialization);
+        projectPanel.add(projectContent);
         projectContent.setEditable(false);
-        ProjectPanel.add(projectStudent);
-        ProjectPanel.add(returnButton);
-        ProjectPanel.add(assignStudentButton);
+        projectPanel.add(projectStudent);
+        projectPanel.add(returnButton);
+        projectPanel.add(assignStudentButton);
         assignStudentButton.setVisible(false);
 
-
-        this.add(ProjectPanel);
+        wrapper.add(tableView);
+        wrapper.add(projectPanel);
     }
 
 
@@ -50,6 +59,14 @@ public class ProjectView extends JFrame{
 
     public void setAssignButtonVisible(){
         assignStudentButton.setVisible(true);
+    }
+
+    public String[] getColumnNames(){
+        return columnNames;
+    } 
+
+    public JTable getProjectTable(){
+        return projectTable;
     }
 
     public String getStudentID(){
@@ -75,5 +92,4 @@ public class ProjectView extends JFrame{
     public void setProjectStudentLabel(String studentName){
         projectName.setText("Assigned to: " + studentName);
     }
-
 }
