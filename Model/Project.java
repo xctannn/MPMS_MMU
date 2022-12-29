@@ -42,11 +42,6 @@ public class Project{
     
 
     // GETTERS AND SETTERS
-
-    // get object from json
-    public Project getProject(String id){
-        return this;
-    }
     public String getId(){
         return id;
     }
@@ -89,7 +84,7 @@ public class Project{
     }
     
     public void setSpecialization(String specialization){
-        this.specialization = id;
+        this.specialization = specialization;
     }
     
     public void setContent(String content){
