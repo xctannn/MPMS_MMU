@@ -45,7 +45,7 @@
     "specialization" : "Data Science",
     "content" : "This is a Data Science Capstone project, you better not fuck this up",
     "lecturer" : {
-      "id" : "L003",
+      "id" : "L007",
       "username" : "Mickey Dees",
       "password" : "Disney123",
       "projectIDList" : [
