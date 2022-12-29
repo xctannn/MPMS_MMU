@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Student extends User{
     private String specialization;
     private String assignedProjectID;
-    private ArrayList<Project> favourites;
+    private ArrayList<String> favourites;
 
     // no-arg constructor for jsonParser
     private Student(){}
@@ -25,7 +25,7 @@ public class Student extends User{
         return assignedProjectID;
     }
     
-    public ArrayList<Project> getFavourites(){
+    public ArrayList<String> getFavourites(){
         return favourites;
     }
 
@@ -33,7 +33,7 @@ public class Student extends User{
         this.specialization = specialization;
     }
 
-    public void setAssignedProjectID(String AssignedProjectID){
+    public void setAssignedProjectID(String assignedProjectID){
         this.assignedProjectID = assignedProjectID;
     }
 }

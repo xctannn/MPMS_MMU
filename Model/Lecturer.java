@@ -3,21 +3,21 @@ package Model;
 import java.util.ArrayList;
 
 public class Lecturer extends User{
-    private ArrayList<Project> projectList;
+    private ArrayList<String> projectIDList;
 
     // No-arg constructor for Json Parser
     private Lecturer(){};
     
-    public Lecturer(String id, String username, String password, ArrayList<Project> projectList){
+    public Lecturer(String id, String username, String password, ArrayList<String> projectList){
         super(id, username, password);
-        this.projectList = projectList;
+        this.projectIDList = projectList;
     }
 
-    public ArrayList<Project> getProjectList(){
-        return projectList;
+    public ArrayList<String> getprojectIDList(){
+        return projectIDList;
     }
 
-    public void setProjectList(ArrayList<Project> projectList){
-        this.projectList = projectList;
+    public void addproject(String projectID){
+        projectIDList.add(projectID);
     }
 }
