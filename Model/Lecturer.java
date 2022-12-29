@@ -8,9 +8,9 @@ public class Lecturer extends User{
     // No-arg constructor for Json Parser
     private Lecturer(){};
     
-    public Lecturer(String id, String username, String password, ArrayList<String> projectList){
+    public Lecturer(String id, String username, String password){
         super(id, username, password);
-        this.projectIDList = projectList;
+        this.projectIDList = new ArrayList<>();
     }
 
     public ArrayList<String> getprojectIDList(){
