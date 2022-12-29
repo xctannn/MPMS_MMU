@@ -19,11 +19,22 @@ public class StudentController {
         }else{
             projectModel.setFavourite(false);
         }
-        updateView();
+        //updateView();
+    }
+    public void populateViewBoard(){
     }
 
-    public void updateView(){
-        viewboard.printListOfProjects(projectModel);
-    }
+    // public void favouriteSubject(){
+    //     if(projectModel.getFavourite() == false){
+    //         projectModel.setFavourite(true);
+    //     }else{
+    //         projectModel.setFavourite(false);
+    //     }
+    //     updateView();
+    // }
+
+    // public void updateView(){
+    //     viewboard.printListOfProjects(projectModel);
+    // }
 
 }

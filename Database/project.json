@@ -1,0 +1,28 @@
+[ {
+  "id" : "P00001",
+  "name" : "Capstone",
+  "specialization" : "P00001",
+  "content" : "This is a Data Science Capstone project, you better not fuck this up",
+  "lecturer" : null,
+  "studentAssigned" : null,
+  "isAssigned" : true,
+  "isActive" : false
+}, {
+  "id" : "P00003",
+  "name" : "Final Year",
+  "specialization" : "P00003",
+  "content" : "Build this game for me or else you fail your FYP and spend another 10k on your degree",
+  "lecturer" : null,
+  "studentAssigned" : null,
+  "isAssigned" : false,
+  "isActive" : true
+}, {
+  "id" : null,
+  "name" : null,
+  "specialization" : null,
+  "content" : null,
+  "lecturer" : null,
+  "studentAssigned" : null,
+  "isAssigned" : false,
+  "isActive" : false
+} ]

@@ -82,6 +82,10 @@ public class Project{
         this.lecturer = lecturer;
     }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     public void setStudent(Student studentAssigned){
         this.studentAssigned = studentAssigned;
     }
