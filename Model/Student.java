@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class Student extends User{
     private String specialization;
-    private Project projectAssigned;
+    private String assignedProjectID;
     private ArrayList<Project> favourites;
 
     // no-arg constructor for jsonParser
     private Student(){}
     
-    public Student(String id, String username, String password, String specialization, Project projectAssigned){
+    public Student(String id, String username, String password, String specialization, String assignedProjectID){
         super(id, username, password);
         this.specialization = specialization;
-        this.projectAssigned =projectAssigned;
+        this.assignedProjectID = assignedProjectID;
         this.favourites = new ArrayList<>();
     }
     
@@ -21,8 +21,8 @@ public class Student extends User{
         return specialization;
     }
 
-    public Project getProjectAssigned(){
-        return projectAssigned;
+    public String getAssignedProjectID(){
+        return assignedProjectID;
     }
     
     public ArrayList<Project> getFavourites(){
@@ -33,8 +33,8 @@ public class Student extends User{
         this.specialization = specialization;
     }
 
-    public void setProjectAssigned(Project projectAssigned){
-        this.projectAssigned = projectAssigned;
+    public void setAssignedProjectID(String AssignedProjectID){
+        this.assignedProjectID = assignedProjectID;
     }
 }
 
