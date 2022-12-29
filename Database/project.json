@@ -1,19 +1,85 @@
 [ {
-  "id" : "P00001",
+  "id" : "P0001",
   "name" : "Capstone",
-  "specialization" : "P00001",
+  "specialization" : "Data Science",
   "content" : "This is a Data Science Capstone project, you better not fuck this up",
-  "lecturer" : null,
-  "studentAssigned" : null,
+  "lecturer" : {
+    "id" : "L007",
+    "username" : "Mickey Dees",
+    "password" : "Disney123",
+    "projectIDList" : [
+        "P0001",
+        "P0002",
+        "P0004"
+    ]
+  },
+  "studentAssigned" : {
+    "id": "S001",
+    "username": "Goofy Arse",
+    "password": "Huekhuek",
+    "specialization": "Data Science",
+    "assignedProjectID": "P0001",
+    "favourites": null
+  },
   "isAssigned" : true,
   "isActive" : false
 }, {
-  "id" : "P00003",
+  "id" : "P0003",
   "name" : "Final Year",
-  "specialization" : "P00003",
+  "specialization" : "Game Development",
   "content" : "Build this game for me or else you fail your FYP and spend another 10k on your degree",
-  "lecturer" : null,
+  "lecturer" : {
+    "id" : "L001",
+    "username" : "Donald Quack",
+    "password" : "Quack123",
+    "projectIDList" : [
+        "P0003"
+    ]
+  },
   "studentAssigned" : null,
   "isAssigned" : false,
   "isActive" : true
-}]
+}, {
+    "id" : "P0002",
+    "name" : "Final Capstone",
+    "specialization" : "Data Science",
+    "content" : "This is a Data Science Capstone project, you better not fuck this up",
+    "lecturer" : {
+      "id" : "L003",
+      "username" : "Mickey Dees",
+      "password" : "Disney123",
+      "projectIDList" : [
+        "P0001",
+        "P0002",
+        "P0004"
+    ]
+    },
+    "studentAssigned" : null,
+    "isAssigned" : false,
+    "isActive" : true
+}, {
+    "id" : "P0004",
+    "name" : "Capstone",
+    "specialization" : "Software Development",
+    "content" : "This is a Data Science Capstone project, you better not fuck this up",
+    "lecturer" : {
+      "id" : "L007",
+      "username" : "Mickey Dees",
+      "password" : "Disney123",
+      "projectIDList" : [
+        "P0001",
+        "P0002",
+        "P0004"
+    ]
+    },
+    "studentAssigned" : {
+        "id": "S002",
+        "username": "Minnie Lad",
+        "password": "Fabulous69",
+        "specialization": "Software Development",
+        "assignedProjectID": "P0004",
+        "favourites": null
+    },
+    "isAssigned" : true,
+    "isActive" : false
+  } ]
