@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionListener;
 
 public class ProjectView {
 
@@ -94,8 +95,12 @@ public class ProjectView {
         assignStudentButton.setEnabled(false);
     }
 
-    public void addAssignButtonListener(ActionListener listenforAssignButton){
-        assignStudentButton.addActionListener(listenforAssignButton);
+    public void addAssignButtonListener(ActionListener assignButtonListener){
+        assignStudentButton.addActionListener(assignButtonListener);
+    }
+
+    public void addTableSelectionListener(ListSelectionListener tableSelectionListener){
+        projectTable.getSelectionModel().addListSelectionListener(tableSelectionListener);
     }
 
     public void setAssignButtonVisible(){
@@ -134,6 +139,10 @@ public class ProjectView {
     }
 
     public void setProjectStudentLabel(String studentName){
-        projectName.setText("Assigned to: " + studentName);
+        projectStudent.setText("Assigned to: " + studentName);
+        if (!(studentName.equals(""))){
+            projectStudent.setEnabled(true);
+        }
+        else projectStudent.setEnabled(false);
     }
 }
