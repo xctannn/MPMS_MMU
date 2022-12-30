@@ -7,19 +7,15 @@
     "id" : "L007",
     "username" : "Mickey Dees",
     "password" : "Disney123",
-    "projectIDList" : [
-        "P0001",
-        "P0002",
-        "P0004"
-    ]
+    "projectIDList" : [ "P0001", "P0002", "P0004" ]
   },
   "studentAssigned" : {
-    "id": "S001",
-    "username": "Goofy Arse",
-    "password": "Huekhuek",
-    "specialization": "Data Science",
-    "assignedProjectID": "P0001",
-    "favourites": null
+    "id" : "S001",
+    "username" : "Goofy Arse",
+    "password" : "Huekhuek",
+    "specialization" : "Data Science",
+    "assignedProjectID" : "P0001",
+    "favourites" : null
   },
   "isAssigned" : true,
   "isActive" : false
@@ -32,54 +28,44 @@
     "id" : "L001",
     "username" : "Donald Quack",
     "password" : "Quack123",
-    "projectIDList" : [
-        "P0003"
-    ]
+    "projectIDList" : [ "P0003" ]
   },
   "studentAssigned" : null,
   "isAssigned" : false,
   "isActive" : true
 }, {
-    "id" : "P0002",
-    "name" : "Final Capstone",
-    "specialization" : "Data Science",
-    "content" : "This is a Data Science Capstone project, you better not fuck this up",
-    "lecturer" : {
-      "id" : "L007",
-      "username" : "Mickey Dees",
-      "password" : "Disney123",
-      "projectIDList" : [
-        "P0001",
-        "P0002",
-        "P0004"
-    ]
-    },
-    "studentAssigned" : null,
-    "isAssigned" : false,
-    "isActive" : true
+  "id" : "P0002",
+  "name" : "Final Capstone",
+  "specialization" : "Data Science",
+  "content" : "This is a Data Science Capstone project, you better not fuck this up",
+  "lecturer" : {
+    "id" : "L007",
+    "username" : "Mickey Dees",
+    "password" : "Disney123",
+    "projectIDList" : [ "P0001", "P0002", "P0004" ]
+  },
+  "studentAssigned" : null,
+  "isAssigned" : false,
+  "isActive" : true
 }, {
-    "id" : "P0004",
-    "name" : "Capstone",
+  "id" : "P0004",
+  "name" : "Capstone",
+  "specialization" : "Software Development",
+  "content" : "This is a Data Science Capstone project, you better not fuck this up",
+  "lecturer" : {
+    "id" : "L007",
+    "username" : "Mickey Dees",
+    "password" : "Disney123",
+    "projectIDList" : [ "P0001", "P0002", "P0004" ]
+  },
+  "studentAssigned" : {
+    "id" : "S002",
+    "username" : "Minnie Lad",
+    "password" : "Fabulous69",
     "specialization" : "Software Development",
-    "content" : "This is a Data Science Capstone project, you better not fuck this up",
-    "lecturer" : {
-      "id" : "L007",
-      "username" : "Mickey Dees",
-      "password" : "Disney123",
-      "projectIDList" : [
-        "P0001",
-        "P0002",
-        "P0004"
-    ]
-    },
-    "studentAssigned" : {
-        "id": "S002",
-        "username": "Minnie Lad",
-        "password": "Fabulous69",
-        "specialization": "Software Development",
-        "assignedProjectID": "P0004",
-        "favourites": null
-    },
-    "isAssigned" : true,
-    "isActive" : false
-  } ]
+    "assignedProjectID" : "P0004",
+    "favourites" : null
+  },
+  "isAssigned" : true,
+  "isActive" : false
+} ]
