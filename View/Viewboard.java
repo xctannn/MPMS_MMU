@@ -22,6 +22,7 @@ public class Viewboard extends JFrame{
         " " + projects.getLecturer().getUsername() + 
         " " + projects.getStudentAssigned().getUsername() + 
         " " + projects.getIsAssigned() + 
+<<<<<<< HEAD
         " " + projects.getIsActive() +
         " " + projects.getFavourite());
 =======
@@ -71,5 +72,8 @@ public class Viewboard extends JFrame{
 
         this.add(ViewboardPanel);
 >>>>>>> Stashed changes
+=======
+        " " + projects.getIsActive());
+>>>>>>> main
     }
 }
