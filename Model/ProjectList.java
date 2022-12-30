@@ -8,7 +8,7 @@ public class ProjectList implements JsonList<Project>{
     private ArrayList<Project> projects;
     public Object getProjects;
     
-    //projectList will contain every project in the database
+    //projectList will contain every project in the database， can be used for adminUser
     public ProjectList(){   
         try {
             this.projects = parser.deserialize();
@@ -55,6 +55,17 @@ public class ProjectList implements JsonList<Project>{
         return projects;
     }
 
+    public void saveProjectContent(String projectID, String content){
+        Project editedProject = getItem(projectID);
+        editedProject.setContent(content);
+
+        try {
+            parser.serialize();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void addItem(Project item) {
         this.projects.add(item);
@@ -63,7 +74,6 @@ public class ProjectList implements JsonList<Project>{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
     }
 
     @Override

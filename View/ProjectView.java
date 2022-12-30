@@ -66,6 +66,9 @@ public class ProjectView {
         setupProjectContentProperties();
         saveEditButton.setVisible(false);
         projectPanelContent.add(projectContentWrapper, BorderLayout.CENTER);
+        JPanel projectPanelEditWrapper = new JPanel();
+        projectPanelEditWrapper.add(editContentButton);
+        projectPanelEditWrapper.add(saveEditButton);
         projectPanelContent.add(projectStudent, BorderLayout.SOUTH);
         projectPanel.add(projectPanelContent);
 
@@ -131,8 +134,21 @@ public class ProjectView {
     public void addDectivateButtonListener(ActionListener deactivateButtonListener){
         deactivateButton.addActionListener(deactivateButtonListener);
     }
+
     public void addTableSelectionListener(ListSelectionListener tableSelectionListener){
         projectTable.getSelectionModel().addListSelectionListener(tableSelectionListener);
+    }
+
+    public void enableContentEditMode(){
+        editContentButton.setVisible(false);
+        saveEditButton.setVisible(true);
+        projectContent.setEditable(true);
+    }
+
+    public void disableContentEditMode(){
+        saveEditButton.setVisible(false);
+        editContentButton.setVisible(true);
+        projectContent.setEditable(false);
     }
 
     public void setAssignButtonVisible(){
@@ -145,6 +161,10 @@ public class ProjectView {
 
     public JTable getProjectTable(){
         return projectTable;
+    }
+
+    public String getProjectContent(){
+        return projectContent.getText();
     }
 
     public String getStudentID(){

@@ -9,6 +9,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.text.View;
 
 import Model.Lecturer;
 import Model.Project;
@@ -28,7 +29,7 @@ public class ProjectController {
         this.projectView = view;
         this.projectList = new ProjectList();
         projectView.addAssignButtonListener(new AssignButtonListener());
-        projectView.addTableSelectionListener(new tableSelectionListener());
+        projectView.addTableSelectionListener(new TableSelectionListener());
         populateTable();
     }
 
@@ -39,7 +40,7 @@ public class ProjectController {
         this.projectList = new ProjectList(user);
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.setAssignButtonVisible();
-        projectView.addTableSelectionListener(new tableSelectionListener());
+        projectView.addTableSelectionListener(new TableSelectionListener());
         populateTable();
     }
 
@@ -49,7 +50,7 @@ public class ProjectController {
         this.projectView = view;
         this.projectList = new ProjectList(user);
         projectView.addAssignButtonListener(new AssignButtonListener());
-        projectView.addTableSelectionListener(new tableSelectionListener());
+        projectView.addTableSelectionListener(new TableSelectionListener());
         populateTable();
     }
 
@@ -108,7 +109,24 @@ public class ProjectController {
         }
     }
 
-    class tableSelectionListener implements ListSelectionListener{
+    class EditButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            projectView.enableContentEditMode();
+        }
+    }
+
+    class SaveEditButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            String newContent = projectView.getProjectContent();
+            String projectID = projectModel.getId();
+            projectList.saveProjectContent(projectID, newContent);
+            projectView.disableContentEditMode();
+        }
+    }
+
+    class TableSelectionListener implements ListSelectionListener{
 
         @Override
         public void valueChanged(ListSelectionEvent e) {
@@ -119,7 +137,4 @@ public class ProjectController {
             populateModelView();
         }
     }
-
-    
-    
 }
