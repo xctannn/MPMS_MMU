@@ -28,8 +28,10 @@ public class ProjectController {
         this.projectModel = model;
         this.projectView = view;
         this.projectList = new ProjectList();
+
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
+
         populateTable();
     }
 
@@ -38,9 +40,13 @@ public class ProjectController {
         this.projectModel = model;
         this.projectView = view;
         this.projectList = new ProjectList(user);
+
+        projectView.setupLecterurProjectView();
         projectView.addAssignButtonListener(new AssignButtonListener());
-        projectView.setAssignButtonVisible();
         projectView.addTableSelectionListener(new TableSelectionListener());
+        projectView.addEditContentButtonListener(new EditButtonListener());
+        projectView.addSaveEditButtonListener(new SaveEditButtonListener());
+
         populateTable();
     }
 
@@ -49,8 +55,10 @@ public class ProjectController {
         this.projectModel = model;
         this.projectView = view;
         this.projectList = new ProjectList(user);
+
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
+
         populateTable();
     }
 
@@ -70,7 +78,6 @@ public class ProjectController {
         projectView.setProjectSpecializationLabel(projectSpecialization);
         projectView.setProjectContentArea(projectContent);
         projectView.setProjectStudentLabel(projectStudent);
-        
     }
 
     // public void populateTable(){
@@ -97,8 +104,6 @@ public class ProjectController {
         columnModel.getColumn(0).setPreferredWidth(50);
         columnModel.getColumn(1).setPreferredWidth(200);
         columnModel.getColumn(2).setPreferredWidth(100);
-
-        // projectView.getTableView().add(viewTable);
     }
 
     class AssignButtonListener implements ActionListener{
@@ -134,6 +139,7 @@ public class ProjectController {
             int selectedRow = table.getSelectedRow();
             String selectedRowID = (String) table.getValueAt(selectedRow, 0);
             projectModel = projectList.getItem(selectedRowID);
+            projectView.enablePanelButtons();
             populateModelView();
         }
     }

@@ -29,7 +29,7 @@ public class ProjectView {
     private JLabel projectName = new JLabel("Project"); 
     private JLabel projectLecturer = new JLabel("By ");
     private JLabel projectSpecialization = new JLabel("Specialization: ");
-    private JTextArea projectContent = (new JTextArea(25, 50));
+    private JTextArea projectContent = new JTextArea();
     private JLabel projectStudent = new JLabel("Assigned to: ");
     private JButton editContentButton = new JButton("Edit");
     private JButton saveEditButton = new JButton("Save");
@@ -60,15 +60,19 @@ public class ProjectView {
 
         //Project Panel Content Setup
         JPanel projectPanelContent = new JPanel(new BorderLayout());
-        JPanel projectContentWrapper = new JPanel();
-        projectContentWrapper.setBorder( BorderFactory.createEmptyBorder(30,20,20,20));
-        projectContentWrapper.add(projectContent);
+        JPanel projectBody = new JPanel();
+        projectBody.setLayout(new BoxLayout(projectBody, BoxLayout.PAGE_AXIS));
+        projectBody.setBorder( BorderFactory.createEmptyBorder(30,20,20,30));
+        JScrollPane projectContentWrapper = new JScrollPane(projectContent);
+        projectBody.add(projectContentWrapper);
         setupProjectContentProperties();
-        saveEditButton.setVisible(false);
-        projectPanelContent.add(projectContentWrapper, BorderLayout.CENTER);
         JPanel projectPanelEditWrapper = new JPanel();
         projectPanelEditWrapper.add(editContentButton);
         projectPanelEditWrapper.add(saveEditButton);
+        projectBody.add(projectPanelEditWrapper);
+        projectPanelContent.add(projectBody, BorderLayout.CENTER);
+
+        // projectPanelContent.add(projectPanelEditWrapper, BorderLayout.NORTH);
         projectPanelContent.add(projectStudent, BorderLayout.SOUTH);
         projectPanel.add(projectPanelContent);
 
@@ -80,6 +84,12 @@ public class ProjectView {
 
         wrapper.add(tableView);
         wrapper.add(projectPanel);
+    }
+
+    public void setupLecterurProjectView(){
+        saveEditButton.setVisible(false);
+        editContentButton.setVisible(true);
+        assignStudentButton.setVisible(true);
     }
 
     private void resizePanelTextsFont(){
@@ -143,16 +153,14 @@ public class ProjectView {
         editContentButton.setVisible(false);
         saveEditButton.setVisible(true);
         projectContent.setEditable(true);
+        projectContent.setOpaque(true);
     }
 
     public void disableContentEditMode(){
         saveEditButton.setVisible(false);
         editContentButton.setVisible(true);
         projectContent.setEditable(false);
-    }
-
-    public void setAssignButtonVisible(){
-        assignStudentButton.setVisible(true);
+        projectContent.setOpaque(false);
     }
 
     public String[] getColumnNames(){
