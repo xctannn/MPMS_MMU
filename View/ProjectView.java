@@ -25,13 +25,17 @@ public class ProjectView {
 
     // Project Detail View Components
     JPanel projectPanel = new JPanel(new BorderLayout());
+    private JTable projectTable = new JTable(); 
     private JLabel projectName = new JLabel("Project"); 
     private JLabel projectLecturer = new JLabel("By ");
     private JLabel projectSpecialization = new JLabel("Specialization: ");
     private JTextArea projectContent = (new JTextArea(25, 50));
     private JLabel projectStudent = new JLabel("Assigned to: ");
+    private JButton editContentButton = new JButton("Edit");
+    private JButton saveEditButton = new JButton("Save");
+    private JButton activateButton = new JButton("Activate");
+    private JButton deactivateButton = new JButton("Deactivate");
     private JButton assignStudentButton = new JButton("Assign");
-    private JTable projectTable = new JTable(); 
 
     public ProjectView(){
         wrapper.setLayout(new GridLayout(1,2));
@@ -43,7 +47,7 @@ public class ProjectView {
         tableView.add(tableWrapper, BorderLayout.CENTER);
         
         // Disable all texts on Project Panel on startup
-        disableAllTextsInPanel();
+        disableAllPanelTexts();
 
         // Project Panel Title Setup
         resizePanelTextsFont();
@@ -60,6 +64,7 @@ public class ProjectView {
         projectContentWrapper.setBorder( BorderFactory.createEmptyBorder(30,20,20,20));
         projectContentWrapper.add(projectContent);
         setupProjectContentProperties();
+        saveEditButton.setVisible(false);
         projectPanelContent.add(projectContentWrapper, BorderLayout.CENTER);
         projectPanelContent.add(projectStudent, BorderLayout.SOUTH);
         projectPanel.add(projectPanelContent);
@@ -68,7 +73,7 @@ public class ProjectView {
         JPanel projectPanelButtons = new JPanel();
         projectPanelButtons.add(assignStudentButton);
         projectPanel.add(projectPanelButtons, BorderLayout.SOUTH);
-        assignStudentButton.setVisible(true);
+        assignStudentButton.setVisible(false);
 
         wrapper.add(tableView);
         wrapper.add(projectPanel);
@@ -87,18 +92,45 @@ public class ProjectView {
         projectContent.setOpaque(false);
     }
 
-    private void disableAllTextsInPanel(){
+    private void disableAllPanelTexts(){
         projectLecturer.setEnabled(false);
         projectName.setEnabled(false);
         projectStudent.setEnabled(false);
         projectSpecialization.setEnabled(false);
+        editContentButton.setEnabled(false);
+        saveEditButton.setEnabled(false);
+        activateButton.setEnabled(false);
+        deactivateButton.setEnabled(false);
         assignStudentButton.setEnabled(false);
+    }
+
+    public void enablePanelButtons(){
+        editContentButton.setEnabled(true);
+        saveEditButton.setEnabled(true);
+        activateButton.setEnabled(true);
+        deactivateButton.setEnabled(true);
+        assignStudentButton.setEnabled(true);
     }
 
     public void addAssignButtonListener(ActionListener assignButtonListener){
         assignStudentButton.addActionListener(assignButtonListener);
     }
 
+    public void addEditContentButtonListener(ActionListener editContentButtonListener){
+        editContentButton.addActionListener(editContentButtonListener);
+    }
+
+    public void addSaveEditButtonListener(ActionListener saveEditButtonListener){
+        saveEditButton.addActionListener(saveEditButtonListener);
+    }
+
+    public void addActivateButtonListener(ActionListener activateButtonListener){
+        activateButton.addActionListener(activateButtonListener);
+    }
+
+    public void addDectivateButtonListener(ActionListener deactivateButtonListener){
+        deactivateButton.addActionListener(deactivateButtonListener);
+    }
     public void addTableSelectionListener(ListSelectionListener tableSelectionListener){
         projectTable.getSelectionModel().addListSelectionListener(tableSelectionListener);
     }
