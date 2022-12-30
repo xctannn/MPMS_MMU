@@ -99,6 +99,15 @@ public class ProjectController {
         // projectView.getTableView().add(viewTable);
     }
 
+    public void populateCommentModel(){
+        
+    }
+
+    public void populateCommentTable(){
+        ArrayList<Project> projects = projectList.getProjects();
+        DefaultTableModel commentTableModel = new DefaultTableModel();
+    }
+
     class AssignButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){

@@ -1,6 +1,5 @@
 package Model;
 
-
 public class Project{
     private String id;
     private String name;
@@ -10,11 +9,12 @@ public class Project{
     private Student studentAssigned;
     private boolean isAssigned = false;
     private boolean isActive = false;
+    private boolean favourite = false;
 
 
     //Constructor
     public Project(String id, String name, String specialization, String content, Lecturer lecturer, 
-    Student studentAssigned, boolean isAssigned, boolean isActive){
+    Student studentAssigned, boolean isAssigned, boolean isActive, boolean favourite){
         this.id = id;
         this.name = name;
         this.specialization = specialization;
@@ -23,25 +23,13 @@ public class Project{
         this.studentAssigned = studentAssigned;
         this.isAssigned = isAssigned;
         this.isActive = isActive;
+        this.favourite = favourite;
     }
 
-    public Project(){};
-    
-    public Project(String id, String name, String specialization, String content, Lecturer lecturer){
-        this.id = id;
-        this.name = name;
-        this.specialization = specialization;
-        this.content = content;
-        this.lecturer = lecturer;
-        this.studentAssigned = null;
-        this.isAssigned = false;
-        this.isActive = true;
-
+    public Project() {
+        
     }
-    
-    
 
-    // GETTERS AND SETTERS
     public String getId(){
         return id;
     }
@@ -74,6 +62,9 @@ public class Project{
         return isActive;
     }
     
+    public boolean getFavourite() {
+        return favourite;
+    }
 
     public void setId(String id){
         this.id = id;
@@ -84,7 +75,7 @@ public class Project{
     }
     
     public void setSpecialization(String specialization){
-        this.specialization = specialization;
+        this.specialization = id;
     }
     
     public void setContent(String content){
@@ -94,10 +85,6 @@ public class Project{
     public void setLecturer(Lecturer lecturer){
         this.lecturer = lecturer;
     }
-
-    // public void setLecturer(String lecturer){
-    //     this.lecturer = lecturer;
-    // }
 
     public void setStudent(Student studentAssigned){
         this.studentAssigned = studentAssigned;
@@ -111,4 +98,7 @@ public class Project{
         this.isActive = isActive;
     }
 
+    public void setFavourite(boolean favourite) {
+        this.favourite = favourite;
+    }
 }

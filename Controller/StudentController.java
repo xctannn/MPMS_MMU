@@ -22,17 +22,8 @@
 //     //     updateView();
 //     // }
 
-//     // public void favouriteSubject(){
-//     //     if(projectModel.getFavourite() == false){
-//     //         projectModel.setFavourite(true);
-//     //     }else{
-//     //         projectModel.setFavourite(false);
-//     //     }
-//     //     updateView();
-//     // }
-
-//     // public void updateView(){
-//     //     viewboard.printListOfProjects(projectModel);
-//     // }
+//     public void updateView(){
+//         viewboard.printListOfProjects(projectModel);
+//     }
 
 // }
