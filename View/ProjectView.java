@@ -1,10 +1,13 @@
 package View;
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -13,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 
@@ -33,6 +37,11 @@ public class ProjectView {
     private JButton assignStudentButton = new JButton("Assign");
     private JTable projectTable = new JTable(); 
 
+    // Comment Section Components
+    private JLabel commentTitleLabel = new JLabel("Class Comments: ");
+    private JButton submitCommentButton = new JButton("Submit");
+    private JTable commentTable = new JTable();
+
     public ProjectView(){
         wrapper.setLayout(new GridLayout(1,2));
 
@@ -52,6 +61,7 @@ public class ProjectView {
         projectPanelTitle.add(projectName);
         projectPanelTitle.add(projectLecturer);
         projectPanelTitle.add(projectSpecialization);
+        projectPanelTitle.add(commentTitleLabel);
         projectPanel.add(projectPanelTitle, BorderLayout.NORTH);
 
         //Project Panel Content Setup
@@ -64,6 +74,24 @@ public class ProjectView {
         projectPanelContent.add(projectStudent, BorderLayout.SOUTH);
         projectPanel.add(projectPanelContent);
 
+        //Past Comments Table
+        JPanel commentTablePanel = new JPanel();
+        commentTablePanel.add(new JScrollPane(commentTable));
+        projectPanel.add(commentTablePanel);
+
+        //Comment Section Text Box Setup
+        // JPanel commentSectionPanel = new JPanel();
+        // JTextField textBox = new JTextField();
+        // commentSectionPanel.setLayout(new BoxLayout(commentSectionPanel,BoxLayout.X_AXIS));
+        // commentSectionPanel.add(textBox, Component.BOTTOM_ALIGNMENT);
+        // commentSectionPanel.add(Box.createHorizontalStrut(15));
+        // commentSectionPanel.add(submitCommentButton, Component.RIGHT_ALIGNMENT);
+        // submitCommentButton.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        // commentSectionPanel.add(Box.createHorizontalGlue());
+        // projectPanel.add(commentSectionPanel);
+        // projectPanel.setBorder(BorderFactory.createRaisedBevelBorder());
+
+        
         // Project Panel Buttons Setup
         JPanel projectPanelButtons = new JPanel();
         projectPanelButtons.add(assignStudentButton);
@@ -79,6 +107,8 @@ public class ProjectView {
         projectLecturer.setFont(new Font(projectLecturer.getFont().toString(), Font.BOLD, 18));
         projectSpecialization.setFont(new Font(projectSpecialization.getFont().toString(), Font.BOLD, 13));
         projectStudent.setFont(new Font(projectStudent.getFont().toString(), Font.BOLD, 13));
+        //Comment Section
+        commentTitleLabel.setFont(new Font(commentTitleLabel.getFont().toString(), Font.BOLD, 16));
     }
 
     private void setupProjectContentProperties(){
