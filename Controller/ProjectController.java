@@ -38,6 +38,7 @@ public class ProjectController {
         this.projectView = view;
         this.projectList = new ProjectList(user);
         projectView.addAssignButtonListener(new AssignButtonListener());
+        projectView.setAssignButtonVisible();
         projectView.addTableSelectionListener(new tableSelectionListener());
         populateTable();
     }
