@@ -74,6 +74,7 @@ public class ProjectController {
             projectStudent = projectModel.getStudentAssigned().getUsername();
         }
 
+        // populating project panel values
         projectView.setProjectNameLabel(projectName);
         projectView.setProjectLecturerLabel(projectLecturer);
         projectView.setProjectSpecializationLabel(projectSpecialization);
@@ -90,6 +91,7 @@ public class ProjectController {
         ArrayList<Project> projects = projectList.getProjects();
         DefaultTableModel projectTableModel = new DefaultTableModel(projectView.getColumnNames(), 0);
         
+        // constructing table models
         for (int i = 0; i < projects.size(); i++){
             Project project = projects.get(i);
             String projectID = project.getId();
@@ -102,6 +104,7 @@ public class ProjectController {
         JTable viewTable = projectView.getProjectTable();
         viewTable.setModel(projectTableModel);
 
+        // Configure table column widths
         TableColumnModel columnModel = viewTable.getColumnModel();
         columnModel.getColumn(0).setPreferredWidth(50);
         columnModel.getColumn(1).setPreferredWidth(200);
@@ -118,11 +121,18 @@ public class ProjectController {
     class SaveEditButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
+            // Get edited values
             String newName = projectView.getProjectName();
             String newSpecialization = projectView.getProjectSpecialization();
             String newContent = projectView.getProjectContent();
             String projectID = projectModel.getId();
+
+            // Update project name in table
+            JTable table = projectView.getProjectTable();
+            int selectedRow = table.getSelectedRow();
+            table.setValueAt(newName, selectedRow, 1);
             
+            // Save project edit to json
             projectList.saveProjectName(projectID, newName);
             projectList.saveProjectSpecialization(projectID, newSpecialization);
             projectList.saveProjectContent(projectID, newContent);
@@ -148,12 +158,16 @@ public class ProjectController {
     class TableSelectionListener implements ListSelectionListener{
         @Override
         public void valueChanged(ListSelectionEvent e) {
+            // get selected row's project object
             JTable table = projectView.getProjectTable();
             int selectedRow = table.getSelectedRow();
             String selectedRowID = (String) table.getValueAt(selectedRow, 0);
             projectModel = projectList.getItem(selectedRowID);
+
+            // configure projectPanel properties
             projectView.enablePanelButtons();
             projectView.disableContentEditMode();
+
             populateModelView();
         }
     }
