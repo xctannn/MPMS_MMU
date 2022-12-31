@@ -42,11 +42,12 @@ public class ProjectController {
         this.projectList = new ProjectList(user);
 
         projectView.setupLecterurProjectView();
-        projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
         projectView.addEditContentButtonListener(new EditButtonListener());
         projectView.addSaveEditButtonListener(new SaveEditButtonListener());
-
+        projectView.addToggleProjectButtonListener(new ToggleProjectButtonListener());
+        projectView.addAssignButtonListener(new AssignButtonListener());
+        
         populateTable();
     }
 
@@ -68,6 +69,7 @@ public class ProjectController {
         String projectLecturer = projectModel.getLecturer().getUsername();
         String projectSpecialization = projectModel.getSpecialization();
         String projectContent = projectModel.getContent();
+        boolean projectActivation = projectModel.getIsActive();
         String projectStudent = "";
         if (projectModel.getIsAssigned()){
             projectStudent = projectModel.getStudentAssigned().getUsername();
@@ -77,6 +79,7 @@ public class ProjectController {
         projectView.setProjectLecturerLabel(projectLecturer);
         projectView.setProjectSpecializationLabel(projectSpecialization);
         projectView.setProjectContentArea(projectContent);
+        projectView.setToggleButtonText(projectActivation);
         projectView.setProjectStudentLabel(projectStudent);
     }
 
@@ -128,6 +131,14 @@ public class ProjectController {
             String projectID = projectModel.getId();
             projectList.saveProjectContent(projectID, newContent);
             projectView.disableContentEditMode();
+        }
+    }
+
+    class ToggleProjectButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            projectList.toggleProject(projectModel.getId());
+            projectView.setToggleButtonText(projectModel.getIsActive());
         }
     }
 

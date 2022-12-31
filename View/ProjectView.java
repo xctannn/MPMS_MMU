@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -33,8 +34,7 @@ public class ProjectView {
     private JLabel projectStudent = new JLabel("Assigned to: ");
     private JButton editContentButton = new JButton("Edit");
     private JButton saveEditButton = new JButton("Save");
-    private JButton activateButton = new JButton("Activate");
-    private JButton deactivateButton = new JButton("Deactivate");
+    private JButton toggleProjectButton = new JButton("Activate");
     private JButton assignStudentButton = new JButton("Assign");
 
     public ProjectView(){
@@ -78,7 +78,12 @@ public class ProjectView {
 
         // Project Panel Buttons Setup
         JPanel projectPanelButtons = new JPanel();
+        projectPanelButtons.setLayout(new BoxLayout(projectPanelButtons, BoxLayout.LINE_AXIS));
+        projectPanelButtons.add(Box.createHorizontalGlue());
         projectPanelButtons.add(assignStudentButton);
+        projectPanelButtons.add(Box.createHorizontalGlue());
+        projectPanelButtons.add(toggleProjectButton);
+        projectPanelButtons.add(Box.createHorizontalGlue());
         projectPanel.add(projectPanelButtons, BorderLayout.SOUTH);
         assignStudentButton.setVisible(false);
 
@@ -112,41 +117,15 @@ public class ProjectView {
         projectSpecialization.setEnabled(false);
         editContentButton.setEnabled(false);
         saveEditButton.setEnabled(false);
-        activateButton.setEnabled(false);
-        deactivateButton.setEnabled(false);
+        toggleProjectButton.setEnabled(false);
         assignStudentButton.setEnabled(false);
     }
 
     public void enablePanelButtons(){
         editContentButton.setEnabled(true);
         saveEditButton.setEnabled(true);
-        activateButton.setEnabled(true);
-        deactivateButton.setEnabled(true);
+        toggleProjectButton.setEnabled(true);
         assignStudentButton.setEnabled(true);
-    }
-
-    public void addAssignButtonListener(ActionListener assignButtonListener){
-        assignStudentButton.addActionListener(assignButtonListener);
-    }
-
-    public void addEditContentButtonListener(ActionListener editContentButtonListener){
-        editContentButton.addActionListener(editContentButtonListener);
-    }
-
-    public void addSaveEditButtonListener(ActionListener saveEditButtonListener){
-        saveEditButton.addActionListener(saveEditButtonListener);
-    }
-
-    public void addActivateButtonListener(ActionListener activateButtonListener){
-        activateButton.addActionListener(activateButtonListener);
-    }
-
-    public void addDectivateButtonListener(ActionListener deactivateButtonListener){
-        deactivateButton.addActionListener(deactivateButtonListener);
-    }
-
-    public void addTableSelectionListener(ListSelectionListener tableSelectionListener){
-        projectTable.getSelectionModel().addListSelectionListener(tableSelectionListener);
     }
 
     public void enableContentEditMode(){
@@ -198,11 +177,40 @@ public class ProjectView {
         projectContent.setText(content);
     }
 
+    public void setToggleButtonText(boolean isActive){
+        if (isActive){
+            toggleProjectButton.setText("Dectivate");
+        }
+        else if (!(isActive)){
+            toggleProjectButton.setText("Activate");
+        }
+    }
+
     public void setProjectStudentLabel(String studentName){
         projectStudent.setText("Assigned to: " + studentName);
         if (!(studentName.equals(""))){
             projectStudent.setEnabled(true);
         }
         else projectStudent.setEnabled(false);
+    }
+
+    public void addAssignButtonListener(ActionListener assignButtonListener){
+        assignStudentButton.addActionListener(assignButtonListener);
+    }
+
+    public void addEditContentButtonListener(ActionListener editContentButtonListener){
+        editContentButton.addActionListener(editContentButtonListener);
+    }
+
+    public void addSaveEditButtonListener(ActionListener saveEditButtonListener){
+        saveEditButton.addActionListener(saveEditButtonListener);
+    }
+
+    public void addToggleProjectButtonListener(ActionListener toggleProjectButtonListener){
+        toggleProjectButton.addActionListener(toggleProjectButtonListener);
+    }
+
+    public void addTableSelectionListener(ListSelectionListener tableSelectionListener){
+        projectTable.getSelectionModel().addListSelectionListener(tableSelectionListener);
     }
 }

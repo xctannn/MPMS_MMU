@@ -39,8 +39,6 @@ public class Project{
 
     }
     
-    
-
     // GETTERS AND SETTERS
     public String getId(){
         return id;
@@ -94,10 +92,6 @@ public class Project{
     public void setLecturer(Lecturer lecturer){
         this.lecturer = lecturer;
     }
-
-    // public void setLecturer(String lecturer){
-    //     this.lecturer = lecturer;
-    // }
 
     public void setStudent(Student studentAssigned){
         this.studentAssigned = studentAssigned;
