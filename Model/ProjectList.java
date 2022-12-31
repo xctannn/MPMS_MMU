@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class ProjectList implements JsonList<Project>{
     JsonParser<Project> parser = new JsonParser<>("/Database/project.json", Project.class);
     private ArrayList<Project> projects;
-    public Object getProjects;
     
     //projectList will contain every project in the database， can be used for adminUser
     public ProjectList(){   
@@ -41,28 +40,39 @@ public class ProjectList implements JsonList<Project>{
         }
     }
 
-    public ArrayList<Project> getProjects(){
-        return projects;
-    }
+    
 
     public void saveProjectContent(String projectID, String content){
         Project editedProject = getItem(projectID);
         editedProject.setContent(content);
 
-        setList();
+        save();
     }
 
     public void toggleProject(String projectID){
         Project project = getItem(projectID);
         project.setIsActive(!(project.getIsActive()));
         
-        setList();
+        save();
+    }
+
+    public ArrayList<Project> getProjects(){
+        return projects;
+    }
+
+    @Override
+    public void save(){
+        try {
+            parser.serialize();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void setList(){
         try {
-            this.projects =  parser.deserialize();
+            this.projects = parser.deserialize();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -72,7 +82,7 @@ public class ProjectList implements JsonList<Project>{
     public void addItem(Project item) {
         this.projects.add(item);
          
-        setList();
+        save();
     }
 
     @Override
