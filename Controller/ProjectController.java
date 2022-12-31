@@ -140,6 +140,7 @@ public class ProjectController {
             String selectedRowID = (String) table.getValueAt(selectedRow, 0);
             projectModel = projectList.getItem(selectedRowID);
             projectView.enablePanelButtons();
+            projectView.disableContentEditMode();
             populateModelView();
         }
     }
