@@ -10,45 +10,35 @@ public class ProjectList implements JsonList<Project>{
     
     //projectList will contain every project in the database， can be used for adminUser
     public ProjectList(){   
-        try {
-            this.projects = parser.deserialize();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        setList();
     }
 
     //projectList will contain all the projects of the lecturerUser
     public ProjectList(Lecturer lecturerUser){
-        try {
-            this.projects = parser.deserialize();
-            for (int i = 0; i < projects.size(); i++){
-                Project project = projects.get(i);
-                String projectLecturerID = project.getLecturer().getID();
-                if (!(projectLecturerID.equals(lecturerUser.getID()))){
-                    projects.remove(i);
-                    i--;
-                }
+        setList();
+
+        for (int i = 0; i < projects.size(); i++){
+            Project project = projects.get(i);
+            String projectLecturerID = project.getLecturer().getID();
+            if (!(projectLecturerID.equals(lecturerUser.getID()))){
+                projects.remove(i);
+                i--;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }    
+        }  
     }
 
     //projectList will contain all the projects with the same specialization to the user
     public ProjectList(Student studentUser){
-        try {
-            this.projects = parser.deserialize();
-            for (int i = 0; i < projects.size(); i++){
-                Project project = projects.get(i);
-                String specialization = studentUser.getSpecialization();
-                if ((!(project.getSpecialization().equals(specialization))) || !project.getIsActive()){
-                    projects.remove(i);
-                    i--;
-                }
+        setList();
+
+        for (int i = 0; i < projects.size(); i++){
+            Project project = projects.get(i);
+            String specialization = studentUser.getSpecialization();
+            if ((!(project.getSpecialization().equals(specialization))) || !project.getIsActive()){
+                projects.remove(i);
+                i--;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }    
+        }
     }
 
     public ArrayList<Project> getProjects(){
@@ -59,8 +49,20 @@ public class ProjectList implements JsonList<Project>{
         Project editedProject = getItem(projectID);
         editedProject.setContent(content);
 
+        setList();
+    }
+
+    public void toggleProject(String projectID){
+        Project project = getItem(projectID);
+        project.setIsActive(!(project.getIsActive()));
+        
+        setList();
+    }
+
+    @Override
+    public void setList(){
         try {
-            parser.serialize();
+            this.projects =  parser.deserialize();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -69,11 +71,8 @@ public class ProjectList implements JsonList<Project>{
     @Override
     public void addItem(Project item) {
         this.projects.add(item);
-        try {
-            parser.serialize();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+         
+        setList();
     }
 
     @Override
