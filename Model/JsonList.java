@@ -1,7 +1,5 @@
 package Model;
 
-import java.util.ArrayList;
-
 public  interface JsonList<T> {
     // populates ArrayList with all the file's data
     public void setList(); 

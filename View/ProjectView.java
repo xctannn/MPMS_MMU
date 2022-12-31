@@ -1,7 +1,7 @@
 package View;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 
@@ -27,9 +28,10 @@ public class ProjectView {
     // Project Detail View Components
     JPanel projectPanel = new JPanel(new BorderLayout());
     private JTable projectTable = new JTable(); 
-    private JLabel projectName = new JLabel("Project"); 
+    private JButton addProjectButton = new JButton("Add Project");
+    private JTextField projectName = new JTextField("Project"); 
     private JLabel projectLecturer = new JLabel("By ");
-    private JLabel projectSpecialization = new JLabel("Specialization: ");
+    private JTextField projectSpecialization = new JTextField("Specialization: ");
     private JTextArea projectContent = new JTextArea();
     private JLabel projectStudent = new JLabel("Assigned to: ");
     private JButton editContentButton = new JButton("Edit");
@@ -50,7 +52,6 @@ public class ProjectView {
         disableAllPanelTexts();
 
         // Project Panel Title Setup
-        resizePanelTextsFont();
         JPanel projectPanelTitle = new JPanel();
         projectPanelTitle.setLayout(new BoxLayout(projectPanelTitle, BoxLayout.PAGE_AXIS));
         projectPanelTitle.add(projectName);
@@ -65,7 +66,7 @@ public class ProjectView {
         projectBody.setBorder( BorderFactory.createEmptyBorder(30,20,20,30));
         JScrollPane projectContentWrapper = new JScrollPane(projectContent);
         projectBody.add(projectContentWrapper);
-        setupProjectContentProperties();
+        
         JPanel projectPanelEditWrapper = new JPanel();
         projectPanelEditWrapper.add(editContentButton);
         projectPanelEditWrapper.add(saveEditButton);
@@ -87,6 +88,7 @@ public class ProjectView {
         projectPanel.add(projectPanelButtons, BorderLayout.SOUTH);
         assignStudentButton.setVisible(false);
 
+        setupProjectPanelTextProperties();
         wrapper.add(tableView);
         wrapper.add(projectPanel);
     }
@@ -104,7 +106,17 @@ public class ProjectView {
         projectStudent.setFont(new Font(projectStudent.getFont().toString(), Font.BOLD, 13));
     }
 
-    private void setupProjectContentProperties(){
+    private void setupProjectPanelTextProperties(){
+        resizePanelTextsFont();
+        
+        projectName.setOpaque(false);
+        projectName.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        projectName.setEditable(false);
+
+        projectSpecialization.setOpaque(false);
+        projectSpecialization.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        projectSpecialization.setEditable(false);
+        
         projectContent.setEditable(false);
         projectContent.setLineWrap(true);
         projectContent.setOpaque(false);
@@ -131,6 +143,13 @@ public class ProjectView {
     public void enableContentEditMode(){
         editContentButton.setVisible(false);
         saveEditButton.setVisible(true);
+
+        projectName.setEditable(true);
+        projectName.setOpaque(true);
+
+        projectSpecialization.setEditable(true);
+        projectSpecialization.setOpaque(true);
+
         projectContent.setEditable(true);
         projectContent.setOpaque(true);
     }
@@ -138,6 +157,13 @@ public class ProjectView {
     public void disableContentEditMode(){
         saveEditButton.setVisible(false);
         editContentButton.setVisible(true);
+
+        projectName.setEditable(false);
+        projectName.setOpaque(false);
+
+        projectSpecialization.setEditable(false);
+        projectSpecialization.setOpaque(false);
+
         projectContent.setEditable(false);
         projectContent.setOpaque(false);
     }
@@ -148,6 +174,14 @@ public class ProjectView {
 
     public JTable getProjectTable(){
         return projectTable;
+    }
+
+    public String getProjectName(){
+        return projectName.getText();
+    }
+
+    public String getProjectSpecialization(){
+        return projectSpecialization.getText();
     }
 
     public String getProjectContent(){
@@ -164,7 +198,7 @@ public class ProjectView {
     }
 
     public void setProjectLecturerLabel(String lecturer){
-        projectLecturer.setText(lecturer);
+        projectLecturer.setText("By: " + lecturer);
         projectLecturer.setEnabled(true);
     }
 
@@ -194,10 +228,6 @@ public class ProjectView {
         else projectStudent.setEnabled(false);
     }
 
-    public void addAssignButtonListener(ActionListener assignButtonListener){
-        assignStudentButton.addActionListener(assignButtonListener);
-    }
-
     public void addEditContentButtonListener(ActionListener editContentButtonListener){
         editContentButton.addActionListener(editContentButtonListener);
     }
@@ -208,6 +238,10 @@ public class ProjectView {
 
     public void addToggleProjectButtonListener(ActionListener toggleProjectButtonListener){
         toggleProjectButton.addActionListener(toggleProjectButtonListener);
+    }
+
+    public void addAssignButtonListener(ActionListener assignButtonListener){
+        assignStudentButton.addActionListener(assignButtonListener);
     }
 
     public void addTableSelectionListener(ListSelectionListener tableSelectionListener){

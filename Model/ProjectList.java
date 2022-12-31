@@ -42,6 +42,20 @@ public class ProjectList implements JsonList<Project>{
 
     
 
+    public void saveProjectName(String projectID, String name){
+        Project editedProject = getItem(projectID);
+        editedProject.setName(name);
+
+        save();
+    }
+
+    public void saveProjectSpecialization(String projectID, String specialization){
+        Project editedProject = getItem(projectID);
+        editedProject.setSpecialization(specialization);
+
+        save();
+    }
+
     public void saveProjectContent(String projectID, String content){
         Project editedProject = getItem(projectID);
         editedProject.setContent(content);

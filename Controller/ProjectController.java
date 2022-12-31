@@ -9,7 +9,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import javax.swing.text.View;
 
 import Model.Lecturer;
 import Model.Project;
@@ -109,14 +108,6 @@ public class ProjectController {
         columnModel.getColumn(2).setPreferredWidth(100);
     }
 
-    class AssignButtonListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e){
-            String id = projectView.getStudentID();
-            System.out.println(id);
-        }
-    }
-
     class EditButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -127,8 +118,13 @@ public class ProjectController {
     class SaveEditButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
+            String newName = projectView.getProjectName();
+            String newSpecialization = projectView.getProjectSpecialization();
             String newContent = projectView.getProjectContent();
             String projectID = projectModel.getId();
+            
+            projectList.saveProjectName(projectID, newName);
+            projectList.saveProjectSpecialization(projectID, newSpecialization);
             projectList.saveProjectContent(projectID, newContent);
             projectView.disableContentEditMode();
         }
@@ -142,8 +138,14 @@ public class ProjectController {
         }
     }
 
+    class AssignButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            String id = projectView.getStudentID();
+            System.out.println(id);
+        }
+    }
     class TableSelectionListener implements ListSelectionListener{
-
         @Override
         public void valueChanged(ListSelectionEvent e) {
             JTable table = projectView.getProjectTable();
