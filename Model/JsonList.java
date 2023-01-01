@@ -1,6 +1,6 @@
 package Model;
 
-public  interface JsonList<T> {
+public  interface JsonList<T>{
     // populates ArrayList with all the file's data
     public void setList(); 
 
@@ -12,4 +12,7 @@ public  interface JsonList<T> {
 
     // get specified item from ArrayList by the item's id 
     public T getItem(String id);
+
+    // get the amount of items that are in the list
+    public int getSize();
 }

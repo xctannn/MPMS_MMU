@@ -6,20 +6,20 @@ public class Project{
     private String name;
     private String specialization;
     private String content;
-    private Lecturer lecturer;
+    private String lecturerId;
     private Student studentAssigned;
     private boolean isAssigned = false;
     private boolean isActive = false;
 
 
     //Constructor
-    public Project(String id, String name, String specialization, String content, Lecturer lecturer, 
+    public Project(String id, String name, String specialization, String content, String lecturerId, 
     Student studentAssigned, boolean isAssigned, boolean isActive){
         this.id = id;
         this.name = name;
         this.specialization = specialization;
         this.content = content;
-        this.lecturer = lecturer;
+        this.lecturerId = lecturerId;
         this.studentAssigned = studentAssigned;
         this.isAssigned = isAssigned;
         this.isActive = isActive;
@@ -27,15 +27,20 @@ public class Project{
 
     public Project(){};
     
-    public Project(String id, String name, String specialization, String content, Lecturer lecturer){
+    public Project(String id, String name, String specialization, String content, String lecturerId){
         this.id = id;
         this.name = name;
         this.specialization = specialization;
         this.content = content;
-        this.lecturer = lecturer;
+        this.lecturerId = lecturerId;
         this.studentAssigned = null;
         this.isAssigned = false;
         this.isActive = true;
+
+    }
+
+    public String generateCode(int listSize){
+        return String.format("%04d", listSize + 1);
     }
     
     // GETTERS AND SETTERS
@@ -51,8 +56,8 @@ public class Project{
         return specialization;
     }
 
-    public Lecturer getLecturer(){
-        return lecturer;
+    public String getLecturerId(){
+        return lecturerId;
     }
 
     public Student getStudentAssigned(){
@@ -70,7 +75,6 @@ public class Project{
     public boolean getIsActive(){
         return isActive;
     }
-    
 
     public void setId(String id){
         this.id = id;
@@ -88,8 +92,8 @@ public class Project{
         this.content = content;
     }
     
-    public void setLecturer(Lecturer lecturer){
-        this.lecturer = lecturer;
+    public void setLecturer(String lecturerId){
+        this.lecturerId = lecturerId;
     }
 
     public void setStudent(Student studentAssigned){
