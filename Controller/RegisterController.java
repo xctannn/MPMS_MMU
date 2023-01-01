@@ -8,16 +8,13 @@ import View.RegisterView;
 public class RegisterController {
     private User userModel;
     private RegisterView registerView;
-    private String userType;
 
     public RegisterController(User model, RegisterView view){
         this.userModel = model;
         this.registerView = view;
 
         registerView.addRegisterButtonListener(new registerBtnListener());
-        registerView.studentBtnListener(new studentListener());
-        registerView.lecturerBtnListener(new lecturerListener());
-        registerView.adminBtnListener(new adminListener());
+        registerView.addUserTypeListener(new userTypeListener());
     }
 
     class registerBtnListener implements ActionListener{
@@ -27,26 +24,21 @@ public class RegisterController {
 
             String username = registerView.getUsername();
             String password = registerView.getPassword();
-            System.out.println(username + " " + password + " " + userType);
+            System.out.println(username + " " + password);
         }
     }
 
-    class studentListener implements ActionListener {
+    class userTypeListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e){
-            userType = "Student";
-        }
-    }
-    class lecturerListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e){
-            userType = "Lecturer";
-        }
-    }
-    class adminListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e){
-            userType = "Admin";
+            String userType = registerView.getUserType();
+            if(userType == "Student"){
+                System.out.println("A Student");
+            }else if(userType == "Lecturer"){
+                System.out.println("A Lecturer");
+            }else{
+                System.out.println("An Admin");
+            }
         }
     }
 }
