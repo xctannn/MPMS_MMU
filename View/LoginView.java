@@ -8,9 +8,9 @@ public class LoginView{
 
     private JComboBox userType = new JComboBox(userList);
     private JLabel userTypeLabel = new JLabel("User Type: ");
-    private JLabel usernameLabel = new JLabel("Username: ");
+    private JLabel userIDLabel = new JLabel("User ID: ");
     private JLabel passwordLabel = new JLabel("Password: ");
-    private JTextField usernameField = new JTextField();
+    private JTextField userIDField = new JTextField();
     private JTextField passwordField = new JTextField();
     private JButton loginButton = new JButton("Login");
 
@@ -21,20 +21,18 @@ public class LoginView{
         loginPanel.setLayout(null);
         
         userTypeLabel.setBounds(10,15,80,25);
-        usernameLabel.setBounds(10,50,80,25);
+        userIDLabel.setBounds(10,50,80,25);
         passwordLabel.setBounds(10,90,80,25);
-
         userType.setBounds(100, 15, 80, 25);
-
-        usernameField.setBounds(100, 50,150,25);
+        userIDField.setBounds(100, 50,150,25);
         passwordField.setBounds(100, 90,150,25);
         loginButton.setBounds(10, 120, 100, 25);
         
         loginPanel.add(userTypeLabel);
-        loginPanel.add(usernameLabel);
+        loginPanel.add(userIDLabel);
         loginPanel.add(passwordLabel);
         loginPanel.add(userType);
-        loginPanel.add(usernameField);
+        loginPanel.add(userIDField);
         loginPanel.add(passwordField);
         loginPanel.add(loginButton);
 
@@ -52,8 +50,8 @@ public class LoginView{
         return userType.getSelectedItem().toString();
     }
 
-    public String getUsername(){
-        return usernameField.getText();
+    public String getUserID(){
+        return userIDField.getText();
     }
 
     public String getPassword(){

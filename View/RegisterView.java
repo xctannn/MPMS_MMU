@@ -3,7 +3,7 @@ package View;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class RegisterView extends JFrame{
+public class RegisterView{
     private String[] userList = {"Student", "Lecturer", "Admin"};
 
     private JComboBox userType = new JComboBox(userList);
@@ -13,12 +13,9 @@ public class RegisterView extends JFrame{
     private JTextField usernameField = new JTextField();
     private JTextField passwordField = new JTextField();
     private JButton registerButton = new JButton("Register");
+    public JPanel registerPanel = new JPanel();
 
     public RegisterView(){
-        JPanel registerPanel = new JPanel();
-
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(600, 200);
 
         registerPanel.setLayout(null);
 
@@ -37,8 +34,6 @@ public class RegisterView extends JFrame{
         registerPanel.add(usernameField);
         registerPanel.add(passwordField);
         registerPanel.add(registerButton);
-
-        this.add(registerPanel);
     }
 
     public void addRegisterButtonListener(ActionListener listenforRegisterButton){
