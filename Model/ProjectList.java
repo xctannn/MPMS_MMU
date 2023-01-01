@@ -18,7 +18,7 @@ public class ProjectList implements JsonList<Project>{
 
         for (int i = 0; i < projects.size(); i++){
             Project project = projects.get(i);
-            String projectLecturerID = project.getLecturer().getID();
+            String projectLecturerID = project.getLecturerId();
             if (!(projectLecturerID.equals(lecturerUser.getID()))){
                 projects.remove(i);
                 i--;
@@ -107,4 +107,9 @@ public class ProjectList implements JsonList<Project>{
         }
         return null;
     }
+
+    @Override
+    public int getSize(){
+        return projects.size();
+    } 
 }

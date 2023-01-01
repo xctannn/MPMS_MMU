@@ -22,8 +22,8 @@ public class StudentController {
     //     updateView();
     // }
 
-    public void updateView(){
-        viewboard.printListOfProjects(projectModel);
-    }
+    // public void updateView(){
+        // viewboard.printListOfProjects(projectModel);
+    // }
 
 }
