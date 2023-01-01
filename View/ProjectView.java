@@ -42,6 +42,7 @@ public class ProjectView {
     private JButton saveEditButton = new JButton("Save");
     private JButton toggleProjectButton = new JButton("Activate");
     private JButton assignStudentButton = new JButton("Assign");
+    private JButton confirmAddProjectButton = new JButton("Confirm");
 
     public ProjectView(){
         wrapper.setLayout(new GridLayout(1,2));
@@ -103,8 +104,11 @@ public class ProjectView {
         projectPanelButtons.add(Box.createHorizontalGlue());
         projectPanelButtons.add(toggleProjectButton);
         projectPanelButtons.add(Box.createHorizontalGlue());
+        projectPanelButtons.add(confirmAddProjectButton);
+        projectPanelButtons.add(Box.createHorizontalGlue());
         projectPanel.add(projectPanelButtons, BorderLayout.SOUTH);
         assignStudentButton.setVisible(false);
+        confirmAddProjectButton.setVisible(false);
 
         setupProjectPanelTextProperties();
         wrapper.add(tableView);
@@ -112,9 +116,37 @@ public class ProjectView {
     }
 
     public void setupLecterurProjectView(){
+        projectLecturer.setVisible(true);
         saveEditButton.setVisible(false);
         editContentButton.setVisible(true);
         assignStudentButton.setVisible(true);
+        toggleProjectButton.setVisible(true);
+        // confirmAddProjectButton.setVisible(false);
+    }
+
+    public void setupLecturerAddProjectPanel(){
+        projectLecturer.setVisible(false);
+        projectStudent.setVisible(false);
+        saveEditButton.setVisible(false);
+        editContentButton.setVisible(false);
+        assignStudentButton.setVisible(false);
+        toggleProjectButton.setVisible(false);
+        confirmAddProjectButton.setVisible(true);
+        
+        emptyAllProjectPanelTexts();
+        projectName.setEditable(true);
+        projectName.setOpaque(true);
+        projectName.setText("Project Name");
+        projectContent.setEditable(true);
+        projectContent.setOpaque(true);
+        projectContent.setText("Enter project content here");
+    }
+
+    public void emptyAllProjectPanelTexts(){
+        setProjectNameLabel("");
+        projectSpecialization.setVisible(false);
+        projectSpecializationPicker.setVisible(true);
+        setProjectContentArea("");
     }
 
     private void resizePanelTextsFont(){
@@ -146,14 +178,12 @@ public class ProjectView {
         projectStudent.setEnabled(false);
         projectSpecialization.setEnabled(false);
         editContentButton.setEnabled(false);
-        saveEditButton.setEnabled(false);
         toggleProjectButton.setEnabled(false);
         assignStudentButton.setEnabled(false);
     }
 
     public void enablePanelButtons(){
         editContentButton.setEnabled(true);
-        saveEditButton.setEnabled(true);
         toggleProjectButton.setEnabled(true);
         assignStudentButton.setEnabled(true);
     }
@@ -171,6 +201,9 @@ public class ProjectView {
 
         projectContent.setEditable(true);
         projectContent.setOpaque(true);
+
+        assignStudentButton.setVisible(false);
+        toggleProjectButton.setVisible(false);
     }
 
     public void disableContentEditMode(){
@@ -186,6 +219,9 @@ public class ProjectView {
 
         projectContent.setEditable(false);
         projectContent.setOpaque(false);
+
+        assignStudentButton.setVisible(true);
+        toggleProjectButton.setVisible(true);
     }
 
     public String[] getColumnNames(){
@@ -254,6 +290,10 @@ public class ProjectView {
 
     public void addAddProjectButtonListerner(ActionListener addProjectButtonListener){
         addProjectButton.addActionListener(addProjectButtonListener);
+    } 
+
+    public void addConfirmAddProjectButtonListerner(ActionListener confirmAddProjectButtonListener){
+        confirmAddProjectButton.addActionListener(confirmAddProjectButtonListener);
     } 
 
     public void addProjectSpecializationPickerListerner(ActionListener projectSpecializationPickerListener){

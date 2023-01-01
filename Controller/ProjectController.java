@@ -42,6 +42,8 @@ public class ProjectController {
 
         projectView.setupLecterurProjectView();
         projectView.addTableSelectionListener(new TableSelectionListener());
+        projectView.addAddProjectButtonListerner(new addProjectButtonListener());
+        projectView.addConfirmAddProjectButtonListerner(new confirmAddProjectButtonListener());
         projectView.addProjectSpecializationPickerListerner(new projectSpecializationPickerListener());
         projectView.addEditContentButtonListener(new EditButtonListener());
         projectView.addSaveEditButtonListener(new SaveEditButtonListener());
@@ -66,7 +68,7 @@ public class ProjectController {
 
     public void populateModelView(){
         String projectName = projectModel.getName();
-        String projectLecturer = projectModel.getLecturer().getUsername();
+        String projectLecturer = projectModel.getLecturerId();
         String projectSpecialization = projectModel.getSpecialization();
         String projectContent = projectModel.getContent();
         boolean projectActivation = projectModel.getIsActive();
@@ -110,6 +112,41 @@ public class ProjectController {
         columnModel.getColumn(0).setPreferredWidth(50);
         columnModel.getColumn(1).setPreferredWidth(200);
         columnModel.getColumn(2).setPreferredWidth(100);
+    }
+
+    public void addNewProjectToTable(Project newProject){
+        JTable projectTable = projectView.getProjectTable();
+        DefaultTableModel projectTableModel = (DefaultTableModel) projectTable.getModel();
+        String projectID = newProject.getId();
+        String projectName = newProject.getName();
+        String projectLecturerName = newProject.getLecturer().getUsername();
+        Object[] row = {projectID, projectName, projectLecturerName};
+
+        projectTableModel.addRow(row);
+    }
+
+    class addProjectButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            projectView.setupLecturerAddProjectPanel();
+            projectView.enablePanelButtons();
+        }
+    }
+
+    class confirmAddProjectButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            String newProjectId = "P" + projectModel.generateCode(projectList.getSize());
+            String newProjectName = projectView.getProjectName();
+            Lecturer newProjectLecturer = (Lecturer) user;
+            String newProjectSpecialization = projectView.getProjectSpecialization();
+            String newProjectContent = projectView.getProjectContent();
+
+            Project newProject = new Project(newProjectId, newProjectName, newProjectSpecialization, newProjectContent, newProjectLecturer);
+            newProjectLecturer.addproject(newProjectId);
+            projectList.addItem(newProject);
+            addNewProjectToTable(newProject);
+        }
     }
 
     class projectSpecializationPickerListener implements ActionListener{
