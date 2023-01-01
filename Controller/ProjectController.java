@@ -42,6 +42,7 @@ public class ProjectController {
 
         projectView.setupLecterurProjectView();
         projectView.addTableSelectionListener(new TableSelectionListener());
+        projectView.addProjectSpecializationPickerListerner(new projectSpecializationPickerListener());
         projectView.addEditContentButtonListener(new EditButtonListener());
         projectView.addSaveEditButtonListener(new SaveEditButtonListener());
         projectView.addToggleProjectButtonListener(new ToggleProjectButtonListener());
@@ -109,6 +110,14 @@ public class ProjectController {
         columnModel.getColumn(0).setPreferredWidth(50);
         columnModel.getColumn(1).setPreferredWidth(200);
         columnModel.getColumn(2).setPreferredWidth(100);
+    }
+
+    class projectSpecializationPickerListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            String selectedSpecialization = projectView.getSelectedSpecialization();
+            projectView.setProjectSpecializationLabel(selectedSpecialization);
+        }
     }
 
     class EditButtonListener implements ActionListener{

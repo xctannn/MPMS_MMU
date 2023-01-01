@@ -40,8 +40,6 @@ public class ProjectList implements JsonList<Project>{
         }
     }
 
-    
-
     public void saveProjectName(String projectID, String name){
         Project editedProject = getItem(projectID);
         editedProject.setName(name);
@@ -103,7 +101,7 @@ public class ProjectList implements JsonList<Project>{
     public Project getItem(String id) {
         for (int i = 0; i < projects.size(); i++){
             Project tempProject = projects.get(i);
-            if (tempProject.getId() == id){
+            if (tempProject.getId().equals(id)){
                 return tempProject;
             }
         }

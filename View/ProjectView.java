@@ -3,11 +3,13 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.*;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,6 +21,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 
 public class ProjectView {
+    private static final String[] projectSpecializationOptions = {"Software Engineering", "Game Development", "Data Science" , "Cybersecurity", "Artificial Intelligence"};
 
     // Projects Table View Components
     public JPanel wrapper = new JPanel();
@@ -32,6 +35,7 @@ public class ProjectView {
     private JTextField projectName = new JTextField("Project"); 
     private JLabel projectLecturer = new JLabel("By ");
     private JTextField projectSpecialization = new JTextField("Specialization: ");
+    private JComboBox<String> projectSpecializationPicker = new JComboBox<>(projectSpecializationOptions);
     private JTextArea projectContent = new JTextArea();
     private JLabel projectStudent = new JLabel("Assigned to: ");
     private JButton editContentButton = new JButton("Edit");
@@ -44,7 +48,9 @@ public class ProjectView {
 
         // Project Table View Initial Setup 
         JPanel tableWrapper = new JPanel();
+        tableWrapper.setLayout(new BoxLayout(tableWrapper, BoxLayout.PAGE_AXIS));
         tableWrapper.add(new JScrollPane(projectTable));
+        tableWrapper.add(addProjectButton);
         projectTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tableView.add(tableWrapper, BorderLayout.CENTER);
         
@@ -53,17 +59,29 @@ public class ProjectView {
 
         // Project Panel Title Setup
         JPanel projectPanelTitle = new JPanel();
-        projectPanelTitle.setLayout(new BoxLayout(projectPanelTitle, BoxLayout.PAGE_AXIS));
-        projectPanelTitle.add(projectName);
-        projectPanelTitle.add(projectLecturer);
-        projectPanelTitle.add(projectSpecialization);
+        projectPanelTitle.setLayout(new BoxLayout(projectPanelTitle, BoxLayout.Y_AXIS));
+        JScrollPane projectNameWrapper = new JScrollPane(projectName, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        projectNameWrapper.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        projectPanelTitle.add(projectNameWrapper);
+        JPanel projectLecturerWrapper = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        projectLecturerWrapper.add(projectLecturer);
+        projectPanelTitle.add(projectLecturerWrapper);
+        JPanel projectSpecializationWrapper = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        projectSpecialization.setMaximumSize(new Dimension(200,20));
+        projectSpecializationPicker.setMaximumSize(new Dimension(200,20));
+        projectSpecializationPicker.setVisible(false);
+        projectSpecializationWrapper.add(projectSpecialization);
+        projectSpecializationWrapper.add(projectSpecializationPicker);
+        projectPanelTitle.add(projectSpecializationWrapper);
+        // projectPanelTitle.add(projectSpecializationPicker);
+        // projectPanel.add(projectSpecializationWrapper);
         projectPanel.add(projectPanelTitle, BorderLayout.NORTH);
 
         //Project Panel Content Setup
         JPanel projectPanelContent = new JPanel(new BorderLayout());
         JPanel projectBody = new JPanel();
         projectBody.setLayout(new BoxLayout(projectBody, BoxLayout.PAGE_AXIS));
-        projectBody.setBorder( BorderFactory.createEmptyBorder(30,20,20,30));
+        projectBody.setBorder(BorderFactory.createEmptyBorder(30,20,20,30));
         JScrollPane projectContentWrapper = new JScrollPane(projectContent);
         projectBody.add(projectContentWrapper);
         
@@ -100,7 +118,7 @@ public class ProjectView {
     }
 
     private void resizePanelTextsFont(){
-        projectName.setFont(new Font(projectName.getFont().toString(), Font.BOLD, 35));
+        projectName.setFont(new Font(projectName.getFont().toString(), Font.BOLD, 30));
         projectLecturer.setFont(new Font(projectLecturer.getFont().toString(), Font.BOLD, 18));
         projectSpecialization.setFont(new Font(projectSpecialization.getFont().toString(), Font.BOLD, 13));
         projectStudent.setFont(new Font(projectStudent.getFont().toString(), Font.BOLD, 13));
@@ -147,7 +165,8 @@ public class ProjectView {
         projectName.setEditable(true);
         projectName.setOpaque(true);
 
-        projectSpecialization.setEditable(true);
+        projectSpecializationPicker.setVisible(true);
+        projectSpecialization.setVisible(false);
         projectSpecialization.setOpaque(true);
 
         projectContent.setEditable(true);
@@ -161,7 +180,8 @@ public class ProjectView {
         projectName.setEditable(false);
         projectName.setOpaque(false);
 
-        projectSpecialization.setEditable(false);
+        projectSpecializationPicker.setVisible(false);
+        projectSpecialization.setVisible(true);
         projectSpecialization.setOpaque(false);
 
         projectContent.setEditable(false);
@@ -178,6 +198,10 @@ public class ProjectView {
 
     public String getProjectName(){
         return projectName.getText();
+    }
+
+    public String getSelectedSpecialization(){
+        return projectSpecializationPicker.getSelectedItem().toString();
     }
 
     public String getProjectSpecialization(){
@@ -226,6 +250,14 @@ public class ProjectView {
             projectStudent.setEnabled(true);
         }
         else projectStudent.setEnabled(false);
+    }
+
+    public void addAddProjectButtonListerner(ActionListener addProjectButtonListener){
+        addProjectButton.addActionListener(addProjectButtonListener);
+    } 
+
+    public void addProjectSpecializationPickerListerner(ActionListener projectSpecializationPickerListener){
+        projectSpecializationPicker.addActionListener(projectSpecializationPickerListener);
     }
 
     public void addEditContentButtonListener(ActionListener editContentButtonListener){

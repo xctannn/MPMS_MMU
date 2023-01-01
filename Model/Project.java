@@ -36,7 +36,6 @@ public class Project{
         this.studentAssigned = null;
         this.isAssigned = false;
         this.isActive = true;
-
     }
     
     // GETTERS AND SETTERS
