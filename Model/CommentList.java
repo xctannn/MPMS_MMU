@@ -10,18 +10,24 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class CommentList implements JsonList<Comment> {
-    JsonParser<Comment> parser = new JsonParser<>("/Database/comments.json", Comment.class);
-    private ArrayList<Comment> comments;
+public class CommentList implements JsonList<CommentModel> {
+    JsonParser<CommentModel> parser = new JsonParser<>("/Database/comments.json", CommentModel.class);
+    private ArrayList<CommentModel> comments;
     private Object getComments;
 
-    public CommentList(){}
+    public CommentList(){
+        try{
+            this.comments = parser.deserialize();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
     //CommentList will contain all the comments of the project
     public CommentList(Project project){
         try {
             this.comments = parser.deserialize();
             for (int i = 0; i < comments.size(); i++){
-                Comment comment = comments.get(i);
+                CommentModel comment = comments.get(i);
                 String projectID = comment.getProjectID();
                 if (!(projectID.equals(project.getId()))){
                     comments.remove(i);
@@ -33,11 +39,11 @@ public class CommentList implements JsonList<Comment> {
         }    
     }
 
-    public ArrayList<Comment> getComments(){
+    public ArrayList<CommentModel> getComments(){
         return comments;
     }
 
-    public void writeAllData(Comment listComments){
+    public void writeAllData(CommentModel listComments){
         ObjectMapper om = new ObjectMapper();
 
         try{
@@ -52,7 +58,7 @@ public class CommentList implements JsonList<Comment> {
     }
 
     @Override
-    public void addItem(Comment item) {
+    public void addItem(CommentModel item) {
         this.comments.add(item);
         try {
             parser.serialize();
@@ -62,10 +68,10 @@ public class CommentList implements JsonList<Comment> {
     }
 
     @Override
-    public Comment getItem(String id) {
+    public CommentModel getItem(String id) {
         for (int i = 0; i < comments.size(); i++){
-            Comment tempComment = comments.get(i);
-            if (tempComment.getID() == id){
+            CommentModel tempComment = comments.get(i);
+            if (tempComment.getCommentID() == id){
                 return tempComment;
             }
         }
@@ -74,15 +80,16 @@ public class CommentList implements JsonList<Comment> {
 
     //TEST DATA ENTRY
     
-    // public static void main(String[] args){
-    //     Lecturer lec = new Lecturer("L007", "Mickey Deez", "DeezNutz123");
-    //     Student stu = new Student("S001", "Goofy Ass", "HoeDuck", "Hotel Management", "P001");
-    //     Project pro = new Project("P001","Manage Hotel", "Hotel Management", "Assign people to love hotel room 1001", lec, stu, true, true, false);
+    public static void main(String[] args){
+        Lecturer lec = new Lecturer("L007", "Mickey Deez", "DeezNutz123");
+        Student stu = new Student("S001", "Goofy Ass", "HoeDuck", "Hotel Management", "P001");
+        User useer = new User("L0007","Danish","Abc123");
+        Project pro = new Project("P001","Manage Hotel", "Hotel Management", "Assign people to love hotel room 1001", lec, stu, true, true, false);
 
-    //     Comment c1 = new Comment("C1", pro, lec, stu, "Sir how do we access this file?");
-    //     CommentList cl = new CommentList();
-    //     cl.writeAllData(c1);
-    // }
+        CommentModel c1 = new CommentModel("C0001", pro,useer,"Sir do we have class tmrw?" );
+        CommentList cl = new CommentList();
+        cl.writeAllData(c1);
+    }
 
 }
 

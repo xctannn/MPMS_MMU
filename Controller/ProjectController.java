@@ -9,12 +9,16 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.xml.stream.events.Comment;
 
+import Model.CommentList;
 import Model.Lecturer;
 import Model.Project;
 import Model.ProjectList;
 import Model.Student;
 import Model.User;
+import Model.CommentModel;
+import View.CommentView;
 import View.ProjectView;
 
 public class ProjectController {
@@ -22,6 +26,9 @@ public class ProjectController {
     private Project projectModel;
     private ProjectList projectList;
     private ProjectView projectView;
+    private CommentModel commentModel;
+    private CommentView commentView;
+    private CommentList commentList;
 
     public ProjectController(Project model, ProjectView view){
         this.projectModel = model;
@@ -30,6 +37,13 @@ public class ProjectController {
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addTableSelectionListener(new tableSelectionListener());
         populateTable();
+    }
+     //Comment Panel
+    public ProjectController(CommentModel model, CommentView view){
+        this.commentModel = model;
+        this.commentView = view;
+        this.commentList = new CommentList();
+        populateCommentTable();
     }
 
     public ProjectController(Lecturer user, Project model, ProjectView view){
@@ -99,13 +113,30 @@ public class ProjectController {
         // projectView.getTableView().add(viewTable);
     }
 
-    public void populateCommentModel(){
-        
-    }
 
     public void populateCommentTable(){
-        ArrayList<Project> projects = projectList.getProjects();
-        DefaultTableModel commentTableModel = new DefaultTableModel();
+        ArrayList<CommentModel> comments = commentList.getComments();
+        DefaultTableModel commentTableModel = new DefaultTableModel(commentView.getColumnNames(),0);
+
+        for(int i = 0; i < comments.size(); i++){
+            CommentModel comment = comments.get(i);
+            String commentID = comments.get(i).getCommentID();
+            String username = comments.get(i).getUser().getUsername();
+            String commentString = comments.get(i).getCommentString();
+            String projectID = comments.get(i).getProjectID();
+            //"ID", "User","Comment","ProjectID"
+            Object[] row = {commentID, username, commentString, projectID};
+
+            commentTableModel.addRow(row);
+        }
+        JTable viewTable = commentView.getCommentTable();
+        viewTable.setModel(commentTableModel);
+
+        TableColumnModel columnModel = viewTable.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(50);
+        columnModel.getColumn(1).setPreferredWidth(100);
+        columnModel.getColumn(2).setPreferredWidth(250);
+        columnModel.getColumn(3).setPreferredWidth(100);
     }
 
     class AssignButtonListener implements ActionListener{
