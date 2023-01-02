@@ -8,15 +8,29 @@ public class StudentList implements JsonList<Student> {
     private ArrayList<Student> students;
 
     public StudentList() {
-        try{
-            this.students = parser.deserialize();
-        }catch(IOException e){
-            e.printStackTrace();
-        }
+        setList();
     }
 
     public ArrayList<Student> getStudents(){
         return students;
+    }
+
+    @Override
+    public void save(){
+        try {
+            parser.serialize();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setList(){
+        try {
+            this.students = parser.deserialize();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -39,4 +53,9 @@ public class StudentList implements JsonList<Student> {
         }
         return null;
     }
+
+    @Override
+    public int getSize(){
+        return students.size();
+    } 
 }

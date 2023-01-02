@@ -8,15 +8,29 @@ public class AdministratorList implements JsonList<Administrator> {
     private ArrayList<Administrator> administrators;
 
     public AdministratorList() {
-        try{
-            this.administrators = parser.deserialize();
-        }catch(IOException e){
-            e.printStackTrace();
-        }
+        setList();
     }
 
     public ArrayList<Administrator> getAdministrators(){
         return administrators;
+    }
+
+    @Override
+    public void save(){
+        try {
+            parser.serialize();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setList(){
+        try {
+            this.administrators = parser.deserialize();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -39,4 +53,9 @@ public class AdministratorList implements JsonList<Administrator> {
         }
         return null;
     }
+
+    @Override
+    public int getSize(){
+        return administrators.size();
+    } 
 }

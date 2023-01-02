@@ -8,15 +8,29 @@ public class LecturerList implements JsonList<Lecturer> {
     private ArrayList<Lecturer> lecturers;
 
     public LecturerList() {
-        try{
-            this.lecturers = parser.deserialize();
-        }catch(IOException e){
-            e.printStackTrace();
-        }
+        setList();
     }
 
     public ArrayList<Lecturer> getLecturers(){
         return lecturers;
+    }
+
+    @Override
+    public void save(){
+        try {
+            parser.serialize();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setList(){
+        try {
+            this.lecturers = parser.deserialize();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -39,4 +53,9 @@ public class LecturerList implements JsonList<Lecturer> {
         }
         return null;
     }
+
+    @Override
+    public int getSize(){
+        return lecturers.size();
+    } 
 }
