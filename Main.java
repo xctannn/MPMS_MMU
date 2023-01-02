@@ -1,8 +1,10 @@
 import javax.swing.JFrame;
+import javax.swing.JFrame;
 
 import Controller.ProjectController;
 import Model.Lecturer;
 import Model.Project;
+import Model.Student;
 import View.ProjectView;
 
 public class Main {
