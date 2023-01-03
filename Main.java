@@ -11,7 +11,9 @@ public class Main {
     public static void main(String[] args){
         Project projectModel = new Project();
         // ProjectList projectList = new ProjectList();
-        Lecturer lecturer2 = new Lecturer("L007", "Mickey Dees", "Disney123");
+        Lecturer lecturer2 = new Lecturer("L0001", "Tan", "l01");
+        // lecturer2.addproject("P0001");
+        // lecturer2.addproject("P0002");
         // Student student = new Student("S001", "Goofy Arse", "Huekhuek", "Data Science", "P0001");
 
         // lecturer2.addproject("P0001");
