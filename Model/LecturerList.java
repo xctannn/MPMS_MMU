@@ -15,6 +15,13 @@ public class LecturerList implements JsonList<Lecturer> {
         return lecturers;
     }
 
+    public void saveNewProject(String lecturerId, String projectId){
+        Lecturer lecturer = getItem(lecturerId);
+        lecturer.addproject(projectId);
+
+        save();
+    }
+
     @Override
     public void save(){
         try {
@@ -47,7 +54,7 @@ public class LecturerList implements JsonList<Lecturer> {
     public Lecturer getItem(String id) {
         for (int i = 0; i < lecturers.size(); i++){
             Lecturer tempLecturer = lecturers.get(i);
-            if (tempLecturer.getID().equals(id)){
+            if (tempLecturer.getId().equals(id)){
                 return tempLecturer;
             }
         }
