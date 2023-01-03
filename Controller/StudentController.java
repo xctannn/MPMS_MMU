@@ -8,7 +8,6 @@ public class StudentController {
     private Viewboard viewboard;
     
     public StudentController(Project projectModel, Viewboard viewboard) {
-        super();
         this.projectModel = projectModel;
         this.viewboard = viewboard;
     }

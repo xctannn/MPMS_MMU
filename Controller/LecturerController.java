@@ -7,7 +7,6 @@ public class LecturerController {
     private Project projectModel;
 
     public LecturerController(Project projectModel) {
-        super();
         this.projectModel = projectModel;
     }
 
