@@ -47,7 +47,7 @@ public class StudentList implements JsonList<Student> {
     public Student getItem(String id) {
         for (int i = 0; i < students.size(); i++){
             Student tempStudent = students.get(i);
-            if (tempStudent.getID().equals(id)){
+            if (tempStudent.getId().equals(id)){
                 return tempStudent;
             }
         }

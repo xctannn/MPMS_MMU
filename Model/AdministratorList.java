@@ -47,7 +47,7 @@ public class AdministratorList implements JsonList<Administrator> {
     public Administrator getItem(String id) {
         for (int i = 0; i < administrators.size(); i++){
             Administrator tempAdministrator = administrators.get(i);
-            if (tempAdministrator.getID().equals(id)){
+            if (tempAdministrator.getId().equals(id)){
                 return tempAdministrator;
             }
         }

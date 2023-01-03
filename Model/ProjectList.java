@@ -19,7 +19,7 @@ public class ProjectList implements JsonList<Project>{
         for (int i = 0; i < projects.size(); i++){
             Project project = projects.get(i);
             String projectLecturerID = project.getLecturerId();
-            if (!(projectLecturerID.equals(lecturerUser.getID()))){
+            if (!(projectLecturerID.equals(lecturerUser.getId()))){
                 projects.remove(i);
                 i--;
             }
