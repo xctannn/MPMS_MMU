@@ -22,7 +22,7 @@ public class StudentController {
     // }
 
     // public void updateView(){
-        // viewboard.printListOfProjects(projectModel);
+    //     viewboard.printListOfProjects(projectModel);
     // }
 
 }
