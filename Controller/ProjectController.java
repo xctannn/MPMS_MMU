@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -167,7 +166,7 @@ public class ProjectController {
                 projectList.addItem(newProject);
                 addNewProjectToTable(newProject);
                 projectView.setupLecturerAddProjectPanel();
-                
+
             } catch (IllegalArgumentException exception){
                 ProjectView.displayErrorMessage(exception.getMessage());
             }
