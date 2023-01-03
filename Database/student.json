@@ -11,6 +11,6 @@
     "username": "Lee",
     "password": "l02",
     "specialization" : "Cybersecurity",
-    "assignedProjectID" : "P0002",
+    "assignedProjectID" : null,
     "favourites" : null
 }]
