@@ -13,7 +13,7 @@ public abstract class User {
         this.password = password;
     }
 
-    public String getID(){
+    public String getId(){
         return id;
     }
 
