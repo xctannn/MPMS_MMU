@@ -6,24 +6,16 @@ import java.util.ArrayList;
 public class ProjectList implements JsonList<Project>{
     JsonParser<Project> parser = new JsonParser<>("/Database/project.json", Project.class);
     private ArrayList<Project> projects;
+    private ArrayList<Project> filteredProjects;
+
     
     //projectList will contain every project in the database， can be used for adminUser
     public ProjectList(){   
         setList();
     }
 
-    //projectList will contain all the projects of the lecturerUser
     public ProjectList(Lecturer lecturerUser){
         setList();
-
-        for (int i = 0; i < projects.size(); i++){
-            Project project = projects.get(i);
-            String projectLecturerID = project.getLecturerId();
-            if (!(projectLecturerID.equals(lecturerUser.getId()))){
-                projects.remove(i);
-                i--;
-            }
-        }  
     }
 
     //projectList will contain all the projects with the same specialization to the user
@@ -38,6 +30,32 @@ public class ProjectList implements JsonList<Project>{
                 i--;
             }
         }
+    }
+
+    //projectList will contain all the projects of the lecturerUser
+    public ArrayList<Project> getFilteredList(Lecturer lecturerUser){
+        for (int i = 0; i < filteredProjects.size(); i++){
+            Project project = filteredProjects.get(i);
+            String projectLecturerID = project.getLecturerId();
+            if (!(projectLecturerID.equals(lecturerUser.getId()))){
+                filteredProjects.remove(i);
+                i--;
+            }
+        }  
+        return filteredProjects;
+    }
+
+    //projectList will contain all the projects with the same specialization to the user
+    public ArrayList<Project> getFilteredList(Student studentUser){
+        for (int i = 0; i < filteredProjects.size(); i++){
+            Project project = filteredProjects.get(i);
+            String specialization = studentUser.getSpecialization();
+            if ((!(project.getSpecialization().equals(specialization))) || !project.getIsActive()){
+                filteredProjects.remove(i);
+                i--;
+            }
+        }
+        return filteredProjects;
     }
 
     public void saveProjectName(String projectID, String name){
@@ -85,6 +103,7 @@ public class ProjectList implements JsonList<Project>{
     public void setList(){
         try {
             this.projects = parser.deserialize();
+            this.filteredProjects = new ArrayList<>(projects);
         } catch (IOException e) {
             e.printStackTrace();
         }
