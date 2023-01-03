@@ -63,6 +63,13 @@ public class LecturerList implements JsonList<Lecturer> {
 
     @Override
     public int getSize(){
-        return lecturers.size();
+        ArrayList<Lecturer> tempList;
+        try {
+            tempList = parser.deserialize();
+            return tempList.size();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
     } 
 }

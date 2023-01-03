@@ -56,6 +56,13 @@ public class StudentList implements JsonList<Student> {
 
     @Override
     public int getSize(){
-        return students.size();
+        ArrayList<Student> tempList;
+        try {
+            tempList = parser.deserialize();
+            return tempList.size();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
     } 
 }

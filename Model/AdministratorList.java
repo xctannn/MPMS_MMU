@@ -56,6 +56,13 @@ public class AdministratorList implements JsonList<Administrator> {
 
     @Override
     public int getSize(){
-        return administrators.size();
+        ArrayList<Administrator> tempList;
+        try {
+            tempList = parser.deserialize();
+            return tempList.size();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
     } 
 }

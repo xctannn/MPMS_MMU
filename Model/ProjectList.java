@@ -92,6 +92,8 @@ public class ProjectList implements JsonList<Project>{
 
     @Override
     public void addItem(Project item) {
+        setList();
+
         this.projects.add(item);
          
         save();
@@ -110,6 +112,13 @@ public class ProjectList implements JsonList<Project>{
 
     @Override
     public int getSize(){
-        return projects.size();
+        ArrayList<Project> tempList;
+        try {
+            tempList = parser.deserialize();
+            return tempList.size();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
     } 
 }
