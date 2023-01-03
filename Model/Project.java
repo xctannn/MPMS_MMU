@@ -7,19 +7,21 @@ public class Project{
     private String specialization;
     private String content;
     private String lecturerId;
+    private String lecturerName;
     private Student studentAssigned;
     private boolean isAssigned = false;
     private boolean isActive = false;
 
 
     //Constructor
-    public Project(String id, String name, String specialization, String content, String lecturerId, 
+    public Project(String id, String name, String specialization, String content, String lecturerId, String lecturerName,
     Student studentAssigned, boolean isAssigned, boolean isActive){
         this.id = id;
         this.name = name;
         this.specialization = specialization;
         this.content = content;
         this.lecturerId = lecturerId;
+        this.lecturerName = lecturerName;
         this.studentAssigned = studentAssigned;
         this.isAssigned = isAssigned;
         this.isActive = isActive;
@@ -27,16 +29,16 @@ public class Project{
 
     public Project(){};
     
-    public Project(String id, String name, String specialization, String content, String lecturerId){
+    public Project(String id, String name, String specialization, String content, String lecturerId, String lecturerName){
         this.id = id;
         this.name = name;
         this.specialization = specialization;
         this.content = content;
         this.lecturerId = lecturerId;
+        this.lecturerName = lecturerName;
         this.studentAssigned = null;
         this.isAssigned = false;
         this.isActive = true;
-
     }
 
     public String generateCode(int listSize){
@@ -58,6 +60,10 @@ public class Project{
 
     public String getLecturerId(){
         return lecturerId;
+    }
+
+    public String getLecturerName(){
+        return lecturerName;
     }
 
     public Student getStudentAssigned(){
