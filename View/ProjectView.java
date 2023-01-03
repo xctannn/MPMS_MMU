@@ -20,8 +20,12 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 
+import Model.Administrator;
+import Model.Lecturer;
+import Model.Student;
+
 public class ProjectView {
-    private static final String[] projectSpecializationOptions = {"Software Engineering", "Game Development", "Data Science" , "Cybersecurity", "Artificial Intelligence"};
+    private static final String[] projectSpecializationOptions = {"---Select Here---", "Software Engineering", "Game Development", "Data Science" , "Cybersecurity", "Artificial Intelligence"};
 
     // Projects Table View Components
     public JPanel wrapper = new JPanel();
@@ -47,7 +51,8 @@ public class ProjectView {
     public ProjectView(){
         wrapper.setLayout(new GridLayout(1,2));
 
-        // Project Table View Initial Setup 
+        // Project Table View Initial Setup
+         
         JPanel tableWrapper = new JPanel();
         tableWrapper.setLayout(new BoxLayout(tableWrapper, BoxLayout.PAGE_AXIS));
         tableWrapper.add(new JScrollPane(projectTable));
@@ -68,14 +73,14 @@ public class ProjectView {
         projectLecturerWrapper.add(projectLecturer);
         projectPanelTitle.add(projectLecturerWrapper);
         JPanel projectSpecializationWrapper = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        projectSpecialization.setMaximumSize(new Dimension(200,20));
+        projectSpecialization.setMinimumSize(new Dimension(250,20));
+        projectSpecialization.setColumns(15);
+
         projectSpecializationPicker.setMaximumSize(new Dimension(200,20));
         projectSpecializationPicker.setVisible(false);
         projectSpecializationWrapper.add(projectSpecialization);
         projectSpecializationWrapper.add(projectSpecializationPicker);
         projectPanelTitle.add(projectSpecializationWrapper);
-        // projectPanelTitle.add(projectSpecializationPicker);
-        // projectPanel.add(projectSpecializationWrapper);
         projectPanel.add(projectPanelTitle, BorderLayout.NORTH);
 
         //Project Panel Content Setup
@@ -92,7 +97,6 @@ public class ProjectView {
         projectBody.add(projectPanelEditWrapper);
         projectPanelContent.add(projectBody, BorderLayout.CENTER);
 
-        // projectPanelContent.add(projectPanelEditWrapper, BorderLayout.NORTH);
         projectPanelContent.add(projectStudent, BorderLayout.SOUTH);
         projectPanel.add(projectPanelContent);
 
@@ -115,13 +119,32 @@ public class ProjectView {
         wrapper.add(projectPanel);
     }
 
-    public void setupLecterurProjectView(){
+    public void defaultProjectView(Administrator adminUser){
+        projectLecturer.setVisible(true);
+        saveEditButton.setVisible(false);
+        editContentButton.setVisible(false);
+        assignStudentButton.setVisible(false);
+        toggleProjectButton.setVisible(false);
+        confirmAddProjectButton.setVisible(false);
+    }
+
+    public void defaultProjectView(Lecturer lecturerUser){
         projectLecturer.setVisible(true);
         saveEditButton.setVisible(false);
         editContentButton.setVisible(true);
         assignStudentButton.setVisible(true);
         toggleProjectButton.setVisible(true);
-        // confirmAddProjectButton.setVisible(false);
+        confirmAddProjectButton.setVisible(false);
+    }
+
+    public void defaultProjectView(Student studentUser){
+        addProjectButton.setVisible(false);
+        projectLecturer.setVisible(true);
+        saveEditButton.setVisible(false);
+        editContentButton.setVisible(false);
+        assignStudentButton.setVisible(false);
+        toggleProjectButton.setVisible(false);
+        confirmAddProjectButton.setVisible(false);
     }
 
     public void setupLecturerAddProjectPanel(){
@@ -217,11 +240,26 @@ public class ProjectView {
         projectSpecialization.setVisible(true);
         projectSpecialization.setOpaque(false);
 
+        projectLecturer.setVisible(true);
+
         projectContent.setEditable(false);
         projectContent.setOpaque(false);
 
         assignStudentButton.setVisible(true);
         toggleProjectButton.setVisible(true);
+        confirmAddProjectButton.setVisible(false);
+    }
+
+    public void resetSpecializationPicker(){
+        projectSpecializationPicker.setSelectedItem(0);
+    }
+
+    public static void displayErrorMessage(String message){
+        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public String getStudentID(){
+        return JOptionPane.showInputDialog("Enter the Student's ID");
     }
 
     public String[] getColumnNames(){
@@ -236,6 +274,10 @@ public class ProjectView {
         return projectName.getText();
     }
 
+    public JComboBox<String> getSpecializationPicker(){
+        return projectSpecializationPicker;
+    }
+
     public String getSelectedSpecialization(){
         return projectSpecializationPicker.getSelectedItem().toString();
     }
@@ -248,9 +290,7 @@ public class ProjectView {
         return projectContent.getText();
     }
 
-    public String getStudentID(){
-        return JOptionPane.showInputDialog("Enter the Student's ID");
-    }
+    
     
     public void setProjectNameLabel(String name){
         projectName.setText(name);
