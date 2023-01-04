@@ -25,7 +25,7 @@ import javax.swing.event.ListSelectionListener;
 
 public class CommentView {
 
-    private String[] columnNames = {"ID", "User","Comment"};
+    private String[] columnNames = {"ID", "UserID","Username","Comment"};
 
     public JPanel wrapper = new JPanel();
     // CardLayout (switch to comment sections)
@@ -48,8 +48,14 @@ public class CommentView {
         JPanel mainPanel = new JPanel();
         //Comment Section
         commentTitleLabel.setFont(new Font(commentTitleLabel.getFont().toString(), Font.BOLD, 16));
+        mainPanel.add(mainPanel, BorderLayout.CENTER);
         // projectPanelButton.setEnabled(false);
         // commentPanelButton.setEnabled(false);
+
+        //Past Comments Table
+        JPanel commentTablePanel = new JPanel();
+        commentTablePanel.add(new JScrollPane(commentTable));
+        mainPanel.add(commentTablePanel,BorderLayout.CENTER);
 
         JPanel oneButton = new JPanel();
         oneButton.add(commentPanelButton);
@@ -57,10 +63,7 @@ public class CommentView {
         mainPanel.add(oneButton,BorderLayout.SOUTH);
         commentPanelButton.setVisible(true);
 
-        //Past Comments Table
-        JPanel commentTablePanel = new JPanel();
-        commentTablePanel.add(new JScrollPane(commentTable));
-        mainPanel.add(commentTablePanel,BorderLayout.CENTER);
+
 
         //Comment Section Text Box Setup
         JPanel commentSectionPanel = new JPanel();

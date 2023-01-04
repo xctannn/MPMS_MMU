@@ -3,37 +3,52 @@ package Model;
 public class CommentModel {
     private String commentID;
 
-    private String lecturerID;
-    private String studentID;
+    // private String lecturerID;
+    // private String studentID;
+    private String userID;
+    private String username;
     private String commentString;
     private String projectID;
 
+
     public CommentModel(){}
 
-    public CommentModel(String commentID, Project project, Lecturer lecturer, Student student, String commentString){
+    public CommentModel(String commentID, String username ,Project project, Administrator admin, String commentString){
         this.commentID = commentID;
+        this.username = admin.getUsername();
         this.projectID = project.getId();
-        this.lecturerID = lecturer.getID();
-        this.studentID = student.getID();
+        this.userID = admin.getID();
+        this.commentString = commentString;
+    }
+    //Lecturer lecturer, Student student,
+    public CommentModel(String commentID,String username , Project project, Lecturer lecturer, String commentString){
+        this.commentID = commentID;
+        this.username = lecturer.getUsername();
+        this.projectID = project.getId();
+        this.userID = lecturer.getID();
         this.commentString = commentString;
     }
 
+    public CommentModel(String commentID,String username , Project project, Student student, String commentString){
+        this.commentID = commentID;
+        this.username = student.getUsername();
+        this.projectID = project.getId();
+        this.userID = student.getID();
+        this.commentString = commentString;
+    }
+    
     public String getCommentID() {
         return commentID;
     }
-
+    public String getUsername(){
+        return username;
+    }
     public String getProjectID(){
         return projectID;
     }
-
-    public String getStudentID(){
-        return studentID;
+    public String getUserID(){
+        return userID;
     }
-    
-    public String getLecturerID(){
-        return lecturerID;
-    }
-
     public String getCommentString(){
         return commentString;
     }

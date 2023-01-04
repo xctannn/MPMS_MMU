@@ -120,24 +120,14 @@ public class ProjectController {
 
         for(int i = 0; i < comments.size(); i++){
             if(comments.get(i).getProjectID().equals("P0001")){
-                if(!comments.get(i).getStudentID().equals(null)){
-                    CommentModel comment = comments.get(i);
-                    String commentID = comment.getCommentID();
-                    String username = comment.getStudentID();
-                    String commentString = comment.getCommentString();
-                    //"ID", "User","Comment",
-                    Object[] row = {commentID, username, commentString};
-                    commentTableModel.addRow(row);
-                }
-                if(!comments.get(i).getLecturerID().equals(null)){
-                    CommentModel comment = comments.get(i);
-                    String commentID = comment.getCommentID();
-                    String username = comment.getLecturerID();
-                    String commentString = comment.getCommentString();
-                    //"ID", "User","Comment",
-                    Object[] row = {commentID, username, commentString};
-                    commentTableModel.addRow(row);
-                }
+                CommentModel comment = comments.get(i);
+                String commentID = comment.getCommentID();
+                String userID = comment.getUserID();
+                String username = comment.getUsername();
+                String commentString = comment.getCommentString();
+                //"ID", "User","Comment",
+                Object[] row = {commentID, userID,username, commentString};
+                commentTableModel.addRow(row);
                 
             }
 

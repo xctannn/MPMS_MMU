@@ -1,7 +1,6 @@
-{
+[{
   "commentID" : "C0001",
   "projectID" : "P0001",
-  "lecturerID" : null,
-  "studentID" : "S0001",
+  "userID" : "S0001",
   "commentString" : "Sir how do we access this file?"
-}
+}]

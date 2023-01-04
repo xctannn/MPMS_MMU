@@ -13,7 +13,6 @@ import java.io.IOException;
 public class CommentList implements JsonList<CommentModel> {
     JsonParser<CommentModel> parser = new JsonParser<>("/Database/comments.json", CommentModel.class);
     private ArrayList<CommentModel> comments;
-    private Object getComments;
 
     public CommentList(){
         try{
@@ -56,7 +55,7 @@ public class CommentList implements JsonList<CommentModel> {
             e.printStackTrace();
         }
     }
-
+    // For adding new json data
     @Override
     public void addItem(CommentModel item) {
         this.comments.add(item);
@@ -83,9 +82,10 @@ public class CommentList implements JsonList<CommentModel> {
     // public static void main(String[] args){
     //     Lecturer lec = new Lecturer("L007", "Mickey Deez", "DeezNutz123");
     //     Student stu = new Student("S001", "Goofy Ass", "HoeDuck", "Hotel Management", "P001");
+    //     User user = new User("L0007","Danish","Abc123");
     //     Project pro = new Project("P001","Manage Hotel", "Hotel Management", "Assign people to love hotel room 1001", lec, stu, true, true, false);
 
-    //     Comment c1 = new Comment("C1", pro, lec, stu, "Sir how do we access this file?");
+    //     CommentModel c1 = new CommentModel("C0001", pro,user,"Sir do we have class tmrw?" );
     //     CommentList cl = new CommentList();
     //     cl.writeAllData(c1);
     // }
