@@ -6,8 +6,6 @@ import java.util.ArrayList;
 public class ProjectList implements JsonList<Project>{
     JsonParser<Project> parser = new JsonParser<>("/Database/project.json", Project.class);
     private ArrayList<Project> projects;
-    private ArrayList<Project> filteredProjects;
-
     
     //projectList will contain every project in the database， can be used for adminUser
     public ProjectList(){   
@@ -33,7 +31,9 @@ public class ProjectList implements JsonList<Project>{
     }
 
     //projectList will contain all the projects of the lecturerUser
-    public ArrayList<Project> getFilteredList(Lecturer lecturerUser){
+    public ArrayList<Project> getFilteredProjects(Lecturer lecturerUser){
+        ArrayList<Project> filteredProjects = new ArrayList<>(projects);
+
         for (int i = 0; i < filteredProjects.size(); i++){
             Project project = filteredProjects.get(i);
             String projectLecturerID = project.getLecturerId();
@@ -46,7 +46,9 @@ public class ProjectList implements JsonList<Project>{
     }
 
     //projectList will contain all the projects with the same specialization to the user
-    public ArrayList<Project> getFilteredList(Student studentUser){
+    public ArrayList<Project> getFilteredProjects(Student studentUser){
+        ArrayList<Project> filteredProjects = new ArrayList<>(projects);
+
         for (int i = 0; i < filteredProjects.size(); i++){
             Project project = filteredProjects.get(i);
             String specialization = studentUser.getSpecialization();
@@ -103,7 +105,6 @@ public class ProjectList implements JsonList<Project>{
     public void setList(){
         try {
             this.projects = parser.deserialize();
-            this.filteredProjects = new ArrayList<>(projects);
         } catch (IOException e) {
             e.printStackTrace();
         }
