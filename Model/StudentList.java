@@ -14,6 +14,48 @@ public class StudentList implements JsonList<Student> {
     public ArrayList<Student> getStudents(){
         return students;
     }
+    
+    private ArrayList<Student> getFilteredStudents(String specialization){
+        ArrayList<Student> filteredStudents = new ArrayList<>(students);
+        
+        for (int i = 0; i < filteredStudents.size(); i++){
+            Student student = filteredStudents.get(i);
+            if ((!(student.getSpecialization().equals(specialization))) || (!(student.getAssignedProjectID() == null))){
+                filteredStudents.remove(i);
+                i--;
+            }
+        }
+
+        return filteredStudents;
+    }
+
+    public ArrayList<String> getFilteredStudentsIds(String specialization){
+        ArrayList<Student> filteredStudents = getFilteredStudents(specialization);
+        ArrayList<String> filteredStudentIds = new ArrayList<>();
+
+        for (int i = 0; i < filteredStudents.size(); i++){
+            Student student = filteredStudents.get(i);
+            String studentId = student.getId(); 
+            
+            filteredStudentIds.add(studentId);
+        }
+
+        return filteredStudentIds;
+    }
+
+    public void saveProjectAssignedToStudent(String studentId, String projectId){
+        Student student = getItem(studentId);
+        student.setAssignedProjectID(projectId);
+
+        save();
+    }
+
+    public void saveUnassignedStudent(String studentId){
+        Student student = getItem(studentId);
+        student.setAssignedProjectID(null);
+
+        save();
+    }
 
     @Override
     public void save(){
