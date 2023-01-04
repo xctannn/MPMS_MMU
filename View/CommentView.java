@@ -28,6 +28,8 @@ public class CommentView {
     private String[] columnNames = {"ID", "UserID","Username","Comment"};
 
     public JPanel wrapper = new JPanel();
+    private JPanel tableView = new JPanel(new BorderLayout());
+
     // CardLayout (switch to comment sections)
     private JPanel panelCont = new JPanel();
     private JButton commentPanelButton = new JButton("To Comment Section");
@@ -56,7 +58,7 @@ public class CommentView {
         JPanel commentTablePanel = new JPanel();
         commentTablePanel.add(new JScrollPane(commentTable));
         commentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        mainPanel.add(commentTablePanel,BorderLayout.CENTER);
+        tableView.add(commentTablePanel,BorderLayout.CENTER);
 
         JPanel oneButton = new JPanel();
         oneButton.add(commentPanelButton);
@@ -85,6 +87,8 @@ public class CommentView {
         //Default Panel
         cl.show(panelCont,"1");
         mainPanel.add(panelCont);
+        wrapper.add(tableView);
+        wrapper.add(mainPanel);
         
     }
 

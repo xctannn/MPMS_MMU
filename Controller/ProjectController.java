@@ -125,8 +125,9 @@ public class ProjectController {
                 String userID = comment.getUserID();
                 String username = comment.getUsername();
                 String commentString = comment.getCommentString();
-                //"ID", "User","Comment",
+                //"ID", "UserID", "Username","Comment",
                 Object[] row = {commentID, userID,username, commentString};
+                
                 commentTableModel.addRow(row);
                 
             }
@@ -139,6 +140,7 @@ public class ProjectController {
         columnModel.getColumn(0).setPreferredWidth(50);
         columnModel.getColumn(1).setPreferredWidth(100);
         columnModel.getColumn(2).setPreferredWidth(250);   
+        columnModel.getColumn(3).setPreferredWidth(250);  
     }
 
     class AssignButtonListener implements ActionListener{

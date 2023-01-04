@@ -13,27 +13,27 @@ public class CommentModel {
 
     public CommentModel(){}
 
-    public CommentModel(String commentID, String username ,Project project, Administrator admin, String commentString){
+    public CommentModel(String commentID, Project project, Administrator admin,String username , String commentString){
         this.commentID = commentID;
-        this.username = admin.getUsername();
         this.projectID = project.getId();
         this.userID = admin.getID();
+        this.username = admin.getUsername();
         this.commentString = commentString;
     }
     //Lecturer lecturer, Student student,
-    public CommentModel(String commentID,String username , Project project, Lecturer lecturer, String commentString){
+    public CommentModel(String commentID, Project project, Lecturer lecturer,String username , String commentString){
         this.commentID = commentID;
-        this.username = lecturer.getUsername();
         this.projectID = project.getId();
         this.userID = lecturer.getID();
+        this.username = lecturer.getUsername();
         this.commentString = commentString;
     }
 
-    public CommentModel(String commentID,String username , Project project, Student student, String commentString){
+    public CommentModel(String commentID, Project project, Student student,String username , String commentString){
         this.commentID = commentID;
-        this.username = student.getUsername();
         this.projectID = project.getId();
         this.userID = student.getID();
+        this.username = student.getUsername();
         this.commentString = commentString;
     }
     
