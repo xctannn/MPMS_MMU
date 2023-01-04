@@ -5,15 +5,9 @@
   "content" : "This is a Data Science Capstone project, you better not fuck this up",
   "lecturerId" : "L0001",
   "lecturerName" : "Tan",
-  "studentAssigned" : {
-    "id" : "S0001",
-    "username" : "s1",
-    "password" : "s01",
-    "specialization" : "Data Science",
-    "assignedProjectID" : "P0001",
-    "favourites" : null
-  },
-  "isAssigned" : true,
+  "studentAssignedId" : null,
+  "studentAssignedName" : null,
+  "isAssigned" : false,
   "isActive" : false
 }, {
   "id" : "P0002",
@@ -22,8 +16,9 @@
   "content" : "This is a Data Science Capstone project, dont fuck this up, yo.\n",
   "lecturerId" : "L0001",
   "lecturerName" : "Tan",
-  "studentAssigned" : null,
-  "isAssigned" : false,
+  "studentAssignedId" : "S0001",
+  "studentAssignedName" : "S1",
+  "isAssigned" : true,
   "isActive" : true
 }, {
   "id" : "P0003",
@@ -32,17 +27,19 @@
   "content" : "This is a new proejct blah blah blah blah",
   "lecturerId" : "L0002",
   "lecturerName" : "Lee",
-  "studentAssigned" : null,
+  "studentAssignedId" : null,
+  "studentAssignedName" : null,
   "isAssigned" : false,
   "isActive" : false
 }, {
   "id" : "P0004",
   "name" : "Tan Project",
-  "specialization" : "Game Development",
+  "specialization" : "Cybersecurity",
   "content" : "Enter project content here bro\njnkn\njnk",
   "lecturerId" : "L0001",
   "lecturerName" : "Tan",
-  "studentAssigned" : null,
-  "isAssigned" : false,
-  "isActive" : true
+  "studentAssignedId" : "S0003",
+  "studentAssignedName" : "s3",
+  "isAssigned" : true,
+  "isActive" : false
 } ]
