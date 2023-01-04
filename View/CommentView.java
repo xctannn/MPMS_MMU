@@ -48,13 +48,14 @@ public class CommentView {
         JPanel mainPanel = new JPanel();
         //Comment Section
         commentTitleLabel.setFont(new Font(commentTitleLabel.getFont().toString(), Font.BOLD, 16));
-        mainPanel.add(mainPanel, BorderLayout.CENTER);
+        mainPanel.add(commentTitleLabel, BorderLayout.CENTER);
         // projectPanelButton.setEnabled(false);
         // commentPanelButton.setEnabled(false);
 
         //Past Comments Table
         JPanel commentTablePanel = new JPanel();
         commentTablePanel.add(new JScrollPane(commentTable));
+        commentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         mainPanel.add(commentTablePanel,BorderLayout.CENTER);
 
         JPanel oneButton = new JPanel();
@@ -68,13 +69,13 @@ public class CommentView {
         //Comment Section Text Box Setup
         JPanel commentSectionPanel = new JPanel();
         JTextField textBox = new JTextField();
-        // commentSectionPanel.setLayout(new BoxLayout(commentSectionPanel,BoxLayout.PAGE_AXIS));
-        // commentSectionPanel.add(commentTitleLabel);
-        // commentSectionPanel.add(textBox, Component.BOTTOM_ALIGNMENT);
-        // commentSectionPanel.add(Box.createHorizontalStrut(15));
-        // commentSectionPanel.add(submitCommentButton, Component.RIGHT_ALIGNMENT);
-        // submitCommentButton.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-        // commentSectionPanel.add(Box.createHorizontalGlue());
+        commentSectionPanel.setLayout(new BoxLayout(commentSectionPanel,BoxLayout.PAGE_AXIS));
+        commentSectionPanel.add(commentTitleLabel);
+        commentSectionPanel.add(textBox, Component.BOTTOM_ALIGNMENT);
+        commentSectionPanel.add(Box.createHorizontalStrut(15));
+        commentSectionPanel.add(submitCommentButton, Component.RIGHT_ALIGNMENT);
+        submitCommentButton.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        commentSectionPanel.add(Box.createHorizontalGlue());
         commentSectionPanel.add(projectPanelButton);
         panelCont.add(projectPanelButton,"2");
 
