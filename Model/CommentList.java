@@ -80,16 +80,15 @@ public class CommentList implements JsonList<CommentModel> {
 
     //TEST DATA ENTRY
     
-    public static void main(String[] args){
-        Lecturer lec = new Lecturer("L007", "Mickey Deez", "DeezNutz123");
-        Student stu = new Student("S001", "Goofy Ass", "HoeDuck", "Hotel Management", "P001");
-        User useer = new User("L0007","Danish","Abc123");
-        Project pro = new Project("P001","Manage Hotel", "Hotel Management", "Assign people to love hotel room 1001", lec, stu, true, true, false);
+    // public static void main(String[] args){
+    //     Lecturer lec = new Lecturer("L007", "Mickey Deez", "DeezNutz123");
+    //     Student stu = new Student("S001", "Goofy Ass", "HoeDuck", "Hotel Management", "P001");
+    //     Project pro = new Project("P001","Manage Hotel", "Hotel Management", "Assign people to love hotel room 1001", lec, stu, true, true, false);
 
-        CommentModel c1 = new CommentModel("C0001", pro,useer,"Sir do we have class tmrw?" );
-        CommentList cl = new CommentList();
-        cl.writeAllData(c1);
-    }
+    //     Comment c1 = new Comment("C1", pro, lec, stu, "Sir how do we access this file?");
+    //     CommentList cl = new CommentList();
+    //     cl.writeAllData(c1);
+    // }
 
 }
 

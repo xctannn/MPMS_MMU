@@ -25,7 +25,7 @@ import javax.swing.event.ListSelectionListener;
 
 public class CommentView {
 
-    private String[] columnNames = {"ID", "User","Comment","ProjectID"};
+    private String[] columnNames = {"ID", "User","Comment"};
 
     public JPanel wrapper = new JPanel();
     // CardLayout (switch to comment sections)
@@ -61,7 +61,7 @@ public class CommentView {
         //Past Comments Table
         JPanel commentTablePanel = new JPanel();
         commentTablePanel.add(new JScrollPane(commentTable));
-        mainPanel.add(commentTablePanel);
+        mainPanel.add(commentTablePanel,BorderLayout.CENTER);
 
         //Comment Section Text Box Setup
         JPanel commentSectionPanel = new JPanel();

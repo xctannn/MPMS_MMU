@@ -119,15 +119,28 @@ public class ProjectController {
         DefaultTableModel commentTableModel = new DefaultTableModel(commentView.getColumnNames(),0);
 
         for(int i = 0; i < comments.size(); i++){
-            CommentModel comment = comments.get(i);
-            String commentID = comments.get(i).getCommentID();
-            String username = comments.get(i).getUser().getUsername();
-            String commentString = comments.get(i).getCommentString();
-            String projectID = comments.get(i).getProjectID();
-            //"ID", "User","Comment","ProjectID"
-            Object[] row = {commentID, username, commentString, projectID};
+            if(comments.get(i).getProjectID().equals("P0001")){
+                if(!comments.get(i).getStudentID().equals(null)){
+                    CommentModel comment = comments.get(i);
+                    String commentID = comment.getCommentID();
+                    String username = comment.getStudentID();
+                    String commentString = comment.getCommentString();
+                    //"ID", "User","Comment",
+                    Object[] row = {commentID, username, commentString};
+                    commentTableModel.addRow(row);
+                }
+                if(!comments.get(i).getLecturerID().equals(null)){
+                    CommentModel comment = comments.get(i);
+                    String commentID = comment.getCommentID();
+                    String username = comment.getLecturerID();
+                    String commentString = comment.getCommentString();
+                    //"ID", "User","Comment",
+                    Object[] row = {commentID, username, commentString};
+                    commentTableModel.addRow(row);
+                }
+                
+            }
 
-            commentTableModel.addRow(row);
         }
         JTable viewTable = commentView.getCommentTable();
         viewTable.setModel(commentTableModel);
@@ -135,9 +148,7 @@ public class ProjectController {
         TableColumnModel columnModel = viewTable.getColumnModel();
         columnModel.getColumn(0).setPreferredWidth(50);
         columnModel.getColumn(1).setPreferredWidth(100);
-        columnModel.getColumn(2).setPreferredWidth(250);
-        columnModel.getColumn(3).setPreferredWidth(100);
-    }
+        columnModel.getColumn(2).setPreferredWidth(250);    }
 
     class AssignButtonListener implements ActionListener{
         @Override

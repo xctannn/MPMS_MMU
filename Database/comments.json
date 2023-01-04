@@ -1,6 +1,7 @@
 {
-  "commentString" : "Sir how do we access this file?",
-  "id" : "C1",
+  "id" : "C0001",
   "projectID" : "P001",
-  "user" : "L007"
+  "lecturerID" : "L0001",
+  "studentID" : "S0001",
+  "commentString" : "Sir how do we access this file?"
 }
