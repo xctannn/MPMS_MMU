@@ -81,6 +81,22 @@ public class ProjectList implements JsonList<Project>{
         save();
     }
 
+    public void saveProjectStudentAssigned(String projectId, String studentId, String studentName){
+        Project assignedProject = getItem(projectId);
+        assignedProject.setStudent(studentId, studentName);
+        assignedProject.setIsAssigned(true);
+
+        save();
+    }
+
+    public void saveProjectUnassigned(String projectId){
+        Project assignedProject = getItem(projectId);
+        assignedProject.setStudent(null, null);
+        assignedProject.setIsAssigned(false);
+
+        save();
+    }
+
     public void toggleProject(String projectID){
         Project project = getItem(projectID);
         project.setIsActive(!(project.getIsActive()));
