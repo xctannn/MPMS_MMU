@@ -2,6 +2,7 @@ import javax.swing.JFrame;
 import javax.swing.JFrame;
 
 import Controller.ProjectController;
+import Model.Administrator;
 import Model.Lecturer;
 import Model.Project;
 import Model.Student;
@@ -9,9 +10,10 @@ import View.ProjectView;
 
 public class Main {
     public static void main(String[] args){
-        Project projectModel = new Project();
         // ProjectList projectList = new ProjectList();
         Lecturer lecturer2 = new Lecturer("L0001", "Tan", "l01");
+        Administrator admin = new Administrator("A0001", "Admin", "a01");
+
         // lecturer2.addproject("P0001");
         // lecturer2.addproject("P0002");
         // Student student = new Student("S001", "Goofy Arse", "Huekhuek", "Data Science", "P0001");
@@ -26,7 +28,7 @@ public class Main {
         frame.setSize(1200, 700);
         
         ProjectView projectView = new ProjectView();
-        ProjectController projectController = new ProjectController(lecturer2, projectModel, projectView);
+        ProjectController projectController = new ProjectController(lecturer2, projectView);
         frame.add(projectView.wrapper);
         frame.setVisible(true);
     } 
