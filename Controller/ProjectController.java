@@ -148,7 +148,8 @@ public class ProjectController {
         TableColumnModel columnModel = viewTable.getColumnModel();
         columnModel.getColumn(0).setPreferredWidth(50);
         columnModel.getColumn(1).setPreferredWidth(100);
-        columnModel.getColumn(2).setPreferredWidth(250);    }
+        columnModel.getColumn(2).setPreferredWidth(250);   
+    }
 
     class AssignButtonListener implements ActionListener{
         @Override

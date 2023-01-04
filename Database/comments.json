@@ -1,7 +1,7 @@
 {
-  "id" : "C0001",
-  "projectID" : "P001",
-  "lecturerID" : "L0001",
+  "commentID" : "C0001",
+  "projectID" : "P0001",
+  "lecturerID" : null,
   "studentID" : "S0001",
   "commentString" : "Sir how do we access this file?"
 }

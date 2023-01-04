@@ -3,18 +3,18 @@ package Model;
 public class CommentModel {
     private String commentID;
 
-    private Lecturer lecturer;
-    private Student student;
+    private String lecturerID;
+    private String studentID;
     private String commentString;
-    private Project project;
+    private String projectID;
 
     public CommentModel(){}
 
     public CommentModel(String commentID, Project project, Lecturer lecturer, Student student, String commentString){
         this.commentID = commentID;
-        this.project = project;
-        this.lecturer = lecturer;
-        this.student = student;
+        this.projectID = project.getId();
+        this.lecturerID = lecturer.getID();
+        this.studentID = student.getID();
         this.commentString = commentString;
     }
 
@@ -23,15 +23,15 @@ public class CommentModel {
     }
 
     public String getProjectID(){
-        return project.getId();
+        return projectID;
     }
 
     public String getStudentID(){
-        return student.getID();
+        return studentID;
     }
     
     public String getLecturerID(){
-        return lecturer.getID();
+        return lecturerID;
     }
 
     public String getCommentString(){

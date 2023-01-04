@@ -51,7 +51,6 @@ public class CommentView {
         // projectPanelButton.setEnabled(false);
         // commentPanelButton.setEnabled(false);
 
-
         JPanel oneButton = new JPanel();
         oneButton.add(commentPanelButton);
         panelCont.add(commentPanelButton,"1");
