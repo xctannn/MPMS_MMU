@@ -3,6 +3,7 @@ package Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.IllegalFormatException;
 
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
@@ -16,6 +17,7 @@ import Model.LecturerList;
 import Model.Project;
 import Model.ProjectList;
 import Model.Student;
+import Model.StudentList;
 import Model.User;
 import View.ProjectView;
 
@@ -25,11 +27,11 @@ public class ProjectController {
     private ProjectList projectList = new ProjectList();
     private ArrayList<Project> filteredProjectList;
     private ProjectView projectView;
-    private LecturerList LecturerList = new LecturerList();
+    private LecturerList lecturerList = new LecturerList();
+    private StudentList studentList = new StudentList();
 
-    public ProjectController(Administrator user, Project model, ProjectView view){
+    public ProjectController(Administrator user, ProjectView view){
         this.user = user;
-        this.projectModel = model;
         this.projectView = view;
         this.filteredProjectList = new ArrayList<>(projectList.getProjects());
 
@@ -40,11 +42,10 @@ public class ProjectController {
         populateTable();
     }
 
-    public ProjectController(Lecturer user, Project model, ProjectView view){
+    public ProjectController(Lecturer user,ProjectView view){
         this.user = user;
-        this.projectModel = model;
         this.projectView = view;
-        this.filteredProjectList = projectList.getFilteredList(user);
+        this.filteredProjectList = projectList.getFilteredProjects(user);
 
         projectView.defaultProjectView(user);
         projectView.addTableSelectionListener(new TableSelectionListener());
@@ -55,15 +56,15 @@ public class ProjectController {
         projectView.addSaveEditButtonListener(new SaveEditButtonListener());
         projectView.addToggleProjectButtonListener(new ToggleProjectButtonListener());
         projectView.addAssignButtonListener(new AssignButtonListener());
+        projectView.addUnassignButtonListener(new UnassignButtonListener());
         
         populateTable();
     }
 
-    public ProjectController(Student user, Project model, ProjectView view){
+    public ProjectController(Student user, ProjectView view){
         this.user = user;
-        this.projectModel = model;
         this.projectView = view;
-        this.filteredProjectList = projectList.getFilteredList(user);
+        this.filteredProjectList = projectList.getFilteredProjects(user);
 
 
         projectView.defaultProjectView(user);
@@ -79,19 +80,18 @@ public class ProjectController {
         String projectLecturerName = projectModel.getLecturerName();
         String projectSpecialization = projectModel.getSpecialization();
         String projectContent = projectModel.getContent();
-        boolean projectActivation = projectModel.getIsActive();
-        String projectStudent = "";
-        if (projectModel.getIsAssigned()){
-            projectStudent = projectModel.getStudentAssigned().getUsername();
-        }
-
+        boolean isProjectActive = projectModel.getIsActive();
+        boolean isProjectAssigned = projectModel.getIsAssigned();
+        String projectStudentName = projectModel.getStudentAssignedName();
+        
         // populating project panel values
         projectView.setProjectNameLabel(projectName);
         projectView.setProjectLecturerLabel(projectLecturerName);
         projectView.setProjectSpecializationLabel(projectSpecialization);
         projectView.setProjectContentArea(projectContent);
-        projectView.setToggleButtonText(projectActivation);
-        projectView.setProjectStudentLabel(projectStudent);
+        projectView.setToggleButtonText(isProjectActive);
+        projectView.setProjectStudentLabel(projectStudentName);
+        projectView.setAssignMode(isProjectAssigned);
     }
 
     // public void populateTable(){
@@ -162,25 +162,25 @@ public class ProjectController {
                 checkSpecializationValidity(projectView.getSpecializationPicker().getSelectedIndex());
 
                 Project newProject = new Project(newProjectId, newProjectName, newProjectSpecialization, newProjectContent, newProjectLecturerId, newProjectLecturerName);
-                LecturerList.saveNewProject(newProjectLecturerId, newProjectId);
+                lecturerList.saveNewProject(newProjectLecturerId, newProjectId);
                 projectList.addItem(newProject);
                 addNewProjectToTable(newProject);
                 projectView.setupLecturerAddProjectPanel();
 
-            } catch (IllegalArgumentException exception){
+            } catch (IllegalFormatException exception){
                 ProjectView.displayErrorMessage(exception.getMessage());
             }
         }
     }
 
-    private void checkNameValidity(String name) throws IllegalArgumentException{
+    private void checkNameValidity(String name) throws IllegalFormatException{
         if(name.isEmpty()){
             throw new IllegalArgumentException("Missing Project Name");
         }
 
     }
 
-    private void checkSpecializationValidity(int index) throws IllegalArgumentException{
+    private void checkSpecializationValidity(int index) throws IllegalFormatException{
         if(index == 0){
             throw new IllegalArgumentException("Please pick a Specialization");
         }
@@ -243,10 +243,50 @@ public class ProjectController {
     class AssignButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            String id = projectView.getStudentID();
-            System.out.println(id);
+            String projectSpecialization = projectModel.getSpecialization();
+            String projectId = projectModel.getId();
+
+            try{
+                ArrayList<String> availableStudentIds = studentList.getFilteredStudentsIds(projectSpecialization);
+                if(availableStudentIds.size() == 0) throw new IllegalArgumentException();
+
+                String selectedStudentId = projectView.getStudentToAssign(availableStudentIds);
+                if (!selectedStudentId.isEmpty()){
+                    Student selectedStudent = studentList.getItem(selectedStudentId);
+                    String selectedStudentName = selectedStudent.getUsername();
+
+                    projectList.saveProjectStudentAssigned(projectId, selectedStudentId, selectedStudentName);
+                    studentList.saveProjectAssignedToStudent(selectedStudentId, projectId);
+                    projectView.setProjectStudentLabel(selectedStudentName);
+                    projectView.enableUnassign();
+                }
+                
+            }catch(IllegalArgumentException exception){
+                ProjectView.displayErrorMessage("There are no students available to assign");
+            }
+            
         }
     }
+
+    class UnassignButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            if(!projectView.getUnassignConfirmation()){
+                return;
+            }
+
+            String projectId = projectModel.getId();
+            String projectStudentAssigned = projectModel.getStudentAssignedId();
+
+            // projectModel.setIsAssigned(false);
+            projectList.saveProjectUnassigned(projectId);
+            studentList.saveUnassignedStudent(projectStudentAssigned);
+
+            projectView.setProjectStudentLabel("");
+            projectView.enableAssign();
+        }
+    }
+
     class TableSelectionListener implements ListSelectionListener{
         @Override
         public void valueChanged(ListSelectionEvent e) {

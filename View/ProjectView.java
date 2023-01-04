@@ -1,9 +1,11 @@
 package View;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.awt.*;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -45,7 +47,9 @@ public class ProjectView {
     private JButton editContentButton = new JButton("Edit");
     private JButton saveEditButton = new JButton("Save");
     private JButton toggleProjectButton = new JButton("Activate");
+    private JPanel assignButtonsWrapper = new JPanel();
     private JButton assignStudentButton = new JButton("Assign");
+    private JButton unassignStudentButton = new JButton("Unassign");
     private JButton confirmAddProjectButton = new JButton("Confirm");
 
     public ProjectView(){
@@ -101,10 +105,14 @@ public class ProjectView {
         projectPanel.add(projectPanelContent);
 
         // Project Panel Buttons Setup
+        assignButtonsWrapper.add(assignStudentButton);
+        assignButtonsWrapper.add(unassignStudentButton);
+
         JPanel projectPanelButtons = new JPanel();
         projectPanelButtons.setLayout(new BoxLayout(projectPanelButtons, BoxLayout.LINE_AXIS));
         projectPanelButtons.add(Box.createHorizontalGlue());
-        projectPanelButtons.add(assignStudentButton);
+        projectPanelButtons.add(assignButtonsWrapper);
+        // projectPanelButtons.add(unassignStudentButton);
         projectPanelButtons.add(Box.createHorizontalGlue());
         projectPanelButtons.add(toggleProjectButton);
         projectPanelButtons.add(Box.createHorizontalGlue());
@@ -126,6 +134,7 @@ public class ProjectView {
         assignStudentButton.setVisible(false);
         toggleProjectButton.setVisible(false);
         confirmAddProjectButton.setVisible(false);
+        assignButtonsWrapper.setVisible(false);
     }
 
     public void defaultProjectView(Lecturer lecturerUser){
@@ -133,8 +142,10 @@ public class ProjectView {
         saveEditButton.setVisible(false);
         editContentButton.setVisible(true);
         assignStudentButton.setVisible(true);
+        unassignStudentButton.setVisible(false);
         toggleProjectButton.setVisible(true);
         confirmAddProjectButton.setVisible(false);
+        assignButtonsWrapper.setVisible(true);
     }
 
     public void defaultProjectView(Student studentUser){
@@ -145,6 +156,7 @@ public class ProjectView {
         assignStudentButton.setVisible(false);
         toggleProjectButton.setVisible(false);
         confirmAddProjectButton.setVisible(false);
+        assignButtonsWrapper.setVisible(false);
     }
 
     public void setupLecturerAddProjectPanel(){
@@ -203,12 +215,14 @@ public class ProjectView {
         editContentButton.setEnabled(false);
         toggleProjectButton.setEnabled(false);
         assignStudentButton.setEnabled(false);
+        unassignStudentButton.setEnabled(false);
     }
 
     public void enablePanelButtons(){
         editContentButton.setEnabled(true);
         toggleProjectButton.setEnabled(true);
         assignStudentButton.setEnabled(true);
+        unassignStudentButton.setEnabled(true);
     }
 
     public void enableContentEditMode(){
@@ -225,7 +239,7 @@ public class ProjectView {
         projectContent.setEditable(true);
         projectContent.setOpaque(true);
 
-        assignStudentButton.setVisible(false);
+        assignButtonsWrapper.setVisible(false);
         toggleProjectButton.setVisible(false);
     }
 
@@ -245,7 +259,7 @@ public class ProjectView {
         projectContent.setEditable(false);
         projectContent.setOpaque(false);
 
-        assignStudentButton.setVisible(true);
+        assignButtonsWrapper.setVisible(true);
         toggleProjectButton.setVisible(true);
         confirmAddProjectButton.setVisible(false);
     }
@@ -258,8 +272,43 @@ public class ProjectView {
         JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    public String getStudentID(){
-        return JOptionPane.showInputDialog("Enter the Student's ID");
+    public String getStudentToAssign(ArrayList<String> availableStudentIds){
+        int arrayLength = availableStudentIds.size();
+        String[] studentOptions = new String[arrayLength];
+        for(int i = 0; i < studentOptions.length; i++){
+            studentOptions[i] = availableStudentIds.get(i);
+        }
+
+        Object selected =  JOptionPane.showInputDialog(null,
+                                                        "Which student would you like to assign the project to?",
+                                                        "Please select the student to assign the project", 
+                                                        JOptionPane.QUESTION_MESSAGE, 
+                                                        null, 
+                                                        studentOptions, 
+                                                        studentOptions[0]);
+        
+        if (selected == null){
+            return "";
+        }else return selected.toString();
+    }
+
+    public boolean getUnassignConfirmation(){
+        int result = JOptionPane.showConfirmDialog(null,"Are you sure you want to unassign the student?", "",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+
+        if (result == JOptionPane.YES_OPTION) return true;
+        else return false;
+    }
+
+    public void enableAssign(){
+        unassignStudentButton.setVisible(false);
+        assignStudentButton.setVisible(true);
+    }
+
+    public void enableUnassign(){
+        unassignStudentButton.setVisible(true);
+        assignStudentButton.setVisible(false);
     }
 
     public String[] getColumnNames(){
@@ -289,8 +338,6 @@ public class ProjectView {
     public String getProjectContent(){
         return projectContent.getText();
     }
-
-    
     
     public void setProjectNameLabel(String name){
         projectName.setText(name);
@@ -320,12 +367,24 @@ public class ProjectView {
         }
     }
 
+    public void setAssignMode(boolean isAssigned){
+        if (isAssigned){
+            enableUnassign();
+        }
+        else if (!(isAssigned)){
+            enableAssign();
+        }
+    }
+
     public void setProjectStudentLabel(String studentName){
-        projectStudent.setText("Assigned to: " + studentName);
-        if (!(studentName.equals(""))){
+        if (!(studentName == null)){
+            projectStudent.setText("Assigned to: " + studentName);
             projectStudent.setEnabled(true);
         }
-        else projectStudent.setEnabled(false);
+        else {
+            projectStudent.setText("Assigned to: ");
+            projectStudent.setEnabled(false);
+        }
     }
 
     public void addAddProjectButtonListerner(ActionListener addProjectButtonListener){
@@ -354,6 +413,10 @@ public class ProjectView {
 
     public void addAssignButtonListener(ActionListener assignButtonListener){
         assignStudentButton.addActionListener(assignButtonListener);
+    }
+
+    public void addUnassignButtonListener(ActionListener unassignButtonListener){
+        unassignStudentButton.addActionListener(unassignButtonListener);
     }
 
     public void addTableSelectionListener(ListSelectionListener tableSelectionListener){
