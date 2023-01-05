@@ -42,10 +42,6 @@ public class Project{
         this.isActive = true;
     }
 
-    public String generateCode(int listSize){
-        return String.format("%04d", listSize + 1);
-    }
-    
     // GETTERS AND SETTERS
     public String getId(){
         return id;

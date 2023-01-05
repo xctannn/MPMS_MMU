@@ -14,6 +14,7 @@ import Model.Administrator;
 import Model.Lecturer;
 import Model.LecturerList;
 import Model.Project;
+import Model.ProjectData;
 import Model.ProjectList;
 import Model.Student;
 import Model.StudentList;
@@ -157,7 +158,7 @@ public class ProjectController {
         @Override
         public void actionPerformed(ActionEvent e){
             try{
-                String newProjectId = "P" + projectModel.generateCode(projectList.getSize());
+                String newProjectId = "P" + projectList.generateCode();
                 String newProjectName = projectView.getProjectName();
                 String newProjectLecturerId = user.getId();
                 String newProjectLecturerName = user.getUsername();
@@ -170,6 +171,7 @@ public class ProjectController {
                 Project newProject = new Project(newProjectId, newProjectName, newProjectSpecialization, newProjectContent, newProjectLecturerId, newProjectLecturerName);
                 lecturerList.saveNewProject(newProjectLecturerId, newProjectId);
                 projectList.addItem(newProject);
+                projectList.saveProjectCountIncrement();
                 addNewProjectToTable(newProject);
                 projectView.setupLecturerAddProjectPanel();
 

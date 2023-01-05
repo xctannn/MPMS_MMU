@@ -3,31 +3,17 @@ package Model;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 public class ProjectList implements JsonList<Project>{
-    JsonParser<Project> parser = new JsonParser<>("/Database/project.json", Project.class);
+    JsonParser<ProjectData> parser = new JsonParser<>("/Database/project.json", ProjectData.class);
+    private ProjectData projectData;
     private ArrayList<Project> projects;
+    private int projectCount;
     
     //projectList will contain every project in the database， can be used for adminUser
     public ProjectList(){   
         setList();
-    }
-
-    public ProjectList(Lecturer lecturerUser){
-        setList();
-    }
-
-    //projectList will contain all the projects with the same specialization to the user
-    public ProjectList(Student studentUser){
-        setList();
-
-        for (int i = 0; i < projects.size(); i++){
-            Project project = projects.get(i);
-            String specialization = studentUser.getSpecialization();
-            if ((!(project.getSpecialization().equals(specialization))) || !project.getIsActive()){
-                projects.remove(i);
-                i--;
-            }
-        }
+        this.projectCount = projectData.getProjectCount();
     }
 
     //projectList will contain all the projects of the lecturerUser
@@ -58,6 +44,17 @@ public class ProjectList implements JsonList<Project>{
             }
         }
         return filteredProjects;
+    }
+
+    public String generateCode(){
+        return String.format("%04d", projectCount + 1);
+    }
+
+    public void saveProjectCountIncrement(){
+        projectCount++;
+        projectData.setProjectCount(projectCount);
+
+        save();
     }
 
     public void saveProjectName(String projectId, String name){
@@ -96,6 +93,7 @@ public class ProjectList implements JsonList<Project>{
 
         save();
     }
+    
 
     public void toggleProject(String projectId){
         Project project = getItem(projectId);
@@ -112,13 +110,17 @@ public class ProjectList implements JsonList<Project>{
     }
 
     public ArrayList<Project> getProjects(){
-        return projects;
+        return projectData.getProjects();
     }
+
+    public int getProjectCount(){
+        return projectData.getProjectCount();
+    } 
 
     @Override
     public void save(){
         try {
-            parser.serialize();
+            parser.serializeObject();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -127,7 +129,8 @@ public class ProjectList implements JsonList<Project>{
     @Override
     public void setList(){
         try {
-            this.projects = parser.deserialize();
+            this.projectData = parser.deserializeObject();
+            this.projects = projectData.getProjects();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -157,8 +160,8 @@ public class ProjectList implements JsonList<Project>{
     public int getSize(){
         ArrayList<Project> tempList;
         try {
-            tempList = parser.deserialize();
-            return tempList.size();
+            parser.deserialize();
+            return projects.size();
         } catch (IOException e) {
             e.printStackTrace();
         }
