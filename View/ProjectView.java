@@ -169,7 +169,8 @@ public class ProjectView {
 
     public void setupLecturerAddProjectPanel(){
         projectLecturer.setVisible(false);
-        projectStudent.setVisible(false);
+        projectStudent.setEnabled(false);
+        setProjectStudentLabel(null);
         saveEditButton.setVisible(false);
         editContentButton.setVisible(false);
         assignStudentButton.setVisible(false);
