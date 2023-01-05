@@ -17,6 +17,6 @@
   "username" : "s3",
   "password" : "s03",
   "specialization" : "Cybersecurity",
-  "assignedProjectID" : "P0004",
+  "assignedProjectID" : null,
   "favourites" : null
 } ]

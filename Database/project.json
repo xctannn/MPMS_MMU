@@ -31,15 +31,4 @@
   "studentAssignedName" : null,
   "isAssigned" : false,
   "isActive" : false
-}, {
-  "id" : "P0004",
-  "name" : "Tan Project",
-  "specialization" : "Cybersecurity",
-  "content" : "Enter project content here bro\njnkn\njnk",
-  "lecturerId" : "L0001",
-  "lecturerName" : "Tan",
-  "studentAssignedId" : "S0003",
-  "studentAssignedName" : "s3",
-  "isAssigned" : true,
-  "isActive" : false
 } ]
