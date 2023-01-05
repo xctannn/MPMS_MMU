@@ -1,4 +1,4 @@
-[ {
+{"projects": [ {
   "id" : "P0001",
   "name" : "Capstone",
   "specialization" : "Software Engineering",
@@ -31,4 +31,5 @@
   "studentAssignedName" : null,
   "isAssigned" : false,
   "isActive" : false
-} ]
+} ],
+"projectCount" : 3}
