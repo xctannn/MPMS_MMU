@@ -173,6 +173,7 @@ public class ProjectView {
         saveEditButton.setVisible(false);
         editContentButton.setVisible(false);
         assignStudentButton.setVisible(false);
+        unassignStudentButton.setVisible(false);
         toggleProjectButton.setVisible(false);
         confirmAddProjectButton.setVisible(true);
         
