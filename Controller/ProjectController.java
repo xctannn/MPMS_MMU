@@ -39,11 +39,11 @@ public class ProjectController {
         populateTable();
     }
      //Comment Panel
-    public ProjectController(CommentModel model, CommentView view){
+    public ProjectController(CommentModel model, CommentView view,Project currentProject){
         this.commentModel = model;
         this.commentView = view;
         this.commentList = new CommentList();
-        populateCommentTable();
+        populateCommentTable(currentProject);
     }
 
     public ProjectController(Lecturer user, Project model, ProjectView view){
@@ -114,12 +114,12 @@ public class ProjectController {
     }
 
 
-    public void populateCommentTable(){
+    public void populateCommentTable(Project currentProject){
         ArrayList<CommentModel> comments = commentList.getComments();
         DefaultTableModel commentTableModel = new DefaultTableModel(commentView.getColumnNames(),0);
-
+        String currentProjectId = currentProject.getId();
         for(int i = 0; i < comments.size(); i++){
-            if(comments.get(i).getProjectID().equals("P0001")){
+            if(comments.get(i).getProjectID().equals(currentProjectId)){
                 CommentModel comment = comments.get(i);
                 String commentID = comment.getCommentID();
                 String userID = comment.getUserID();
