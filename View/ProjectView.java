@@ -216,7 +216,7 @@ public class ProjectView {
         projectContent.setOpaque(false);
     }
 
-    private void disableAllPanelTexts(){
+    public void disableAllPanelTexts(){
         projectLecturer.setEnabled(false);
         projectName.setEnabled(false);
         projectStudent.setEnabled(false);

@@ -307,6 +307,7 @@ public class ProjectController {
             lecturerList.saveProjectDeletion(projectLecturerId, projectId);
             projectList.saveProjectDeletion(projectId);
             deleteProjectFromTable();
+            projectView.disableAllPanelTexts();
         }
     }
 
