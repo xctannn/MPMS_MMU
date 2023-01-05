@@ -3,7 +3,6 @@ package Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.IllegalFormatException;
 
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
@@ -158,7 +157,6 @@ public class ProjectController {
         @Override
         public void actionPerformed(ActionEvent e){
             try{
-                System.out.println("Test");
                 String newProjectId = "P" + projectModel.generateCode(projectList.getSize());
                 String newProjectName = projectView.getProjectName();
                 String newProjectLecturerId = user.getId();
@@ -175,20 +173,19 @@ public class ProjectController {
                 addNewProjectToTable(newProject);
                 projectView.setupLecturerAddProjectPanel();
 
-            } catch (IllegalFormatException exception){
+            } catch (IllegalArgumentException exception){
                 ProjectView.displayErrorMessage(exception.getMessage());
             }
         }
     }
 
-    private void checkNameValidity(String name) throws IllegalFormatException{
+    private void checkNameValidity(String name) throws IllegalArgumentException{
         if(name.isEmpty()){
             throw new IllegalArgumentException("Missing Project Name");
         }
-
     }
 
-    private void checkSpecializationValidity(int index) throws IllegalFormatException{
+    private void checkSpecializationValidity(int index) throws IllegalArgumentException{
         if(index == 0){
             throw new IllegalArgumentException("Please pick a Specialization");
         }
