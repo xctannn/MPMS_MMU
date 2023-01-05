@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.type.CollectionType;
 
 public class JsonParser<T> {
     ArrayList<T> list;
+    T object;
     private Class<T> type;
     private String filePath;
     private File dataFile;
@@ -26,13 +27,24 @@ public class JsonParser<T> {
 
     public void serialize() throws StreamWriteException, DatabindException, IOException{
         ObjectMapper mapper = Mapper.INSTANCE.getMapper();
-        mapper.writerWithDefaultPrettyPrinter().writeValue(dataFile, list);;
+        mapper.writerWithDefaultPrettyPrinter().writeValue(dataFile, list);
+    }
+
+    public void serializeObject() throws StreamWriteException, DatabindException, IOException{
+        ObjectMapper mapper = Mapper.INSTANCE.getMapper();
+        mapper.writerWithDefaultPrettyPrinter().writeValue(dataFile, object);
     }
     
     public ArrayList<T> deserialize() throws StreamReadException, DatabindException, IOException{
         ObjectMapper mapper = Mapper.INSTANCE.getMapper();
         CollectionType collectionType = mapper.getTypeFactory().constructCollectionType(ArrayList.class, this.type);
         this.list = mapper.readValue(dataFile, collectionType);
-        return this.list;
+        return list;
+    }
+
+    public T deserializeObject() throws StreamReadException, DatabindException, IOException{
+        ObjectMapper mapper = Mapper.INSTANCE.getMapper();
+        this.object = mapper.readValue(dataFile, type);
+        return object;
     }
 }
