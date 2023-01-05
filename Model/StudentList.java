@@ -57,6 +57,13 @@ public class StudentList implements JsonList<Student> {
         save();
     }
 
+    public void saveProjectDeletion(String studentId){
+        Student student = getItem(studentId);
+        student.removeAssignedProject();
+
+        save();
+    }
+
     @Override
     public void save(){
         try {
