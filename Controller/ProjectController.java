@@ -35,11 +35,14 @@ public class ProjectController {
         this.projectView = view;
         this.filteredProjectList = new ArrayList<>(projectList.getProjects());
 
-        projectView.defaultProjectView(user);
+        
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
+        projectView.addDeleteProjectButtonListener(new DeleteProjectButtonListener());
+
 
         populateTable();
+        projectView.defaultProjectView(user);
     }
 
     public ProjectController(Lecturer user,ProjectView view){
@@ -47,7 +50,7 @@ public class ProjectController {
         this.projectView = view;
         this.filteredProjectList = projectList.getFilteredProjects(user);
 
-        projectView.defaultProjectView(user);
+        
         projectView.addTableSelectionListener(new TableSelectionListener());
         projectView.addAddProjectButtonListerner(new addProjectButtonListener());
         projectView.addConfirmAddProjectButtonListerner(new confirmAddProjectButtonListener());
@@ -59,6 +62,7 @@ public class ProjectController {
         projectView.addUnassignButtonListener(new UnassignButtonListener());
         
         populateTable();
+        projectView.defaultProjectView(user);
     }
 
     public ProjectController(Student user, ProjectView view){
@@ -67,11 +71,12 @@ public class ProjectController {
         this.filteredProjectList = projectList.getFilteredProjects(user);
 
 
-        projectView.defaultProjectView(user);
+        
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
 
         populateTable();
+        projectView.defaultProjectView(user);
     }
 
 
@@ -93,10 +98,6 @@ public class ProjectController {
         projectView.setProjectStudentLabel(projectStudentName);
         projectView.setAssignMode(isProjectAssigned);
     }
-
-    // public void populateTable(){
-    //     // TableColumnModel columnModel = new TableColumnModel();
-    // }
 
     public void populateTable(){
         DefaultTableModel projectTableModel = new DefaultTableModel(projectView.getColumnNames(), 0){
@@ -135,6 +136,13 @@ public class ProjectController {
         Object[] row = {projectID, projectName, projectLecturerName};
 
         projectTableModel.addRow(row);
+    }
+
+    public void deleteProjectFromTable(){
+        int selectedRow = projectView.getSelectedRow();
+
+        filteredProjectList.remove(selectedRow);
+        populateTable();
     }
 
     class addProjectButtonListener implements ActionListener{
@@ -271,7 +279,7 @@ public class ProjectController {
     class UnassignButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            if(!projectView.getUnassignConfirmation()){
+            if(!projectView.getUnassignConfirmation("Are you sure you want to unassign the student?")){
                 return;
             }
 
@@ -287,20 +295,36 @@ public class ProjectController {
         }
     }
 
+    class DeleteProjectButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            if(!projectView.getUnassignConfirmation("Are you sure you want to delete this project?")){
+                return;
+            }
+
+            String projectId = projectModel.getId();
+
+            projectList.saveProjectDeletion(projectId);
+            deleteProjectFromTable();
+        }
+    }
+
     class TableSelectionListener implements ListSelectionListener{
         @Override
         public void valueChanged(ListSelectionEvent e) {
             // get selected row's project object
             JTable table = projectView.getProjectTable();
-            int selectedRow = table.getSelectedRow();
-            String selectedRowID = (String) table.getValueAt(selectedRow, 0);
-            projectModel = projectList.getItem(selectedRowID);
+            int selectedRow = projectView.getSelectedRow();
+
+            if (!e.getValueIsAdjusting() && table.getSelectedRow() != -1){
+                String selectedRowID = (String) table.getValueAt(selectedRow, 0);
+                projectModel = projectList.getItem(selectedRowID);
+                populateModelView();
+            }
 
             // configure projectPanel properties
             projectView.enablePanelButtons();
             projectView.disableContentEditMode();
-
-            populateModelView();
         }
     }
 }

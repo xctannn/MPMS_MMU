@@ -60,22 +60,22 @@ public class ProjectList implements JsonList<Project>{
         return filteredProjects;
     }
 
-    public void saveProjectName(String projectID, String name){
-        Project editedProject = getItem(projectID);
+    public void saveProjectName(String projectId, String name){
+        Project editedProject = getItem(projectId);
         editedProject.setName(name);
 
         save();
     }
 
-    public void saveProjectSpecialization(String projectID, String specialization){
-        Project editedProject = getItem(projectID);
+    public void saveProjectSpecialization(String projectId, String specialization){
+        Project editedProject = getItem(projectId);
         editedProject.setSpecialization(specialization);
 
         save();
     }
 
-    public void saveProjectContent(String projectID, String content){
-        Project editedProject = getItem(projectID);
+    public void saveProjectContent(String projectId, String content){
+        Project editedProject = getItem(projectId);
         editedProject.setContent(content);
 
         save();
@@ -97,10 +97,17 @@ public class ProjectList implements JsonList<Project>{
         save();
     }
 
-    public void toggleProject(String projectID){
-        Project project = getItem(projectID);
+    public void toggleProject(String projectId){
+        Project project = getItem(projectId);
         project.setIsActive(!(project.getIsActive()));
         
+        save();
+    }
+
+    public void saveProjectDeletion(String projectId){
+        Project project = getItem(projectId);
+        projects.remove(project);
+
         save();
     }
 
