@@ -303,7 +303,11 @@ public class ProjectController {
             }
 
             String projectId = projectModel.getId();
+            String projectLecturerId = projectModel.getLecturerId();
+            String projectStudentId = projectModel.getStudentAssignedId();
 
+            if (projectModel.getIsAssigned()) studentList.saveProjectDeletion(projectStudentId);
+            lecturerList.saveProjectDeletion(projectLecturerId, projectId);
             projectList.saveProjectDeletion(projectId);
             deleteProjectFromTable();
         }
