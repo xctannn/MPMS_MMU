@@ -43,14 +43,18 @@ public class ProjectView {
     private JTextField projectSpecialization = new JTextField("Specialization: ");
     private JComboBox<String> projectSpecializationPicker = new JComboBox<>(projectSpecializationOptions);
     private JTextArea projectContent = new JTextArea();
+    private JPanel projectBody = new JPanel();
+
     private JLabel projectStudent = new JLabel("Assigned to: ");
     private JButton editContentButton = new JButton("Edit");
     private JButton saveEditButton = new JButton("Save");
+    private JPanel projectPanelButtons = new JPanel();
     private JButton toggleProjectButton = new JButton("Activate");
     private JPanel assignButtonsWrapper = new JPanel();
     private JButton assignStudentButton = new JButton("Assign");
     private JButton unassignStudentButton = new JButton("Unassign");
     private JButton confirmAddProjectButton = new JButton("Confirm");
+    private JButton deleteProjectButton = new JButton("Delete");
 
     public ProjectView(){
         wrapper.setLayout(new GridLayout(1,2));
@@ -89,16 +93,12 @@ public class ProjectView {
 
         //Project Panel Content Setup
         JPanel projectPanelContent = new JPanel(new BorderLayout());
-        JPanel projectBody = new JPanel();
         projectBody.setLayout(new BoxLayout(projectBody, BoxLayout.PAGE_AXIS));
         projectBody.setBorder(BorderFactory.createEmptyBorder(30,20,20,30));
         JScrollPane projectContentWrapper = new JScrollPane(projectContent);
         projectBody.add(projectContentWrapper);
         
-        JPanel projectPanelEditWrapper = new JPanel();
-        projectPanelEditWrapper.add(editContentButton);
-        projectPanelEditWrapper.add(saveEditButton);
-        projectBody.add(projectPanelEditWrapper);
+        
         projectPanelContent.add(projectBody, BorderLayout.CENTER);
 
         projectPanelContent.add(projectStudent, BorderLayout.SOUTH);
@@ -107,20 +107,9 @@ public class ProjectView {
         // Project Panel Buttons Setup
         assignButtonsWrapper.add(assignStudentButton);
         assignButtonsWrapper.add(unassignStudentButton);
-
-        JPanel projectPanelButtons = new JPanel();
         projectPanelButtons.setLayout(new BoxLayout(projectPanelButtons, BoxLayout.LINE_AXIS));
-        projectPanelButtons.add(Box.createHorizontalGlue());
-        projectPanelButtons.add(assignButtonsWrapper);
-        // projectPanelButtons.add(unassignStudentButton);
-        projectPanelButtons.add(Box.createHorizontalGlue());
-        projectPanelButtons.add(toggleProjectButton);
-        projectPanelButtons.add(Box.createHorizontalGlue());
-        projectPanelButtons.add(confirmAddProjectButton);
-        projectPanelButtons.add(Box.createHorizontalGlue());
-        projectPanel.add(projectPanelButtons, BorderLayout.SOUTH);
-        assignStudentButton.setVisible(false);
-        confirmAddProjectButton.setVisible(false);
+
+        
 
         setupProjectPanelTextProperties();
         wrapper.add(tableView);
@@ -135,6 +124,11 @@ public class ProjectView {
         toggleProjectButton.setVisible(false);
         confirmAddProjectButton.setVisible(false);
         assignButtonsWrapper.setVisible(false);
+
+        projectPanelButtons.add(Box.createHorizontalGlue());
+        projectPanelButtons.add(deleteProjectButton);
+        projectPanelButtons.add(Box.createHorizontalGlue());
+        projectPanel.add(projectPanelButtons, BorderLayout.SOUTH);
     }
 
     public void defaultProjectView(Lecturer lecturerUser){
@@ -146,6 +140,20 @@ public class ProjectView {
         toggleProjectButton.setVisible(true);
         confirmAddProjectButton.setVisible(false);
         assignButtonsWrapper.setVisible(true);
+
+        JPanel projectPanelEditWrapper = new JPanel();
+        projectPanelEditWrapper.add(editContentButton);
+        projectPanelEditWrapper.add(saveEditButton);
+        projectBody.add(projectPanelEditWrapper);
+
+        projectPanelButtons.add(Box.createHorizontalGlue());
+        projectPanelButtons.add(assignButtonsWrapper);
+        projectPanelButtons.add(Box.createHorizontalGlue());
+        projectPanelButtons.add(toggleProjectButton);
+        projectPanelButtons.add(Box.createHorizontalGlue());
+        projectPanelButtons.add(confirmAddProjectButton);
+        projectPanelButtons.add(Box.createHorizontalGlue());
+        projectPanel.add(projectPanelButtons, BorderLayout.SOUTH);
     }
 
     public void defaultProjectView(Student studentUser){
@@ -216,6 +224,7 @@ public class ProjectView {
         toggleProjectButton.setEnabled(false);
         assignStudentButton.setEnabled(false);
         unassignStudentButton.setEnabled(false);
+        deleteProjectButton.setEnabled(false);
     }
 
     public void enablePanelButtons(){
@@ -223,6 +232,7 @@ public class ProjectView {
         toggleProjectButton.setEnabled(true);
         assignStudentButton.setEnabled(true);
         unassignStudentButton.setEnabled(true);
+        deleteProjectButton.setEnabled(true);
     }
 
     public void enableContentEditMode(){
@@ -292,8 +302,8 @@ public class ProjectView {
         }else return selected.toString();
     }
 
-    public boolean getUnassignConfirmation(){
-        int result = JOptionPane.showConfirmDialog(null,"Are you sure you want to unassign the student?", "",
+    public boolean getUnassignConfirmation(String message){
+        int result = JOptionPane.showConfirmDialog(null, message, "",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
 
@@ -309,6 +319,10 @@ public class ProjectView {
     public void enableUnassign(){
         unassignStudentButton.setVisible(true);
         assignStudentButton.setVisible(false);
+    }
+
+    public int getSelectedRow(){
+        return projectTable.getSelectedRow();
     }
 
     public String[] getColumnNames(){
@@ -417,6 +431,10 @@ public class ProjectView {
 
     public void addUnassignButtonListener(ActionListener unassignButtonListener){
         unassignStudentButton.addActionListener(unassignButtonListener);
+    }
+
+    public void addDeleteProjectButtonListener(ActionListener deleteProjectButtonListener){
+        deleteProjectButton.addActionListener(deleteProjectButtonListener);
     }
 
     public void addTableSelectionListener(ListSelectionListener tableSelectionListener){
