@@ -35,12 +35,11 @@ public class AdministratorList implements JsonList<Administrator> {
 
     @Override
     public void addItem(Administrator item) {
+        setList();
+
         this.administrators.add(item);
-        try {
-            parser.serialize();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+         
+        save();
     }
 
     @Override

@@ -3,21 +3,13 @@ package Controller;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import View.LoginView;
 import Model.User;
-import Model.Student;
-import Model.Lecturer;
-import Model.Administrator;
 import Model.LecturerList;
 import Model.StudentList;
 import Model.AdministratorList;
 
 public class LoginController{
-    private User user;
-    private Student studentModel;
-    private Lecturer lecturerModel;
-    private Administrator adminModel;
 
     private StudentList studentList = new StudentList();
     private LecturerList lecturerList = new LecturerList();
@@ -25,8 +17,7 @@ public class LoginController{
 
     private LoginView loginView;
 
-    public LoginController(User model, LoginView view) {
-        this.user = model;
+    public LoginController(LoginView view) {
         this.loginView = view;
 
         loginView.addLoginButtonListener(new loginButtonListener());
@@ -37,40 +28,40 @@ public class LoginController{
         public void actionPerformed(ActionEvent e){
             String userID = loginView.getUserID();
             String password = loginView.getPassword();
+            String userType = loginView.getUserType();
 
             if(userID.isBlank() || password.isBlank()){
-                JOptionPane.showMessageDialog(null, "Please fill in the username and password");
+                JOptionPane.showMessageDialog(null, "Please fill in the username and password","Error", JOptionPane.ERROR_MESSAGE);
 
-            }else if(loginView.getUserType() == "Student"){
-                studentModel = studentList.getItem(userID);
-                if (studentModel == null){
-                    JOptionPane.showMessageDialog(null, "User account does not exist");
-                }else if (!(password.equals(studentModel.getPassword()))){
-                    JOptionPane.showMessageDialog(null, "Passwords do not match");
-                }else {
-                    JOptionPane.showMessageDialog(null, "Login Successful");
-                }
-                
-            }else if(loginView.getUserType() == "Lecturer"){
-                lecturerModel = lecturerList.getItem(userID);
-                if (lecturerModel == null){
-                    JOptionPane.showMessageDialog(null, "User account does not exist");
-                }else if (!(password.equals(lecturerModel.getPassword()))){
-                    JOptionPane.showMessageDialog(null, "Passwords do not match");
-                }else {
-                    JOptionPane.showMessageDialog(null, "Login Successful");
-                }
-
+            }else if(userType == "Student"){
+                checkUser(userType, userID, password);
+            }else if(userType == "Lecturer"){
+                checkUser(userType, userID, password);
             }else{
-                adminModel = adminList.getItem(userID);
-                if (adminModel == null){
-                    JOptionPane.showMessageDialog(null, "User account does not exist");
-                }else if (!(password.equals(adminModel.getPassword()))){
-                    JOptionPane.showMessageDialog(null, "Passwords do not match");
-                }else {
-                    JOptionPane.showMessageDialog(null, "Login Successful");
-                }
+                checkUser(userType, userID, password);
             }
+        }
+    }
+
+    public Object getModel(String userType){
+        String userID = loginView.getUserID();
+        if(userType == "Student"){
+            return studentList.getItem(userID);
+        }else if(userType == "Lecturer"){
+            return lecturerList.getItem(userID);
+        }else{
+            return adminList.getItem(userID);
+        }
+    }
+
+    public void checkUser(String userType, String userID, String password){
+        Object model = getModel(userType);
+        if(model == null){
+            JOptionPane.showMessageDialog(null, "User account does not exist", "Error", JOptionPane.ERROR_MESSAGE);
+        }else if(!(password.equals(((User) model).getPassword()))){
+            JOptionPane.showMessageDialog(null, "Password do not match", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Login Successful");
         }
     }
 }
