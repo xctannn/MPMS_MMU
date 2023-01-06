@@ -40,7 +40,6 @@ public class CommentView {
     private CardLayout cl = new CardLayout();
 
     // Comment Section Components
-    private Project currentProject = new Project();
     private JLabel commentTitleLabel = new JLabel("Class Comments: ");
 
     private JTable commentTable = new JTable();
@@ -118,9 +117,7 @@ public class CommentView {
         }
     }
 
-    public Project getCurrentProject(){
-        return currentProject;
-    }
+
     public String[] getColumnNames(){
         return columnNames;
     } 

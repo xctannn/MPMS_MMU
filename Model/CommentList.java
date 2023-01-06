@@ -21,16 +21,18 @@ public class CommentList implements JsonList<CommentModel> {
         this.commentCount = commentData.getCommentCount();
     }
     //CommentList will contain all the comments of the project
-    public CommentList(Project project){
-        for (int i = 0; i < comments.size(); i++){
-            CommentModel comment = comments.get(i);
+    public ArrayList<CommentModel> getFilteredComments(Project project){
+        ArrayList<CommentModel> filteredComments= new ArrayList<>(comments);
+        for (int i = 0; i < filteredComments.size(); i++){
+            CommentModel comment = filteredComments.get(i);
             String projectID = comment.getProjectID();
             if (!(projectID.equals(project.getId()))){
-                comments.remove(i);
+                filteredComments.remove(i);
                 i--;
             }
 
         }
+        return filteredComments;
     }
 
     public ArrayList<CommentModel> getComments(){

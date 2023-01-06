@@ -35,7 +35,8 @@ public class ProjectController {
     private ProjectView projectView;
     private CommentModel commentModel;
     private CommentView commentView;
-    private CommentList commentList;
+    private CommentList commentList = new CommentList();
+    private ArrayList<CommentModel> filteredCommentList;
     
     public ProjectController(Administrator user, ProjectView view){
         this.user = user;
@@ -56,7 +57,7 @@ public class ProjectController {
     public ProjectController(CommentModel model, CommentView view,Project currentProject){
         this.commentModel = model;
         this.commentView = view;
-        this.commentList = new CommentList();
+        this.filteredCommentList = commentList.getFilteredComments(currentProject);
         
         view.getSubmitButton().addActionListener(new commentSubmitListener());
         
@@ -156,12 +157,11 @@ public class ProjectController {
         projectTableModel.addRow(row);
     }
     public void populateCommentTable(Project currentProject){
-        ArrayList<CommentModel> comments = commentList.getComments();
         DefaultTableModel commentTableModel = new DefaultTableModel(commentView.getColumnNames(),0);
         String currentProjectId = currentProject.getId();
-        for(int i = 0; i < comments.size(); i++){
-            if(comments.get(i).getProjectID().equals(currentProjectId)){
-                CommentModel comment = comments.get(i);
+        for(int i = 0; i < filteredCommentList.size(); i++){
+            if(filteredCommentList.get(i).getProjectID().equals(currentProjectId)){
+                CommentModel comment = filteredCommentList.get(i);
                 // String commentID = comment.getCommentID();
                 String userID = comment.getUserID();
                 String username = comment.getUsername();

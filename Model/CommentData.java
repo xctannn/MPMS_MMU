@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class CommentData {
     private ArrayList<CommentModel> comments;
-    private int projectCount;
+    private int commentCount;
 
     private CommentData(){}
 
@@ -17,11 +17,11 @@ public class CommentData {
     }
 
     public int getCommentCount() {
-        return projectCount;
+        return commentCount;
     }
 
-    public void setCommentCount(int projectCount) {
-        this.projectCount = projectCount;
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
     };
 
 }
