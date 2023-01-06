@@ -41,7 +41,7 @@ public class ProjectController {
         projectView.addTableSelectionListener(new TableSelectionListener());
         projectView.addConfirmAdminAddProjectButtonListener(new ConfirmAdminAddProjectButtonListener());
         projectView.addDeleteProjectButtonListener(new DeleteProjectButtonListener());
-
+        projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
 
         populateTable();
         projectView.defaultProjectView(user);
@@ -63,6 +63,7 @@ public class ProjectController {
         projectView.addToggleProjectButtonListener(new ToggleProjectButtonListener());
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addUnassignButtonListener(new UnassignButtonListener());
+        projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
         
         populateTable();
         projectView.defaultProjectView(user);
@@ -72,11 +73,10 @@ public class ProjectController {
         this.user = user;
         this.projectView = view;
         this.filteredProjectList = projectList.getFilteredProjects(user);
-
-
         
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
+        projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
 
         populateTable();
         projectView.defaultProjectView(user);
@@ -363,6 +363,13 @@ public class ProjectController {
             projectList.saveProjectDeletion(projectId);
             deleteProjectFromTable();
             projectView.disableAllPanelTexts();
+        }
+    }
+
+    class ProjectCommentsButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            // insert event handler here
         }
     }
 

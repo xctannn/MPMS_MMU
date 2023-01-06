@@ -60,6 +60,7 @@ public class ProjectView extends JPanel{
     private JButton confirmLecturerAddProjectButton = new JButton("Confirm");
     private JButton confirmAdminAddProjectButton = new JButton("Confirm");
     private JButton deleteProjectButton = new JButton("Delete");
+    private JButton projectCommentsButton = new JButton("Comments");
 
     public ProjectView(){
         this.setLayout(new GridLayout(1,2));
@@ -142,6 +143,8 @@ public class ProjectView extends JPanel{
         projectPanelButtons.add(deleteProjectButton);
         projectPanelButtons.add(confirmAdminAddProjectButton);
         projectPanelButtons.add(Box.createHorizontalGlue());
+        projectPanelButtons.add(projectCommentsButton);
+        projectPanelButtons.add(Box.createHorizontalGlue());
         projectPanel.add(projectPanelButtons, BorderLayout.SOUTH);
     }
 
@@ -167,6 +170,7 @@ public class ProjectView extends JPanel{
         projectPanelButtons.add(toggleProjectButton);
         projectPanelButtons.add(Box.createHorizontalGlue());
         projectPanelButtons.add(confirmLecturerAddProjectButton);
+        projectPanelButtons.add(projectCommentsButton);
         projectPanelButtons.add(Box.createHorizontalGlue());
         projectPanel.add(projectPanelButtons, BorderLayout.SOUTH);
     }
@@ -180,6 +184,11 @@ public class ProjectView extends JPanel{
         toggleProjectButton.setVisible(false);
         confirmLecturerAddProjectButton.setVisible(false);
         assignButtonsWrapper.setVisible(false);
+
+        projectPanelButtons.add(Box.createHorizontalGlue());
+        projectPanelButtons.add(projectCommentsButton);
+        projectPanelButtons.add(Box.createHorizontalGlue());
+        projectPanel.add(projectPanelButtons, BorderLayout.SOUTH);
     }
 
     public void setupLecturerAddProjectPanel(){
@@ -192,6 +201,7 @@ public class ProjectView extends JPanel{
         unassignStudentButton.setVisible(false);
         toggleProjectButton.setVisible(false);
         confirmLecturerAddProjectButton.setVisible(true);
+        projectCommentsButton.setVisible(false);
         
         emptyAllProjectPanelTexts();
         projectName.setEditable(true);
@@ -213,6 +223,7 @@ public class ProjectView extends JPanel{
         toggleProjectButton.setVisible(false);
         deleteProjectButton.setVisible(false);
         confirmAdminAddProjectButton.setVisible(true);
+        projectCommentsButton.setVisible(false);
         
         emptyAllProjectPanelTexts();
         projectName.setEditable(true);
@@ -269,6 +280,7 @@ public class ProjectView extends JPanel{
         assignStudentButton.setEnabled(false);
         unassignStudentButton.setEnabled(false);
         deleteProjectButton.setEnabled(false);
+        projectCommentsButton.setEnabled(false);
     }
 
     public void enablePanelButtons(){
@@ -277,6 +289,7 @@ public class ProjectView extends JPanel{
         assignStudentButton.setEnabled(true);
         unassignStudentButton.setEnabled(true);
         deleteProjectButton.setEnabled(true);
+        projectCommentsButton.setEnabled(true);
     }
 
     public void enableContentEditMode(){
@@ -295,6 +308,7 @@ public class ProjectView extends JPanel{
 
         assignButtonsWrapper.setVisible(false);
         toggleProjectButton.setVisible(false);
+        projectCommentsButton.setVisible(false);
     }
 
     public void disableContentEditMode(){
@@ -319,7 +333,7 @@ public class ProjectView extends JPanel{
         deleteProjectButton.setVisible(true);
         confirmLecturerAddProjectButton.setVisible(false);
         confirmAdminAddProjectButton.setVisible(false);
-
+        projectCommentsButton.setVisible(true);
     }
 
     public void resetSpecializationSelector(){
@@ -510,6 +524,10 @@ public class ProjectView extends JPanel{
 
     public void addDeleteProjectButtonListener(ActionListener deleteProjectButtonListener){
         deleteProjectButton.addActionListener(deleteProjectButtonListener);
+    }
+
+    public void addProjectCommentsButtonListener(ActionListener projectCommentsButtonListener){
+        projectCommentsButton.addActionListener(projectCommentsButtonListener);
     }
 
     public void addTableSelectionListener(ListSelectionListener tableSelectionListener){

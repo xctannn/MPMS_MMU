@@ -12,11 +12,4 @@
   "specialization" : "Cybersecurity",
   "assignedProjectID" : null,
   "favourites" : null
-}, {
-  "id" : "S0003",
-  "username" : "s3",
-  "password" : "s03",
-  "specialization" : "Cybersecurity",
-  "assignedProjectID" : null,
-  "favourites" : null
-} ]
+}]
