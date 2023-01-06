@@ -30,8 +30,12 @@ public class ProjectController {
     private Project projectModel;
     private ProjectList projectList = new ProjectList();
     private ArrayList<Project> filteredProjectList;
+    private StudentList studentList = new StudentList();
+    private LecturerList lecturerList = new LecturerList();
     private ProjectView projectView;
-
+    private CommentModel commentModel;
+    private CommentView commentView;
+    private CommentList commentList;
     public ProjectController(Administrator user, ProjectView view){
         this.user = user;
         this.projectView = view;
@@ -46,13 +50,7 @@ public class ProjectController {
         populateTable();
         projectView.defaultProjectView(user);
     }
-     //Comment Panel
-    public ProjectController(CommentModel model, CommentView view,Project currentProject){
-        this.commentModel = model;
-        this.commentView = view;
-        this.commentList = new CommentList();
-        populateCommentTable(currentProject);
-    }
+
      //Comment Panel
     public ProjectController(CommentModel model, CommentView view,Project currentProject){
         this.commentModel = model;
@@ -184,7 +182,7 @@ public class ProjectController {
                 checkNameValidity(newProjectName);
                 checkSpecializationValidity(projectView.getSpecializationPicker().getSelectedIndex());
 
-                Project newProject = new Project(newProjectId, newProjectName, newProjectSpecialization, newProjectContent, newProjectLecturerId, newProjectLecturerName);
+                Project newProject = new Project(newProjectId, newProjectName, newProjectSpecialization, newProjectContent, newProjectLecturerId, newProjectLecturerName, newProjectContent, false, false);
                 lecturerList.saveNewProject(newProjectLecturerId, newProjectId);
                 projectList.addItem(newProject);
                 projectList.saveProjectCountIncrement();
