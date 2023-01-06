@@ -12,6 +12,8 @@ public class Project{
     private boolean isAssigned = false;
     private boolean isActive = false;
     private boolean favourite = false;
+    private Lecturer lecturer;
+    private Object studentAssigned;
 
 
     //Constructor
@@ -126,5 +128,8 @@ public class Project{
 
     public void setFavourite(boolean favourite) {
         this.favourite = favourite;
+    }
+
+    public void setStudent(String studentId, String studentName) {
     }
 }

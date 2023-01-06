@@ -13,6 +13,7 @@ import View.ProjectView;
 public class Main {
     public static void main(String[] args){
         CommentModel commentModel = new CommentModel();
+        Project projectModel = new Project();
         // ProjectList projectList = new ProjectList();
         Lecturer lecturer2 = new Lecturer("L0001", "Tan", "l01");
         Administrator admin = new Administrator("A0001", "Admin", "a01");
@@ -26,7 +27,8 @@ public class Main {
         ProjectView projectView = new ProjectView();
         CommentView cV = new CommentView();
         ProjectController projectController = new ProjectController(commentModel, cV);
-        ProjectController projectController = new ProjectController(projectModel, projectView);
+  
+        ProjectController projectController2 = new ProjectController(projectModel, projectView);
         frame.add(projectView.wrapper);
         frame.setVisible(true);
 

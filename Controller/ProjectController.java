@@ -36,6 +36,7 @@ public class ProjectController {
     private CommentModel commentModel;
     private CommentView commentView;
     private CommentList commentList;
+    
     public ProjectController(Administrator user, ProjectView view){
         this.user = user;
         this.projectView = view;
