@@ -9,7 +9,6 @@ public class CommentModel {
     private String username;
     private String commentString;
     private String projectID;
-  
 
 
     public CommentModel(){}
@@ -37,15 +36,7 @@ public class CommentModel {
         this.username = student.getUsername();
         this.commentString = commentString;
     }
-
-    public CommentModel(String commentID, String projectID,String userID,String username ,String commentString){
-        this.commentID =commentID;
-        this.projectID = projectID;
-        this.userID = userID;
-        this.username = username;
-        this.commentString = commentString;
-    }
-
+    
     public String getCommentID() {
         return commentID;
     }

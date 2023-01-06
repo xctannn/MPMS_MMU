@@ -25,8 +25,6 @@ public class Student extends User{
         return specialization;
     }
 
-    
-
     public String getAssignedProjectID(){
         return assignedProjectID;
     }

@@ -11,39 +11,37 @@ import java.io.IOException;
 
 
 public class CommentList implements JsonList<CommentModel> {
-    JsonParser<CommentData> parser = new JsonParser<>("/Database/comments.json", CommentData.class);
+    JsonParser<CommentModel> parser = new JsonParser<>("/Database/comments.json", CommentModel.class);
     private ArrayList<CommentModel> comments;
-    private CommentData commentData;
-    private int commentCount;
 
     public CommentList(){
-        setList();
-        this.commentCount = commentData.getCommentCount();
+        try{
+            this.comments = parser.deserialize();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
     //CommentList will contain all the comments of the project
-    public ArrayList<CommentModel> getFilteredComments(Project project){
-        ArrayList<CommentModel> filteredComments= new ArrayList<>(comments);
-        for (int i = 0; i < filteredComments.size(); i++){
-            CommentModel comment = filteredComments.get(i);
-            String projectID = comment.getProjectID();
-            if (!(projectID.equals(project.getId()))){
-                filteredComments.remove(i);
-                i--;
+    public CommentList(Project project){
+        try {
+            this.comments = parser.deserialize();
+            for (int i = 0; i < comments.size(); i++){
+                CommentModel comment = comments.get(i);
+                String projectID = comment.getProjectID();
+                if (!(projectID.equals(project.getId()))){
+                    comments.remove(i);
+                    i--;
+                }
             }
-
-        }
-        return filteredComments;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }    
     }
 
     public ArrayList<CommentModel> getComments(){
         return comments;
     }
-    public void saveProjectCountIncrement(){
-        commentCount++;
-        commentData.setCommentCount(commentCount);
 
-        save();
-    }
     public void writeAllData(CommentModel listComments){
         ObjectMapper om = new ObjectMapper();
 
@@ -56,10 +54,6 @@ public class CommentList implements JsonList<CommentModel> {
         }catch(IOException e){
             e.printStackTrace();
         }
-    }
-
-    public String generateCode(){
-        return String.format("%04d", commentCount + 1);
     }
     // For adding new json data
     @Override
@@ -82,24 +76,14 @@ public class CommentList implements JsonList<CommentModel> {
         }
         return null;
     }
-
     @Override
     public void setList() {
-        try {
-            this.commentData = parser.deserializeObject();
-            this.comments = commentData.getComments();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // TODO Auto-generated method stub
         
     }
     @Override
     public void save() {
-        try {
-            parser.serializeObject();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // TODO Auto-generated method stub
         
     }
     @Override
