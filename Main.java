@@ -28,8 +28,8 @@ public class Main {
         frame.setSize(1200, 700);
         
         ProjectView projectView = new ProjectView();
-        ProjectController projectController = new ProjectController(lecturer2, projectView);
-        frame.add(projectView.wrapper);
+        ProjectController projectController = new ProjectController(admin, projectView);
+        frame.add(projectView);
         frame.setVisible(true);
     } 
 }

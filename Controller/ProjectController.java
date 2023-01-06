@@ -35,9 +35,11 @@ public class ProjectController {
         this.projectView = view;
         this.filteredProjectList = new ArrayList<>(projectList.getProjects());
 
-        
+        projectView.addAdminAddProjectButtonListener(new AdminAddProjectButtonListener());
+        projectView.addProjectLecturerSelectorListener(new ProjectLecturerSelectorListener());
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
+        projectView.addConfirmAdminAddProjectButtonListener(new ConfirmAdminAddProjectButtonListener());
         projectView.addDeleteProjectButtonListener(new DeleteProjectButtonListener());
 
 
@@ -52,9 +54,10 @@ public class ProjectController {
 
         
         projectView.addTableSelectionListener(new TableSelectionListener());
-        projectView.addAddProjectButtonListerner(new addProjectButtonListener());
-        projectView.addConfirmAddProjectButtonListerner(new confirmAddProjectButtonListener());
-        projectView.addProjectSpecializationPickerListerner(new projectSpecializationPickerListener());
+        projectView.addLecturerAddProjectButtonListener(new LecturerAddProjectButtonListener());
+        projectView.addAdminAddProjectButtonListener(new AdminAddProjectButtonListener());
+        projectView.addConfirmLecturerAddProjectButtonListener(new ConfirmLecturerAddProjectButtonListener());
+        projectView.addProjectSpecializationSelectorListener(new ProjectSpecializationSelectorListener());
         projectView.addEditContentButtonListener(new EditButtonListener());
         projectView.addSaveEditButtonListener(new SaveEditButtonListener());
         projectView.addToggleProjectButtonListener(new ToggleProjectButtonListener());
@@ -145,16 +148,33 @@ public class ProjectController {
         populateTable();
     }
 
-    class addProjectButtonListener implements ActionListener{
+    class LecturerAddProjectButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
             projectView.setupLecturerAddProjectPanel();
             projectView.enablePanelButtons();
-            projectView.resetSpecializationPicker();
+            projectView.resetSpecializationSelector();
         }
     }
 
-    class confirmAddProjectButtonListener implements ActionListener{
+    class AdminAddProjectButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            ArrayList<String> lecturerOptions = new ArrayList<String>();
+            ArrayList<Lecturer> lecturers = lecturerList.getLecturers();
+            for(int i = 0; i < lecturers.size(); i++){
+                Lecturer lecturer = lecturers.get(i);
+                lecturerOptions.add(lecturer.getId());
+            }
+
+            projectView.setupAdminAddProjectPanel();
+            projectView.populateLecturerPicker(lecturerOptions);
+            projectView.enablePanelButtons();
+            projectView.resetSpecializationSelector();
+        }
+    }
+
+    class ConfirmLecturerAddProjectButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
             try{
@@ -166,7 +186,7 @@ public class ProjectController {
                 String newProjectContent = projectView.getProjectContent();
 
                 checkNameValidity(newProjectName);
-                checkSpecializationValidity(projectView.getSpecializationPicker().getSelectedIndex());
+                checkSpecializationValidity(projectView.getSpecializationSelector().getSelectedIndex());
 
                 Project newProject = new Project(newProjectId, newProjectName, newProjectSpecialization, newProjectContent, newProjectLecturerId, newProjectLecturerName);
                 lecturerList.saveNewProject(newProjectLecturerId, newProjectId);
@@ -174,6 +194,33 @@ public class ProjectController {
                 projectList.saveProjectCountIncrement();
                 addNewProjectToTable(newProject);
                 projectView.setupLecturerAddProjectPanel();
+
+            } catch (IllegalArgumentException exception){
+                ProjectView.displayErrorMessage(exception.getMessage());
+            }
+        }
+    }
+
+    class ConfirmAdminAddProjectButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            try{
+                // checkLecturerValidity(projectView.getLecturerSelector().getSelectedIndex());
+                checkSpecializationValidity(projectView.getSpecializationSelector().getSelectedIndex());
+                String newProjectId = "P" + projectList.generateCode();
+                String newProjectName = projectView.getProjectName();
+                String newProjectLecturerId = projectView.getSelectedLecturer();
+                String newProjectLecturerName = lecturerList.getItem(newProjectLecturerId).getUsername();
+                String newProjectSpecialization = projectView.getProjectSpecialization();
+                String newProjectContent = projectView.getProjectContent();
+                checkNameValidity(newProjectName);
+
+                Project newProject = new Project(newProjectId, newProjectName, newProjectSpecialization, newProjectContent, newProjectLecturerId, newProjectLecturerName);
+                lecturerList.saveNewProject(newProjectLecturerId, newProjectId);
+                projectList.addItem(newProject);
+                projectList.saveProjectCountIncrement();
+                addNewProjectToTable(newProject);
+                projectView.setupAdminAddProjectPanel();
 
             } catch (IllegalArgumentException exception){
                 ProjectView.displayErrorMessage(exception.getMessage());
@@ -193,7 +240,21 @@ public class ProjectController {
         }
     }
 
-    class projectSpecializationPickerListener implements ActionListener{
+    // private void checkLecturerValidity(int index) throws IllegalArgumentException{
+    //     if(index == 0){
+    //         throw new IllegalArgumentException("Please pick a Lecturer");
+    //     }
+    // }
+
+    
+    class ProjectLecturerSelectorListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            String selectedLecturer = projectView.getSelectedLecturer();
+            projectView.setProjectLecturerLabel(selectedLecturer);
+        }
+    }
+    class ProjectSpecializationSelectorListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
             String selectedSpecialization = projectView.getSelectedSpecialization();
@@ -219,7 +280,7 @@ public class ProjectController {
                 String projectID = projectModel.getId();
 
                 checkNameValidity(newName);
-                checkSpecializationValidity(projectView.getSpecializationPicker().getSelectedIndex());
+                checkSpecializationValidity(projectView.getSpecializationSelector().getSelectedIndex());
 
                 // Update project name in table
                 JTable table = projectView.getProjectTable();
