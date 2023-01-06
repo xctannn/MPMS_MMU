@@ -16,7 +16,7 @@ public class Main {
 
         // lecturer2.addproject("P0001");
         // lecturer2.addproject("P0002");
-        // Student student = new Student("S001", "Goofy Arse", "Huekhuek", "Data Science", "P0001");
+        Student student = new Student("S001", "S1", "s01", "Data Science", "P0002");
 
         // lecturer2.addproject("P0001");
         // lecturer2.addproject("P0002");
