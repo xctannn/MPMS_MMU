@@ -15,14 +15,14 @@ public class Main {
         // Lecturer lecturer2 = new Lecturer("L0001", "Tan", "l01");
         // Administrator admin = new Administrator("A0001", "Admin", "a01");
 
-        JFrame frame = new JFrame();     
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1200, 700);
+        // JFrame frame = new JFrame();     
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setSize(1200, 700);
 
-        ProjectView projectView = new ProjectView();
-        ProjectController projectController2 = new ProjectController(lecturer2, projectView);
-        frame.add(projectView.wrapper);
-        frame.setVisible(true);
+        // ProjectView projectView = new ProjectView();
+        // ProjectController projectController2 = new ProjectController(lecturer2, projectView);
+        // frame.add(projectView.wrapper);
+        // frame.setVisible(true);
 
         //For testing comments
         CommentModel commentModel = new CommentModel();

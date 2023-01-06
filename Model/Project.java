@@ -44,6 +44,9 @@ public class Project{
         this.isActive = true;
 
     }
+    public Project(String id){
+        this.id = id;
+    };
     
     
 
