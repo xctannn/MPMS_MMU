@@ -1,85 +1,35 @@
-[ {
+{"projects": [ {
   "id" : "P0001",
   "name" : "Capstone",
-  "specialization" : "Data Science",
+  "specialization" : "Software Engineering",
   "content" : "This is a Data Science Capstone project, you better not fuck this up",
-  "lecturer" : {
-    "id" : "L007",
-    "username" : "Mickey Dees",
-    "password" : "Disney123",
-    "projectIDList" : [
-        "P0001",
-        "P0002",
-        "P0004"
-    ]
-  },
-  "studentAssigned" : {
-    "id": "S001",
-    "username": "Goofy Arse",
-    "password": "Huekhuek",
-    "specialization": "Data Science",
-    "assignedProjectID": "P0001",
-    "favourites": null
-  },
-  "isAssigned" : true,
+  "lecturerId" : "L0001",
+  "lecturerName" : "Tan",
+  "studentAssignedId" : null,
+  "studentAssignedName" : null,
+  "isAssigned" : false,
   "isActive" : false
 }, {
-  "id" : "P0003",
-  "name" : "Final Year",
-  "specialization" : "Game Development",
-  "content" : "Build this game for me or else you fail your FYP and spend another 10k on your degree",
-  "lecturer" : {
-    "id" : "L001",
-    "username" : "Donald Quack",
-    "password" : "Quack123",
-    "projectIDList" : [
-        "P0003"
-    ]
-  },
-  "studentAssigned" : null,
-  "isAssigned" : false,
+  "id" : "P0002",
+  "name" : "Final Year Project",
+  "specialization" : "Data Science",
+  "content" : "This is a Data Science Capstone project, dont fuck this up, yo.\n",
+  "lecturerId" : "L0001",
+  "lecturerName" : "Tan",
+  "studentAssignedId" : "S0001",
+  "studentAssignedName" : "S1",
+  "isAssigned" : true,
   "isActive" : true
 }, {
-    "id" : "P0002",
-    "name" : "Final Capstone",
-    "specialization" : "Data Science",
-    "content" : "This is a Data Science Capstone project, you better not fuck this up",
-    "lecturer" : {
-      "id" : "L007",
-      "username" : "Mickey Dees",
-      "password" : "Disney123",
-      "projectIDList" : [
-        "P0001",
-        "P0002",
-        "P0004"
-    ]
-    },
-    "studentAssigned" : null,
-    "isAssigned" : false,
-    "isActive" : true
-}, {
-    "id" : "P0004",
-    "name" : "Capstone",
-    "specialization" : "Software Development",
-    "content" : "This is a Data Science Capstone project, you better not fuck this up",
-    "lecturer" : {
-      "id" : "L007",
-      "username" : "Mickey Dees",
-      "password" : "Disney123",
-      "projectIDList" : [
-        "P0001",
-        "P0002",
-        "P0004"
-    ]
-    },
-    "studentAssigned" : {
-        "id": "S002",
-        "username": "Minnie Lad",
-        "password": "Fabulous69",
-        "specialization": "Software Development",
-        "assignedProjectID": "P0004",
-        "favourites": null
-    },
-    "isAssigned" : true,
-    "isActive" : false
-  } ]
+  "id" : "P0003",
+  "name" : "New Project",
+  "specialization" : "Software Engineering",
+  "content" : "This is a new proejct blah blah blah blah",
+  "lecturerId" : "L0002",
+  "lecturerName" : "Lee",
+  "studentAssignedId" : null,
+  "studentAssignedName" : null,
+  "isAssigned" : false,
+  "isActive" : false
+} ],
+"projectCount" : 3}

@@ -5,31 +5,47 @@ public class Project{
     private String name;
     private String specialization;
     private String content;
-    private Lecturer lecturer;
-    private Student studentAssigned;
+    private String lecturerId;
+    private String lecturerName;
+    private String studentAssignedId;
+    private String studentAssignedName;
     private boolean isAssigned = false;
     private boolean isActive = false;
     private boolean favourite = false;
 
 
     //Constructor
-    public Project(String id, String name, String specialization, String content, Lecturer lecturer, 
-    Student studentAssigned, boolean isAssigned, boolean isActive, boolean favourite){
+    public Project(String id, String name, String specialization, String content, String lecturerId, String lecturerName,
+    String studentAssignedId, boolean isAssigned, boolean isActive){
         this.id = id;
         this.name = name;
         this.specialization = specialization;
         this.content = content;
-        this.lecturer = lecturer;
-        this.studentAssigned = studentAssigned;
+        this.lecturerId = lecturerId;
+        this.lecturerName = lecturerName;
+        this.studentAssignedId = studentAssignedId;
         this.isAssigned = isAssigned;
         this.isActive = isActive;
         this.favourite = favourite;
     }
 
-    public Project() {
-        
-    }
+    public Project(){};
+    
+    public Project(String id, String name, String specialization, String content, Lecturer lecturer){
+        this.id = id;
+        this.name = name;
+        this.specialization = specialization;
+        this.content = content;
+        this.lecturer = lecturer;
+        this.studentAssigned = null;
+        this.isAssigned = false;
+        this.isActive = true;
 
+    }
+    
+    
+
+    // GETTERS AND SETTERS
     public String getId(){
         return id;
     }
@@ -42,12 +58,20 @@ public class Project{
         return specialization;
     }
 
-    public Lecturer getLecturer(){
-        return lecturer;
+    public String getLecturerId(){
+        return lecturerId;
     }
 
-    public Student getStudentAssigned(){
-        return studentAssigned;
+    public String getLecturerName(){
+        return lecturerName;
+    }
+
+    public String getStudentAssignedId(){
+        return studentAssignedId;
+    }
+
+    public String getStudentAssignedName(){
+        return studentAssignedName;
     }
 
     public String getContent(){
@@ -62,9 +86,6 @@ public class Project{
         return isActive;
     }
     
-    public boolean getFavourite() {
-        return favourite;
-    }
 
     public void setId(String id){
         this.id = id;
@@ -82,9 +103,14 @@ public class Project{
         this.content = content;
     }
     
-    public void setLecturer(Lecturer lecturer){
-        this.lecturer = lecturer;
+    public void setLecturer(String lecturerId, String lecturerName){
+        this.lecturerId = lecturerId;
+        this.lecturerName = lecturerName;
     }
+
+    // public void setLecturer(String lecturer){
+    //     this.lecturer = lecturer;
+    // }
 
     public void setStudent(Student studentAssigned){
         this.studentAssigned = studentAssigned;

@@ -17,7 +17,11 @@ public class Lecturer extends User{
         return projectIDList;
     }
 
-    public void addproject(String projectID){
-        projectIDList.add(projectID);
+    public void addProject(String projectId){
+        projectIDList.add(projectId);
+    }
+
+    public void removeProject(String projectId){
+        projectIDList.remove(projectId);
     }
 }

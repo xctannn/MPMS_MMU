@@ -16,6 +16,10 @@ public class Student extends User{
         this.assignedProjectID = assignedProjectID;
         this.favourites = new ArrayList<>();
     }
+
+    public void removeAssignedProject(){
+        setAssignedProjectID(null);
+    }
     
     public String getSpecialization(){
         return specialization;
