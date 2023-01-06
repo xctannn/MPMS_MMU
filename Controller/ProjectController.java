@@ -205,7 +205,6 @@ public class ProjectController {
         @Override
         public void actionPerformed(ActionEvent e){
             try{
-                // checkLecturerValidity(projectView.getLecturerSelector().getSelectedIndex());
                 checkSpecializationValidity(projectView.getSpecializationSelector().getSelectedIndex());
                 String newProjectId = "P" + projectList.generateCode();
                 String newProjectName = projectView.getProjectName();
@@ -239,13 +238,6 @@ public class ProjectController {
             throw new IllegalArgumentException("Please pick a Specialization");
         }
     }
-
-    // private void checkLecturerValidity(int index) throws IllegalArgumentException{
-    //     if(index == 0){
-    //         throw new IllegalArgumentException("Please pick a Lecturer");
-    //     }
-    // }
-
     
     class ProjectLecturerSelectorListener implements ActionListener{
         @Override
