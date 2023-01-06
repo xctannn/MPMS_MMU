@@ -36,6 +36,7 @@ public class ProjectController {
         this.filteredProjectList = new ArrayList<>(projectList.getProjects());
 
         projectView.addAdminAddProjectButtonListener(new AdminAddProjectButtonListener());
+        projectView.addFilterProjectsButtonListener(new FilterProjectsButtonListener());
         projectView.addProjectLecturerSelectorListener(new ProjectLecturerSelectorListener());
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
@@ -171,6 +172,13 @@ public class ProjectController {
             projectView.populateLecturerPicker(lecturerOptions);
             projectView.enablePanelButtons();
             projectView.resetSpecializationSelector();
+        }
+    }
+
+    class FilterProjectsButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+           // implement what happens after the filter projects button is clicked
         }
     }
 

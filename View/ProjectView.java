@@ -34,13 +34,14 @@ public class ProjectView extends JPanel{
     public JPanel wrapper = new JPanel();
     private JPanel tableView = new JPanel(new BorderLayout());
     private String[] columnNames = {"ID", "Name", "Lecturer"};
-
-    // Project Detail View Components
-    JPanel projectPanel = new JPanel(new BorderLayout());
     private JTable projectTable = new JTable(); 
     private JPanel projectTableButtons = new JPanel();
     private JButton lecturerAddProjectButton = new JButton("Add Project");
     private JButton adminAddProjectButton = new JButton("Add Project");
+    private JButton filterProjectsButton = new JButton("Filter Projects");
+
+    // Project Detail View Components
+    JPanel projectPanel = new JPanel(new BorderLayout());
     private JTextField projectName = new JTextField("Project"); 
     private JTextField projectLecturer = new JTextField("By ");
     private JComboBox<String> projectLecturerSelector = new JComboBox<>();
@@ -73,6 +74,8 @@ public class ProjectView extends JPanel{
         projectTableButtons.setLayout(new BoxLayout(projectTableButtons, BoxLayout.LINE_AXIS));
         projectTableButtons.add(lecturerAddProjectButton);
         projectTableButtons.add(adminAddProjectButton);
+        projectTableButtons.add(Box.createHorizontalGlue());
+        projectTableButtons.add(filterProjectsButton);
         tableWrapper.add(projectTableButtons);
         projectTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tableView.add(tableWrapper, BorderLayout.CENTER);
@@ -158,6 +161,7 @@ public class ProjectView extends JPanel{
         toggleProjectButton.setVisible(true);
         confirmLecturerAddProjectButton.setVisible(false);
         assignButtonsWrapper.setVisible(true);
+        filterProjectsButton.setVisible(false);
 
         JPanel projectPanelEditWrapper = new JPanel();
         projectPanelEditWrapper.add(editContentButton);
@@ -185,6 +189,7 @@ public class ProjectView extends JPanel{
         confirmLecturerAddProjectButton.setVisible(false);
         confirmAdminAddProjectButton.setVisible(false);
         assignButtonsWrapper.setVisible(false);
+        filterProjectsButton.setVisible(false);
 
         projectPanelButtons.add(Box.createHorizontalGlue());
         projectPanelButtons.add(projectCommentsButton);
@@ -490,6 +495,10 @@ public class ProjectView extends JPanel{
     public void addAdminAddProjectButtonListener(ActionListener adminAddProjectButtonListener){
         adminAddProjectButton.addActionListener(adminAddProjectButtonListener);
     } 
+
+    public void addFilterProjectsButtonListener(ActionListener filterProjectsButtonListener){
+        filterProjectsButton.addActionListener(filterProjectsButtonListener);
+    }
 
     public void addConfirmLecturerAddProjectButtonListener(ActionListener confirmLecturerAddProjectButtonListener){
         confirmLecturerAddProjectButton.addActionListener(confirmLecturerAddProjectButtonListener);
