@@ -191,6 +191,7 @@ public class ProjectController {
                 Project newProject = new Project(newProjectId, newProjectName, newProjectSpecialization, newProjectContent, newProjectLecturerId, newProjectLecturerName);
                 lecturerList.saveNewProject(newProjectLecturerId, newProjectId);
                 projectList.addItem(newProject);
+                filteredProjectList.add(newProject);
                 projectList.saveProjectCountIncrement();
                 addNewProjectToTable(newProject);
                 projectView.setupLecturerAddProjectPanel();
@@ -210,13 +211,14 @@ public class ProjectController {
                 String newProjectName = projectView.getProjectName();
                 String newProjectLecturerId = projectView.getSelectedLecturer();
                 String newProjectLecturerName = lecturerList.getItem(newProjectLecturerId).getUsername();
-                String newProjectSpecialization = projectView.getProjectSpecialization();
+                String newProjectSpecialization = projectView.getSelectedSpecialization();
                 String newProjectContent = projectView.getProjectContent();
                 checkNameValidity(newProjectName);
 
                 Project newProject = new Project(newProjectId, newProjectName, newProjectSpecialization, newProjectContent, newProjectLecturerId, newProjectLecturerName);
                 lecturerList.saveNewProject(newProjectLecturerId, newProjectId);
                 projectList.addItem(newProject);
+                filteredProjectList.add(newProject);
                 projectList.saveProjectCountIncrement();
                 addNewProjectToTable(newProject);
                 projectView.setupAdminAddProjectPanel();
@@ -358,10 +360,10 @@ public class ProjectController {
             String projectLecturerId = projectModel.getLecturerId();
             String projectStudentId = projectModel.getStudentAssignedId();
 
+            deleteProjectFromTable();
             if (projectModel.getIsAssigned()) studentList.saveProjectDeletion(projectStudentId);
             lecturerList.saveProjectDeletion(projectLecturerId, projectId);
             projectList.saveProjectDeletion(projectId);
-            deleteProjectFromTable();
             projectView.disableAllPanelTexts();
         }
     }
