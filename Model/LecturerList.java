@@ -42,12 +42,11 @@ public class LecturerList implements JsonList<Lecturer> {
 
     @Override
     public void addItem(Lecturer item) {
+        setList();
+
         this.lecturers.add(item);
-        try {
-            parser.serialize();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+         
+        save();
     }
 
     @Override

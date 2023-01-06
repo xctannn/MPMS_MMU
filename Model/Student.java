@@ -8,7 +8,7 @@ public class Student extends User{
     private ArrayList<String> favourites;
 
     // no-arg constructor for jsonParser
-    private Student(){}
+    public Student(){}
     
     public Student(String id, String username, String password, String specialization, String assignedProjectID){
         super(id, username, password);
@@ -16,7 +16,11 @@ public class Student extends User{
         this.assignedProjectID = assignedProjectID;
         this.favourites = new ArrayList<>();
     }
-    
+
+    public String generateCode(int listSize){
+        return String.format("%04d", listSize + 1);
+    }
+
     public String getSpecialization(){
         return specialization;
     }
