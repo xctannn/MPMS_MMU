@@ -17,7 +17,14 @@ public class LecturerList implements JsonList<Lecturer> {
 
     public void saveNewProject(String lecturerId, String projectId){
         Lecturer lecturer = getItem(lecturerId);
-        lecturer.addproject(projectId);
+        lecturer.addProject(projectId);
+
+        save();
+    }
+
+    public void saveProjectDeletion(String lecturerId, String projectId){
+        Lecturer lecturer = getItem(lecturerId);
+        lecturer.removeProject(projectId);
 
         save();
     }

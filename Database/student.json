@@ -1,16 +1,22 @@
-[{
-    "id" : "S0001",
-    "username": "S1",
-    "password": "s01",
-    "specialization" : "Data Science",
-    "assignedProjectID" : "P0001",
-    "favourites" : null
-},
-{
-    "id" : "S0002",
-    "username": "Lee",
-    "password": "l02",
-    "specialization" : "Cybersecurity",
-    "assignedProjectID" : null,
-    "favourites" : null
-}]
+[ {
+  "id" : "S0001",
+  "username" : "S1",
+  "password" : "s01",
+  "specialization" : "Data Science",
+  "assignedProjectID" : "P0002",
+  "favourites" : null
+}, {
+  "id" : "S0002",
+  "username" : "s2",
+  "password" : "s02",
+  "specialization" : "Cybersecurity",
+  "assignedProjectID" : null,
+  "favourites" : null
+}, {
+  "id" : "S0003",
+  "username" : "s3",
+  "password" : "s03",
+  "specialization" : "Cybersecurity",
+  "assignedProjectID" : null,
+  "favourites" : null
+} ]

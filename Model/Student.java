@@ -17,10 +17,15 @@ public class Student extends User{
         this.favourites = new ArrayList<>();
     }
 
+
     public String generateCode(int listSize){
         return String.format("%04d", listSize + 1);
     }
 
+    public void removeAssignedProject(){
+        setAssignedProjectID(null);
+    }
+    
     public String getSpecialization(){
         return specialization;
     }

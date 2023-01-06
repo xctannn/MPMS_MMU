@@ -1,13 +1,11 @@
-[{
-    "id" : "L0001",
-    "username": "Tan",
-    "password": "l01",
-    "projectIDList":[ "P0001", "P0002", "P0004" ]
-},
-{
-    "id" : "L0002",
-    "username": "Lee",
-    "password": "l02",
-    "projectIDList":[ "P0003"]
-}
-]
+[ {
+  "id" : "L0001",
+  "username" : "Tan",
+  "password" : "l01",
+  "projectIDList" : [ "P0001", "P0002"]
+}, {
+  "id" : "L0002",
+  "username" : "Lee",
+  "password" : "l02",
+  "projectIDList" : [ "P0003" ]
+} ]

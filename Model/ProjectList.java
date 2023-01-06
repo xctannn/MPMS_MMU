@@ -3,37 +3,23 @@ package Model;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ProjectList implements JsonList<Project>{
-    JsonParser<Project> parser = new JsonParser<>("/Database/project.json", Project.class);
-    private ArrayList<Project> projects;
-    private ArrayList<Project> filteredProjects;
 
+public class ProjectList implements JsonList<Project>{
+    JsonParser<ProjectData> parser = new JsonParser<>("/Database/project.json", ProjectData.class);
+    private ProjectData projectData;
+    private ArrayList<Project> projects;
+    private int projectCount;
     
     //projectList will contain every project in the database， can be used for adminUser
     public ProjectList(){   
         setList();
-    }
-
-    public ProjectList(Lecturer lecturerUser){
-        setList();
-    }
-
-    //projectList will contain all the projects with the same specialization to the user
-    public ProjectList(Student studentUser){
-        setList();
-
-        for (int i = 0; i < projects.size(); i++){
-            Project project = projects.get(i);
-            String specialization = studentUser.getSpecialization();
-            if ((!(project.getSpecialization().equals(specialization))) || !project.getIsActive()){
-                projects.remove(i);
-                i--;
-            }
-        }
+        this.projectCount = projectData.getProjectCount();
     }
 
     //projectList will contain all the projects of the lecturerUser
-    public ArrayList<Project> getFilteredList(Lecturer lecturerUser){
+    public ArrayList<Project> getFilteredProjects(Lecturer lecturerUser){
+        ArrayList<Project> filteredProjects = new ArrayList<>(projects);
+
         for (int i = 0; i < filteredProjects.size(); i++){
             Project project = filteredProjects.get(i);
             String projectLecturerID = project.getLecturerId();
@@ -46,7 +32,9 @@ public class ProjectList implements JsonList<Project>{
     }
 
     //projectList will contain all the projects with the same specialization to the user
-    public ArrayList<Project> getFilteredList(Student studentUser){
+    public ArrayList<Project> getFilteredProjects(Student studentUser){
+        ArrayList<Project> filteredProjects = new ArrayList<>(projects);
+
         for (int i = 0; i < filteredProjects.size(); i++){
             Project project = filteredProjects.get(i);
             String specialization = studentUser.getSpecialization();
@@ -58,42 +46,81 @@ public class ProjectList implements JsonList<Project>{
         return filteredProjects;
     }
 
-    public void saveProjectName(String projectID, String name){
-        Project editedProject = getItem(projectID);
+    public String generateCode(){
+        return String.format("%04d", projectCount + 1);
+    }
+
+    public void saveProjectCountIncrement(){
+        projectCount++;
+        projectData.setProjectCount(projectCount);
+
+        save();
+    }
+
+    public void saveProjectName(String projectId, String name){
+        Project editedProject = getItem(projectId);
         editedProject.setName(name);
 
         save();
     }
 
-    public void saveProjectSpecialization(String projectID, String specialization){
-        Project editedProject = getItem(projectID);
+    public void saveProjectSpecialization(String projectId, String specialization){
+        Project editedProject = getItem(projectId);
         editedProject.setSpecialization(specialization);
 
         save();
     }
 
-    public void saveProjectContent(String projectID, String content){
-        Project editedProject = getItem(projectID);
+    public void saveProjectContent(String projectId, String content){
+        Project editedProject = getItem(projectId);
         editedProject.setContent(content);
 
         save();
     }
 
-    public void toggleProject(String projectID){
-        Project project = getItem(projectID);
+    public void saveProjectStudentAssigned(String projectId, String studentId, String studentName){
+        Project assignedProject = getItem(projectId);
+        assignedProject.setStudent(studentId, studentName);
+        assignedProject.setIsAssigned(true);
+
+        save();
+    }
+
+    public void saveProjectUnassigned(String projectId){
+        Project assignedProject = getItem(projectId);
+        assignedProject.setStudent(null, null);
+        assignedProject.setIsAssigned(false);
+
+        save();
+    }
+    
+
+    public void toggleProject(String projectId){
+        Project project = getItem(projectId);
         project.setIsActive(!(project.getIsActive()));
         
         save();
     }
 
-    public ArrayList<Project> getProjects(){
-        return projects;
+    public void saveProjectDeletion(String projectId){
+        Project project = getItem(projectId);
+        projects.remove(project);
+
+        save();
     }
+
+    public ArrayList<Project> getProjects(){
+        return projectData.getProjects();
+    }
+
+    public int getProjectCount(){
+        return projectData.getProjectCount();
+    } 
 
     @Override
     public void save(){
         try {
-            parser.serialize();
+            parser.serializeObject();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -102,8 +129,8 @@ public class ProjectList implements JsonList<Project>{
     @Override
     public void setList(){
         try {
-            this.projects = parser.deserialize();
-            this.filteredProjects = new ArrayList<>(projects);
+            this.projectData = parser.deserializeObject();
+            this.projects = projectData.getProjects();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -133,8 +160,8 @@ public class ProjectList implements JsonList<Project>{
     public int getSize(){
         ArrayList<Project> tempList;
         try {
-            tempList = parser.deserialize();
-            return tempList.size();
+            parser.deserialize();
+            return projects.size();
         } catch (IOException e) {
             e.printStackTrace();
         }
