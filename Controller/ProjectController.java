@@ -57,6 +57,9 @@ public class ProjectController {
         this.commentModel = model;
         this.commentView = view;
         this.commentList = new CommentList();
+        
+        view.getSubmitButton().addActionListener(new commentSubmitListener());
+        
         populateCommentTable(currentProject);
     }
 
@@ -152,6 +155,42 @@ public class ProjectController {
 
         projectTableModel.addRow(row);
     }
+    public void populateCommentTable(Project currentProject){
+        ArrayList<CommentModel> comments = commentList.getComments();
+        DefaultTableModel commentTableModel = new DefaultTableModel(commentView.getColumnNames(),0);
+        String currentProjectId = currentProject.getId();
+        for(int i = 0; i < comments.size(); i++){
+            if(comments.get(i).getProjectID().equals(currentProjectId)){
+                CommentModel comment = comments.get(i);
+                // String commentID = comment.getCommentID();
+                String userID = comment.getUserID();
+                String username = comment.getUsername();
+                String commentString = comment.getCommentString();
+                // "UserID", "Username","Comment"
+                Object[] row = { userID,username, commentString};
+                
+                commentTableModel.addRow(row);
+            }
+
+        }
+        JTable viewTable = commentView.getCommentTable();
+        viewTable.setModel(commentTableModel);
+
+        TableColumnModel columnModel = viewTable.getColumnModel();
+        //columnModel.getColumn(0).setPreferredWidth(100);
+        columnModel.getColumn(0).setPreferredWidth(100);
+        columnModel.getColumn(1).setPreferredWidth(100);   
+        columnModel.getColumn(2).setPreferredWidth(250);  
+    }
+
+    public void commentBlock(Project currentProject){
+        ArrayList<CommentModel> comments = commentList.getComments();
+        DefaultTableModel commentTableModel = new DefaultTableModel(commentView.getColumnNames(),0);
+        String currentProjectId = currentProject.getId();
+        
+        
+    }
+
 
     public void deleteProjectFromTable(){
         int selectedRow = projectView.getSelectedRow();
@@ -263,34 +302,6 @@ public class ProjectController {
     }
 
 
-    public void populateCommentTable(Project currentProject){
-        ArrayList<CommentModel> comments = commentList.getComments();
-        DefaultTableModel commentTableModel = new DefaultTableModel(commentView.getColumnNames(),0);
-        String currentProjectId = currentProject.getId();
-        for(int i = 0; i < comments.size(); i++){
-            if(comments.get(i).getProjectID().equals(currentProjectId)){
-                CommentModel comment = comments.get(i);
-                String commentID = comment.getCommentID();
-                String userID = comment.getUserID();
-                String username = comment.getUsername();
-                String commentString = comment.getCommentString();
-                //"ID", "UserID", "Username","Comment",
-                Object[] row = {commentID, userID,username, commentString};
-                
-                commentTableModel.addRow(row);
-                
-            }
-
-        }
-        JTable viewTable = commentView.getCommentTable();
-        viewTable.setModel(commentTableModel);
-
-        TableColumnModel columnModel = viewTable.getColumnModel();
-        columnModel.getColumn(0).setPreferredWidth(50);
-        columnModel.getColumn(1).setPreferredWidth(100);
-        columnModel.getColumn(2).setPreferredWidth(250);   
-        columnModel.getColumn(3).setPreferredWidth(250);  
-    }
 
     class AssignButtonListener implements ActionListener{
         @Override
@@ -376,4 +387,38 @@ public class ProjectController {
             projectView.disableContentEditMode();
         }
     }
+    
+    public void addNewCommentToTable(CommentModel newComment){
+        JTable commentTable = commentView.getCommentTable();
+        DefaultTableModel commentTableModel = (DefaultTableModel) commentTable.getModel();
+        String commentID = newComment.getCommentID();
+        String username = newComment.getUsername();
+        String commentString = newComment.getCommentString();
+        Object[] row = {commentID, username, commentString};
+
+        commentTableModel.addRow(row);
+    }
+    class commentSubmitListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == commentView.getSubmitButton()) {
+                String newCommentId = "C" + commentList.generateCode();
+                String currentProjectID = commentModel.getProjectID();
+                String currentUserID = user.getId();
+                String currentUserName = user.getUsername();
+                // Get comment from field and add to model
+                String comment = commentView.getCommentField().getText();
+                
+                CommentModel newComment = new CommentModel(newCommentId,currentProjectID,currentUserID,currentUserName,comment);
+                commentList.addItem(newComment);
+                commentList.saveProjectCountIncrement();
+                addNewCommentToTable(newComment);
+
+                // Clear comment field and add comment to area
+                commentView.getCommentField().setText("");
+                commentView.getCommentArea().append(comment + "\n");
+        }
+    }
+    
+}
 }

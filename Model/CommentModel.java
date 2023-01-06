@@ -9,6 +9,7 @@ public class CommentModel {
     private String username;
     private String commentString;
     private String projectID;
+  
 
 
     public CommentModel(){}
@@ -16,7 +17,7 @@ public class CommentModel {
     public CommentModel(String commentID, Project project, Administrator admin,String username , String commentString){
         this.commentID = commentID;
         this.projectID = project.getId();
-        this.userID = admin.getID();
+        this.userID = admin.getId();
         this.username = admin.getUsername();
         this.commentString = commentString;
     }
@@ -24,7 +25,7 @@ public class CommentModel {
     public CommentModel(String commentID, Project project, Lecturer lecturer,String username , String commentString){
         this.commentID = commentID;
         this.projectID = project.getId();
-        this.userID = lecturer.getID();
+        this.userID = lecturer.getId();
         this.username = lecturer.getUsername();
         this.commentString = commentString;
     }
@@ -32,11 +33,19 @@ public class CommentModel {
     public CommentModel(String commentID, Project project, Student student,String username , String commentString){
         this.commentID = commentID;
         this.projectID = project.getId();
-        this.userID = student.getID();
+        this.userID = student.getId();
         this.username = student.getUsername();
         this.commentString = commentString;
     }
-    
+
+    public CommentModel(String commentID, String projectID,String userID,String username ,String commentString){
+        this.commentID =commentID;
+        this.projectID = projectID;
+        this.userID = userID;
+        this.username = username;
+        this.commentString = commentString;
+    }
+
     public String getCommentID() {
         return commentID;
     }

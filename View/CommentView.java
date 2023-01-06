@@ -23,9 +23,11 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 
+import Model.Project;
+
 public class CommentView {
 
-    private String[] columnNames = {"ID", "UserID","Username","Comment"};
+    private String[] columnNames = {"UserID","Username","Comment"};
 
     public JPanel wrapper = new JPanel();
     private JPanel tableView = new JPanel(new BorderLayout());
@@ -34,13 +36,18 @@ public class CommentView {
     private JPanel panelCont = new JPanel();
     private JButton commentPanelButton = new JButton("To Comment Section");
     private JButton projectPanelButton = new JButton("To View Board");
-    // private Dimension d = new Dimension(30,15);
+
     private CardLayout cl = new CardLayout();
 
     // Comment Section Components
+    private Project currentProject = new Project();
     private JLabel commentTitleLabel = new JLabel("Class Comments: ");
-    private JButton submitCommentButton = new JButton("Submit");
+
     private JTable commentTable = new JTable();
+    private JTextField commentField = new JTextField(); 
+    private JButton submitButton = new JButton("Submit");
+    private JTextArea commentArea= new JTextArea();
+    private JScrollPane commentScroll= new JScrollPane(commentArea);
 
 
     public CommentView(){
@@ -51,13 +58,19 @@ public class CommentView {
         //Comment Section
         commentTitleLabel.setFont(new Font(commentTitleLabel.getFont().toString(), Font.BOLD, 16));
         mainPanel.add(commentTitleLabel, BorderLayout.CENTER);
-        // projectPanelButton.setEnabled(false);
-        // commentPanelButton.setEnabled(false);
+
 
         //Past Comments Table
         JPanel commentTablePanel = new JPanel();
-        commentTablePanel.add(new JScrollPane(commentTable));
-        commentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        commentTablePanel.setLayout(new BoxLayout(commentTablePanel,BoxLayout.Y_AXIS));
+        commentTablePanel.add(commentTitleLabel, BorderLayout.NORTH);
+        commentTablePanel.add(new JScrollPane(commentTable), BorderLayout.NORTH);
+        // commentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        commentTablePanel.add(commentField,  BorderLayout.NORTH);
+        commentTablePanel.add(submitButton, BorderLayout.CENTER);
+        submitButton.setPreferredSize(new Dimension(250,100));
+        submitButton.setAlignmentX(300);
+        commentTablePanel.add(commentScroll,BorderLayout.SOUTH);
         tableView.add(commentTablePanel,BorderLayout.CENTER);
 
         JPanel oneButton = new JPanel();
@@ -72,14 +85,13 @@ public class CommentView {
         JPanel commentSectionPanel = new JPanel();
         JTextField textBox = new JTextField();
         commentSectionPanel.setLayout(new BoxLayout(commentSectionPanel,BoxLayout.PAGE_AXIS));
-        commentSectionPanel.add(commentTitleLabel);
-        commentSectionPanel.add(textBox, Component.BOTTOM_ALIGNMENT);
+
         commentSectionPanel.add(Box.createHorizontalStrut(15));
-        commentSectionPanel.add(submitCommentButton, Component.RIGHT_ALIGNMENT);
-        submitCommentButton.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+
         commentSectionPanel.add(Box.createHorizontalGlue());
         commentSectionPanel.add(projectPanelButton);
         panelCont.add(projectPanelButton,"2");
+        mainPanel.add(commentSectionPanel,BorderLayout.PAGE_END);
 
         commentPanelButton.addActionListener(new actionListener());
         projectPanelButton.addActionListener(new actionListener());
@@ -105,10 +117,25 @@ public class CommentView {
             }
         }
     }
+
+    public Project getCurrentProject(){
+        return currentProject;
+    }
     public String[] getColumnNames(){
         return columnNames;
     } 
     public JTable getCommentTable(){
         return commentTable;
+    }
+        public JTextField getCommentField() {
+        return commentField;
+    }
+
+    public JButton getSubmitButton() {
+        return submitButton;
+    }
+
+    public JTextArea getCommentArea() {
+        return commentArea;
     }
 }

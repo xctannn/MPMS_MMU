@@ -33,6 +33,11 @@ public class Project{
 
     public Project(){};
     
+    //Temp for Comment View
+    public Project(String id){
+        this.id = id;
+    }
+
     public Project(String id, String name, String specialization, String content, Lecturer lecturer){
         this.id = id;
         this.name = name;
