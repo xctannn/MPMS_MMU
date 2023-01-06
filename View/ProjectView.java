@@ -183,6 +183,7 @@ public class ProjectView extends JPanel{
         assignStudentButton.setVisible(false);
         toggleProjectButton.setVisible(false);
         confirmLecturerAddProjectButton.setVisible(false);
+        confirmAdminAddProjectButton.setVisible(false);
         assignButtonsWrapper.setVisible(false);
 
         projectPanelButtons.add(Box.createHorizontalGlue());
