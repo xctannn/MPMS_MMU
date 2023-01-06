@@ -13,27 +13,35 @@ public class CommentModel {
 
     public CommentModel(){}
 
-    public CommentModel(String commentID, Project project, Administrator admin,String username , String commentString){
-        this.commentID = commentID;
-        this.projectID = project.getId();
-        this.userID = admin.getId();
-        this.username = admin.getUsername();
-        this.commentString = commentString;
-    }
-    //Lecturer lecturer, Student student,
-    public CommentModel(String commentID, Project project, Lecturer lecturer,String username , String commentString){
-        this.commentID = commentID;
-        this.projectID = project.getId();
-        this.userID = lecturer.getId();
-        this.username = lecturer.getUsername();
-        this.commentString = commentString;
-    }
+    // public CommentModel(String commentID, Project project, Administrator admin, String commentString){
+    //     this.commentID = commentID;
+    //     this.projectID = project.getId();
+    //     this.userID = admin.getId();
+    //     this.username = admin.getUsername();
+    //     this.commentString = commentString;
+    // }
+    // //Lecturer lecturer, Student student,
+    // public CommentModel(String commentID, Project project, Lecturer lecturer, String commentString){
+    //     this.commentID = commentID;
+    //     this.projectID = project.getId();
+    //     this.userID = lecturer.getId();
+    //     this.username = lecturer.getUsername();
+    //     this.commentString = commentString;
+    // }
 
-    public CommentModel(String commentID, Project project, Student student,String username , String commentString){
+    // public CommentModel(String commentID, Project project, Student student , String commentString){
+    //     this.commentID = commentID;
+    //     this.projectID = project.getId();
+    //     this.userID = student.getId();
+    //     this.username = student.getUsername();
+    //     this.commentString = commentString;
+    // }
+
+    public CommentModel(String commentID, Project project, User user , String commentString){
         this.commentID = commentID;
         this.projectID = project.getId();
-        this.userID = student.getId();
-        this.username = student.getUsername();
+        this.userID = user.getId();
+        this.username = user.getUsername();
         this.commentString = commentString;
     }
     

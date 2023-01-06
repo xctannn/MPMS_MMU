@@ -41,7 +41,9 @@ public class CommentList implements JsonList<CommentModel> {
     public ArrayList<CommentModel> getComments(){
         return comments;
     }
-
+    public String generateCommentIdNum(){
+        return String.format("%04d", comments.size() + 1);
+    }
     public void writeAllData(CommentModel listComments){
         ObjectMapper om = new ObjectMapper();
 
@@ -83,7 +85,15 @@ public class CommentList implements JsonList<CommentModel> {
     }
     @Override
     public void save() {
-        // TODO Auto-generated method stub
+        // Write comments to file using JSON parser
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            mapper.writerWithDefaultPrettyPrinter().writeValue(new File("Database/comments.json"), this.comments);
+        }catch(IOException ex){
+            ex.printStackTrace();
+
+        }
+
         
     }
     @Override
