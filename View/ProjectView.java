@@ -181,6 +181,7 @@ public class ProjectView extends JPanel{
 
     public void defaultProjectView(Student studentUser){
         lecturerAddProjectButton.setVisible(false);
+        adminAddProjectButton.setVisible(false);
         projectLecturer.setVisible(true);
         saveEditButton.setVisible(false);
         editContentButton.setVisible(false);
