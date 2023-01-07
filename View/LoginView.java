@@ -37,11 +37,7 @@ public class LoginView{
         gbc.gridwidth = 2;
         loginForm.add(loginButton, gbc);
 
-        gbc.gridx = 1;
-        gbc.gridy = 4;
-        gbc.gridwidth = 2;
         loginPanel.add(loginForm, BorderLayout.CENTER);
-
     }
 
     private void addComponent(JPanel panel, JLabel label, JComponent component, GridBagConstraints gbc, int gridx, int gridy) {
