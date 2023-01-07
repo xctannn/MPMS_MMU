@@ -27,7 +27,6 @@ import Model.Project;
 
 public class CommentView {
 
-    private String[] columnNames = {"UserID","Username","Comment"};
 
     public JPanel wrapper = new JPanel();
     private JPanel tableView = new JPanel(new BorderLayout());
@@ -37,23 +36,29 @@ public class CommentView {
     private JButton commentPanelButton = new JButton("To Comment Section");
     private JButton projectPanelButton = new JButton("To View Board");
 
+
     private CardLayout cl = new CardLayout();
 
     // Comment Section Components
     private JLabel commentTitleLabel = new JLabel("Class Comments: ");
 
-    private JTable commentTable = new JTable();
+    private JPanel commentBlock = new JPanel();
     private JTextField commentField = new JTextField(); 
     private JButton submitButton = new JButton("Submit");
     private JTextArea commentArea= new JTextArea();
     private JScrollPane commentScroll= new JScrollPane(commentArea);
+    private JPanel submitButtonWrapper = new JPanel();
+    private JPanel commentBoxWrapper = new JPanel();
 
 
     public CommentView(){
-        wrapper.setLayout(new GridLayout(1,2));
+        wrapper.setLayout(new GridLayout(1,1));
         
         panelCont.setLayout(cl);
         JPanel mainPanel = new JPanel();
+        mainPanel.setPreferredSize(new Dimension(1200,700));
+        mainPanel.setMaximumSize(new Dimension(1200,700));
+        mainPanel.setMinimumSize(new Dimension(1000,500));
         //Comment Section
         commentTitleLabel.setFont(new Font(commentTitleLabel.getFont().toString(), Font.BOLD, 16));
         mainPanel.add(commentTitleLabel, BorderLayout.CENTER);
@@ -61,15 +66,22 @@ public class CommentView {
 
         //Past Comments Table
         JPanel commentTablePanel = new JPanel();
+        JPanel titleWrapper = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        titleWrapper.add(commentTitleLabel);
         commentTablePanel.setLayout(new BoxLayout(commentTablePanel,BoxLayout.Y_AXIS));
-        commentTablePanel.add(commentTitleLabel, BorderLayout.NORTH);
-        commentTablePanel.add(new JScrollPane(commentTable), BorderLayout.NORTH);
-        // commentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        commentTablePanel.add(commentField,  BorderLayout.NORTH);
-        commentTablePanel.add(submitButton, BorderLayout.CENTER);
-        submitButton.setPreferredSize(new Dimension(250,100));
-        submitButton.setAlignmentX(300);
-        commentTablePanel.add(commentScroll,BorderLayout.SOUTH);
+        commentTablePanel.setBorder(BorderFactory.createEtchedBorder());
+
+        commentTablePanel.add(titleWrapper,BorderLayout.EAST);
+        commentTablePanel.add(new JScrollPane(commentBlock),BorderLayout.NORTH);
+        commentBlock.setPreferredSize(new Dimension(600,500));
+
+        submitButtonWrapper.add(submitButton);
+        commentScroll.setPreferredSize(new Dimension(550,100));
+
+        commentBoxWrapper.add(commentScroll);
+        commentTablePanel.add(commentBoxWrapper,  BorderLayout.SOUTH);
+        commentTablePanel.add(submitButtonWrapper, BorderLayout.SOUTH);
+        // commentTablePanel.add(commentScroll,BorderLayout.SOUTH);
         tableView.add(commentTablePanel,BorderLayout.CENTER);
 
         JPanel oneButton = new JPanel();
@@ -99,7 +111,7 @@ public class CommentView {
         cl.show(panelCont,"1");
         mainPanel.add(panelCont);
         wrapper.add(tableView);
-        wrapper.add(mainPanel);
+        //wrapper.add(mainPanel);
         
     }
 
@@ -117,14 +129,8 @@ public class CommentView {
         }
     }
 
-
-    public String[] getColumnNames(){
-        return columnNames;
-    } 
-    public JTable getCommentTable(){
-        return commentTable;
-    }
-        public JTextField getCommentField() {
+    
+    public JTextField getCommentField() {
         return commentField;
     }
 
@@ -134,5 +140,8 @@ public class CommentView {
 
     public JTextArea getCommentArea() {
         return commentArea;
+    }
+    public JPanel getCommentBlock(){
+        return commentBlock;
     }
 }

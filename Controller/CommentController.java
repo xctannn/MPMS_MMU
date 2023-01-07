@@ -4,6 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
+import java.awt.BorderLayout;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+
+import java.awt.GridLayout;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -25,82 +32,51 @@ import View.ProjectView;
 public class CommentController {
     private User user;
     private Project projectModel;
-    private ProjectList projectList;
-    private ProjectView projectView;
     private CommentModel model;
     private CommentView commentView;
     private CommentList commentList;
 
-    //Comment Panel
+    public CommentController(CommentModel commentModel, CommentView view,User user ,Project currentProject){
+        this.model = commentModel;
+        this.commentView = view;
+        this.commentList = new CommentList();
+        this.projectModel = currentProject;
+        this.user = user;
+        view.getSubmitButton().addActionListener(new commentSubmitListener());
+        
+        createCommentPanel(currentProject);
 
-     public CommentController(CommentModel commentModel, CommentView view,Administrator user ,Project currentProject){
-        this.model = commentModel;
-        this.commentView = view;
-        this.commentList = new CommentList();
-        this.projectModel = currentProject;
-        this.user = user;
-        view.getSubmitButton().addActionListener(new commentSubmitListener());
-        
-        
-        populateCommentTable(currentProject);
-    }
-    public CommentController(CommentModel commentModel, CommentView view,Lecturer user ,Project currentProject){
-        this.model = commentModel;
-        this.commentView = view;
-        this.commentList = new CommentList();
-        this.projectModel = currentProject;
-        this.user = user;
-        view.getSubmitButton().addActionListener(new commentSubmitListener());
-        
-        
-        populateCommentTable(currentProject);
-    }
-    public CommentController(CommentModel commentModel, CommentView view,Student user ,Project currentProject){
-        this.model = commentModel;
-        this.commentView = view;
-        this.commentList = new CommentList();
-        this.projectModel = currentProject;
-        this.user = user;
-        view.getSubmitButton().addActionListener(new commentSubmitListener());
-        
-        
-        populateCommentTable(currentProject);
     }
     
 
-    public void populateCommentTable(Project currentProject){
+    public void createCommentPanel(Project currentProject){
+        JPanel commentPanel = commentView.getCommentBlock();
         ArrayList<CommentModel> comments = commentList.getComments();
-        DefaultTableModel commentTableModel = new DefaultTableModel(commentView.getColumnNames(),0);
+        commentPanel.setLayout(new BoxLayout(commentPanel, BoxLayout.Y_AXIS));
+
+        
         String currentProjectId = currentProject.getId();
         for(int i = 0; i < comments.size(); i++){
             if(comments.get(i).getProjectID().equals(currentProjectId)){
+                JPanel frame = new JPanel();
+                frame.setLayout(new GridLayout(2,1));
+                frame.setBorder(BorderFactory.createEtchedBorder());
+                JPanel inframePanel = new JPanel();
+                inframePanel.setLayout(new GridLayout(1,2));
+                inframePanel.setBorder(BorderFactory.createEtchedBorder());
                 CommentModel comment = comments.get(i);
                 // String commentID = comment.getCommentID();
-                String userID = comment.getUserID();
-                String username = comment.getUsername();
-                String commentString = comment.getCommentString();
-                // "UserID", "Username","Comment"
-                Object[] row = { userID,username, commentString};
-                
-                commentTableModel.addRow(row);
+                String userIdentityString = "ID: " + comment.getUserID() + "   " +"Name: " + comment.getUsername();
+                JLabel userLabel = new JLabel(userIdentityString);
+                JLabel commentString =  new JLabel(comment.getCommentString());
+
+                inframePanel.add(userLabel,BorderLayout.NORTH );
+
+                frame.add(inframePanel);
+                frame.add(commentString);
+                commentPanel.add(frame);
             }
-
         }
-        JTable viewTable = commentView.getCommentTable();
-        viewTable.setModel(commentTableModel);
-
-        TableColumnModel columnModel = viewTable.getColumnModel();
-        //columnModel.getColumn(0).setPreferredWidth(100);
-        columnModel.getColumn(0).setPreferredWidth(100);
-        columnModel.getColumn(1).setPreferredWidth(100);   
-        columnModel.getColumn(2).setPreferredWidth(250);  
-    }
-    public void commentBlock(Project currentProject){
-        ArrayList<CommentModel> comments = commentList.getComments();
-        DefaultTableModel commentTableModel = new DefaultTableModel(commentView.getColumnNames(),0);
-        String currentProjectId = currentProject.getId();
-        
-        
     }
     class commentSubmitListener implements ActionListener{
         @Override
@@ -110,14 +86,15 @@ public class CommentController {
                 String newCommentId = "C" + commentList.generateCommentIdNum();
                 Project newProject = projectModel;
                 User commentor = user;
-                String newCommentString = commentView.getCommentField().getText();
+                String newCommentString = commentView.getCommentArea().getText();
 
                 CommentModel newComment = new CommentModel(newCommentId, newProject,commentor, newCommentString);
                 commentList.addItem(newComment);
 
                 // Clear comment field and add comment to area
-                commentView.getCommentField().setText("");
-                commentView.getCommentArea().append(newComment + "\n");
+                commentView.getCommentArea().setText("");
+                createCommentPanel(newProject);
+                // commentView.getCommentBlock();
 
                 commentList.save();
 
