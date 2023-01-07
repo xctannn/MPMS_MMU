@@ -9,7 +9,7 @@ import java.awt.GridBagConstraints;
 import Model.Student;
 import Model.StudentList;
 
-public class RegisterView{
+public class RegisterView extends JPanel{
     private Student studentModel = new Student();
     private StudentList studentList = new StudentList();
     String studentId = "S" + studentModel.generateCode(studentList.getSize());
@@ -19,7 +19,6 @@ public class RegisterView{
     
     private JComboBox userType = new JComboBox(userList);
     private JComboBox specialization = new JComboBox(specializationList);
-    public JPanel registerWrapper= new JPanel();
     public JPanel registerPanel= new JPanel();
     private JLabel userTypeLabel = new JLabel("User Type: ");
     private JLabel userIDLabel = new JLabel("User ID: ");
@@ -36,7 +35,7 @@ public class RegisterView{
     
     public RegisterView() {
         userType.setSelectedItem("Student");
-        registerWrapper.setLayout(new BorderLayout());
+        this.setLayout(new BorderLayout());
         registerPanel.setLayout(new GridBagLayout());
 
         gbc.insets = new Insets(5, 5, 5, 5);
@@ -57,7 +56,7 @@ public class RegisterView{
         gbc.gridx = 1;
         gbc.gridy = 7;
         registerPanel.add(cancelButton, gbc);
-        registerWrapper.add(registerPanel, BorderLayout.CENTER);
+        this.add(registerPanel, BorderLayout.CENTER);
     }
     
     private void addComponent(JPanel panel, JLabel label, JComponent component, GridBagConstraints gbc, int gridx, int gridy) {

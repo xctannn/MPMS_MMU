@@ -7,7 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-public class LoginView{
+public class LoginView extends JPanel{
     private String[] userList = {"Student", "Lecturer", "Admin"};
     GridBagConstraints gbc = new GridBagConstraints();
 
@@ -19,12 +19,11 @@ public class LoginView{
     private JTextField passwordField = new JTextField(20);
     private JButton loginButton = new JButton("Login");
 
-    public JPanel loginPanel = new JPanel();
 
     public LoginView(){
 
         JPanel loginForm = new JPanel();
-        loginPanel.setLayout(new BorderLayout());
+        this.setLayout(new BorderLayout());
         loginForm.setLayout(new GridBagLayout());
         gbc.insets = new Insets(3,3,3,3);
         
@@ -37,7 +36,7 @@ public class LoginView{
         gbc.gridwidth = 2;
         loginForm.add(loginButton, gbc);
 
-        loginPanel.add(loginForm, BorderLayout.CENTER);
+        this.add(loginForm, BorderLayout.CENTER);
     }
 
     private void addComponent(JPanel panel, JLabel label, JComponent component, GridBagConstraints gbc, int gridx, int gridy) {
@@ -46,6 +45,10 @@ public class LoginView{
         panel.add(label, gbc);
         gbc.gridx = gridx + 1;
         panel.add(component, gbc);
+    }
+
+    public static void displayErrorMessage(String message){
+        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     public void addLoginButtonListener(ActionListener listenforLoginButton){
