@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 
 import java.awt.GridLayout;
@@ -16,6 +19,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.text.AttributeSet.ColorAttribute;
 import javax.xml.stream.events.Comment;
 
 import Model.Administrator;
@@ -36,6 +40,8 @@ public class CommentController {
     private CommentView commentView;
     private CommentList commentList;
 
+
+
     public CommentController(CommentModel commentModel, CommentView view,User user ,Project currentProject){
         this.model = commentModel;
         this.commentView = view;
@@ -44,23 +50,25 @@ public class CommentController {
         this.user = user;
         view.getSubmitButton().addActionListener(new commentSubmitListener());
         
-        createCommentPanel(currentProject);
+        createCommentPanel();
 
     }
     
 
-    public void createCommentPanel(Project currentProject){
+    public void createCommentPanel(){
         JPanel commentPanel = commentView.getCommentBlock();
         ArrayList<CommentModel> comments = commentList.getComments();
         commentPanel.setLayout(new BoxLayout(commentPanel, BoxLayout.Y_AXIS));
 
         
-        String currentProjectId = currentProject.getId();
+        String currentProjectId = projectModel.getId();
         for(int i = 0; i < comments.size(); i++){
             if(comments.get(i).getProjectID().equals(currentProjectId)){
                 JPanel frame = new JPanel();
                 frame.setLayout(new GridLayout(2,1));
                 frame.setBorder(BorderFactory.createEtchedBorder());
+                frame.setBackground(Color.getHSBColor(188, 87, 68));
+                frame.setSize(new Dimension(750,300));
                 JPanel inframePanel = new JPanel();
                 inframePanel.setLayout(new GridLayout(1,2));
                 inframePanel.setBorder(BorderFactory.createEtchedBorder());
@@ -93,7 +101,7 @@ public class CommentController {
 
                 // Clear comment field and add comment to area
                 commentView.getCommentArea().setText("");
-                createCommentPanel(newProject);
+                updateCommentPanel();
                 // commentView.getCommentBlock();
 
                 commentList.save();
@@ -101,4 +109,10 @@ public class CommentController {
             }
         }
     }
+
+    public void updateCommentPanel(){
+        commentView.getCommentBlock().removeAll();
+        createCommentPanel();
+    }
+
 }

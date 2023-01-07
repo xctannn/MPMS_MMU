@@ -38,5 +38,7 @@ public class Main {
         CommentController commentController = new CommentController(commentModel, cV, user,tempProject);
         frame2.add(cV.wrapper);
         frame2.setVisible(true);
-    } 
+    }
+
+    
 }

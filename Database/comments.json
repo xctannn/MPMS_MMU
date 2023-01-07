@@ -22,4 +22,34 @@
   "username" : "Tan",
   "commentString" : "skndajkdawd",
   "projectID" : "P0001"
+}, {
+  "commentID" : "C0005",
+  "userID" : "L0001",
+  "username" : "Tan",
+  "commentString" : "Im lost",
+  "projectID" : "P0001"
+}, {
+  "commentID" : "C0006",
+  "userID" : "L0001",
+  "username" : "Tan",
+  "commentString" : "jom makan\n",
+  "projectID" : "P0001"
+}, {
+  "commentID" : "C0007",
+  "userID" : "L0001",
+  "username" : "Tan",
+  "commentString" : "No problem mate",
+  "projectID" : "P0001"
+}, {
+  "commentID" : "C0008",
+  "userID" : "L0001",
+  "username" : "Tan",
+  "commentString" : "Bunch of yesses\n",
+  "projectID" : "P0001"
+}, {
+  "commentID" : "C0009",
+  "userID" : "L0001",
+  "username" : "Tan",
+  "commentString" : "HeHeHe\nWe good",
+  "projectID" : "P0001"
 } ]
