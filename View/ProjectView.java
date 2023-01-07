@@ -35,6 +35,8 @@ public class ProjectView extends JPanel{
     private JPanel tableView = new JPanel(new BorderLayout());
     private String[] columnNames = {"ID", "Name", "Lecturer"};
     private JTable projectTable = new JTable(); 
+    private JButton logoutButton = new JButton("Log out");
+    private JButton registerAccountButton = new JButton("Register Account");
     private JButton lecturerAddProjectButton = new JButton("Add Project");
     private JButton adminAddProjectButton = new JButton("Add Project");
     private JButton filterProjectsButton = new JButton("Filter Projects");
@@ -121,11 +123,14 @@ public class ProjectView extends JPanel{
     private JPanel adminProjectTable(){
         JPanel tableWrapper = new JPanel();
         tableWrapper.setLayout(new BoxLayout(tableWrapper, BoxLayout.PAGE_AXIS));
+        JPanel accountButtons = logoutButton();
+        accountButtons.add(registerAccountButton);
+        
+        tableWrapper.add(accountButtons);
         tableWrapper.add(new JScrollPane(projectTable));
+        tableWrapper.add(adminProjectTableButtons());
         
         projectTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tableView.add(tableWrapper, BorderLayout.CENTER);
-        tableWrapper.add(adminProjectTableButtons());
 
         return tableWrapper;
     }
@@ -133,11 +138,12 @@ public class ProjectView extends JPanel{
     private JPanel lecturerProjectTable(){
         JPanel tableWrapper = new JPanel();
         tableWrapper.setLayout(new BoxLayout(tableWrapper, BoxLayout.PAGE_AXIS));
+
+        tableWrapper.add(logoutButton());
         tableWrapper.add(new JScrollPane(projectTable));
-        
-        projectTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tableView.add(tableWrapper, BorderLayout.CENTER);
         tableWrapper.add(lecturerProjectTableButtons());
+
+        projectTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         return tableWrapper;
     }
@@ -145,13 +151,24 @@ public class ProjectView extends JPanel{
     private JPanel studentProjectTable(){
         JPanel tableWrapper = new JPanel();
         tableWrapper.setLayout(new BoxLayout(tableWrapper, BoxLayout.PAGE_AXIS));
+
+        tableWrapper.add(logoutButton());
         tableWrapper.add(new JScrollPane(projectTable));
         
         projectTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tableView.add(tableWrapper, BorderLayout.CENTER);
 
         return tableWrapper;
     }
+
+    private JPanel logoutButton(){
+        JPanel logoutButtonWrapper = new JPanel();
+        logoutButtonWrapper.setLayout(new BoxLayout(logoutButtonWrapper, BoxLayout.LINE_AXIS));
+        logoutButtonWrapper.add(logoutButton);
+        logoutButtonWrapper.add(Box.createHorizontalGlue());
+
+        return logoutButtonWrapper;
+    }
+    
 
     private JPanel adminProjectTableButtons(){
         JPanel projectTableButtons = new JPanel();
@@ -171,6 +188,7 @@ public class ProjectView extends JPanel{
         projectTableButtons.add(Box.createHorizontalGlue());
         return projectTableButtons;
     }
+    
 
     private JPanel projectPanelTitle(){
         JPanel projectPanelTitle = new JPanel();
@@ -550,6 +568,14 @@ public class ProjectView extends JPanel{
             projectStudent.setText("Assigned to: ");
             projectStudent.setEnabled(false);
         }
+    }
+
+    public void addLogoutButtonListener(ActionListener logoutButtonListener){
+        logoutButton.addActionListener(logoutButtonListener);
+    }
+
+    public void addRegisterAccountButtonListener(ActionListener registerAccountButtonListener){
+        registerAccountButton.addActionListener(registerAccountButtonListener);
     }
 
     public void addLecturerAddProjectButtonListener(ActionListener lecturerAddProjectButtonListener){

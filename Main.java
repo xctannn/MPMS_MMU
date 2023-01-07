@@ -1,12 +1,9 @@
 import javax.swing.JFrame;
-import javax.swing.JFrame;
 
 import Controller.ProjectController;
 import Model.Administrator;
 import Model.Lecturer;
-import Model.Project;
 import Model.Student;
-import View.ProjectView;
 
 public class Main {
     public static void main(String[] args){
@@ -27,7 +24,7 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1200, 700);
         
-        ProjectController projectController = new ProjectController(lecturer2);
+        ProjectController projectController = new ProjectController(student);
         frame.add(projectController.getProjectView());
         frame.setVisible(true);
     } 

@@ -35,6 +35,8 @@ public class ProjectController {
         this.projectView = new ProjectView(user);
         this.filteredProjectList = new ArrayList<>(projectList.getProjects());
 
+        projectView.addLogoutButtonListener(new LogoutButtonListener());
+        projectView.addRegisterAccountButtonListener(new RegisterAccountButtonListener());
         projectView.addAdminAddProjectButtonListener(new AdminAddProjectButtonListener());
         projectView.addFilterProjectsButtonListener(new FilterProjectsButtonListener());
         projectView.addProjectLecturerSelectorListener(new ProjectLecturerSelectorListener());
@@ -54,6 +56,7 @@ public class ProjectController {
         this.filteredProjectList = projectList.getFilteredProjects(user);
 
         // new ProjectController.Listeners
+        projectView.addLogoutButtonListener(new LogoutButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
         projectView.addLecturerAddProjectButtonListener(new LecturerAddProjectButtonListener());
         projectView.addAdminAddProjectButtonListener(new AdminAddProjectButtonListener());
@@ -75,6 +78,7 @@ public class ProjectController {
         this.projectView = new ProjectView(user);
         this.filteredProjectList = projectList.getFilteredProjects(user);
         
+        projectView.addLogoutButtonListener(new LogoutButtonListener());
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
         projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
@@ -151,6 +155,24 @@ public class ProjectController {
 
         filteredProjectList.remove(selectedRow);
         populateTable();
+    }
+
+    public class LogoutButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            if(!projectView.getUnassignConfirmation("Are you sure you want to log out?")){
+                return;
+            }
+
+            // MainController.toLoginView
+        }
+    }
+
+    public class RegisterAccountButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            // MainController.toRegisterView
+        }
     }
 
     public class LecturerAddProjectButtonListener implements ActionListener{
