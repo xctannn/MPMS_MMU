@@ -23,7 +23,6 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 
-import Controller.ProjectController;
 import Model.Administrator;
 import Model.Lecturer;
 import Model.Student;
