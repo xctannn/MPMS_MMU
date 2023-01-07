@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -14,7 +15,6 @@ import Model.Administrator;
 import Model.Lecturer;
 import Model.LecturerList;
 import Model.Project;
-import Model.ProjectData;
 import Model.ProjectList;
 import Model.Student;
 import Model.StudentList;
@@ -30,9 +30,9 @@ public class ProjectController {
     private LecturerList lecturerList = new LecturerList();
     private StudentList studentList = new StudentList();
 
-    public ProjectController(Administrator user, ProjectView view){
+    public ProjectController(Administrator user){
         this.user = user;
-        this.projectView = view;
+        this.projectView = new ProjectView(user);
         this.filteredProjectList = new ArrayList<>(projectList.getProjects());
 
         projectView.addAdminAddProjectButtonListener(new AdminAddProjectButtonListener());
@@ -45,15 +45,15 @@ public class ProjectController {
         projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
 
         populateTable();
-        projectView.defaultProjectView(user);
+        // projectView.defaultProjectView(user);
     }
 
-    public ProjectController(Lecturer user,ProjectView view){
+    public ProjectController(Lecturer user){
         this.user = user;
-        this.projectView = view;
+        this.projectView = new ProjectView(user);
         this.filteredProjectList = projectList.getFilteredProjects(user);
 
-        
+        // new ProjectController.Listeners
         projectView.addTableSelectionListener(new TableSelectionListener());
         projectView.addLecturerAddProjectButtonListener(new LecturerAddProjectButtonListener());
         projectView.addAdminAddProjectButtonListener(new AdminAddProjectButtonListener());
@@ -67,12 +67,12 @@ public class ProjectController {
         projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
         
         populateTable();
-        projectView.defaultProjectView(user);
+        // projectView.defaultProjectView(user);
     }
 
-    public ProjectController(Student user, ProjectView view){
+    public ProjectController(Student user){
         this.user = user;
-        this.projectView = view;
+        this.projectView = new ProjectView(user);
         this.filteredProjectList = projectList.getFilteredProjects(user);
         
         projectView.addAssignButtonListener(new AssignButtonListener());
@@ -80,7 +80,11 @@ public class ProjectController {
         projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
 
         populateTable();
-        projectView.defaultProjectView(user);
+        // projectView.defaultProjectView(user);
+    }
+
+    public JPanel getProjectView(){
+        return projectView;
     }
 
 
@@ -149,7 +153,7 @@ public class ProjectController {
         populateTable();
     }
 
-    class LecturerAddProjectButtonListener implements ActionListener{
+    public class LecturerAddProjectButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
             projectView.setupLecturerAddProjectPanel();
@@ -372,7 +376,7 @@ public class ProjectController {
             if (projectModel.getIsAssigned()) studentList.saveProjectDeletion(projectStudentId);
             lecturerList.saveProjectDeletion(projectLecturerId, projectId);
             projectList.saveProjectDeletion(projectId);
-            projectView.disableAllPanelTexts();
+            projectView.disableAllPanelElements();
         }
     }
 

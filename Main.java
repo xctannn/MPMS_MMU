@@ -27,9 +27,8 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1200, 700);
         
-        ProjectView projectView = new ProjectView();
-        ProjectController projectController = new ProjectController(admin, projectView);
-        frame.add(projectView);
+        ProjectController projectController = new ProjectController(lecturer2);
+        frame.add(projectController.getProjectView());
         frame.setVisible(true);
     } 
 }

@@ -35,7 +35,6 @@ public class ProjectView extends JPanel{
     private JPanel tableView = new JPanel(new BorderLayout());
     private String[] columnNames = {"ID", "Name", "Lecturer"};
     private JTable projectTable = new JTable(); 
-    private JPanel projectTableButtons = new JPanel();
     private JButton lecturerAddProjectButton = new JButton("Add Project");
     private JButton adminAddProjectButton = new JButton("Add Project");
     private JButton filterProjectsButton = new JButton("Filter Projects");
@@ -48,12 +47,11 @@ public class ProjectView extends JPanel{
     private JTextField projectSpecialization = new JTextField("Specialization: ");
     private JComboBox<String> projectSpecializationSelector = new JComboBox<>(projectSpecializationOptions);
     private JTextArea projectContent = new JTextArea();
-    private JPanel projectBody = new JPanel();
+    JPanel projectBody = new JPanel();
 
     private JLabel projectStudent = new JLabel("Assigned to: ");
     private JButton editContentButton = new JButton("Edit");
     private JButton saveEditButton = new JButton("Save");
-    private JPanel projectPanelButtons = new JPanel();
     private JButton toggleProjectButton = new JButton("Activate");
     private JPanel assignButtonsWrapper = new JPanel();
     private JButton assignStudentButton = new JButton("Assign");
@@ -63,27 +61,118 @@ public class ProjectView extends JPanel{
     private JButton deleteProjectButton = new JButton("Delete");
     private JButton projectCommentsButton = new JButton("Comments");
 
-    public ProjectView(){
+    public ProjectView(Administrator adminUser){
         this.setLayout(new GridLayout(1,2));
 
-        // Project Table View Initial Setup
-         
+        // Project Table View Setup
+        tableView.add(adminProjectTable(), BorderLayout.CENTER);
+
+        // Project Panel Setup
+        projectPanel.add(projectPanelTitle(), BorderLayout.NORTH);
+        projectPanel.add(projectPanelContent());
+        projectPanel.add(adminProjectPanelButtons(), BorderLayout.SOUTH);
+        
+        setupProjectPanelTextProperties();
+        disableAllPanelElements();
+        confirmAdminAddProjectButton.setVisible(false);
+        this.add(tableView);
+        this.add(projectPanel);
+    }
+
+    public ProjectView(Lecturer lecturerUser){
+        this.setLayout(new GridLayout(1,2));
+
+        // Project Table View Setup
+        tableView.add(lecturerProjectTable(), BorderLayout.CENTER);
+
+        // Project Panel Setup
+        projectPanel.add(projectPanelTitle(), BorderLayout.NORTH);
+        projectPanel.add(projectPanelContent());
+        projectBody.add(editButton());
+        projectPanel.add(lecturerProjectPanelButtons(), BorderLayout.SOUTH);
+
+        // Disable all texts on Project Panel on startup
+        setupProjectPanelTextProperties();
+        disableAllPanelElements();
+        confirmLecturerAddProjectButton.setVisible(false);
+        saveEditButton.setVisible(false);
+        unassignStudentButton.setVisible(false);
+        this.add(tableView);
+        this.add(projectPanel);
+    }
+
+    public ProjectView(Student studentUser){
+        this.setLayout(new GridLayout(1,2));
+
+        // Project Table View Setup
+        tableView.add(studentProjectTable(), BorderLayout.CENTER);
+
+        // Project Panel Setup
+        projectPanel.add(projectPanelTitle(), BorderLayout.NORTH);
+        projectPanel.add(projectPanelContent());
+        projectPanel.add(studentProjectPanelButtons(), BorderLayout.SOUTH);
+        
+        setupProjectPanelTextProperties();
+        disableAllPanelElements();
+        this.add(tableView);
+        this.add(projectPanel);
+    }
+
+    private JPanel adminProjectTable(){
         JPanel tableWrapper = new JPanel();
         tableWrapper.setLayout(new BoxLayout(tableWrapper, BoxLayout.PAGE_AXIS));
         tableWrapper.add(new JScrollPane(projectTable));
+        
+        projectTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableView.add(tableWrapper, BorderLayout.CENTER);
+        tableWrapper.add(adminProjectTableButtons());
+
+        return tableWrapper;
+    }
+
+    private JPanel lecturerProjectTable(){
+        JPanel tableWrapper = new JPanel();
+        tableWrapper.setLayout(new BoxLayout(tableWrapper, BoxLayout.PAGE_AXIS));
+        tableWrapper.add(new JScrollPane(projectTable));
+        
+        projectTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableView.add(tableWrapper, BorderLayout.CENTER);
+        tableWrapper.add(lecturerProjectTableButtons());
+        
+        return tableWrapper;
+    }
+
+    private JPanel studentProjectTable(){
+        JPanel tableWrapper = new JPanel();
+        tableWrapper.setLayout(new BoxLayout(tableWrapper, BoxLayout.PAGE_AXIS));
+        tableWrapper.add(new JScrollPane(projectTable));
+        
+        projectTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableView.add(tableWrapper, BorderLayout.CENTER);
+
+        return tableWrapper;
+    }
+
+    private JPanel adminProjectTableButtons(){
+        JPanel projectTableButtons = new JPanel();
         projectTableButtons.setLayout(new BoxLayout(projectTableButtons, BoxLayout.LINE_AXIS));
-        projectTableButtons.add(lecturerAddProjectButton);
+
         projectTableButtons.add(adminAddProjectButton);
         projectTableButtons.add(Box.createHorizontalGlue());
         projectTableButtons.add(filterProjectsButton);
-        tableWrapper.add(projectTableButtons);
-        projectTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tableView.add(tableWrapper, BorderLayout.CENTER);
-        
-        // Disable all texts on Project Panel on startup
-        disableAllPanelTexts();
+        return projectTableButtons;
+    }
 
-        // Project Panel Title Setup
+    private JPanel lecturerProjectTableButtons(){
+        JPanel projectTableButtons = new JPanel();
+        projectTableButtons.setLayout(new BoxLayout(projectTableButtons, BoxLayout.LINE_AXIS));
+
+        projectTableButtons.add(lecturerAddProjectButton);
+        projectTableButtons.add(Box.createHorizontalGlue());
+        return projectTableButtons;
+    }
+
+    private JPanel projectPanelTitle(){
         JPanel projectPanelTitle = new JPanel();
         projectPanelTitle.setLayout(new BoxLayout(projectPanelTitle, BoxLayout.Y_AXIS));
 
@@ -106,96 +195,74 @@ public class ProjectView extends JPanel{
         projectSpecializationWrapper.add(projectSpecialization);
         projectSpecializationWrapper.add(projectSpecializationSelector);
         projectPanelTitle.add(projectSpecializationWrapper);
-        projectPanel.add(projectPanelTitle, BorderLayout.NORTH);
 
-        //Project Panel Content Setup
-        JPanel projectPanelContent = new JPanel(new BorderLayout());
+        return projectPanelTitle;
+    }
+
+    private JPanel projectPanelContent(){
         projectBody.setLayout(new BoxLayout(projectBody, BoxLayout.PAGE_AXIS));
         projectBody.setBorder(BorderFactory.createEmptyBorder(30,20,20,30));
         JScrollPane projectContentWrapper = new JScrollPane(projectContent);
         projectBody.add(projectContentWrapper);
+
+        JPanel projectPanelContent = new JPanel(new BorderLayout());
         projectPanelContent.add(projectBody, BorderLayout.CENTER);
         projectPanelContent.add(projectStudent, BorderLayout.SOUTH);
-        projectPanel.add(projectPanelContent);
 
-        // Project Panel Buttons Setup
-        assignButtonsWrapper.add(assignStudentButton);
-        assignButtonsWrapper.add(unassignStudentButton);
-        projectPanelButtons.setLayout(new BoxLayout(projectPanelButtons, BoxLayout.LINE_AXIS));
-
-        
-
-        
-        this.add(tableView);
-        this.add(projectPanel);
-        setupProjectPanelTextProperties();
+        return projectPanelContent;
     }
 
-    public void defaultProjectView(Administrator adminUser){
-        lecturerAddProjectButton.setVisible(false);
-        projectLecturer.setVisible(true);
-        saveEditButton.setVisible(false);
-        editContentButton.setVisible(false);
-        assignStudentButton.setVisible(false);
-        toggleProjectButton.setVisible(false);
-        confirmAdminAddProjectButton.setVisible(false);
-        assignButtonsWrapper.setVisible(false);
-
-        
-        projectPanelButtons.add(Box.createHorizontalGlue());
-        projectPanelButtons.add(deleteProjectButton);
-        projectPanelButtons.add(confirmAdminAddProjectButton);
-        projectPanelButtons.add(Box.createHorizontalGlue());
-        projectPanelButtons.add(projectCommentsButton);
-        projectPanelButtons.add(Box.createHorizontalGlue());
-        projectPanel.add(projectPanelButtons, BorderLayout.SOUTH);
-    }
-
-    public void defaultProjectView(Lecturer lecturerUser){
-        adminAddProjectButton.setVisible(false);
-        projectLecturer.setVisible(true);
-        saveEditButton.setVisible(false);
-        editContentButton.setVisible(true);
-        assignStudentButton.setVisible(true);
-        unassignStudentButton.setVisible(false);
-        toggleProjectButton.setVisible(true);
-        confirmLecturerAddProjectButton.setVisible(false);
-        assignButtonsWrapper.setVisible(true);
-        filterProjectsButton.setVisible(false);
-
+    private JPanel editButton(){
         JPanel projectPanelEditWrapper = new JPanel();
         projectPanelEditWrapper.add(editContentButton);
-        projectPanelEditWrapper.add(saveEditButton);
-        projectBody.add(projectPanelEditWrapper);
+        projectPanelEditWrapper.add(saveEditButton); 
+
+        return projectPanelEditWrapper;
+    }
+
+    private JPanel assignButton(){
+        assignButtonsWrapper.add(assignStudentButton);
+        assignButtonsWrapper.add(unassignStudentButton);
+
+        return assignButtonsWrapper;
+    }
+
+    private JPanel adminProjectPanelButtons(){
+        JPanel projectPanelButtons = new JPanel();
+        projectPanelButtons.setLayout(new BoxLayout(projectPanelButtons, BoxLayout.LINE_AXIS));
 
         projectPanelButtons.add(Box.createHorizontalGlue());
-        projectPanelButtons.add(assignButtonsWrapper);
+        projectPanelButtons.add(deleteProjectButton);
+        projectPanelButtons.add(Box.createHorizontalGlue());
+        projectPanelButtons.add(confirmAdminAddProjectButton);
+        projectPanelButtons.add(projectCommentsButton);
+        projectPanelButtons.add(Box.createHorizontalGlue());
+
+        return projectPanelButtons;
+    }
+
+    private JPanel lecturerProjectPanelButtons(){
+        JPanel projectPanelButtons = new JPanel();
+        projectPanelButtons.setLayout(new BoxLayout(projectPanelButtons, BoxLayout.LINE_AXIS));
+        projectPanelButtons.add(assignButton());
         projectPanelButtons.add(Box.createHorizontalGlue());
         projectPanelButtons.add(toggleProjectButton);
         projectPanelButtons.add(Box.createHorizontalGlue());
         projectPanelButtons.add(confirmLecturerAddProjectButton);
         projectPanelButtons.add(projectCommentsButton);
         projectPanelButtons.add(Box.createHorizontalGlue());
-        projectPanel.add(projectPanelButtons, BorderLayout.SOUTH);
+
+        return projectPanelButtons;
     }
 
-    public void defaultProjectView(Student studentUser){
-        lecturerAddProjectButton.setVisible(false);
-        adminAddProjectButton.setVisible(false);
-        projectLecturer.setVisible(true);
-        saveEditButton.setVisible(false);
-        editContentButton.setVisible(false);
-        assignStudentButton.setVisible(false);
-        toggleProjectButton.setVisible(false);
-        confirmLecturerAddProjectButton.setVisible(false);
-        confirmAdminAddProjectButton.setVisible(false);
-        assignButtonsWrapper.setVisible(false);
-        filterProjectsButton.setVisible(false);
-
+    private JPanel studentProjectPanelButtons(){
+        JPanel projectPanelButtons = new JPanel();
+        projectPanelButtons.setLayout(new BoxLayout(projectPanelButtons, BoxLayout.LINE_AXIS));
         projectPanelButtons.add(Box.createHorizontalGlue());
         projectPanelButtons.add(projectCommentsButton);
         projectPanelButtons.add(Box.createHorizontalGlue());
-        projectPanel.add(projectPanelButtons, BorderLayout.SOUTH);
+
+        return projectPanelButtons;
     }
 
     public void setupLecturerAddProjectPanel(){
@@ -277,7 +344,7 @@ public class ProjectView extends JPanel{
         projectContent.setOpaque(false);
     }
 
-    public void disableAllPanelTexts(){
+    public void disableAllPanelElements(){
         projectLecturer.setEnabled(false);
         projectName.setEnabled(false);
         projectStudent.setEnabled(false);
