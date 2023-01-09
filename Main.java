@@ -2,11 +2,14 @@ import javax.swing.JFrame;
 import javax.swing.JFrame;
 
 import Controller.ProjectController;
+import Controller.ReportController;
 import Model.Administrator;
 import Model.Lecturer;
 import Model.Project;
+import Model.Report;
 import Model.Student;
 import View.ProjectView;
+import View.ReportView;
 
 public class Main {
     public static void main(String[] args){
@@ -23,13 +26,24 @@ public class Main {
         // lecturer2.addproject("P0004");
         // projectList.addItem(new Project("P0003", "Final Year", "Data", "Build this game for me or else you fail your FYP and spend another 10k on your degree", lecturer2));
 
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1200, 700);
+        // JFrame frame = new JFrame();
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setSize(1200, 700);
         
-        ProjectView projectView = new ProjectView();
-        ProjectController projectController = new ProjectController(admin, projectView);
-        frame.add(projectView);
-        frame.setVisible(true);
+        // ProjectView projectView = new ProjectView();
+        // //ProjectController projectController = new ProjectController(admin, projectView);
+        // ProjectController projectController = new ProjectController(lecturer2, projectView);
+        // frame.add(projectView);
+        // frame.setVisible(true);
+
+        JFrame frame2 = new JFrame();
+        frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame2.setSize(1200, 700);
+        Report report = new Report("123");
+        ReportView reportView = new ReportView();
+        ReportController reportController = new ReportController(admin,report,reportView);
+        frame2.add(reportView.generateWrapperPanel);
+
+        frame2.setVisible(true);
     } 
 }

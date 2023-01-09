@@ -36,7 +36,7 @@ public class ProjectController {
         this.filteredProjectList = new ArrayList<>(projectList.getProjects());
 
         projectView.addAdminAddProjectButtonListener(new AdminAddProjectButtonListener());
-        projectView.addFilterProjectsButtonListener(new FilterProjectsButtonListener());
+        // projectView.addFilterProjectsButtonListener(new GenerateButtonListener());
         projectView.addProjectLecturerSelectorListener(new ProjectLecturerSelectorListener());
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
@@ -175,12 +175,22 @@ public class ProjectController {
         }
     }
 
-    class FilterProjectsButtonListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e){
-           // implement what happens after the filter projects button is clicked
-        }
-    }
+    // class FilterProjectsButtonListener implements ActionListener{
+    //     @Override
+    //     public void actionPerformed(ActionEvent e){
+    //        // implement what happens after the filter projects button is clicked
+    //        String reportID = reportModel.getId();
+
+    //        try{
+    //             ArrayList<String> viewListArray = reportList.getViewList();
+    //            //
+    //            // get the report list i think? by who blabla
+    //        }catch(IllegalArgumentException exception){
+    //            ProjectView.displayErrorMessage("There are no projects to generate report");
+
+    //        }
+    //     }
+    // }
 
     class ConfirmLecturerAddProjectButtonListener implements ActionListener{
         @Override

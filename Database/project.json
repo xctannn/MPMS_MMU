@@ -1,35 +1,37 @@
-{"projects": [ {
-  "id" : "P0001",
-  "name" : "Capstone",
-  "specialization" : "Software Engineering",
-  "content" : "This is a Data Science Capstone project, you better not fuck this up",
-  "lecturerId" : "L0001",
-  "lecturerName" : "Tan",
-  "studentAssignedId" : null,
-  "studentAssignedName" : null,
-  "isAssigned" : false,
-  "isActive" : false
-}, {
-  "id" : "P0002",
-  "name" : "Final Year Project",
-  "specialization" : "Data Science",
-  "content" : "This is a Data Science Capstone project, dont fuck this up, yo.\n",
-  "lecturerId" : "L0001",
-  "lecturerName" : "Tan",
-  "studentAssignedId" : "S0001",
-  "studentAssignedName" : "S1",
-  "isAssigned" : true,
-  "isActive" : true
-}, {
-  "id" : "P0003",
-  "name" : "New Project",
-  "specialization" : "Software Engineering",
-  "content" : "This is a new proejct blah blah blah blah",
-  "lecturerId" : "L0002",
-  "lecturerName" : "Lee",
-  "studentAssignedId" : null,
-  "studentAssignedName" : null,
-  "isAssigned" : false,
-  "isActive" : false
-} ],
-"projectCount" : 3}
+{
+  "projects" : [ {
+    "id" : "P0001",
+    "name" : "Capstone",
+    "specialization" : "Software Engineering",
+    "content" : "This is a Data Science Capstone project, you better not fuck this up",
+    "lecturerId" : "L0001",
+    "lecturerName" : "Tan",
+    "studentAssignedId" : null,
+    "studentAssignedName" : null,
+    "isAssigned" : false,
+    "isActive" : false
+  }, {
+    "id" : "P0002",
+    "name" : "Final Year Project",
+    "specialization" : "Data Science",
+    "content" : "This is a Data Science Capstone project, dont fuck this up, yo.\n",
+    "lecturerId" : "L0001",
+    "lecturerName" : "Tan",
+    "studentAssignedId" : null,
+    "studentAssignedName" : null,
+    "isAssigned" : false,
+    "isActive" : true
+  }, {
+    "id" : "P0003",
+    "name" : "New Project",
+    "specialization" : "Software Engineering",
+    "content" : "This is a new proejct blah blah blah blah",
+    "lecturerId" : "L0002",
+    "lecturerName" : "Lee",
+    "studentAssignedId" : null,
+    "studentAssignedName" : null,
+    "isAssigned" : false,
+    "isActive" : false
+  } ],
+  "projectCount" : 3
+}

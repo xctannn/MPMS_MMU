@@ -3,7 +3,7 @@
   "username" : "S1",
   "password" : "s01",
   "specialization" : "Data Science",
-  "assignedProjectID" : "P0002",
+  "assignedProjectID" : null,
   "favourites" : null
 }, {
   "id" : "S0002",
@@ -12,4 +12,4 @@
   "specialization" : "Cybersecurity",
   "assignedProjectID" : null,
   "favourites" : null
-}]
+} ]
