@@ -9,7 +9,9 @@ public class ProjectList implements JsonList<Project>{
     private ProjectData projectData;
     private ArrayList<Project> projects;
     private int projectCount;
-    
+    private String specialization;
+    private String id;
+
     //projectList will contain every project in the database， can be used for adminUser
     public ProjectList(){   
         setList();
@@ -45,6 +47,39 @@ public class ProjectList implements JsonList<Project>{
         }
         return filteredProjects;
     }
+
+
+    //Contains all the projects to generate the report
+    public ArrayList<Project> getAllProjects(){
+        ArrayList<Project> allProjectReport = new ArrayList<>();
+
+        //for(int i = 0; i < allProjectReport.size(); i++){
+            setList();
+           
+        //}   
+        return allProjectReport;
+    }
+
+    //Contains filtered specialization to generate the report
+    public ArrayList<Project> getFilteredSpecialization(String specialization){
+        ArrayList<Project> filteredProjects = new ArrayList<>(projects);
+        
+        for (int i = 0; i < filteredProjects.size(); i++){
+            Project project = filteredProjects.get(i);
+            String tempSpecialization = project.getSpecialization();
+            if (!(tempSpecialization.equals(specialization))){
+                filteredProjects.remove(i);
+                i--;
+
+            }
+            
+        }
+        
+
+        return filteredProjects;
+    }
+
+
 
     public String generateCode(){
         return String.format("%04d", projectCount + 1);
@@ -167,4 +202,5 @@ public class ProjectList implements JsonList<Project>{
         }
         return 0;
     } 
+
 }

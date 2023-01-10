@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class ReportList implements JsonList<Report>{
-    JsonParser<Report> parser = new JsonParser<>("/Database/project.json", Report.class);
-    private ProjectData projectData;
-    private ArrayList<Report> reports;
+public class ReportList implements JsonList<Project>{
+    JsonParser<Project> parser = new JsonParser<>("/Database/project.json", Project.class);
+    private Project project;
+    private ArrayList<Project> reports;
     //private int projectCount; ini pending
 
     //handles data logics
@@ -20,24 +20,43 @@ public class ReportList implements JsonList<Report>{
         }
         
     }
+    // get all projects
+    // public ReportList(Project project){
+    //     try{
+    //         this.reports = parser.deserialize();
+    //         for (int i = 0; i < reports.size(); i++){
+    //             Report report = reports.get(i);
+    //         }
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     } 
+    // }
 
-    public ArrayList<Report>  getAllProjects (){
-        ArrayList<Report> allProjectReport = new ArrayList<>(reports);
+    public ArrayList<Project> getAllProjects(){
+        ArrayList<Project> allProjectReport = new ArrayList<>();
 
         for(int i = 0; i < allProjectReport.size(); i++){
-            Report report = allProjectReport.get(i);
-
-        }
+            Project report = allProjectReport.get(i);
+        }   
         return allProjectReport;
     }
 
-    
-    // filter by 
-    // public ArrayList<String> getReportList(){
+    // removing soon
+    public ArrayList<Project> getBySpecialization(String specialization){
+        ArrayList<Project> filteredProjects = new ArrayList<>();
 
-    // }
+        for(int i = 0; i < filteredProjects.size(); i++){
+                Project report = filteredProjects.get(i);
+                if(!(specialization.equals(report.getSpecialization()))){
+                    reports.remove(i);
+                    i--;
+                }
+        }   
+        return filteredProjects;
+    }
 
-    public ArrayList<Report> getReports(){
+
+    public ArrayList<Project> getReports(){
         return reports;
     }
 
@@ -62,15 +81,15 @@ public class ReportList implements JsonList<Report>{
     }
 
     @Override
-    public void addItem(Report item) {
+    public void addItem(Project item) {
         // TODO Auto-generated method stub
         
     }
 
     @Override
-    public Report getItem(String id) {
+    public Project getItem(String id) {
         for (int i = 0; i < reports.size(); i++){
-            Report tempReport = reports.get(i);
+            Project tempReport = reports.get(i);
             if (tempReport.getId().equals(id)){
                 return tempReport;
             }
@@ -83,4 +102,5 @@ public class ReportList implements JsonList<Report>{
         // TODO Auto-generated method stub
         return 0;
     }
+
 }

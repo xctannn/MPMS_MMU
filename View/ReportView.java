@@ -15,6 +15,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -26,11 +27,13 @@ import javax.swing.event.ListSelectionListener;
 
 
 import Model.Project;
+import Model.Report;
 
 public class ReportView {
     private static final ArrayList<String> selectionWheelOptions = new ArrayList<String>();
     private JButton generateButton = new JButton("Generate");
     public JPanel generateWrapperPanel = new JPanel();
+
     //view text file
     //hailat kepala sakit woi
     //button similan all here
@@ -101,6 +104,11 @@ public class ReportView {
 	public void addGenerateButtonListener(ActionListener generateButtonListener) {
         generateButton.addActionListener(generateButtonListener);
     }
+
+    // public JPanel displayReport(ArrayList<Report> filteredSpecialization){
+
+    // }
+    
 
 
 }
