@@ -26,24 +26,30 @@ public class LoginController{
     class loginButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            String userID = loginView.getUserID();
-            String password = loginView.getPassword();
-            String userType = loginView.getUserType();
+            try{
+                String userID = loginView.getUserID();
+                String password = loginView.getPassword();
+                String userType = loginView.getUserType();
 
-            if(userID.isBlank() || password.isBlank()){
-                JOptionPane.showMessageDialog(null, "Please fill in the username and password","Error", JOptionPane.ERROR_MESSAGE);
+                checkNamePassword(userID, password);
+                checkUserExists(userType, password);
+                JOptionPane.showMessageDialog(null, "Login Successful");
+                
+                // if(userType == "Student"){
+                //     mainController.switchProjectView(studentList.getItem(userID));
+                // }else if(userType == "Lecturer")
+                //     mainController.switchProjectView(lecturerList.getItem(userID));
+                // else{
+                //     mainController.switchProjectView(adminList.getItem(userID));
+                // }
 
-            }else if(userType == "Student"){
-                checkUser(userType, userID, password);
-            }else if(userType == "Lecturer"){
-                checkUser(userType, userID, password);
-            }else{
-                checkUser(userType, userID, password);
+            }catch(IllegalArgumentException exception){
+                LoginView.displayErrorMessage(exception.getMessage());
             }
         }
     }
 
-    public Object getModel(String userType){
+    private Object getModel(String userType){
         String userID = loginView.getUserID();
         if(userType == "Student"){
             return studentList.getItem(userID);
@@ -54,14 +60,22 @@ public class LoginController{
         }
     }
 
-    public void checkUser(String userType, String userID, String password){
-        Object model = getModel(userType);
-        if(model == null){
-            JOptionPane.showMessageDialog(null, "User account does not exist", "Error", JOptionPane.ERROR_MESSAGE);
-        }else if(!(password.equals(((User) model).getPassword()))){
-            JOptionPane.showMessageDialog(null, "Password do not match", "Error", JOptionPane.ERROR_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog(null, "Login Successful");
+    private void checkNamePassword(String userID, String password) throws IllegalArgumentException{
+        if(userID.isEmpty()){
+            throw new IllegalArgumentException("Username must not be empty");
+        }else if(password.isEmpty()){
+            throw new IllegalArgumentException("Password must not be empty");
         }
     }
+
+    private void checkUserExists(String userType, String password){
+        Object model = getModel(userType);
+        if(model == null){
+            throw new IllegalArgumentException("User account does not exist");
+        }else if(!(password.equals(((User) model).getPassword()))){
+            throw new IllegalArgumentException("Password do no match");
+        }
+    }
+
+
 }

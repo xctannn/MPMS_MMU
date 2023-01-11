@@ -37,8 +37,6 @@ public class RegisterController {
             
             if(userType == "Student"){
                 specializationType.setEnabled(true);
-            }else if(userType == "Lecturer"){
-                specializationType.setEnabled(false);
             }else{
                 specializationType.setEnabled(false);
             }
@@ -49,41 +47,46 @@ public class RegisterController {
     class registerBtnListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            String newUsername = registerView.getUsername();
-            String newPassword = registerView.getPassword();
-            String userType = registerView.getUserType();
-            String id = getUserID(userType);
-            String newID = updateID(userType);
-            
-            if (newUsername.isBlank() || newPassword.isBlank()){
-                JOptionPane.showMessageDialog(null, "Please fill in the username and password", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            
-            else if(userType == "Student"){
-                String specialization = registerView.getSpecialization();
-                Student newStudent = new Student(id, newUsername, newPassword, specialization, "");
-                studentList.addItem(newStudent);
-                JOptionPane.showMessageDialog(null, "Register Successful");
-                registerView.setID(newID);
+            try{
+                String newUsername = registerView.getUsername();
+                String newPassword = registerView.getPassword();
+                String userType = registerView.getUserType();
+                String id = getUserID(userType);
+                String newID = updateID(userType);
 
-            }else if(userType == "Lecturer"){
-                Lecturer newLecturer = new Lecturer(id, newUsername, newPassword);
-                lecturerList.addItem(newLecturer);
-                JOptionPane.showMessageDialog(null, "Register Successful");
+                checkNamePassword(newUsername, newPassword);
+            
+                if(userType == "Student"){
+                    String specialization = registerView.getSpecialization();
+                    Student newStudent = new Student(id, newUsername, newPassword, specialization, "");
+                    studentList.addItem(newStudent);
+                }else if(userType == "Lecturer"){
+                    Lecturer newLecturer = new Lecturer(id, newUsername, newPassword);
+                    lecturerList.addItem(newLecturer);
+                }else{
+                    Administrator newAdmin = new Administrator(id, newUsername, newPassword);
+                    adminList.addItem(newAdmin);
+                }
                 registerView.setID(newID);
-
-            }else{
-                Administrator newAdmin = new Administrator(id, newUsername, newPassword);
-                adminList.addItem(newAdmin);
                 JOptionPane.showMessageDialog(null, "Register Successful");
-                registerView.setID(newID);
+            
+            }catch(IllegalArgumentException exception){
+                JOptionPane.showMessageDialog(null, exception.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
     // class cancelButtonListener implements ActionListener{
-
+    //      mainController.switchProjectView(adminList.getItem(userID));
     // }
+
+    private void checkNamePassword(String username, String password) throws IllegalArgumentException{
+        if(username.isEmpty()){
+            throw new IllegalArgumentException("Username must not be empty");
+        }else if(password.isEmpty()){
+            throw new IllegalArgumentException("Password must not be empty");
+        }
+    }
 
     private String getUserID(String userType){
         if(userType == "Student"){
