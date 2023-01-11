@@ -57,8 +57,9 @@ public class ReportView {
                                                         "blah assign the project", 
                                                         JOptionPane.QUESTION_MESSAGE, 
                                                         null, 
-                                                        wheelOptions, 
-                                                        wheelOptions[0]);
+                                                        wheelOptions 
+                                                        //wheelOptions[0]
+                                                        );
         
         if (selected == null){
             return "";
@@ -105,10 +106,6 @@ public class ReportView {
         generateButton.addActionListener(generateButtonListener);
     }
 
-    // public JPanel displayReport(ArrayList<Report> filteredSpecialization){
-
-    // }
-    
 
 
 }

@@ -31,7 +31,9 @@ public class ReportList implements JsonList<Project>{
     //         e.printStackTrace();
     //     } 
     // }
+    
 
+    //removing soon also
     public ArrayList<Project> getAllProjects(){
         ArrayList<Project> allProjectReport = new ArrayList<>();
 

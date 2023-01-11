@@ -32,7 +32,7 @@ public class Main {
         
         // ProjectView projectView = new ProjectView();
         // //ProjectController projectController = new ProjectController(admin, projectView);
-        // ProjectController projectController = new ProjectController(lecturer2, projectView);
+        // ProjectController projectController = new ProjectController(admin, projectView);
         // frame.add(projectView);
         // frame.setVisible(true);
 

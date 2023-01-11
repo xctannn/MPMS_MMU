@@ -19,7 +19,7 @@
     "lecturerName" : "Tan",
     "studentAssignedId" : null,
     "studentAssignedName" : null,
-    "isAssigned" : false,
+    "isAssigned" : true,
     "isActive" : true
   }, {
     "id" : "P0003",

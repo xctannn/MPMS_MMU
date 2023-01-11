@@ -76,9 +76,8 @@ public class ReportController {
 
                 String selectedOptions = reportView.getOptions(selectionWheelOptions);
                 if (selectedOptions.equals(selectionWheelOptions.get(1))){
-                    //generate a textfile
-                    //System.out.println("Generate text file");
-                    ArrayList<Project> allProjects = projectList.getAllProjects();
+                    //generate all project textfile
+                    ArrayList<Project> allProjects = projectList.getProjects();
                     String fileName = "Report\\AllProjectsReport.txt";
                     writeToFile(fileName, allProjects);
                 }
@@ -86,10 +85,11 @@ public class ReportController {
                     //call function to open another joptionpanel and ask for the speciliazation
                     //generate a textfile according to specialization
                     specializationWheelOptions.add("---Select Here---");
-                    specializationWheelOptions.add("Data Science");
-                    specializationWheelOptions.add("Cyber Security");
                     specializationWheelOptions.add("Software Engineering");
                     specializationWheelOptions.add("Game Development");
+                    specializationWheelOptions.add("Data Science");
+                    specializationWheelOptions.add("Cybersecurity");
+                    specializationWheelOptions.add("Artficial Intelligence");
 
                     String selectedSpecOption = reportView.getSpecializationOptions(specializationWheelOptions);
                     actionForSelectedSpecOption(selectedSpecOption);
@@ -97,27 +97,71 @@ public class ReportController {
                 else if (selectedOptions.equals(selectionWheelOptions.get(3))){
                     //call function to open another joptionpanel and ask for the lecturer list
                     //generate a textfile
-                    //ArrayList<String> lecturerWheelOptions = new ArrayList<String>();
+                    ArrayList<String> lecturerWheelOptions = new ArrayList<String>();
                     ArrayList<Lecturer> lecturers = lecturerList.getLecturers();
                     for(int i=0; i< lecturers.size(); i++){
-                        //lecturerWheelOptions.add(lecturers.get(i));
+                        String lecturerName = lecturers.get(i).getUsername();
+                        lecturerWheelOptions.add(lecturerName);
                     }
-
+                    String selectedLecOption = reportView.getSpecializationOptions(lecturerWheelOptions);
+                    actionForSelectedLecOption(selectedLecOption);
                 }
                 else if (selectedOptions.equals(selectionWheelOptions.get(4))){
                     //generate inactive projects textfile
+                    ArrayList<Project> Projects = projectList.getProjects();
+                    ArrayList<Project> notActiveProjects = new ArrayList<Project>();
+                    for(int i=0; i< Projects.size(); i++){
+                        Project project = Projects.get(i);
+                        if(project.getIsActive() == false){
+                            notActiveProjects.add(project);
+                        }
+                    }
+                    String fileName = "Report\\NotActiveProjectsReport.txt";
+                    writeToFile(fileName, notActiveProjects);
                 }
                 else if (selectedOptions.equals(selectionWheelOptions.get(5))){
                     //generate active projects textfile
+                    ArrayList<Project> Projects = projectList.getProjects();
+                    ArrayList<Project> activeProjects = new ArrayList<Project>();
+                    for(int i=0; i< Projects.size(); i++){
+                        Project project = Projects.get(i);
+                        if(project.getIsActive() == true){
+                            activeProjects.add(project);
+                        }
+                    }
+                    String fileName = "Report\\ActiveProjectsReport.txt";
+                    writeToFile(fileName, activeProjects);
                 }
                 else if (selectedOptions.equals(selectionWheelOptions.get(6))){
                     //generate projects assigned to students textfile
+                    ArrayList<Project> Projects = projectList.getProjects();
+                    ArrayList<Project> assignedProjects = new ArrayList<Project>();
+                    for(int i=0; i< Projects.size(); i++){
+                        Project project = Projects.get(i);
+                        if(project.getIsAssigned() == true){
+                            assignedProjects.add(project);
+                        }
+                    }
+                    String fileName = "Report\\AssignedProjectsReport.txt";
+                    writeToFile(fileName, assignedProjects);
                 }
                 else if (selectedOptions.equals(selectionWheelOptions.get(7))){
                     //generate projects unassigned to students textfile
+                    ArrayList<Project> Projects = projectList.getProjects();
+                    ArrayList<Project> unAssignedProjects = new ArrayList<Project>();
+                    for(int i=0; i< Projects.size(); i++){
+                        Project project = Projects.get(i);
+                        if(project.getIsAssigned() == false){
+                            unAssignedProjects.add(project);
+                        }
+                    }
+                    String fileName = "Report\\UnassignedProjectsReport.txt";
+                    writeToFile(fileName, unAssignedProjects);
+                    
                 }
                 else if (selectedOptions.equals(selectionWheelOptions.get(8))){
                     //generate prpkects with comments
+                    
                 }
                 
             }catch(IllegalArgumentException exception){
@@ -133,21 +177,20 @@ public class ReportController {
         writeToFile(fileName, filteredSpecialization);
     }
 
-    public void actionForSelectedLecOption(String specialization){
-       // ArrayList<Project> filteredSpecialization = projectList.getFilteredLecturer(specialization);
-
-        if(specialization.equals(specializationWheelOptions.get(1))){
-            //generate projects textfile for all projects'
-        }
+    public void actionForSelectedLecOption(String lecturerName){
+       ArrayList<Project> filteredLecturer = projectList.getFilteredLecturer(lecturerName);
+       String fileName = "Report\\LecturerReport.txt";
+       writeToFile(fileName, filteredLecturer);
     }
 
     public void writeToFile(String fileName, ArrayList<Project> projectData){
         try(FileWriter fileWriter = new FileWriter(fileName);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
             //if (fileName.equals()
+            bufferedWriter.write("Project Name");
             for(int i = 0 ; i < projectData.size(); i++){
             Project project = projectData.get(i);
-            bufferedWriter.write("Project Name\n" + project.getName());
+            bufferedWriter.write("\n" + project.getName());
             }
             bufferedWriter.close();
     } catch (IOException e) {
@@ -156,9 +199,6 @@ public class ReportController {
     }
 
 }
-// private void populateTable() { inin pending
-//     //
-// }
 
 
 //if statement here

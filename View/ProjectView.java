@@ -38,7 +38,7 @@ public class ProjectView extends JPanel{
     private JPanel projectTableButtons = new JPanel();
     private JButton lecturerAddProjectButton = new JButton("Add Project");
     private JButton adminAddProjectButton = new JButton("Add Project");
-    private JButton filterProjectsButton = new JButton("Filter Projects");
+    private JButton filterProjectsButton = new JButton("Generate Projects Report");
 
     // Project Detail View Components
     JPanel projectPanel = new JPanel(new BorderLayout());

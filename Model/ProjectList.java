@@ -48,18 +48,6 @@ public class ProjectList implements JsonList<Project>{
         return filteredProjects;
     }
 
-
-    //Contains all the projects to generate the report
-    public ArrayList<Project> getAllProjects(){
-        ArrayList<Project> allProjectReport = new ArrayList<>();
-
-        //for(int i = 0; i < allProjectReport.size(); i++){
-            setList();
-           
-        //}   
-        return allProjectReport;
-    }
-
     //Contains filtered specialization to generate the report
     public ArrayList<Project> getFilteredSpecialization(String specialization){
         ArrayList<Project> filteredProjects = new ArrayList<>(projects);
@@ -70,14 +58,25 @@ public class ProjectList implements JsonList<Project>{
             if (!(tempSpecialization.equals(specialization))){
                 filteredProjects.remove(i);
                 i--;
-
             }
-            
         }
-        
-
         return filteredProjects;
     }
+
+        //Contains filtered lecturer to generate the report
+        public ArrayList<Project> getFilteredLecturer(String lecturerName){
+            ArrayList<Project> filteredLecturers = new ArrayList<>(projects);
+            
+            for (int i = 0; i < filteredLecturers.size(); i++){
+                Project lecturer = filteredLecturers.get(i);
+                String tempLecturers = lecturer.getLecturerName();
+                if (!(tempLecturers.equals(lecturerName))){
+                    filteredLecturers.remove(i);
+                    i--;
+                }
+            }
+            return filteredLecturers;
+        }
 
 
 
