@@ -42,8 +42,7 @@ public class CommentController {
 
 
 
-    public CommentController(CommentModel commentModel, CommentView view,User user ,Project currentProject){
-        this.model = commentModel;
+    public CommentController(CommentView view,User user ,Project currentProject){
         this.commentView = view;
         this.commentList = new CommentList();
         this.projectModel = currentProject;
@@ -52,6 +51,11 @@ public class CommentController {
         
         createCommentPanel();
 
+    }
+
+    
+    public JPanel getCommentView(){
+        return commentView;
     }
     
 
