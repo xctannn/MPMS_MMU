@@ -36,7 +36,7 @@ public class RegisterController {
     class userTypeListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            JComboBox specializationType = registerView.getComboBox();
+            JComboBox<String> specializationType = registerView.getComboBox();
             String userType = registerView.getUserType();
             String id = getUserID(userType);
             

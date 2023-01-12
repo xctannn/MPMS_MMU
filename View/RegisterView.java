@@ -30,8 +30,8 @@ public class RegisterView extends JPanel{
     private String[] specializationList = {"Data Science", "Software Engineering", "Game Development", "Cybersecurity"};
     
     // Register View Components
-    private JComboBox userType = new JComboBox(userList);
-    private JComboBox specialization = new JComboBox(specializationList);
+    private JComboBox<String> userType = new JComboBox<>(userList);
+    private JComboBox<String> specialization = new JComboBox<>(specializationList);
     public JPanel registerPanel= new JPanel();
     private JLabel userTypeLabel = new JLabel("User Type: ");
     private JLabel userIDLabel = new JLabel("User ID: ");
@@ -101,7 +101,7 @@ public class RegisterView extends JPanel{
     }
 
     // Get the combobox for specialization
-    public JComboBox getComboBox(){
+    public JComboBox<String> getComboBox(){
         return specialization;
     }
 

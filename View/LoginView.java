@@ -18,7 +18,7 @@ public class LoginView extends JPanel{
     GridBagConstraints gbc = new GridBagConstraints();
 
     // Login View Components
-    private JComboBox userType = new JComboBox(userList);
+    private JComboBox<String> userType = new JComboBox<>(userList);
     private JLabel userTypeLabel = new JLabel("User Type: ");
     private JLabel userIDLabel = new JLabel("User ID: ");
     private JLabel passwordLabel = new JLabel("Password: ");
