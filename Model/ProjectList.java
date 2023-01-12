@@ -63,20 +63,20 @@ public class ProjectList implements JsonList<Project>{
         return filteredProjects;
     }
 
-        //Contains filtered lecturer to generate the report
-        public ArrayList<Project> getFilteredLecturer(String lecturerName){
-            ArrayList<Project> filteredLecturers = new ArrayList<>(projects);
+    //Contains filtered lecturer to generate the report
+    public ArrayList<Project> getFilteredLecturer(String lecturerName){
+        ArrayList<Project> filteredLecturers = new ArrayList<>(projects);
             
-            for (int i = 0; i < filteredLecturers.size(); i++){
-                Project lecturer = filteredLecturers.get(i);
-                String tempLecturers = lecturer.getLecturerName();
-                if (!(tempLecturers.equals(lecturerName))){
-                    filteredLecturers.remove(i);
-                    i--;
-                }
+        for (int i = 0; i < filteredLecturers.size(); i++){
+            Project lecturer = filteredLecturers.get(i);
+            String tempLecturers = lecturer.getLecturerName();
+            if (!(tempLecturers.equals(lecturerName))){
+                filteredLecturers.remove(i);
+                i--;
             }
-            return filteredLecturers;
         }
+        return filteredLecturers;
+    }
 
 
 

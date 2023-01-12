@@ -57,9 +57,8 @@ public class ReportView {
                                                         "blah assign the project", 
                                                         JOptionPane.QUESTION_MESSAGE, 
                                                         null, 
-                                                        wheelOptions 
-                                                        //wheelOptions[0]
-                                                        );
+                                                        wheelOptions, 
+                                                        wheelOptions[0]);
         
         if (selected == null){
             return "";

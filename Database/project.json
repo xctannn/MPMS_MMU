@@ -2,13 +2,13 @@
   "projects" : [ {
     "id" : "P0001",
     "name" : "Capstone",
-    "specialization" : "Software Engineering",
+    "specialization" : "Data Science",
     "content" : "This is a Data Science Capstone project, you better not fuck this up",
     "lecturerId" : "L0001",
     "lecturerName" : "Tan",
     "studentAssignedId" : null,
     "studentAssignedName" : null,
-    "isAssigned" : false,
+    "isAssigned" : true,
     "isActive" : false
   }, {
     "id" : "P0002",
@@ -30,7 +30,7 @@
     "lecturerName" : "Lee",
     "studentAssignedId" : null,
     "studentAssignedName" : null,
-    "isAssigned" : false,
+    "isAssigned" : true,
     "isActive" : false
   } ],
   "projectCount" : 3

@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.io.BufferedWriter;
 // import org.json.simple.JSONObject;
 // import org.json.simple.parser.JSONParser;
+import java.io.File;
 
 
 public class ReportController {
@@ -62,22 +63,24 @@ public class ReportController {
     class GenerateButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){ 
-
-            selectionWheelOptions.add("---Select Here---");
-            selectionWheelOptions.add("All Project");
-            selectionWheelOptions.add("According to Specialization");
-            selectionWheelOptions.add("According to Lecturers");
-            selectionWheelOptions.add("Inactive Projects");
-            selectionWheelOptions.add("Active Projects");
-            selectionWheelOptions.add("Projects Assigned to Students");
-            selectionWheelOptions.add("Projects Unassigned to Students");
-            selectionWheelOptions.add("Projects With Comments");
+            if(selectionWheelOptions.isEmpty()){
+                selectionWheelOptions.add("---Select Here---");
+                selectionWheelOptions.add("All Project");
+                selectionWheelOptions.add("According to Specialization");
+                selectionWheelOptions.add("According to Lecturers");
+                selectionWheelOptions.add("Inactive Projects");
+                selectionWheelOptions.add("Active Projects");
+                selectionWheelOptions.add("Projects Assigned to Students");
+                selectionWheelOptions.add("Projects Unassigned to Students");
+                selectionWheelOptions.add("Projects With Comments");
+            }
             try{
 
                 String selectedOptions = reportView.getOptions(selectionWheelOptions);
                 if (selectedOptions.equals(selectionWheelOptions.get(1))){
                     //generate all project textfile
                     ArrayList<Project> allProjects = projectList.getProjects();
+                    if(allProjects.size() == 0) throw new IllegalArgumentException();
                     String fileName = "Report\\AllProjectsReport.txt";
                     writeToFile(fileName, allProjects);
                 }
@@ -116,6 +119,7 @@ public class ReportController {
                             notActiveProjects.add(project);
                         }
                     }
+                    if(notActiveProjects.size() == 0) throw new IllegalArgumentException();
                     String fileName = "Report\\NotActiveProjectsReport.txt";
                     writeToFile(fileName, notActiveProjects);
                 }
@@ -129,6 +133,7 @@ public class ReportController {
                             activeProjects.add(project);
                         }
                     }
+                    if(activeProjects.size() == 0) throw new IllegalArgumentException();
                     String fileName = "Report\\ActiveProjectsReport.txt";
                     writeToFile(fileName, activeProjects);
                 }
@@ -142,6 +147,7 @@ public class ReportController {
                             assignedProjects.add(project);
                         }
                     }
+                    if(assignedProjects.size() == 0) throw new IllegalArgumentException();
                     String fileName = "Report\\AssignedProjectsReport.txt";
                     writeToFile(fileName, assignedProjects);
                 }
@@ -155,17 +161,30 @@ public class ReportController {
                             unAssignedProjects.add(project);
                         }
                     }
+                    if(unAssignedProjects.size() == 0) throw new IllegalArgumentException();
                     String fileName = "Report\\UnassignedProjectsReport.txt";
                     writeToFile(fileName, unAssignedProjects);
-                    
+                
                 }
                 else if (selectedOptions.equals(selectionWheelOptions.get(8))){
                     //generate prpkects with comments
-                    
+                    // pending yet
+                    // ArrayList<Project> Projects = projectList.getProjects();
+                    // ArrayList<CommentModel> Comments = commentList.getComments();                    
+                    // ArrayList<Project> commentedProjects = new ArrayList<Project>();
+                    // for(int i=0; i< Projects.size(); i++){
+                    //     CommentModel project = Comments.get(i);
+                    //     if(project.() == false){
+                    //         commentedProjects.add(project);
+                    //     }
+                    // }
+                    // String fileName = "Report\\CommentsProjectsReport.txt";
+                    // writeToFile(fileName, commentedProjects);
                 }
                 
+
             }catch(IllegalArgumentException exception){
-                ReportView.displayErrorMessage("There are no projects available to generate");
+                ReportView.displayErrorMessage("No projects found, report will not be generated");
             }
         }
         
@@ -173,29 +192,34 @@ public class ReportController {
     
     public void actionForSelectedSpecOption(String specialization){
         ArrayList<Project> filteredSpecialization = projectList.getFilteredSpecialization(specialization);
+        if(filteredSpecialization.size() == 0) throw new IllegalArgumentException();
         String fileName = "Report\\SpecializationReport.txt";
         writeToFile(fileName, filteredSpecialization);
     }
 
     public void actionForSelectedLecOption(String lecturerName){
        ArrayList<Project> filteredLecturer = projectList.getFilteredLecturer(lecturerName);
+       if(filteredLecturer.size() == 0) throw new IllegalArgumentException();
        String fileName = "Report\\LecturerReport.txt";
        writeToFile(fileName, filteredLecturer);
     }
 
     public void writeToFile(String fileName, ArrayList<Project> projectData){
-        try(FileWriter fileWriter = new FileWriter(fileName);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
-            //if (fileName.equals()
-            bufferedWriter.write("Project Name");
+        try{
+            
+            FileWriter fileWriter = new FileWriter(fileName);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+         
+            //formattedString = 
+            bufferedWriter.write("Project Name\t\t\t\t\tSpecialization        \tLecturer   \tStatus   \tAssigned Student");
             for(int i = 0 ; i < projectData.size(); i++){
             Project project = projectData.get(i);
-            bufferedWriter.write("\n" + project.getName());
+            bufferedWriter.write("\n" + project.getName() + "%3s" + project.getSpecialization() + " " + project.getLecturerName() + " " + project.getIsActive() + " " + project.getStudentAssignedId());
             }
             bufferedWriter.close();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-Project Name
-Capstone
-Final Year Project
-New Project
+Project Name					Specialization        	Lecturer   	Status   	Assigned Student
+Capstone%3sData Science Tan false null
+Final Year Project%3sData Science Tan true null
+New Project%3sSoftware Engineering Lee false null
