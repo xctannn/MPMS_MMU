@@ -84,12 +84,11 @@ public class StudentList implements JsonList<Student> {
 
     @Override
     public void addItem(Student item) {
+        setList();
+
         this.students.add(item);
-        try {
-            parser.serialize();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+         
+        save();
     }
 
     @Override

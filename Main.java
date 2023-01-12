@@ -1,12 +1,10 @@
 import javax.swing.JFrame;
-import javax.swing.JFrame;
 
 import Controller.CommentController;
 import Controller.ProjectController;
 import Model.CommentModel;
 import Model.Administrator;
 import Model.Lecturer;
-import Model.Project;
 import Model.Student;
 import View.CommentView;
 import View.ProjectView;

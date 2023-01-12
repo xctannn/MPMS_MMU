@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -16,7 +17,6 @@ import Model.CommentList;
 import Model.Lecturer;
 import Model.LecturerList;
 import Model.Project;
-import Model.ProjectData;
 import Model.ProjectList;
 import Model.Student;
 import Model.StudentList;
@@ -31,61 +31,70 @@ public class ProjectController {
     private ProjectList projectList = new ProjectList();
     private ArrayList<Project> filteredProjectList;
     private StudentList studentList = new StudentList();
-    private LecturerList lecturerList = new LecturerList();
     private ProjectView projectView;
-    private CommentModel commentModel;
-    private CommentView commentView;
-    private CommentList commentList = new CommentList();
-    private ArrayList<CommentModel> filteredCommentList;
-    
-    public ProjectController(Administrator user, ProjectView view){
+    private LecturerList lecturerList = new LecturerList();
+
+
+    public ProjectController(Administrator user){
         this.user = user;
-        this.projectView = view;
+        this.projectView = new ProjectView(user);
         this.filteredProjectList = new ArrayList<>(projectList.getProjects());
 
-        
+        projectView.addLogoutButtonListener(new LogoutButtonListener());
+        projectView.addRegisterAccountButtonListener(new RegisterAccountButtonListener());
+        projectView.addAdminAddProjectButtonListener(new AdminAddProjectButtonListener());
+        projectView.addFilterProjectsButtonListener(new FilterProjectsButtonListener());
+        projectView.addProjectLecturerSelectorListener(new ProjectLecturerSelectorListener());
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
+        projectView.addConfirmAdminAddProjectButtonListener(new ConfirmAdminAddProjectButtonListener());
         projectView.addDeleteProjectButtonListener(new DeleteProjectButtonListener());
-
+        projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
 
         populateTable();
-        projectView.defaultProjectView(user);
+        // projectView.defaultProjectView(user);
     }
 
 
-    public ProjectController(Lecturer user,ProjectView view){
+    public ProjectController(Lecturer user){
         this.user = user;
-        this.projectView = view;
+        this.projectView = new ProjectView(user);
         this.filteredProjectList = projectList.getFilteredProjects(user);
 
-        
+        // new ProjectController.Listeners
+        projectView.addLogoutButtonListener(new LogoutButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
-        projectView.addAddProjectButtonListerner(new addProjectButtonListener());
-        projectView.addConfirmAddProjectButtonListerner(new confirmAddProjectButtonListener());
-        projectView.addProjectSpecializationPickerListerner(new projectSpecializationPickerListener());
+        projectView.addLecturerAddProjectButtonListener(new LecturerAddProjectButtonListener());
+        projectView.addAdminAddProjectButtonListener(new AdminAddProjectButtonListener());
+        projectView.addConfirmLecturerAddProjectButtonListener(new ConfirmLecturerAddProjectButtonListener());
+        projectView.addProjectSpecializationSelectorListener(new ProjectSpecializationSelectorListener());
         projectView.addEditContentButtonListener(new EditButtonListener());
         projectView.addSaveEditButtonListener(new SaveEditButtonListener());
         projectView.addToggleProjectButtonListener(new ToggleProjectButtonListener());
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addUnassignButtonListener(new UnassignButtonListener());
+        projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
         
         populateTable();
-        projectView.defaultProjectView(user);
+        // projectView.defaultProjectView(user);
     }
 
-    public ProjectController(Student user, ProjectView view){
+    public ProjectController(Student user){
         this.user = user;
-        this.projectView = view;
+        this.projectView = new ProjectView(user);
         this.filteredProjectList = projectList.getFilteredProjects(user);
-
-
         
+        projectView.addLogoutButtonListener(new LogoutButtonListener());
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
+        projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
 
         populateTable();
-        projectView.defaultProjectView(user);
+        // projectView.defaultProjectView(user);
+    }
+
+    public JPanel getProjectView(){
+        return projectView;
     }
 
 
@@ -158,16 +167,58 @@ public class ProjectController {
         populateTable();
     }
 
-    class addProjectButtonListener implements ActionListener{
+    public class LogoutButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            if(!projectView.getUnassignConfirmation("Are you sure you want to log out?")){
+                return;
+            }
+
+            // MainController.toLoginView
+        }
+    }
+
+    public class RegisterAccountButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            // MainController.toRegisterView
+        }
+    }
+
+    public class LecturerAddProjectButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
             projectView.setupLecturerAddProjectPanel();
             projectView.enablePanelButtons();
-            projectView.resetSpecializationPicker();
+            projectView.resetSpecializationSelector();
         }
     }
 
-    class confirmAddProjectButtonListener implements ActionListener{
+    class AdminAddProjectButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            ArrayList<String> lecturerOptions = new ArrayList<String>();
+            ArrayList<Lecturer> lecturers = lecturerList.getLecturers();
+            for(int i = 0; i < lecturers.size(); i++){
+                Lecturer lecturer = lecturers.get(i);
+                lecturerOptions.add(lecturer.getId());
+            }
+
+            projectView.setupAdminAddProjectPanel();
+            projectView.populateLecturerPicker(lecturerOptions);
+            projectView.enablePanelButtons();
+            projectView.resetSpecializationSelector();
+        }
+    }
+
+    class FilterProjectsButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+           // implement what happens after the filter projects button is clicked
+        }
+    }
+
+    class ConfirmLecturerAddProjectButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
             try{
@@ -179,14 +230,42 @@ public class ProjectController {
                 String newProjectContent = projectView.getProjectContent();
 
                 checkNameValidity(newProjectName);
-                checkSpecializationValidity(projectView.getSpecializationPicker().getSelectedIndex());
+                checkSpecializationValidity(projectView.getSpecializationSelector().getSelectedIndex());
 
-                Project newProject = new Project(newProjectId, newProjectName, newProjectSpecialization, newProjectContent, newProjectLecturerId, newProjectLecturerName, newProjectContent, false, false);
+                Project newProject = new Project(newProjectId, newProjectName, newProjectSpecialization, newProjectContent, newProjectLecturerId, newProjectLecturerName);
                 lecturerList.saveNewProject(newProjectLecturerId, newProjectId);
                 projectList.addItem(newProject);
+                filteredProjectList.add(newProject);
                 projectList.saveProjectCountIncrement();
                 addNewProjectToTable(newProject);
-                projectView.setupLecturerAddProjectPanel();
+                projectView.setupAdminAddProjectPanel();
+
+            } catch (IllegalArgumentException exception){
+                ProjectView.displayErrorMessage(exception.getMessage());
+            }
+        }
+    }
+
+    class ConfirmAdminAddProjectButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            try{
+                checkSpecializationValidity(projectView.getSpecializationSelector().getSelectedIndex());
+                String newProjectId = "P" + projectList.generateCode();
+                String newProjectName = projectView.getProjectName();
+                String newProjectLecturerId = projectView.getSelectedLecturer();
+                String newProjectLecturerName = lecturerList.getItem(newProjectLecturerId).getUsername();
+                String newProjectSpecialization = projectView.getSelectedSpecialization();
+                String newProjectContent = projectView.getProjectContent();
+                checkNameValidity(newProjectName);
+
+                Project newProject = new Project(newProjectId, newProjectName, newProjectSpecialization, newProjectContent, newProjectLecturerId, newProjectLecturerName);
+                lecturerList.saveNewProject(newProjectLecturerId, newProjectId);
+                projectList.addItem(newProject);
+                filteredProjectList.add(newProject);
+                projectList.saveProjectCountIncrement();
+                addNewProjectToTable(newProject);
+                projectView.setupAdminAddProjectPanel();
 
             } catch (IllegalArgumentException exception){
                 ProjectView.displayErrorMessage(exception.getMessage());
@@ -205,8 +284,15 @@ public class ProjectController {
             throw new IllegalArgumentException("Please pick a Specialization");
         }
     }
-
-    class projectSpecializationPickerListener implements ActionListener{
+    
+    class ProjectLecturerSelectorListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            String selectedLecturer = projectView.getSelectedLecturer();
+            projectView.setProjectLecturerLabel(selectedLecturer);
+        }
+    }
+    class ProjectSpecializationSelectorListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
             String selectedSpecialization = projectView.getSelectedSpecialization();
@@ -232,7 +318,7 @@ public class ProjectController {
                 String projectID = projectModel.getId();
 
                 checkNameValidity(newName);
-                checkSpecializationValidity(projectView.getSpecializationPicker().getSelectedIndex());
+                checkSpecializationValidity(projectView.getSpecializationSelector().getSelectedIndex());
 
                 // Update project name in table
                 JTable table = projectView.getProjectTable();
@@ -320,11 +406,18 @@ public class ProjectController {
             String projectLecturerId = projectModel.getLecturerId();
             String projectStudentId = projectModel.getStudentAssignedId();
 
+            deleteProjectFromTable();
             if (projectModel.getIsAssigned()) studentList.saveProjectDeletion(projectStudentId);
             lecturerList.saveProjectDeletion(projectLecturerId, projectId);
             projectList.saveProjectDeletion(projectId);
-            deleteProjectFromTable();
-            projectView.disableAllPanelTexts();
+            projectView.disableAllPanelElements();
+        }
+    }
+
+    class ProjectCommentsButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            // insert event handler here
         }
     }
 

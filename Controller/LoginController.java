@@ -3,21 +3,13 @@ package Controller;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import View.LoginView;
 import Model.User;
-import Model.Student;
-import Model.Lecturer;
-import Model.Administrator;
 import Model.LecturerList;
 import Model.StudentList;
 import Model.AdministratorList;
 
 public class LoginController{
-    private User user;
-    private Student studentModel;
-    private Lecturer lecturerModel;
-    private Administrator adminModel;
 
     private StudentList studentList = new StudentList();
     private LecturerList lecturerList = new LecturerList();
@@ -25,8 +17,7 @@ public class LoginController{
 
     private LoginView loginView;
 
-    public LoginController(User model, LoginView view) {
-        this.user = model;
+    public LoginController(LoginView view) {
         this.loginView = view;
 
         loginView.addLoginButtonListener(new loginButtonListener());
@@ -35,42 +26,56 @@ public class LoginController{
     class loginButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            String userID = loginView.getUserID();
-            String password = loginView.getPassword();
+            try{
+                String userID = loginView.getUserID();
+                String password = loginView.getPassword();
+                String userType = loginView.getUserType();
 
-            if(userID.isBlank() || password.isBlank()){
-                JOptionPane.showMessageDialog(null, "Please fill in the username and password");
-
-            }else if(loginView.getUserType() == "Student"){
-                studentModel = studentList.getItem(userID);
-                if (studentModel == null){
-                    JOptionPane.showMessageDialog(null, "User account does not exist");
-                }else if (!(password.equals(studentModel.getPassword()))){
-                    JOptionPane.showMessageDialog(null, "Passwords do not match");
-                }else {
-                    JOptionPane.showMessageDialog(null, "Login Successful");
-                }
+                checkNamePassword(userID, password);
+                checkUserExists(userType, password);
+                JOptionPane.showMessageDialog(null, "Login Successful");
                 
-            }else if(loginView.getUserType() == "Lecturer"){
-                lecturerModel = lecturerList.getItem(userID);
-                if (lecturerModel == null){
-                    JOptionPane.showMessageDialog(null, "User account does not exist");
-                }else if (!(password.equals(lecturerModel.getPassword()))){
-                    JOptionPane.showMessageDialog(null, "Passwords do not match");
-                }else {
-                    JOptionPane.showMessageDialog(null, "Login Successful");
-                }
+                // if(userType == "Student"){
+                //     mainController.switchProjectView(studentList.getItem(userID));
+                // }else if(userType == "Lecturer")
+                //     mainController.switchProjectView(lecturerList.getItem(userID));
+                // else{
+                //     mainController.switchProjectView(adminList.getItem(userID));
+                // }
 
-            }else{
-                adminModel = adminList.getItem(userID);
-                if (adminModel == null){
-                    JOptionPane.showMessageDialog(null, "User account does not exist");
-                }else if (!(password.equals(adminModel.getPassword()))){
-                    JOptionPane.showMessageDialog(null, "Passwords do not match");
-                }else {
-                    JOptionPane.showMessageDialog(null, "Login Successful");
-                }
+            }catch(IllegalArgumentException exception){
+                LoginView.displayErrorMessage(exception.getMessage());
             }
         }
     }
+
+    private Object getModel(String userType){
+        String userID = loginView.getUserID();
+        if(userType == "Student"){
+            return studentList.getItem(userID);
+        }else if(userType == "Lecturer"){
+            return lecturerList.getItem(userID);
+        }else{
+            return adminList.getItem(userID);
+        }
+    }
+
+    private void checkNamePassword(String userID, String password) throws IllegalArgumentException{
+        if(userID.isEmpty()){
+            throw new IllegalArgumentException("Username must not be empty");
+        }else if(password.isEmpty()){
+            throw new IllegalArgumentException("Password must not be empty");
+        }
+    }
+
+    private void checkUserExists(String userType, String password){
+        Object model = getModel(userType);
+        if(model == null){
+            throw new IllegalArgumentException("User account does not exist");
+        }else if(!(password.equals(((User) model).getPassword()))){
+            throw new IllegalArgumentException("Password do no match");
+        }
+    }
+
+
 }
