@@ -13,14 +13,18 @@ import Model.AdministratorList;
 import View.RegisterView;
 
 public class RegisterController {
+
+    // Initializing instances
     private Lecturer lecturerModel = new Lecturer();
     private Student studentModel = new Student();
     private Administrator adminModel = new Administrator();
     private StudentList studentList = new StudentList();
     private LecturerList lecturerList = new LecturerList();
     private AdministratorList adminList = new AdministratorList();
+
     private RegisterView registerView;
 
+    // Construct register controller
     public RegisterController(RegisterView view){
         this.registerView = view;
 
@@ -28,6 +32,7 @@ public class RegisterController {
         registerView.addUserTypeListener(new userTypeListener());
     }
 
+    // Implementing the action listener to the user type combobox
     class userTypeListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -44,6 +49,7 @@ public class RegisterController {
         }
     }
 
+    // Implementing the action listener to the register button
     class registerBtnListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -80,6 +86,7 @@ public class RegisterController {
     //      mainController.switchProjectView(adminList.getItem(userID));
     // }
 
+    // Validating the inputs
     private void checkNamePassword(String username, String password) throws IllegalArgumentException{
         if(username.isEmpty()){
             throw new IllegalArgumentException("Username must not be empty");
@@ -88,6 +95,7 @@ public class RegisterController {
         }
     }
 
+    // Generate the user ID
     private String getUserID(String userType){
         if(userType == "Student"){
             return "S" + studentModel.generateCode(studentList.getSize());
@@ -99,6 +107,7 @@ public class RegisterController {
         }
     }
 
+    // Update the user ID whenever a new account is created
     private String updateID(String userType){
         if(userType == "Student"){
             return "S" + studentModel.generateCode(studentList.getSize()+1);
