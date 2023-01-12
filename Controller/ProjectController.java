@@ -13,6 +13,7 @@ import javax.swing.table.TableColumnModel;
 import javax.xml.stream.events.Comment;
 
 import Model.Administrator;
+import Model.CommentList;
 import Model.Lecturer;
 import Model.LecturerList;
 import Model.Project;
@@ -34,7 +35,6 @@ public class ProjectController {
     private LecturerList lecturerList = new LecturerList();
     private CommentModel commentModel = new CommentModel();
     private CommentView commentView = new CommentView();
-
 
     public ProjectController(Administrator user){
         this.user = user;
@@ -216,7 +216,6 @@ public class ProjectController {
         @Override
         public void actionPerformed(ActionEvent e){
            // implement what happens after the filter projects button is clicked
-
         }
     }
 
@@ -419,11 +418,8 @@ public class ProjectController {
     class ProjectCommentsButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            
             // insert event handler here
-            CommentController commentController = new CommentController(commentView, user, projectModel);
-            
-            commentController.getCommentView();
+            CommentController commentController = new CommentController(commentModel, commentView, user, projectModel);
             
         }
     }

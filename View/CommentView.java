@@ -25,9 +25,10 @@ import javax.swing.event.ListSelectionListener;
 
 import Model.Project;
 
-public class CommentView extends JPanel {
+public class CommentView {
 
 
+    public JPanel wrapper = new JPanel();
     private JPanel tableView = new JPanel(new BorderLayout());
 
     // CardLayout (switch to comment sections)
@@ -51,7 +52,7 @@ public class CommentView extends JPanel {
 
 
     public CommentView(){
-        this.setLayout(new GridLayout(1,1));
+        wrapper.setLayout(new GridLayout(1,1));
         
         panelCont.setLayout(cl);
         JPanel mainPanel = new JPanel();
@@ -109,7 +110,7 @@ public class CommentView extends JPanel {
         //Default Panel
         cl.show(panelCont,"1");
         mainPanel.add(panelCont);
-        this.add(tableView);
+        wrapper.add(tableView);
         //wrapper.add(mainPanel);
         
     }

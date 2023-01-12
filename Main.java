@@ -24,32 +24,19 @@ public class Main {
         // frame.add(projectView.wrapper);
         // frame.setVisible(true);
 
-        Lecturer lecturer2 = new Lecturer("L0001", "Tan", "l01");
-        Administrator admin = new Administrator("A0001", "Admin", "a01");
-
-        Student student = new Student("S001", "S1", "s01", "Data Science", "P0002");
-
-	    JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1200, 700);
-        
-        ProjectController projectController = new ProjectController(admin);
-        frame.add(projectController.getProjectView());
-        frame.setVisible(true);
-        
         //For testing comments
-        // CommentModel commentModel = new CommentModel();
-        // Project tempProject = new Project("P0001");
-        // CommentView cV = new CommentView();
-        // Lecturer user = new Lecturer("L0001", "Tan", "l01");
+        CommentModel commentModel = new CommentModel();
+        Project tempProject = new Project("P0001");
+        CommentView cV = new CommentView();
+        Lecturer user = new Lecturer("L0001", "Tan", "l01");
 
-        // JFrame frame2 = new JFrame();
-        // frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // frame2.setSize(800, 600);
+        JFrame frame2 = new JFrame();
+        frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame2.setSize(800, 600);
 
-        // CommentController commentController = new CommentController(commentModel, cV, user,tempProject);
-        // frame2.add(cV.wrapper);
-        // frame2.setVisible(true);
+        CommentController commentController = new CommentController(commentModel, cV, user,tempProject);
+        frame2.add(cV.wrapper);
+        frame2.setVisible(true);
     }
 
     
