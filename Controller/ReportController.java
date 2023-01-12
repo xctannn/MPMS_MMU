@@ -209,12 +209,13 @@ public class ReportController {
             
             FileWriter fileWriter = new FileWriter(fileName);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-         
+            //pending to be done
             //formattedString = 
             bufferedWriter.write("Project Name\t\t\t\t\tSpecialization        \tLecturer   \tStatus   \tAssigned Student");
             for(int i = 0 ; i < projectData.size(); i++){
             Project project = projectData.get(i);
-            bufferedWriter.write("\n" + project.getName() + "%3s" + project.getSpecialization() + " " + project.getLecturerName() + " " + project.getIsActive() + " " + project.getStudentAssignedId());
+            //String writeString = String.format("Name: %s, Age: %s", project.getName(), project.getSpecialization());
+            bufferedWriter.write("\n" + project.getName() + " " + project.getSpecialization() + " " + project.getLecturerName() + " " + project.getIsActive() + " " + project.getStudentAssignedId());
             }
             bufferedWriter.close();
         }catch (IOException e) {
