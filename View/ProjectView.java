@@ -1,15 +1,11 @@
 package View;
 
 import java.awt.*;
-import java.awt.CardLayout;
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
@@ -72,7 +68,7 @@ public class ProjectView extends JPanel{
 
     public ProjectView(Administrator adminUser){
         this.setLayout(new GridLayout(1,2));
-
+        
         // Project Table View Setup
         tableView.add(adminProjectTable(), BorderLayout.CENTER);
 
@@ -645,6 +641,7 @@ public class ProjectView extends JPanel{
     public void addProjectCommentsButtonListener(ActionListener projectCommentsButtonListener){
         projectCommentsButton.addActionListener(projectCommentsButtonListener);
     }
+
 
     public void addTableSelectionListener(ListSelectionListener tableSelectionListener){
         projectTable.getSelectionModel().addListSelectionListener(tableSelectionListener);

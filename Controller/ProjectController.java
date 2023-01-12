@@ -33,8 +33,7 @@ public class ProjectController {
     private StudentList studentList = new StudentList();
     private ProjectView projectView;
     private LecturerList lecturerList = new LecturerList();
-    private CommentModel commentModel = new CommentModel();
-    private CommentView commentView = new CommentView();
+
 
     public ProjectController(Administrator user){
         this.user = user;
@@ -418,9 +417,7 @@ public class ProjectController {
     class ProjectCommentsButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            // insert event handler here
-            CommentController commentController = new CommentController(commentModel, commentView, user, projectModel);
-            
+            // insert event handler here            
         }
     }
 

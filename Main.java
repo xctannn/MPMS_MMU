@@ -12,6 +12,7 @@ import View.ProjectView;
 
 public class Main {
     public static void main(String[] args){
+        // For testing Project 
         // Lecturer lecturer2 = new Lecturer("L0001", "Tan", "l01");
         // Administrator admin = new Administrator("A0001", "Admin", "a01");
 
@@ -35,7 +36,7 @@ public class Main {
         frame2.setSize(800, 600);
 
         CommentController commentController = new CommentController(commentModel, cV, user,tempProject);
-        frame2.add(cV.wrapper);
+        frame2.add(cV);
         frame2.setVisible(true);
     }
 
