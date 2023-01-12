@@ -2,19 +2,8 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.BoxLayout;
-
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
@@ -24,7 +13,6 @@ import javax.swing.table.TableColumnModel;
 import javax.xml.stream.events.Comment;
 
 import Model.Administrator;
-import Model.CommentList;
 import Model.Lecturer;
 import Model.LecturerList;
 import Model.Project;
@@ -37,7 +25,6 @@ import View.CommentView;
 import View.ProjectView;
 
 public class ProjectController {
-
     private User user;
     private Project projectModel;
     private ProjectList projectList = new ProjectList();
@@ -47,16 +34,13 @@ public class ProjectController {
     private LecturerList lecturerList = new LecturerList();
     private CommentModel commentModel = new CommentModel();
     private CommentView commentView = new CommentView();
-    private CommentList commentList;
 
 
     public ProjectController(Administrator user){
         this.user = user;
         this.projectView = new ProjectView(user);
         this.filteredProjectList = new ArrayList<>(projectList.getProjects());
-        this.commentList = new CommentList();
 
-        commentView.getSubmitButton().addActionListener(new commentSubmitListener());
         projectView.addLogoutButtonListener(new LogoutButtonListener());
         projectView.addRegisterAccountButtonListener(new RegisterAccountButtonListener());
         projectView.addAdminAddProjectButtonListener(new AdminAddProjectButtonListener());
@@ -66,7 +50,7 @@ public class ProjectController {
         projectView.addTableSelectionListener(new TableSelectionListener());
         projectView.addConfirmAdminAddProjectButtonListener(new ConfirmAdminAddProjectButtonListener());
         projectView.addDeleteProjectButtonListener(new DeleteProjectButtonListener());
-        // projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
+        projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
 
         populateTable();
         // projectView.defaultProjectView(user);
@@ -90,7 +74,7 @@ public class ProjectController {
         projectView.addToggleProjectButtonListener(new ToggleProjectButtonListener());
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addUnassignButtonListener(new UnassignButtonListener());
-        // projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
+        projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
         
         populateTable();
         // projectView.defaultProjectView(user);
@@ -104,7 +88,7 @@ public class ProjectController {
         projectView.addLogoutButtonListener(new LogoutButtonListener());
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
-        // projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
+        projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
 
         populateTable();
         // projectView.defaultProjectView(user);
@@ -437,7 +421,10 @@ public class ProjectController {
         public void actionPerformed(ActionEvent e){
             
             // insert event handler here
-
+            CommentController commentController = new CommentController(commentView, user, projectModel);
+            
+            commentController.getCommentView();
+            
         }
     }
 
@@ -458,70 +445,6 @@ public class ProjectController {
             projectView.enablePanelButtons();
             projectView.disableContentEditMode();
         }
-    }
-    public JPanel getCommentView(){
-        return commentView;
-    }
-    
-
-    public void createCommentPanel(){
-        JPanel commentPanel = projectView.getCommentBlock();
-        ArrayList<CommentModel> comments = commentList.getComments();
-        commentPanel.setLayout(new BoxLayout(commentPanel, BoxLayout.Y_AXIS));
-
-        
-        String currentProjectId = projectModel.getId();
-        for(int i = 0; i < comments.size(); i++){
-            if(comments.get(i).getProjectID().equals(currentProjectId)){
-                JPanel panel = new JPanel();
-                panel.setLayout(new GridLayout(2,1));
-                panel.setBorder(BorderFactory.createEtchedBorder());
-                panel.setBackground(Color.getHSBColor(188, 87, 68));
-                panel.setSize(new Dimension(750,300));
-                JPanel inframePanel = new JPanel();
-                inframePanel.setLayout(new GridLayout(1,2));
-                inframePanel.setBorder(BorderFactory.createEtchedBorder());
-                CommentModel comment = comments.get(i);
-                // String commentID = comment.getCommentID();
-                String userIdentityString = "ID: " + comment.getUserID() + "   " +"Name: " + comment.getUsername();
-                JLabel userLabel = new JLabel(userIdentityString);
-                JLabel commentString =  new JLabel(comment.getCommentString());
-
-                inframePanel.add(userLabel,BorderLayout.NORTH );
-
-                panel.add(inframePanel);
-                panel.add(commentString);
-                commentPanel.add(panel);
-            }
-        }
-    }
-    class commentSubmitListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == commentView.getSubmitButton()) {
-                // Get comment from field and add to model
-                String newCommentId = "C" + commentList.generateCommentIdNum();
-                Project newProject = projectModel;
-                User commentor = user;
-                String newCommentString = commentView.getCommentArea().getText();
-
-                CommentModel newComment = new CommentModel(newCommentId, newProject,commentor, newCommentString);
-                commentList.addItem(newComment);
-
-                // Clear comment field and add comment to area
-                commentView.getCommentArea().setText("");
-                updateCommentPanel();
-                // commentView.getCommentBlock();
-
-                commentList.save();
-
-            }
-        }
-    }
-
-    public void updateCommentPanel(){
-        commentView.getCommentBlock().removeAll();
-        createCommentPanel();
     }
 
 

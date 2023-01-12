@@ -10,7 +10,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
@@ -70,16 +69,10 @@ public class ProjectView extends JPanel{
     private JButton deleteProjectButton = new JButton("Delete");
 
     private JButton projectCommentsButton = new JButton("Comments");
-    private JButton projectButton = new JButton("Projects");
-    private CardLayout cl = new CardLayout();
-    private JPanel panelCont = new JPanel();
-    private CommentView commentView = new CommentView();
-    
-    
 
     public ProjectView(Administrator adminUser){
         this.setLayout(new GridLayout(1,2));
-        panelCont.setLayout(cl);
+
         // Project Table View Setup
         tableView.add(adminProjectTable(), BorderLayout.CENTER);
 
@@ -90,13 +83,9 @@ public class ProjectView extends JPanel{
         
         setupProjectPanelTextProperties();
         disableAllPanelElements();
-        
         confirmAdminAddProjectButton.setVisible(false);
         this.add(tableView);
         this.add(projectPanel);
-
-        cl.show(panelCont,"1");
-
     }
 
     public ProjectView(Lecturer lecturerUser){
@@ -272,11 +261,6 @@ public class ProjectView extends JPanel{
         projectPanelButtons.add(Box.createHorizontalGlue());
         projectPanelButtons.add(confirmAdminAddProjectButton);
         projectPanelButtons.add(projectCommentsButton);
-        // cardLayout
-        panelCont.add(projectCommentsButton,"1");
-        projectCommentsButton.addActionListener(new projectCommentsButtonListener());
-        
-        //
         projectPanelButtons.add(Box.createHorizontalGlue());
 
         return projectPanelButtons;
@@ -658,98 +642,9 @@ public class ProjectView extends JPanel{
         deleteProjectButton.addActionListener(deleteProjectButtonListener);
     }
 
-    JLabel commentTitleLabel = new JLabel("Class Comments: ");
-
-    JPanel commentBlock = new JPanel();
-    JTextField commentField = new JTextField(); 
-    JButton submitButton = new JButton("Submit");
-    JTextArea commentArea= new JTextArea();
-    JScrollPane commentScroll= new JScrollPane(commentArea);
-    JPanel submitButtonWrapper = new JPanel();
-    JPanel commentBoxWrapper = new JPanel();
-    public JPanel setUpCommentView(){
-
-        JPanel wrapper = new JPanel();
-        wrapper.setLayout(new GridLayout(1,1));
-        
-        JPanel mainPanel = new JPanel();
-        mainPanel.setPreferredSize(new Dimension(1200,700));
-        mainPanel.setMaximumSize(new Dimension(1200,700));
-        mainPanel.setMinimumSize(new Dimension(1000,500));
-        //Comment Section
-        commentTitleLabel.setFont(new Font(commentTitleLabel.getFont().toString(), Font.BOLD, 16));
-        mainPanel.add(commentTitleLabel, BorderLayout.CENTER);
-
-
-        //Past Comments Table
-        JPanel commentTablePanel = new JPanel();
-        JPanel titleWrapper = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        titleWrapper.add(commentTitleLabel);
-        commentTablePanel.setLayout(new BoxLayout(commentTablePanel,BoxLayout.Y_AXIS));
-        commentTablePanel.setBorder(BorderFactory.createEtchedBorder());
-
-        commentTablePanel.add(titleWrapper,BorderLayout.EAST);
-        commentTablePanel.add(new JScrollPane(commentBlock),BorderLayout.NORTH);
-        commentBlock.setPreferredSize(new Dimension(600,500));
-
-        submitButtonWrapper.add(submitButton);
-        commentScroll.setPreferredSize(new Dimension(550,100));
-
-        commentBoxWrapper.add(commentScroll);
-        commentTablePanel.add(commentBoxWrapper,  BorderLayout.SOUTH);
-        commentTablePanel.add(submitButtonWrapper, BorderLayout.SOUTH);
-        // commentTablePanel.add(commentScroll,BorderLayout.SOUTH);
-        tableView.add(commentTablePanel,BorderLayout.CENTER);
-
-        JPanel oneButton = new JPanel();
-        oneButton.add(projectButton);
-        panelCont.add(projectButton,"2");
-        mainPanel.add(oneButton,BorderLayout.SOUTH);
-        projectButton.setVisible(true);
-        
-        projectButton.addActionListener(new projectCommentsButtonListener());
-
-        wrapper.add(tableView);
-        
-        return wrapper;
+    public void addProjectCommentsButtonListener(ActionListener projectCommentsButtonListener){
+        projectCommentsButton.addActionListener(projectCommentsButtonListener);
     }
-    public JTextField getCommentField() {
-        return commentField;
-    }
-
-    public JButton getSubmitButton() {
-        return submitButton;
-    }
-
-    public JTextArea getCommentArea() {
-        return commentArea;
-    }
-    public JPanel getCommentBlock(){
-        return commentBlock;
-    }
-
-
-    // public void addProjectCommentsButtonListener(ActionListener projectCommentsButtonListener){
-    //     projectCommentsButton.addActionListener(new projectCommentsButtonListener());
-    // }
-    private class projectCommentsButtonListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JButton src = (JButton) e.getSource();
-            // TODO Auto-generated method stub
-            
-            if(src.equals(projectCommentsButton)){
-                cl.show(panelCont, "2");
-                setUpCommentView();
-            }
-            if(src.equals(projectButton)){
-                cl.show(panelCont,"1");
-            }
-            
-        }
-    }
-
 
     public void addTableSelectionListener(ListSelectionListener tableSelectionListener){
         projectTable.getSelectionModel().addListSelectionListener(tableSelectionListener);
