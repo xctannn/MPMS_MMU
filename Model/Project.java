@@ -30,6 +30,20 @@ public class Project{
         this.isActive = isActive;
         this.favourite = favourite;
     }
+    public Project(String id, String name, String specialization, String content, String lecturerId, String lecturerName){
+        this.id = id;
+        this.name = name;
+        this.specialization = specialization;
+        this.content = content;
+        this.lecturerId = lecturerId;
+        this.lecturerName = lecturerId;
+        this.studentAssignedId = null;
+        this.isAssigned = false;
+        this.isActive = false;
+        this.favourite = false;
+    }
+
+
 
     public Project(){};
     

@@ -458,16 +458,6 @@ public class ProjectView extends JPanel{
         projectLecturerSelector.setModel(comboBoxModel);
     }
 
-    public void populateLecturerPicker(ArrayList<String> lecturerIds){
-        int arrayLength = lecturerIds.size();
-        String[] lecturerOptions = new String[arrayLength];
-
-        for(int i = 0; i < arrayLength; i++){
-            lecturerOptions[i] = lecturerIds.get(i);
-        }
-        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(lecturerOptions);
-        projectLecturerSelector.setModel(comboBoxModel);
-    }
 
     public String getStudentToAssign(ArrayList<String> availableStudentIds){
         Object[] studentOptions = availableStudentIds.toArray();
