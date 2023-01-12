@@ -1,4 +1,6 @@
 package View;
+
+import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -61,11 +63,12 @@ public class ProjectView extends JPanel{
     private JButton confirmLecturerAddProjectButton = new JButton("Confirm");
     private JButton confirmAdminAddProjectButton = new JButton("Confirm");
     private JButton deleteProjectButton = new JButton("Delete");
+
     private JButton projectCommentsButton = new JButton("Comments");
 
     public ProjectView(Administrator adminUser){
         this.setLayout(new GridLayout(1,2));
-
+        
         // Project Table View Setup
         tableView.add(adminProjectTable(), BorderLayout.CENTER);
 
@@ -315,8 +318,9 @@ public class ProjectView extends JPanel{
         toggleProjectButton.setVisible(false);
         deleteProjectButton.setVisible(false);
         confirmAdminAddProjectButton.setVisible(true);
-        projectCommentsButton.setVisible(false);
+                projectCommentsButton.setVisible(false);
         
+
         emptyAllProjectPanelTexts();
         projectName.setEditable(true);
         projectName.setOpaque(true);
@@ -334,6 +338,8 @@ public class ProjectView extends JPanel{
         projectSpecializationSelector.setVisible(true);
         setProjectContentArea("");
     }
+
+
 
     private void resizePanelTextsFont(){
         projectName.setFont(new Font(projectName.getFont().toString(), Font.BOLD, 30));
@@ -434,6 +440,7 @@ public class ProjectView extends JPanel{
 
     public static void displayErrorMessage(String message){
         JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+
     }
 
     public void populateLecturerPicker(ArrayList<String> lecturerIds){
@@ -446,6 +453,7 @@ public class ProjectView extends JPanel{
         DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(lecturerOptions);
         projectLecturerSelector.setModel(comboBoxModel);
     }
+
 
     public String getStudentToAssign(ArrayList<String> availableStudentIds){
         Object[] studentOptions = availableStudentIds.toArray();
@@ -634,7 +642,9 @@ public class ProjectView extends JPanel{
         projectCommentsButton.addActionListener(projectCommentsButtonListener);
     }
 
+
     public void addTableSelectionListener(ListSelectionListener tableSelectionListener){
         projectTable.getSelectionModel().addListSelectionListener(tableSelectionListener);
     }
+
 }
