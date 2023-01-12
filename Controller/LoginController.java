@@ -1,6 +1,8 @@
 package Controller;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import View.LoginView;
@@ -19,10 +21,14 @@ public class LoginController{
     private LoginView loginView;
 
     // Construct login controller
-    public LoginController(LoginView view) {
-        this.loginView = view;
+    public LoginController() {
+        this.loginView = new LoginView();
 
         loginView.addLoginButtonListener(new loginButtonListener());
+    }
+
+    public JPanel getLoginView(){
+        return loginView;
     }
 
     // Implementing the action listener to the login button

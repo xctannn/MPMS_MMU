@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import Model.Lecturer;
 import Model.Student;
 import Model.Administrator;
@@ -25,11 +27,15 @@ public class RegisterController {
     private RegisterView registerView;
 
     // Construct register controller
-    public RegisterController(RegisterView view){
-        this.registerView = view;
+    public RegisterController(){
+        this.registerView = new RegisterView();
 
         registerView.addRegisterButtonListener(new registerBtnListener());
         registerView.addUserTypeListener(new userTypeListener());
+    }
+
+    public JPanel getRegisterView(){
+        return registerView;
     }
 
     // Implementing the action listener to the user type combobox
