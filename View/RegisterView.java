@@ -91,9 +91,9 @@ public class RegisterView extends JPanel{
         registerButton.addActionListener(listenforRegisterButton);
     }
 
-    // public void addCancelButtonListener(ActionListener listenforCancelButton){
-    //     cancelButton.addActionListener(listenforCancelButton);
-    // }
+    public void addCancelButtonListener(ActionListener listenforCancelButton){
+        cancelButton.addActionListener(listenforCancelButton);
+    }
 
     // Set the user ID
     public void setID(String userId){
