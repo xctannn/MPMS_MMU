@@ -1,8 +1,9 @@
 package Model;
 
-
-// A comment will contain the project id of a project, the user who is commenting and the commented string
-// Author: Kam Kar Hou
+/**
+ * Kam Kar Hou
+ * Purpose: A comment will contain the project id of a project, the user who is commenting and the commented string
+ */
 public class CommentModel {
     private String commentID;
     private String userID;
@@ -11,7 +12,10 @@ public class CommentModel {
     private String projectID;
 
     
-    // This constructor creates a new Comment object with the given commentID, projectID, user and commentString 
+    /**
+     * Kam Kar Hou
+     * Purpose: This constructor creates a new Comment object with the given commentID, projectID, user and commentString 
+     */
     public CommentModel(String commentID, String projectID, User user , String commentString){
         this.commentID = commentID;
         this.projectID = projectID;
@@ -20,31 +24,33 @@ public class CommentModel {
         this.commentString = commentString;
     }
     
-
-    // Getter for Comment ID
+    /**
+     * Kam Kar Hou
+     */
     public String getCommentID() {
         return commentID;
     }
-
-    // Getter for User ID
+    /**
+     * Kam Kar Hou
+     */
     public String getUserID(){
         return userID;
     }
-        
-
-    // Getter for Username
+    /**
+     * Kam Kar Hou
+     */
     public String getUsername(){
         return username;
     }
-        
-
-    // Getter for Project ID
+    /**
+     * Kam Kar Hou
+     */
     public String getProjectID(){
         return projectID;
     }
-        
-
-    // Getter for Written Comment
+    /**
+     * Kam Kar Hou
+     */
     public String getCommentString(){
         return commentString;
     }

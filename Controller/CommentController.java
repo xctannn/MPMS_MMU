@@ -20,18 +20,21 @@ import Model.CommentModel;
 import Model.User;
 import View.CommentView;
 
- 
-// CommentController handles the method updating and creating commentblocks, revalidating scrollpane from commentView.java
-// Author: Kam Kar Hou 
+/**
+ * Kam Kar Hou 
+ * CommentController handles the method updating and creating commentblocks, revalidating scrollpane from commentView.java
+ */
 public class CommentController {
     private User user;
     private String currentProjectID;
     private CommentView commentView;
     private CommentList commentList;
 
-    // Purpose: Creates a new CommentController with the given user and projectID
-    // also adds an action listener and also handles the creation of commentBlocks.
-    // Author: Kam Kar Hou
+    /**
+     * Kam Kar Hou
+     * Purpose: Creates a new CommentController with the given user and projectID
+     * also adds an action listener and also handles the creation of commentBlocks.
+     */
     public CommentController( User currentUser ,String currentProjectID){
 
         this.commentList = new CommentList();
@@ -43,9 +46,11 @@ public class CommentController {
         createCommentPanel();
     }
 
-    // Purpose: This creates the comment blocks in the scrollable pane in the commentView.java
-    // it contains the userID, userName and the commentedString.
-    // Author: Kam Kar Hou
+    /**
+     * Kam Kar Hou
+     * Purpose: This creates the comment blocks in the scrollable pane in the commentView.java
+     * it contains the userID, userName and the commentedString.
+     */
     public void createCommentPanel(){
         final Dimension EACH_ROW_DIMENSION = new Dimension(700,100);
         JPanel commentPanel = commentView.getCommentBlock();
@@ -83,18 +88,22 @@ public class CommentController {
         }
     }
 
-    // Purpose: This empties the list of commentBlocks
-    // and updates the comments table with the new list of comment blocks
-    // Author: Kam Kar Hou
+    /**
+     * Kam Kar Hou
+     * Purpose: This empties the list of commentBlocks
+     * and updates the comments table with the new list of comment blocks
+     */
     public void updateCommentPanel(){
         commentView.getCommentBlock().removeAll();
 
         createCommentPanel();
     }
 
-    // Purpose: A submit button listener to create a new object to be saved into the comments.json database
-    // also empties the Comment Area for new comments to be entered
-    // Author: Kam Kar Hou
+    /**
+     * Purpose: A submit button listener to create a new object to be saved into the comments.json database
+     * also empties the Comment Area for new comments to be entered
+     * Kam Kar Hou
+     */
     class commentSubmitListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -117,6 +126,9 @@ public class CommentController {
         }
     }
     
+    /**
+     * Kam Kar Hou
+     */
     public JPanel getCommentView(){
         return commentView;
     }

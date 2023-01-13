@@ -14,8 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-// Purpose: A View class for the commenting system
-// Author: Kam Kar Hou
+/**
+ * Kam Kar Hou
+ * Purpose: A View class for the commenting system
+ */
 public class CommentView extends JPanel{
 
     public JPanel wrapper = new JPanel();
@@ -31,12 +33,12 @@ public class CommentView extends JPanel{
     private final Dimension COMMENT_SCROLL_PANE_DIMENSION = new Dimension(650,100);
     private JScrollPane commentsScrollPane = new JScrollPane(commentBlock,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-    // Purpose: A default constructor to call the GUI of the commenting system
-    // Author: Kam Kar Hou
+    /**
+     * Kam Kar Hou
+     * Purpose: A default constructor to call the GUI of the commenting system
+     */
     public CommentView(){
 
-        // Purpose: Properties for the Fonts, Panels, ScrollPane, Wrappers and Layout
-        // Author: Kam Kar Hou
         this.setLayout(new GridLayout(1,1));
         commentTitleLabel.setFont(new Font(commentTitleLabel.getFont().toString(), Font.BOLD, 16));
         JPanel commentTablePanel = new JPanel();
@@ -54,34 +56,35 @@ public class CommentView extends JPanel{
         commentScroll.setMaximumSize(COMMENT_SCROLL_PANE_DIMENSION);
         commentScroll.setMinimumSize(COMMENT_SCROLL_PANE_DIMENSION);
 
-
-        // Purpose: This JPanel Table is the container for all the comments in the database
-        // it uses the JScrollPanel to allow scrolling if there are a lot of comments in the database
-        // Author: Kam Kar Hou
         commentBoxWrapper.add(commentScroll,BorderLayout.CENTER);
-        // Purpose: This is the comment area to allow the user to input comments
-        // Author: Kam Kar Hou
         commentTablePanel.add(commentBoxWrapper,  BorderLayout.SOUTH);
-        // Purpose: This is the submit button to for the user to click to confirm submission
-        // Author: Kam Kar Hou
         commentTablePanel.add(submitButtonWrapper, BorderLayout.SOUTH);
 
         tableView.add(commentTablePanel,BorderLayout.CENTER);
         this.add(tableView);
     }
 
+    /**
+     * Kam Kar Hou
+     */
     public JButton getSubmitButton() {
         return submitButton;
     }
-
+    /**
+     * Kam Kar Hou
+     */
     public JTextArea getCommentArea() {
         return commentArea;
     }
-
+    /**
+     * Kam Kar Hou
+     */
     public JPanel getCommentBlock(){
         return commentBlock;
     }
-
+    /**
+     * Kam Kar Hou
+     */
     public JScrollPane getcommentsScrollPane(){
         return commentsScrollPane;
     }
