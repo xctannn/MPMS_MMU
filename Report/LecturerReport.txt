@@ -1,2 +1,3 @@
-Project Name					Specialization        	Lecturer   	Status   	Assigned Student
-New Project Software Engineering Lee false null
+Project Name                                             Specialization             Lecturer            Status        Assigned Student
+Mini-project Management System                             Data Science              L0001              false               null
+Final Year Project                                         Data Science              L0001               true               null

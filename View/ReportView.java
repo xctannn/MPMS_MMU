@@ -30,8 +30,8 @@ import Model.Project;
 import Model.Report;
 
 public class ReportView {
-    private static final ArrayList<String> selectionWheelOptions = new ArrayList<String>();
-    private JButton generateButton = new JButton("Generate");
+    //private ArrayList<String> selectionWheelOptions = new ArrayList<String>();
+    private JButton generateButton = new JButton("Generate"); //no
     public JPanel generateWrapperPanel = new JPanel();
 
     //view text file
@@ -48,13 +48,13 @@ public class ReportView {
         JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    public String getOptions(ArrayList<String> selectionWheelOptions){
+    public String getGenerateReportOptions(ArrayList<String> selectionWheelOptions){
     
         Object[] wheelOptions = selectionWheelOptions.toArray();
 
         Object selected =  JOptionPane.showInputDialog(null,
-                                                        "Project?",
-                                                        "blah assign the project", 
+                                                        "Please Select Options",
+                                                        "Project List Report Generation", 
                                                         JOptionPane.QUESTION_MESSAGE, 
                                                         null, 
                                                         wheelOptions, 
@@ -71,8 +71,8 @@ public class ReportView {
         Object[] specializationOptions = specializationWheelOptions.toArray();
 
         Object selected =  JOptionPane.showInputDialog(null,
-                                                        "Specialization?",
-                                                        "Choose specialization", 
+                                                        "Select Specialization",
+                                                        "Specialization Options", 
                                                         JOptionPane.QUESTION_MESSAGE, 
                                                         null, 
                                                         specializationOptions, 
@@ -89,8 +89,8 @@ public class ReportView {
         Object[] wheelOptions = selectionWheelOptions.toArray();
 
         Object selected =  JOptionPane.showInputDialog(null,
-                                                        "Lecturer?",
-                                                        "Choose Lecturer",  
+                                                        "Select Lecturer",
+                                                        "Lecturer Options",  
                                                         JOptionPane.QUESTION_MESSAGE, 
                                                         null, 
                                                         wheelOptions, 

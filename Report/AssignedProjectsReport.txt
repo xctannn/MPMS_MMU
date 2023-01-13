@@ -1,4 +1,4 @@
-Project Name					Specialization        	Lecturer   	Status   	Assigned Student
-Capstone Data Science Tan false null
-Final Year Project Data Science Tan true null
-New Project Software Engineering Lee false null
+Project Name                                                  Specialization             Lecturer            Status        Assigned Student
+MMU Online Mini-project Management System                       Data Science              L0001              false               null
+Final Year Project                                              Data Science              L0001               true               null
+New Project                                             Software Engineering              L0002              false               null

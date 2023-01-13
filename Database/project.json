@@ -1,7 +1,7 @@
 {
   "projects" : [ {
     "id" : "P0001",
-    "name" : "Capstone",
+    "name" : "Mini-project Management System",
     "specialization" : "Data Science",
     "content" : "This is a Data Science Capstone project, you better not fuck this up",
     "lecturerId" : "L0001",
