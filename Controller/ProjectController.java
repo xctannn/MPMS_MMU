@@ -10,8 +10,10 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.xml.stream.events.Comment;
 
 import Model.Administrator;
+import Model.CommentList;
 import Model.Lecturer;
 import Model.LecturerList;
 import Model.Project;
@@ -19,6 +21,8 @@ import Model.ProjectList;
 import Model.Student;
 import Model.StudentList;
 import Model.User;
+import Model.CommentModel;
+import View.CommentView;
 import View.ProjectView;
 
 public class ProjectController {
@@ -26,9 +30,10 @@ public class ProjectController {
     private Project projectModel;
     private ProjectList projectList = new ProjectList();
     private ArrayList<Project> filteredProjectList;
+    private StudentList studentList = new StudentList();
     private ProjectView projectView;
     private LecturerList lecturerList = new LecturerList();
-    private StudentList studentList = new StudentList();
+
 
     public ProjectController(Administrator user){
         this.user = user;
@@ -49,6 +54,7 @@ public class ProjectController {
         populateTable();
         // projectView.defaultProjectView(user);
     }
+
 
     public ProjectController(Lecturer user){
         this.user = user;
@@ -150,6 +156,10 @@ public class ProjectController {
         projectTableModel.addRow(row);
     }
 
+
+
+
+
     public void deleteProjectFromTable(){
         int selectedRow = projectView.getSelectedRow();
 
@@ -218,7 +228,7 @@ public class ProjectController {
                 String newProjectLecturerName = user.getUsername();
                 String newProjectSpecialization = projectView.getProjectSpecialization();
                 String newProjectContent = projectView.getProjectContent();
-
+                projectView.setupLecturerAddProjectPanel();                
                 checkNameValidity(newProjectName);
                 checkSpecializationValidity(projectView.getSpecializationSelector().getSelectedIndex());
 
@@ -228,8 +238,6 @@ public class ProjectController {
                 filteredProjectList.add(newProject);
                 projectList.saveProjectCountIncrement();
                 addNewProjectToTable(newProject);
-                projectView.setupLecturerAddProjectPanel();
-
             } catch (IllegalArgumentException exception){
                 ProjectView.displayErrorMessage(exception.getMessage());
             }
@@ -336,6 +344,8 @@ public class ProjectController {
         }
     }
 
+
+
     class AssignButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -405,7 +415,7 @@ public class ProjectController {
     class ProjectCommentsButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            // insert event handler here
+            // insert event handler here            
         }
     }
 
@@ -427,4 +437,6 @@ public class ProjectController {
             projectView.disableContentEditMode();
         }
     }
+
+
 }
