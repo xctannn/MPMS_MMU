@@ -21,7 +21,7 @@ public class Project{
     /*
      * Tan Xiao Chin
      * No-Arg Constructor
-     * Purpose: For JSON serializer to serialize and deserialize Project object into and from JSON file
+     * Purpose: For JSON serializer to serialize and deserialize Project object into and from project.json
      */
     public Project(){};
 
