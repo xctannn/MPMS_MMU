@@ -36,16 +36,14 @@ public class CommentList implements JsonList<CommentModel> {
         }    
     }
 
-    
-    // Getter for Arraylist of comments
-    
+
     public ArrayList<CommentModel> getComments(){
         return comments;
     }
     
-    // This is to return a comment id with the format 0001 to 9999
+    // Purpose: This is to return a comment id with the format 0001 to 9999
     // to be added with a string "C" to produce a unique ID e.g. C0001
-    
+    //  Author: Kam Kar Hou
     public String generateCommentIdNum(){
         return String.format("%04d", comments.size() + 1);
     }
@@ -53,7 +51,7 @@ public class CommentList implements JsonList<CommentModel> {
     
     // While adding a new comment, it will set the comments list again 
     // and add a new comment then save into comments.json
-     
+    //  Author: Kam Kar Hou
     @Override
     public void addItem(CommentModel item) {
         setList();
@@ -63,7 +61,7 @@ public class CommentList implements JsonList<CommentModel> {
 
     
     //  A getter for a specific comment id in an arraylist of comments
-    
+    //  Author: Kam Kar Hou
     @Override
     public CommentModel getItem(String id) {
         for (int i = 0; i < comments.size(); i++){
@@ -77,6 +75,7 @@ public class CommentList implements JsonList<CommentModel> {
 
 
     // Reads the comments.java file into the arraylist comments
+    //  Author: Kam Kar Hou
     @Override
     public void setList() {
         try{

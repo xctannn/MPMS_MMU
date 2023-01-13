@@ -29,8 +29,9 @@ public class CommentController {
     private CommentView commentView;
     private CommentList commentList;
 
-    // Creates a new CommentController with the given user and projectID
+    // Purpose: Creates a new CommentController with the given user and projectID
     // also adds an action listener and also handles the creation of commentBlocks.
+    // Author: Kam Kar Hou
     public CommentController( User currentUser ,String currentProjectID){
 
         this.commentList = new CommentList();
@@ -41,14 +42,10 @@ public class CommentController {
         
         createCommentPanel();
     }
-    
-    // Getter for commentView
-    public JPanel getCommentView(){
-        return commentView;
-    }
 
-    // This creates the comment blocks in the scrollable pane in the commentView.java
+    // Purpose: This creates the comment blocks in the scrollable pane in the commentView.java
     // it contains the userID, userName and the commentedString.
+    // Author: Kam Kar Hou
     public void createCommentPanel(){
         final Dimension EACH_ROW_DIMENSION = new Dimension(700,100);
         JPanel commentPanel = commentView.getCommentBlock();
@@ -86,16 +83,18 @@ public class CommentController {
         }
     }
 
-    // This empties the list of commentBlocks
+    // Purpose: This empties the list of commentBlocks
     // and updates the comments table with the new list of comment blocks
+    // Author: Kam Kar Hou
     public void updateCommentPanel(){
         commentView.getCommentBlock().removeAll();
 
         createCommentPanel();
     }
 
-    // A submit button listener to create a new object to be saved into the comments.json database
+    // Purpose: A submit button listener to create a new object to be saved into the comments.json database
     // also empties the Comment Area for new comments to be entered
+    // Author: Kam Kar Hou
     class commentSubmitListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -109,15 +108,18 @@ public class CommentController {
                 CommentModel newComment = new CommentModel(newCommentId, newProject,commentor, newCommentString);
                 commentList.addItem(newComment);
 
-                // Clear comment field and add comment to area
+                // Clear commentfield
                 commentView.getCommentArea().setText("");
-                
+
                 updateCommentPanel();
 
             }
         }
     }
     
+    public JPanel getCommentView(){
+        return commentView;
+    }
 
 
 }
