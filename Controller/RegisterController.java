@@ -97,7 +97,7 @@ public class RegisterController {
             mainController.returnProjectView();
         }
     }
-
+    
     // Validating the inputs
     private void checkNamePassword(String username, String password) throws IllegalArgumentException{
         if(username.isEmpty()){
