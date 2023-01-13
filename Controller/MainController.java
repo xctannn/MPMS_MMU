@@ -13,9 +13,9 @@ public class MainController {
     private LoginController loginController;
     private RegisterController registerController;
     private ProjectController projectController;
+    private CommentController commentController;
     private JPanel mainView;
     private CardLayout cardLayout;
-    // private CommentController commentController;
     
     private MainController(){
         this.cardLayout = new CardLayout();
@@ -23,6 +23,7 @@ public class MainController {
         this.loginController = new LoginController(this);
         this.registerController = new RegisterController(this);
         this.projectController = new ProjectController(this, new Administrator());
+        // this.commentController = new CommentController(this);
 
         mainView.add(loginController.getLoginView(), "login", 0);
         mainView.add(registerController.getRegisterView(), "register", 1);
@@ -65,6 +66,14 @@ public class MainController {
         mainView.add(projectController.getProjectView(), "student", 2);
         cardLayout.show(mainView, "student");
     }
+
+    // pseudo code for how to switch to comment view
+    // public void switchCommentView(String projectId, User user){
+    //     mainView.remove(3);
+    //     this.commentController = new CommentController(this, projectId, user);
+    //     mainView.add(projectController.getProjectView(), "student", 2);
+    //     cardLayout.show(mainView, "comment");
+    // }
 
     public void init(){
         JFrame frame = new JFrame();
