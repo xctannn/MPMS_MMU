@@ -1,2 +1,2 @@
-Project Name
-Final Year Project
+Project Name					Specialization        	Lecturer   	Status   	Assigned Student
+Final Year Project Data Science Tan true null

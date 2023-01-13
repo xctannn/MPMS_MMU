@@ -19,7 +19,7 @@ import Model.Project;
 import Model.ProjectData;
 import Model.ProjectList;
 import Model.Report;
-import Model.ReportList;
+//import Model.ReportList;
 import Model.Student;
 import Model.StudentList;
 import Model.User;
@@ -44,7 +44,7 @@ public class ReportController {
     private ProjectView projectView;
     private Report model;
     private ReportView reportView;
-    private ReportList reportList;
+    //private ReportList reportList;
     private CommentList commentList = new CommentList();;
     private LecturerList lecturerList = new LecturerList();
     private ArrayList<String> selectionWheelOptions = new ArrayList<String>();
@@ -90,12 +90,14 @@ public class ReportController {
                 else if (selectedOptions.equals(selectionWheelOptions.get(2))){
                     //call function to open another joptionpanel and ask for the speciliazation
                     //generate a textfile according to specialization
+                    if(specializationWheelOptions.isEmpty()){
                     specializationWheelOptions.add("---Select Here---");
                     specializationWheelOptions.add("Software Engineering");
                     specializationWheelOptions.add("Game Development");
                     specializationWheelOptions.add("Data Science");
                     specializationWheelOptions.add("Cybersecurity");
                     specializationWheelOptions.add("Artficial Intelligence");
+                    }
 
                     String selectedSpecOption = reportView.getSpecializationOptions(specializationWheelOptions);
                     actionForSelectedSpecOption(selectedSpecOption);

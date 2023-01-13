@@ -1,2 +1,2 @@
-Project Name
-New Project
+Project Name					Specialization        	Lecturer   	Status   	Assigned Student
+New Project Software Engineering Lee false null

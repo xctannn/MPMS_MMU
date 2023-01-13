@@ -1,1 +1,3 @@
-Project Name
+Project Name					Specialization        	Lecturer   	Status   	Assigned Student
+Capstone Data Science Tan false null
+Final Year Project Data Science Tan true null
