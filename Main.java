@@ -1,9 +1,10 @@
 import javax.swing.JFrame;
 
-import Controller.ProjectController;
-import Model.Administrator;
+import Controller.CommentController;
+import Model.CommentModel;
 import Model.Lecturer;
-import Model.Student;
+import Model.Project;
+import View.CommentView;
 
 public class Main {
     public static void main(String[] args){
@@ -21,7 +22,7 @@ public class Main {
         
         //For testing comments
         CommentModel commentModel = new CommentModel();
-        Project tempProject = new Project("P0001");
+        Project tempProject = new Project(); // change to proper constructor
         CommentView cV = new CommentView();
         Lecturer user = new Lecturer("L0001", "Tan", "l01");
 
