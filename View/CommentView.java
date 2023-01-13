@@ -1,7 +1,7 @@
 package View;
 
-import java.awt.*;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Font;
