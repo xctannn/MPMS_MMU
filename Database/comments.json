@@ -4,4 +4,10 @@
   "username" : "Tan",
   "commentString" : "hi",
   "projectID" : "P0001"
+},{
+  "commentID" : "C0002",
+  "userID" : "L0001",
+  "username" : "Tan",
+  "commentString" : "hi",
+  "projectID" : "P0002"
 } ]

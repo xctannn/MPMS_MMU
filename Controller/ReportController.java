@@ -11,6 +11,8 @@ import java.util.ArrayList;
 // import javax.swing.table.TableColumnModel;
 
 import Model.Administrator;
+import Model.CommentList;
+import Model.CommentModel;
 import Model.Lecturer;
 import Model.LecturerList;
 import Model.Project;
@@ -35,7 +37,7 @@ import java.io.File;
 
 
 public class ReportController {
-    private User user;
+    private Administrator user;
     private Project projectModel;
     private ProjectList projectList;
     //private ArrayList<Project> filteredProjectList;
@@ -43,6 +45,7 @@ public class ReportController {
     private Report model;
     private ReportView reportView;
     private ReportList reportList;
+    private CommentList commentList = new CommentList();;
     private LecturerList lecturerList = new LecturerList();
     private ArrayList<String> selectionWheelOptions = new ArrayList<String>();
     private ArrayList<String> specializationWheelOptions = new ArrayList<String>();
@@ -111,10 +114,10 @@ public class ReportController {
                 }
                 else if (selectedOptions.equals(selectionWheelOptions.get(4))){
                     //generate inactive projects textfile
-                    ArrayList<Project> Projects = projectList.getProjects();
+                    ArrayList<Project> projects = projectList.getProjects();
                     ArrayList<Project> notActiveProjects = new ArrayList<Project>();
-                    for(int i=0; i< Projects.size(); i++){
-                        Project project = Projects.get(i);
+                    for(int i=0; i< projects.size(); i++){
+                        Project project = projects.get(i);
                         if(project.getIsActive() == false){
                             notActiveProjects.add(project);
                         }
@@ -125,10 +128,10 @@ public class ReportController {
                 }
                 else if (selectedOptions.equals(selectionWheelOptions.get(5))){
                     //generate active projects textfile
-                    ArrayList<Project> Projects = projectList.getProjects();
+                    ArrayList<Project> projects = projectList.getProjects();
                     ArrayList<Project> activeProjects = new ArrayList<Project>();
-                    for(int i=0; i< Projects.size(); i++){
-                        Project project = Projects.get(i);
+                    for(int i=0; i< projects.size(); i++){
+                        Project project = projects.get(i);
                         if(project.getIsActive() == true){
                             activeProjects.add(project);
                         }
@@ -139,10 +142,10 @@ public class ReportController {
                 }
                 else if (selectedOptions.equals(selectionWheelOptions.get(6))){
                     //generate projects assigned to students textfile
-                    ArrayList<Project> Projects = projectList.getProjects();
+                    ArrayList<Project> projects = projectList.getProjects();
                     ArrayList<Project> assignedProjects = new ArrayList<Project>();
-                    for(int i=0; i< Projects.size(); i++){
-                        Project project = Projects.get(i);
+                    for(int i=0; i< projects.size(); i++){
+                        Project project = projects.get(i);
                         if(project.getIsAssigned() == true){
                             assignedProjects.add(project);
                         }
@@ -153,10 +156,10 @@ public class ReportController {
                 }
                 else if (selectedOptions.equals(selectionWheelOptions.get(7))){
                     //generate projects unassigned to students textfile
-                    ArrayList<Project> Projects = projectList.getProjects();
+                    ArrayList<Project> projects = projectList.getProjects();
                     ArrayList<Project> unAssignedProjects = new ArrayList<Project>();
-                    for(int i=0; i< Projects.size(); i++){
-                        Project project = Projects.get(i);
+                    for(int i=0; i< projects.size(); i++){
+                        Project project = projects.get(i);
                         if(project.getIsAssigned() == false){
                             unAssignedProjects.add(project);
                         }
@@ -168,18 +171,20 @@ public class ReportController {
                 }
                 else if (selectedOptions.equals(selectionWheelOptions.get(8))){
                     //generate prpkects with comments
-                    // pending yet
-                    // ArrayList<Project> Projects = projectList.getProjects();
-                    // ArrayList<CommentModel> Comments = commentList.getComments();                    
-                    // ArrayList<Project> commentedProjects = new ArrayList<Project>();
-                    // for(int i=0; i< Projects.size(); i++){
-                    //     CommentModel project = Comments.get(i);
-                    //     if(project.() == false){
-                    //         commentedProjects.add(project);
-                    //     }
-                    // }
-                    // String fileName = "Report\\CommentsProjectsReport.txt";
-                    // writeToFile(fileName, commentedProjects);
+                    ArrayList<Project> projects = projectList.getProjects();
+                    ArrayList<CommentModel> comments = commentList.getComments();      
+                    ArrayList<Project> listOfProjectsWithComments = new ArrayList<Project>();                                  
+                    for(int i=0; i< projects.size(); i++){
+                        Project project = projects.get(i);
+                        for(int j=0; j < comments.size(); j++){
+                            CommentModel comment = comments.get(j);
+                            if(comment.getProjectID().equals(project.getId())){
+                                listOfProjectsWithComments.add(project);
+                            }
+                        }
+                    }
+                    String fileName = "Report\\CommentsProjectsReport.txt";
+                    writeToFile(fileName, listOfProjectsWithComments);
                 }
                 
 
@@ -187,6 +192,7 @@ public class ReportController {
                 ReportView.displayErrorMessage("No projects found, report will not be generated");
             }
         }
+        
         
     }
     
