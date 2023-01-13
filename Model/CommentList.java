@@ -21,11 +21,7 @@ public class CommentList implements JsonList<CommentModel> {
      * and reads the comments.java file into the arraylist comments.
      */
     public CommentList(){
-        try{
-            this.comments = parser.deserialize();
-        }catch(IOException e){
-            e.printStackTrace();
-        }
+        setList();
     }
     /**
      * A contructor that filters out the projects which are not the current project
@@ -66,12 +62,14 @@ public class CommentList implements JsonList<CommentModel> {
 
     @Override
     public void addItem(CommentModel item) {
+        setList();
         this.comments.add(item);
-        try {
-            parser.serialize();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        save();
+        // try {
+        //     parser.serialize();
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
     }
 
     /**
@@ -91,7 +89,11 @@ public class CommentList implements JsonList<CommentModel> {
 
     @Override
     public void setList() {
-        // TODO Auto-generated method stub
+        try{
+            this.comments = parser.deserialize();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
         
     }
     
@@ -101,19 +103,23 @@ public class CommentList implements JsonList<CommentModel> {
     @Override
     public void save() {
         // Write comments to file using JSON parser
-        ObjectMapper mapper = new ObjectMapper();
-        try{
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File("Database/comments.json"), this.comments);
-        }catch(IOException ex){
-            ex.printStackTrace();
-
+        try {
+            parser.serialize();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         
     }
     @Override
     public int getSize() {
-        // TODO Auto-generated method stub
+        ArrayList<CommentModel> tempList;
+        try {
+            tempList = parser.deserialize();
+            return tempList.size();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 

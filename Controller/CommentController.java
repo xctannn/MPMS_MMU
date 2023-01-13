@@ -90,9 +90,6 @@ public class CommentController {
                 // Clear comment field and add comment to area
                 commentView.getCommentArea().setText("");
                 updateCommentPanel();
-                // commentView.getCommentBlock();
-
-                commentList.save();
 
             }
         }

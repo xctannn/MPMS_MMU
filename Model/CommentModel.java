@@ -12,6 +12,9 @@ public class CommentModel {
     private String commentString;
     private String projectID;
 
+
+    public CommentModel(){
+    }
     /**
      * This constructor creates a new Comment object with the given commentID, project, user, commentString
      * @param commentID represents an unique id to be identified in the comments.json
