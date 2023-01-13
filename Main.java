@@ -1,14 +1,9 @@
 import javax.swing.JFrame;
 
-import Controller.CommentController;
 import Controller.ProjectController;
-import Model.CommentModel;
 import Model.Administrator;
 import Model.Lecturer;
-import Model.Project;
 import Model.Student;
-import View.CommentView;
-import View.ProjectView;
 
 public class Main {
     public static void main(String[] args){
