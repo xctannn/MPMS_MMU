@@ -35,8 +35,8 @@ public class Main {
         frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame2.setSize(800, 600);
 
-        CommentController commentController = new CommentController(commentModel, cV, user,tempProject);
-        frame2.add(cV);
+        CommentController commentController = new CommentController(commentModel, user,tempProject);
+        frame2.add(commentController.getCommentView());
         frame2.setVisible(true);
     }
 

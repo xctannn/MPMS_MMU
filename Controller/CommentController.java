@@ -14,24 +14,12 @@ import javax.swing.JLabel;
 
 import java.awt.GridLayout;
 import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
-import javax.swing.text.AttributeSet.ColorAttribute;
-import javax.xml.stream.events.Comment;
 
-import Model.Administrator;
 import Model.CommentList;
 import Model.CommentModel;
-import Model.Lecturer;
 import Model.Project;
-import Model.ProjectList;
-import Model.Student;
 import Model.User;
 import View.CommentView;
-import View.ProjectView;
 
 public class CommentController {
     private User user;
@@ -42,13 +30,13 @@ public class CommentController {
 
 
 
-    public CommentController(CommentModel commentModel, CommentView view,User user ,Project currentProject){
+    public CommentController(CommentModel commentModel, User user ,Project currentProject){
         this.model = commentModel;
-        this.commentView = view;
         this.commentList = new CommentList();
+        this.commentView = new CommentView();
         this.projectModel = currentProject;
         this.user = user;
-        view.getSubmitButton().addActionListener(new commentSubmitListener());
+        commentView.getSubmitButton().addActionListener(new commentSubmitListener());
         
         createCommentPanel();
 
@@ -108,6 +96,10 @@ public class CommentController {
 
             }
         }
+    }
+    
+    public JPanel getCommentView(){
+        return commentView;
     }
 
     public void updateCommentPanel(){

@@ -228,7 +228,7 @@ public class ProjectController {
                 String newProjectLecturerName = user.getUsername();
                 String newProjectSpecialization = projectView.getProjectSpecialization();
                 String newProjectContent = projectView.getProjectContent();
-
+                projectView.setupLecturerAddProjectPanel();                
                 checkNameValidity(newProjectName);
                 checkSpecializationValidity(projectView.getSpecializationSelector().getSelectedIndex());
 
@@ -238,8 +238,6 @@ public class ProjectController {
                 filteredProjectList.add(newProject);
                 projectList.saveProjectCountIncrement();
                 addNewProjectToTable(newProject);
-                projectView.setupAdminAddProjectPanel();
-
             } catch (IllegalArgumentException exception){
                 ProjectView.displayErrorMessage(exception.getMessage());
             }

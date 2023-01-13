@@ -11,10 +11,9 @@ public class Project{
     private String studentAssignedName;
     private boolean isAssigned = false;
     private boolean isActive = false;
-    private boolean favourite = false;
-    private Lecturer lecturer;
-    private Object studentAssigned;
 
+
+    public Project(){};
 
     //Constructor
     public Project(String id, String name, String specialization, String content, String lecturerId, String lecturerName,
@@ -28,7 +27,7 @@ public class Project{
         this.studentAssignedId = studentAssignedId;
         this.isAssigned = isAssigned;
         this.isActive = isActive;
-        this.favourite = favourite;
+
     }
     public Project(String id, String name, String specialization, String content, String lecturerId, String lecturerName){
         this.id = id;
@@ -36,28 +35,29 @@ public class Project{
         this.specialization = specialization;
         this.content = content;
         this.lecturerId = lecturerId;
-        this.lecturerName = lecturerId;
         this.studentAssignedId = null;
         this.isAssigned = false;
         this.isActive = false;
-        this.favourite = false;
+
     }
 
 
 
-    public Project(){};
+
     
-    public Project(String id, String name, String specialization, String content, Lecturer lecturer){
+    public Project(String id, String name, String specialization, String content, String lecturerId){
         this.id = id;
         this.name = name;
         this.specialization = specialization;
         this.content = content;
-        this.lecturer = lecturer;
-        this.studentAssigned = null;
+        this.lecturerId = lecturerId;
+        this.studentAssignedId = null;
         this.isAssigned = false;
         this.isActive = true;
 
     }
+
+    // This is for temporary testing in main for comment
     public Project(String id){
         this.id = id;
     };
@@ -127,13 +127,6 @@ public class Project{
         this.lecturerName = lecturerName;
     }
 
-    // public void setLecturer(String lecturer){
-    //     this.lecturer = lecturer;
-    // }
-
-    public void setStudent(Student studentAssigned){
-        this.studentAssigned = studentAssigned;
-    }
 
     public void setIsAssigned(boolean isAssigned){
         this.isAssigned = isAssigned;
@@ -141,10 +134,6 @@ public class Project{
 
     public void setIsActive(boolean isActive){
         this.isActive = isActive;
-    }
-
-    public void setFavourite(boolean favourite) {
-        this.favourite = favourite;
     }
 
     public void setStudent(String studentId, String studentName) {

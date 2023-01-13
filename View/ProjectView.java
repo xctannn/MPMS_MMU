@@ -1,6 +1,5 @@
 package View;
 
-import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -318,8 +317,7 @@ public class ProjectView extends JPanel{
         toggleProjectButton.setVisible(false);
         deleteProjectButton.setVisible(false);
         confirmAdminAddProjectButton.setVisible(true);
-                projectCommentsButton.setVisible(false);
-        
+        projectCommentsButton.setVisible(false);
 
         emptyAllProjectPanelTexts();
         projectName.setEditable(true);
