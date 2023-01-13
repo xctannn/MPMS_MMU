@@ -9,6 +9,9 @@ import Model.Administrator;
 import Model.Lecturer;
 import Model.Student;
 
+/*
+ * Purpose: Redirect user to different pages of the system
+ */
 public class MainController {
     private LoginController loginController;
     private RegisterController registerController;
@@ -17,6 +20,10 @@ public class MainController {
     private JPanel mainView;
     private CardLayout cardLayout;
     
+    /*
+     * Yaw Boon Zhe
+     * No-arg Constructor
+     */
     private MainController(){
         this.cardLayout = new CardLayout();
         this.mainView = new JPanel(cardLayout);
@@ -30,22 +37,30 @@ public class MainController {
         mainView.add(projectController.getProjectView(), "startProjectView", 2);
     }
 
+    // Yaw Boon Zhe
     public JPanel getMainView(){
         return mainView;
     }
 
+    // Yaw Boon Zhe
     public void switchLoginView(){
         cardLayout.show(mainView,"login");
     }
 
+    // Yaw Boon Zhe
     public void switchRegisterView(){
         cardLayout.show(mainView,"register");
     }
 
+    // Yaw Boon Zhe
     public void returnProjectView(){
         cardLayout.show(mainView, "admin");
     }
 
+    /*
+     * Yaw Boon Zhe
+     * Purpose: redirect Administrator user to project view
+     */
     public void switchProjectView(Administrator adminUser){
         mainView.remove(2);
         this.projectController = new ProjectController(this, adminUser);
@@ -53,6 +68,10 @@ public class MainController {
         cardLayout.show(mainView, "admin");
     }
 
+    /*
+     * Yaw Boon Zhe
+     * Purpose: redirect Lecturer user to project view
+     */
     public void switchProjectView(Lecturer lecturerUser){
         mainView.remove(2);
         this.projectController = new ProjectController(this, lecturerUser);
@@ -60,6 +79,10 @@ public class MainController {
         cardLayout.show(mainView, "lecturer");
     }
 
+    /*
+     * Yaw Boon Zhe
+     * Purpose: redirect Student user to project view
+     */
     public void switchProjectView(Student studentUser){
         mainView.remove(2);
         this.projectController = new ProjectController(this, studentUser);
@@ -75,6 +98,7 @@ public class MainController {
     //     cardLayout.show(mainView, "comment");
     // }
 
+    // Yaw Boon Zhe
     public void init(){
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,7 +109,6 @@ public class MainController {
     }
 
     public static void main(String[] args){
-        
         MainController main = new MainController();
         main.init();
 
