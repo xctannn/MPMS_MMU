@@ -22,7 +22,7 @@ import View.CommentView;
 
 /**
  * Kam Kar Hou 
- * CommentController handles the method updating and creating commentblocks, revalidating scrollpane from commentView.java
+ * Purpose: CommentController handles the method updating and creating commentblocks, revalidating scrollpane from commentView.java
  */
 public class CommentController {
     private User user;
@@ -100,9 +100,9 @@ public class CommentController {
     }
 
     /**
+     * Kam Kar Hou
      * Purpose: A submit button listener to create a new object to be saved into the comments.json database
      * also empties the Comment Area for new comments to be entered
-     * Kam Kar Hou
      */
     class commentSubmitListener implements ActionListener{
         @Override
