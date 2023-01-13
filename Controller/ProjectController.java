@@ -22,6 +22,7 @@ import Model.User;
 import View.ProjectView;
 
 public class ProjectController {
+    private MainController mainController;
     private User user;
     private Project projectModel;
     private ProjectList projectList = new ProjectList();
@@ -30,7 +31,8 @@ public class ProjectController {
     private LecturerList lecturerList = new LecturerList();
     private StudentList studentList = new StudentList();
 
-    public ProjectController(Administrator user){
+    public ProjectController(MainController mainController, Administrator user){
+        this.mainController = mainController;
         this.user = user;
         this.projectView = new ProjectView(user);
         this.filteredProjectList = new ArrayList<>(projectList.getProjects());
@@ -50,7 +52,8 @@ public class ProjectController {
         // projectView.defaultProjectView(user);
     }
 
-    public ProjectController(Lecturer user){
+    public ProjectController(MainController mainController, Lecturer user){
+        this.mainController = mainController;
         this.user = user;
         this.projectView = new ProjectView(user);
         this.filteredProjectList = projectList.getFilteredProjects(user);
@@ -73,7 +76,8 @@ public class ProjectController {
         // projectView.defaultProjectView(user);
     }
 
-    public ProjectController(Student user){
+    public ProjectController(MainController mainController, Student user){
+        this.mainController = mainController;
         this.user = user;
         this.projectView = new ProjectView(user);
         this.filteredProjectList = projectList.getFilteredProjects(user);
@@ -164,7 +168,7 @@ public class ProjectController {
                 return;
             }
 
-            // MainController.toLoginView
+            mainController.switchLoginView();
         }
     }
 
