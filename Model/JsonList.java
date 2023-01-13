@@ -1,7 +1,6 @@
 package Model;
 
 /*
- * Tan Xiao Chin
  * Purpose: An interface for all the model lists that parses the JSON files
  */
 public interface JsonList<T>{
