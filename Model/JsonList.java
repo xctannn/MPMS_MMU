@@ -1,18 +1,38 @@
 package Model;
 
-public  interface JsonList<T>{
-    // populates ArrayList with all the file's data
+/*
+ * Tan Xiao Chin
+ * Purpose: An interface for all the model lists that parses the JSON files
+ */
+public interface JsonList<T>{
+    /*
+     * Tan Xiao Chin
+     * Purpose: Populate ArrayList with all the file's data
+     */
     public void setList(); 
 
-    // saves the list to the json file
+    /*
+     * Tan Xiao Chin
+     * Purpose: Save the list to the json file
+     */
     public void save();
 
-    // adds new items to the ArrayList
+    /*
+     * Tan Xiao Chin
+     * Purpose: Add new items to the ArrayList
+     */
+    // 
     public void addItem(T item);
 
-    // get specified item from ArrayList by the item's id 
+    /*
+     * Tan Xiao Chin
+     * Purpose: Get specified item from ArrayList based on the item's id 
+     */
     public T getItem(String id);
 
-    // get the amount of items that are in the list
+    /*
+     * Tan Xiao Chin
+     * Purpose: Get amount of items that are in the list
+     */
     public int getSize();
 }
