@@ -214,8 +214,8 @@ public class ReportController {
             bufferedWriter.write("Project Name\t\t\t\t\tSpecialization        \tLecturer   \tStatus   \tAssigned Student");
             for(int i = 0 ; i < projectData.size(); i++){
             Project project = projectData.get(i);
-            //String writeString = String.format("Name: %s, Age: %s", project.getName(), project.getSpecialization());
-            bufferedWriter.write("\n" + project.getName() + " " + project.getSpecialization() + " " + project.getLecturerName() + " " + project.getIsActive() + " " + project.getStudentAssignedId());
+            String writeString = String.format("%s %s %s %s %s", project.getName(), project.getSpecialization(), project.getLecturerName(), project.getIsActive(), project.getStudentAssignedId());
+            bufferedWriter.write("\n" + writeString);
             }
             bufferedWriter.close();
         }catch (IOException e) {
