@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import Model.Lecturer;
 import Model.Student;
 import Model.Administrator;
@@ -13,32 +15,42 @@ import Model.AdministratorList;
 import View.RegisterView;
 
 public class RegisterController {
+
+    // Initializing instances
+    private MainController mainController;
     private Lecturer lecturerModel = new Lecturer();
     private Student studentModel = new Student();
     private Administrator adminModel = new Administrator();
     private StudentList studentList = new StudentList();
     private LecturerList lecturerList = new LecturerList();
     private AdministratorList adminList = new AdministratorList();
+
     private RegisterView registerView;
 
-    public RegisterController(RegisterView view){
-        this.registerView = view;
+    // Construct register controller
+    public RegisterController(MainController mainController){
+        this.mainController = mainController;
+        this.registerView = new RegisterView();
 
         registerView.addRegisterButtonListener(new registerBtnListener());
         registerView.addUserTypeListener(new userTypeListener());
+        registerView.addCancelButtonListener(new cancelButtonListener());
     }
 
+    public JPanel getRegisterView(){
+        return registerView;
+    }
+
+    // Implementing the action listener to the user type combobox
     class userTypeListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            JComboBox specializationType = registerView.getComboBox();
+            JComboBox<String> specializationType = registerView.getComboBox();
             String userType = registerView.getUserType();
             String id = getUserID(userType);
             
             if(userType == "Student"){
                 specializationType.setEnabled(true);
-            }else if(userType == "Lecturer"){
-                specializationType.setEnabled(false);
             }else{
                 specializationType.setEnabled(false);
             }
@@ -46,45 +58,56 @@ public class RegisterController {
         }
     }
 
+    // Implementing the action listener to the register button
     class registerBtnListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            String newUsername = registerView.getUsername();
-            String newPassword = registerView.getPassword();
-            String userType = registerView.getUserType();
-            String id = getUserID(userType);
-            String newID = updateID(userType);
-            
-            if (newUsername.isBlank() || newPassword.isBlank()){
-                JOptionPane.showMessageDialog(null, "Please fill in the username and password", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            
-            else if(userType == "Student"){
-                String specialization = registerView.getSpecialization();
-                Student newStudent = new Student(id, newUsername, newPassword, specialization, "");
-                studentList.addItem(newStudent);
-                JOptionPane.showMessageDialog(null, "Register Successful");
-                registerView.setID(newID);
+            try{
+                String newUsername = registerView.getUsername();
+                String newPassword = registerView.getPassword();
+                String userType = registerView.getUserType();
+                String id = getUserID(userType);
+                String newID = updateID(userType);
 
-            }else if(userType == "Lecturer"){
-                Lecturer newLecturer = new Lecturer(id, newUsername, newPassword);
-                lecturerList.addItem(newLecturer);
-                JOptionPane.showMessageDialog(null, "Register Successful");
+                checkNamePassword(newUsername, newPassword);
+            
+                if(userType == "Student"){
+                    String specialization = registerView.getSpecialization();
+                    Student newStudent = new Student(id, newUsername, newPassword, specialization, "");
+                    studentList.addItem(newStudent);
+                }else if(userType == "Lecturer"){
+                    Lecturer newLecturer = new Lecturer(id, newUsername, newPassword);
+                    lecturerList.addItem(newLecturer);
+                }else{
+                    Administrator newAdmin = new Administrator(id, newUsername, newPassword);
+                    adminList.addItem(newAdmin);
+                }
                 registerView.setID(newID);
-
-            }else{
-                Administrator newAdmin = new Administrator(id, newUsername, newPassword);
-                adminList.addItem(newAdmin);
                 JOptionPane.showMessageDialog(null, "Register Successful");
-                registerView.setID(newID);
+            
+            }catch(IllegalArgumentException exception){
+                JOptionPane.showMessageDialog(null, exception.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
-    // class cancelButtonListener implements ActionListener{
+    class cancelButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            mainController.returnProjectView();
+        }
+    }
 
-    // }
+    // Validating the inputs
+    private void checkNamePassword(String username, String password) throws IllegalArgumentException{
+        if(username.isEmpty()){
+            throw new IllegalArgumentException("Username must not be empty");
+        }else if(password.isEmpty()){
+            throw new IllegalArgumentException("Password must not be empty");
+        }
+    }
 
+    // Generate the user ID
     private String getUserID(String userType){
         if(userType == "Student"){
             return "S" + studentModel.generateCode(studentList.getSize());
@@ -96,6 +119,7 @@ public class RegisterController {
         }
     }
 
+    // Update the user ID whenever a new account is created
     private String updateID(String userType){
         if(userType == "Student"){
             return "S" + studentModel.generateCode(studentList.getSize()+1);

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -14,7 +15,6 @@ import Model.Administrator;
 import Model.Lecturer;
 import Model.LecturerList;
 import Model.Project;
-import Model.ProjectData;
 import Model.ProjectList;
 import Model.Student;
 import Model.StudentList;
@@ -22,6 +22,7 @@ import Model.User;
 import View.ProjectView;
 
 public class ProjectController {
+    private MainController mainController;
     private User user;
     private Project projectModel;
     private ProjectList projectList = new ProjectList();
@@ -30,11 +31,14 @@ public class ProjectController {
     private LecturerList lecturerList = new LecturerList();
     private StudentList studentList = new StudentList();
 
-    public ProjectController(Administrator user, ProjectView view){
+    public ProjectController(MainController mainController, Administrator user){
+        this.mainController = mainController;
         this.user = user;
-        this.projectView = view;
+        this.projectView = new ProjectView(user);
         this.filteredProjectList = new ArrayList<>(projectList.getProjects());
 
+        projectView.addLogoutButtonListener(new LogoutButtonListener());
+        projectView.addRegisterAccountButtonListener(new RegisterAccountButtonListener());
         projectView.addAdminAddProjectButtonListener(new AdminAddProjectButtonListener());
         // projectView.addFilterProjectsButtonListener(new GenerateButtonListener());
         projectView.addProjectLecturerSelectorListener(new ProjectLecturerSelectorListener());
@@ -45,15 +49,16 @@ public class ProjectController {
         projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
 
         populateTable();
-        projectView.defaultProjectView(user);
     }
 
-    public ProjectController(Lecturer user,ProjectView view){
+    public ProjectController(MainController mainController, Lecturer user){
+        this.mainController = mainController;
         this.user = user;
-        this.projectView = view;
+        this.projectView = new ProjectView(user);
         this.filteredProjectList = projectList.getFilteredProjects(user);
 
-        
+        // new ProjectController.Listeners
+        projectView.addLogoutButtonListener(new LogoutButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
         projectView.addLecturerAddProjectButtonListener(new LecturerAddProjectButtonListener());
         projectView.addAdminAddProjectButtonListener(new AdminAddProjectButtonListener());
@@ -67,20 +72,24 @@ public class ProjectController {
         projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
         
         populateTable();
-        projectView.defaultProjectView(user);
     }
 
-    public ProjectController(Student user, ProjectView view){
+    public ProjectController(MainController mainController, Student user){
+        this.mainController = mainController;
         this.user = user;
-        this.projectView = view;
+        this.projectView = new ProjectView(user);
         this.filteredProjectList = projectList.getFilteredProjects(user);
         
+        projectView.addLogoutButtonListener(new LogoutButtonListener());
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
         projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
 
         populateTable();
-        projectView.defaultProjectView(user);
+    }
+
+    public JPanel getProjectView(){
+        return projectView;
     }
 
 
@@ -149,7 +158,25 @@ public class ProjectController {
         populateTable();
     }
 
-    class LecturerAddProjectButtonListener implements ActionListener{
+    public class LogoutButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            if(!projectView.getUnassignConfirmation("Are you sure you want to log out?")){
+                return;
+            }
+
+            mainController.switchLoginView();
+        }
+    }
+
+    public class RegisterAccountButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            mainController.switchRegisterView();
+        }
+    }
+
+    public class LecturerAddProjectButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
             projectView.setupLecturerAddProjectPanel();
@@ -382,7 +409,7 @@ public class ProjectController {
             if (projectModel.getIsAssigned()) studentList.saveProjectDeletion(projectStudentId);
             lecturerList.saveProjectDeletion(projectLecturerId, projectId);
             projectList.saveProjectDeletion(projectId);
-            projectView.disableAllPanelTexts();
+            projectView.disableAllPanelElements();
         }
     }
 
@@ -411,4 +438,27 @@ public class ProjectController {
             projectView.disableContentEditMode();
         }
     }
+
+    // public static void main(String[] args){
+        // ProjectList projectList = new ProjectList();
+        // Lecturer lecturer2 = new Lecturer("L0001", "Tan", "l01");
+        // Administrator admin = new Administrator("A0001", "Admin", "a01");
+
+        // lecturer2.addproject("P0001");
+        // lecturer2.addproject("P0002");
+        // Student student = new Student("S001", "S1", "s01", "Data Science", "P0002");
+
+        // lecturer2.addproject("P0001");
+        // lecturer2.addproject("P0002");
+        // lecturer2.addproject("P0004");
+        // projectList.addItem(new Project("P0003", "Final Year", "Data", "Build this game for me or else you fail your FYP and spend another 10k on your degree", lecturer2));
+
+        // JFrame frame = new JFrame();
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setSize(1200, 700);
+        
+        // ProjectController projectController = new ProjectController(this, student);
+        // frame.add(projectController.getProjectView());
+        // frame.setVisible(true);
+    // }
 }
