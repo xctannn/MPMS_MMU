@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.text.DefaultCaret;
 
 
 public class CommentView extends JPanel{
@@ -33,6 +34,8 @@ public class CommentView extends JPanel{
     private JScrollPane commentScroll= new JScrollPane(commentArea);
     private JPanel submitButtonWrapper = new JPanel();
     private JPanel commentBoxWrapper = new JPanel();
+    private final Dimension COMMENT_SCROLL_DIMENTSION = new Dimension(720,400);
+    private final Dimension COMMENT_SCROLL_PANE_DIMENSION = new Dimension(650,100);
 
 
     public CommentView(){
@@ -48,13 +51,18 @@ public class CommentView extends JPanel{
         commentTablePanel.setBorder(BorderFactory.createEtchedBorder());
 
         commentTablePanel.add(titleWrapper,BorderLayout.EAST);
-        commentTablePanel.add(new JScrollPane(commentBlock),BorderLayout.NORTH);
-        commentBlock.setPreferredSize(new Dimension(600,500));
+        JScrollPane commentsScrollPane = new JScrollPane(commentBlock,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        commentsScrollPane.setPreferredSize(COMMENT_SCROLL_DIMENTSION);
+        commentsScrollPane.setMinimumSize(COMMENT_SCROLL_DIMENTSION);
+        commentsScrollPane.setMaximumSize(COMMENT_SCROLL_DIMENTSION);
+        commentTablePanel.add(commentsScrollPane,BorderLayout.CENTER);
+
 
         submitButtonWrapper.add(submitButton);
-        commentScroll.setPreferredSize(new Dimension(550,100));
-
-        commentBoxWrapper.add(commentScroll);
+        commentScroll.setPreferredSize(COMMENT_SCROLL_PANE_DIMENSION);
+        commentScroll.setMaximumSize(COMMENT_SCROLL_PANE_DIMENSION);
+        commentScroll.setMinimumSize(COMMENT_SCROLL_PANE_DIMENSION);
+        commentBoxWrapper.add(commentScroll,BorderLayout.CENTER);
         commentTablePanel.add(commentBoxWrapper,  BorderLayout.SOUTH);
         commentTablePanel.add(submitButtonWrapper, BorderLayout.SOUTH);
         tableView.add(commentTablePanel,BorderLayout.CENTER);
@@ -63,7 +71,6 @@ public class CommentView extends JPanel{
 
     }
 
-    
     public JTextField getCommentField() {
         return commentField;
     }

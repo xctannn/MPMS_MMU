@@ -30,6 +30,7 @@ public class CommentController {
 
 
 
+
     public CommentController(CommentModel commentModel, User user ,Project currentProject){
         this.model = commentModel;
         this.commentList = new CommentList();
@@ -42,12 +43,21 @@ public class CommentController {
 
     }
     
+    public JPanel getCommentView(){
+        return commentView;
+    }
+
+    public void updateCommentPanel(){
+        commentView.getCommentBlock().removeAll();
+
+        createCommentPanel();
+    }
 
     public void createCommentPanel(){
+        final Dimension EACH_ROW_DIMENSION = new Dimension(700,100);
         JPanel commentPanel = commentView.getCommentBlock();
         ArrayList<CommentModel> comments = commentList.getComments();
         commentPanel.setLayout(new BoxLayout(commentPanel, BoxLayout.Y_AXIS));
-
         
         String currentProjectId = projectModel.getId();
         for(int i = 0; i < comments.size(); i++){
@@ -56,8 +66,14 @@ public class CommentController {
                 frame.setLayout(new GridLayout(2,1));
                 frame.setBorder(BorderFactory.createEtchedBorder());
                 frame.setBackground(Color.getHSBColor(188, 87, 68));
-                frame.setSize(new Dimension(750,300));
+                frame.setMinimumSize(EACH_ROW_DIMENSION);
+                frame.setPreferredSize(EACH_ROW_DIMENSION);
+                frame.setMaximumSize(EACH_ROW_DIMENSION);
+
                 JPanel inframePanel = new JPanel();
+                inframePanel.setMinimumSize(EACH_ROW_DIMENSION);
+                inframePanel.setPreferredSize(EACH_ROW_DIMENSION);
+                inframePanel.setMaximumSize(EACH_ROW_DIMENSION);
                 inframePanel.setLayout(new GridLayout(1,2));
                 inframePanel.setBorder(BorderFactory.createEtchedBorder());
                 CommentModel comment = comments.get(i);
@@ -89,19 +105,13 @@ public class CommentController {
 
                 // Clear comment field and add comment to area
                 commentView.getCommentArea().setText("");
+                
                 updateCommentPanel();
 
             }
         }
     }
     
-    public JPanel getCommentView(){
-        return commentView;
-    }
 
-    public void updateCommentPanel(){
-        commentView.getCommentBlock().removeAll();
-        createCommentPanel();
-    }
 
 }

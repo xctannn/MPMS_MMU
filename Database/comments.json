@@ -1,61 +1,7 @@
 [ {
   "commentID" : "C0001",
-  "userID" : "S0001",
-  "username" : "S1",
-  "commentString" : "Sir how do we access this file?",
-  "projectID" : "P0001"
-}, {
-  "commentID" : "C0002",
   "userID" : "L0001",
   "username" : "Tan",
-  "commentString" : "sdjncasdnfseunfosd",
-  "projectID" : "P0001"
-}, {
-  "commentID" : "C0003",
-  "userID" : "L0001",
-  "username" : "Tan",
-  "commentString" : "hjfduidhdfusdhvguidfv",
-  "projectID" : "P0001"
-}, {
-  "commentID" : "C0004",
-  "userID" : "L0001",
-  "username" : "Tan",
-  "commentString" : "skndajkdawd",
-  "projectID" : "P0001"
-}, {
-  "commentID" : "C0005",
-  "userID" : "L0001",
-  "username" : "Tan",
-  "commentString" : "Im lost",
-  "projectID" : "P0001"
-}, {
-  "commentID" : "C0006",
-  "userID" : "L0001",
-  "username" : "Tan",
-  "commentString" : "jom makan\n",
-  "projectID" : "P0001"
-}, {
-  "commentID" : "C0007",
-  "userID" : "L0001",
-  "username" : "Tan",
-  "commentString" : "No problem mate",
-  "projectID" : "P0001"
-}, {
-  "commentID" : "C0008",
-  "userID" : "L0001",
-  "username" : "Tan",
-  "commentString" : "Bunch of yesses\n",
-  "projectID" : "P0001"
-}, {
-  "commentID" : "C0009",
-  "userID" : "L0001",
-  "username" : "Tan",
-  "commentString" : "HeHeHe\nWe good",
-  "projectID" : "P0001"
-}, {
-  "commentID" : "C0010",
-  "userID" : "L0001",
-  "username" : "Tan",
-  "commentString" : "hei monica",
+  "commentString" : "hi",
   "projectID" : "P0001"
 } ]
