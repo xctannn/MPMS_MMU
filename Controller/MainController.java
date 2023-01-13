@@ -42,7 +42,7 @@ public class MainController {
         cardLayout.show(mainView,"register");
     }
 
-    public void returnAdminView(){
+    public void returnProjectView(){
         cardLayout.show(mainView, "admin");
     }
 

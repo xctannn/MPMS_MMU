@@ -94,7 +94,7 @@ public class RegisterController {
     class cancelButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            mainController.returnAdminView();
+            mainController.returnProjectView();
         }
     }
 
