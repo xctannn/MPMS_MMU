@@ -1,5 +1,6 @@
 package Model;
 
+
 public class Project{
     private String id;
     private String name;
@@ -13,8 +14,6 @@ public class Project{
     private boolean isActive = false;
 
 
-    public Project(){};
-
     //Constructor
     public Project(String id, String name, String specialization, String content, String lecturerId, String lecturerName,
     String studentAssignedId, boolean isAssigned, boolean isActive){
@@ -27,42 +26,21 @@ public class Project{
         this.studentAssignedId = studentAssignedId;
         this.isAssigned = isAssigned;
         this.isActive = isActive;
-
     }
+
+    public Project(){};
+    
     public Project(String id, String name, String specialization, String content, String lecturerId, String lecturerName){
         this.id = id;
         this.name = name;
         this.specialization = specialization;
         this.content = content;
         this.lecturerId = lecturerId;
-        this.studentAssignedId = null;
-        this.isAssigned = false;
-        this.isActive = false;
-
-    }
-
-
-
-
-    
-    public Project(String id, String name, String specialization, String content, String lecturerId){
-        this.id = id;
-        this.name = name;
-        this.specialization = specialization;
-        this.content = content;
-        this.lecturerId = lecturerId;
+        this.lecturerName = lecturerName;
         this.studentAssignedId = null;
         this.isAssigned = false;
         this.isActive = true;
-
     }
-
-    // This is for temporary testing in main for comment
-    public Project(String id){
-        this.id = id;
-    };
-    
-    
 
     // GETTERS AND SETTERS
     public String getId(){
@@ -104,7 +82,6 @@ public class Project{
     public boolean getIsActive(){
         return isActive;
     }
-    
 
     public void setId(String id){
         this.id = id;
@@ -115,7 +92,7 @@ public class Project{
     }
     
     public void setSpecialization(String specialization){
-        this.specialization = id;
+        this.specialization = specialization;
     }
     
     public void setContent(String content){
@@ -127,6 +104,10 @@ public class Project{
         this.lecturerName = lecturerName;
     }
 
+    public void setStudent(String studentAssignedId, String studentAssignedName){
+        this.studentAssignedId = studentAssignedId;
+        this.studentAssignedName = studentAssignedName;
+    }
 
     public void setIsAssigned(boolean isAssigned){
         this.isAssigned = isAssigned;
@@ -136,6 +117,4 @@ public class Project{
         this.isActive = isActive;
     }
 
-    public void setStudent(String studentId, String studentName) {
-    }
 }
