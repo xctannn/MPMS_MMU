@@ -39,7 +39,7 @@ public class LoginController{
         public void actionPerformed(ActionEvent e){
             try{
                 String userID = loginView.getUserID();
-                String password = loginView.getPassword();
+                String password = new String(loginView.getPassword());
                 String userType = loginView.getUserType();
 
                 checkNamePassword(userID, password);
@@ -87,7 +87,7 @@ public class LoginController{
         if(model == null){
             throw new IllegalArgumentException("User account does not exist");
         }else if(!(password.equals(((User) model).getPassword()))){
-            throw new IllegalArgumentException("Password do no match");
+            throw new IllegalArgumentException("Password does no match");
         }
     }
 }

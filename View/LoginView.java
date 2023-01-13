@@ -11,6 +11,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class LoginView extends JPanel{
@@ -23,7 +24,7 @@ public class LoginView extends JPanel{
     private JLabel userIDLabel = new JLabel("User ID: ");
     private JLabel passwordLabel = new JLabel("Password: ");
     private JTextField userIDField = new JTextField(20);
-    private JTextField passwordField = new JTextField(20);
+    private JPasswordField passwordField = new JPasswordField(20);
     private JButton loginButton = new JButton("Login");
 
     // Construct Login View
@@ -79,8 +80,8 @@ public class LoginView extends JPanel{
     }
 
     // Get the password
-    public String getPassword(){
-        return passwordField.getText();
+    public char[] getPassword(){
+        return passwordField.getPassword();
     }
 }  
 
