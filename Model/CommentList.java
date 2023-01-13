@@ -60,21 +60,20 @@ public class CommentList implements JsonList<CommentModel> {
         return String.format("%04d", comments.size() + 1);
     }
 
+    /**
+     * While adding a new comment, it will set the comments list again 
+     * and add a new comment then save into comments.json
+     */
     @Override
     public void addItem(CommentModel item) {
         setList();
         this.comments.add(item);
         save();
-        // try {
-        //     parser.serialize();
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
     }
 
     /**
      * A getter for a specific comment id in an arraylist of comments
-     * @return comment
+     * @return comment, null
      */
     @Override
     public CommentModel getItem(String id) {
@@ -87,6 +86,9 @@ public class CommentList implements JsonList<CommentModel> {
         return null;
     }
 
+    /**
+     * reads the comments.java file into the arraylist comments
+     */
     @Override
     public void setList() {
         try{
