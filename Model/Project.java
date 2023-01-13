@@ -47,130 +47,112 @@ public class Project{
 
 
     // GETTERS AND SETTERS
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public String getId(){
         return id;
     }
 
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public String getName(){
         return name;
     }
 
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public String getSpecialization(){
         return specialization;
     }
 
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public String getLecturerId(){
         return lecturerId;
     }
 
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public String getLecturerName(){
         return lecturerName;
     }
 
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public String getStudentAssignedId(){
         return studentAssignedId;
     }
 
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public String getStudentAssignedName(){
         return studentAssignedName;
     }
 
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public String getContent(){
         return content;
     }
 
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public boolean getIsAssigned(){
         return isAssigned;
     }
 
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public boolean getIsActive(){
         return isActive;
     }
 
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public void setId(String id){
         this.id = id;
     }
 
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public void setName(String name){
         this.name = name;
     }
     
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public void setSpecialization(String specialization){
         this.specialization = specialization;
     }
     
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public void setContent(String content){
         this.content = content;
     }
     
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public void setLecturer(String lecturerId, String lecturerName){
         this.lecturerId = lecturerId;
         this.lecturerName = lecturerName;
     }
 
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public void setStudent(String studentAssignedId, String studentAssignedName){
         this.studentAssignedId = studentAssignedId;
         this.studentAssignedName = studentAssignedName;
     }
 
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public void setIsAssigned(boolean isAssigned){
         this.isAssigned = isAssigned;
     }
 
-    /*
-     * Tan Xiao Chin
-     */
+    
+    // Tan Xiao Chin    
     public void setIsActive(boolean isActive){
         this.isActive = isActive;
     }
