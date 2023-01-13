@@ -15,7 +15,7 @@ public class CommentModel {
     public CommentModel(){
     }
     /**
-     * This constructor creates a new Comment object with the given commentID, project, user, commentString
+     * This constructor creates a new Comment object with the given commentID, projectID, user and commentString
      */
     public CommentModel(String commentID, String projectID, User user , String commentString){
         this.commentID = commentID;
