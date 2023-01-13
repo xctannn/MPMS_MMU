@@ -1,6 +1,8 @@
 package Controller;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import View.LoginView;
@@ -11,18 +13,25 @@ import Model.AdministratorList;
 
 public class LoginController{
 
+    // Initializing instances
     private StudentList studentList = new StudentList();
     private LecturerList lecturerList = new LecturerList();
     private AdministratorList adminList = new AdministratorList();
 
     private LoginView loginView;
 
-    public LoginController(LoginView view) {
-        this.loginView = view;
+    // Construct login controller
+    public LoginController() {
+        this.loginView = new LoginView();
 
         loginView.addLoginButtonListener(new loginButtonListener());
     }
 
+    public JPanel getLoginView(){
+        return loginView;
+    }
+
+    // Implementing the action listener to the login button
     class loginButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -49,6 +58,7 @@ public class LoginController{
         }
     }
 
+    // Get the usertype and return the object
     private Object getModel(String userType){
         String userID = loginView.getUserID();
         if(userType == "Student"){
@@ -60,6 +70,7 @@ public class LoginController{
         }
     }
 
+    // Validating the inputs
     private void checkNamePassword(String userID, String password) throws IllegalArgumentException{
         if(userID.isEmpty()){
             throw new IllegalArgumentException("Username must not be empty");
@@ -68,6 +79,7 @@ public class LoginController{
         }
     }
 
+    // Check if the user existed in database and validate the password
     private void checkUserExists(String userType, String password){
         Object model = getModel(userType);
         if(model == null){
