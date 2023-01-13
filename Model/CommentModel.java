@@ -3,7 +3,6 @@ package Model;
 /**
  * A comment will contain the project id of a project, the user who is commenting and the commented string
  * @author Kam Kar Hou
- * @version 1.0
  */
 public class CommentModel {
     private String commentID;
@@ -17,14 +16,10 @@ public class CommentModel {
     }
     /**
      * This constructor creates a new Comment object with the given commentID, project, user, commentString
-     * @param commentID represents an unique id to be identified in the comments.json
-     * @param project represents for the current project the users are commenting into
-     * @param user represents the current author of the comment
-     * @param commentString represents the written comment in the project
      */
-    public CommentModel(String commentID, Project project, User user , String commentString){
+    public CommentModel(String commentID, String projectID, User user , String commentString){
         this.commentID = commentID;
-        this.projectID = project.getId();
+        this.projectID = projectID;
         this.userID = user.getId();
         this.username = user.getUsername();
         this.commentString = commentString;
@@ -32,7 +27,6 @@ public class CommentModel {
     
     /**
      * Getter for Comment ID
-     * @return commentID
      */
     public String getCommentID() {
         return commentID;
@@ -40,7 +34,6 @@ public class CommentModel {
 
     /**
      * Getter for User ID
-     * @return userID
      */
     public String getUserID(){
         return userID;
@@ -48,7 +41,6 @@ public class CommentModel {
         
     /**
      * Getter for Username
-     * @return username
      */
     public String getUsername(){
         return username;
@@ -56,7 +48,6 @@ public class CommentModel {
         
     /**
      * Getter for Project ID
-     * @return projectID
      */
     public String getProjectID(){
         return projectID;
@@ -64,7 +55,6 @@ public class CommentModel {
         
     /**
      * Getter for Written Comment
-     * @return commentString
      */
     public String getCommentString(){
         return commentString;

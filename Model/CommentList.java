@@ -1,16 +1,12 @@
 package Model;
 
 import java.util.ArrayList;
-
-import java.io.File;
 import java.io.IOException;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * A list of comments will have several comments from comments.json which implements a parser from JsonList.java
- * @author Kam Kar Hou
- * @version 1.0
+ * Author: Kam Kar Hou
  */
 public class CommentList implements JsonList<CommentModel> {
     JsonParser<CommentModel> parser = new JsonParser<>("/Database/comments.json", CommentModel.class);
@@ -26,7 +22,6 @@ public class CommentList implements JsonList<CommentModel> {
     /**
      * A contructor that filters out the projects which are not the current project
      * to see the current project's comments
-     * @param currentProject represents the project that is current viewed
      */
     public CommentList(Project currentProject){
         try {
@@ -46,7 +41,6 @@ public class CommentList implements JsonList<CommentModel> {
 
     /**
      * Getter for Arraylist of comments
-     * @return Arraylist of comments
      */
     public ArrayList<CommentModel> getComments(){
         return comments;
@@ -54,7 +48,6 @@ public class CommentList implements JsonList<CommentModel> {
     /**
      * This is to return a comment id with the format 0001 to 9999
      * to be added with a string "C" to produce a unique ID e.g. C0001
-     * @return Comment Id Number
      */
     public String generateCommentIdNum(){
         return String.format("%04d", comments.size() + 1);
@@ -73,7 +66,6 @@ public class CommentList implements JsonList<CommentModel> {
 
     /**
      * A getter for a specific comment id in an arraylist of comments
-     * @return comment, null
      */
     @Override
     public CommentModel getItem(String id) {
@@ -113,6 +105,9 @@ public class CommentList implements JsonList<CommentModel> {
 
         
     }
+    /**
+     * A method gets the size of the array
+     */
     @Override
     public int getSize() {
         ArrayList<CommentModel> tempList;

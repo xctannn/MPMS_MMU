@@ -23,19 +23,19 @@ import View.CommentView;
 
 public class CommentController {
     private User user;
-    private Project projectModel;
-    private CommentModel model;
+    private String currentProjectID;
+
     private CommentView commentView;
     private CommentList commentList;
 
 
 
 
-    public CommentController(CommentModel commentModel, User user ,Project currentProject){
-        this.model = commentModel;
+    public CommentController( User user ,String currentProjectID){
+
         this.commentList = new CommentList();
         this.commentView = new CommentView();
-        this.projectModel = currentProject;
+        this.currentProjectID = currentProjectID;
         this.user = user;
         commentView.getSubmitButton().addActionListener(new commentSubmitListener());
         
@@ -59,9 +59,8 @@ public class CommentController {
         ArrayList<CommentModel> comments = commentList.getComments();
         commentPanel.setLayout(new BoxLayout(commentPanel, BoxLayout.Y_AXIS));
         
-        String currentProjectId = projectModel.getId();
         for(int i = 0; i < comments.size(); i++){
-            if(comments.get(i).getProjectID().equals(currentProjectId)){
+            if(comments.get(i).getProjectID().equals(currentProjectID)){
                 JPanel frame = new JPanel();
                 frame.setLayout(new GridLayout(2,1));
                 frame.setBorder(BorderFactory.createEtchedBorder());
@@ -77,7 +76,6 @@ public class CommentController {
                 inframePanel.setLayout(new GridLayout(1,2));
                 inframePanel.setBorder(BorderFactory.createEtchedBorder());
                 CommentModel comment = comments.get(i);
-                // String commentID = comment.getCommentID();
                 String userIdentityString = "ID: " + comment.getUserID() + "   " +"Name: " + comment.getUsername();
                 JLabel userLabel = new JLabel(userIdentityString);
                 JLabel commentString =  new JLabel(comment.getCommentString());
@@ -87,6 +85,7 @@ public class CommentController {
                 frame.add(inframePanel);
                 frame.add(commentString);
                 commentPanel.add(frame);
+                commentView.getcommentsScrollPane().revalidate();;
             }
         }
     }
@@ -96,7 +95,7 @@ public class CommentController {
             if (e.getSource() == commentView.getSubmitButton()) {
                 // Get comment from field and add to model
                 String newCommentId = "C" + commentList.generateCommentIdNum();
-                Project newProject = projectModel;
+                String newProject = currentProjectID;
                 User commentor = user;
                 String newCommentString = commentView.getCommentArea().getText();
 

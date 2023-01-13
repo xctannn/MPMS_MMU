@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.text.DefaultCaret;
 
 
 public class CommentView extends JPanel{
@@ -36,6 +35,7 @@ public class CommentView extends JPanel{
     private JPanel commentBoxWrapper = new JPanel();
     private final Dimension COMMENT_SCROLL_DIMENTSION = new Dimension(720,400);
     private final Dimension COMMENT_SCROLL_PANE_DIMENSION = new Dimension(650,100);
+    private JScrollPane commentsScrollPane = new JScrollPane(commentBlock,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
 
     public CommentView(){
@@ -51,7 +51,6 @@ public class CommentView extends JPanel{
         commentTablePanel.setBorder(BorderFactory.createEtchedBorder());
 
         commentTablePanel.add(titleWrapper,BorderLayout.EAST);
-        JScrollPane commentsScrollPane = new JScrollPane(commentBlock,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         commentsScrollPane.setPreferredSize(COMMENT_SCROLL_DIMENTSION);
         commentsScrollPane.setMinimumSize(COMMENT_SCROLL_DIMENTSION);
         commentsScrollPane.setMaximumSize(COMMENT_SCROLL_DIMENTSION);
@@ -84,5 +83,8 @@ public class CommentView extends JPanel{
     }
     public JPanel getCommentBlock(){
         return commentBlock;
+    }
+    public JScrollPane getcommentsScrollPane(){
+        return commentsScrollPane;
     }
 }
