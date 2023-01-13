@@ -40,13 +40,6 @@ public class CommentList implements JsonList<CommentModel> {
             e.printStackTrace();
         }    
     }
-
-    /**
-     * Kam Kar Hou
-     */
-    public ArrayList<CommentModel> getComments(){
-        return comments;
-    }
     
     /**
      * Kam Kar Hou
@@ -129,6 +122,12 @@ public class CommentList implements JsonList<CommentModel> {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    // SETTERS AND GETTERS
+    // Kam Kar Hou
+    public ArrayList<CommentModel> getComments(){
+        return comments;
     }
 
 }

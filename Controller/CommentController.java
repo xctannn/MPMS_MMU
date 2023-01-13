@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -42,7 +44,7 @@ public class CommentController {
         this.currentProjectID = currentProjectID;
         this.user = currentUser;
         commentView.getSubmitButton().addActionListener(new commentSubmitListener());
-        
+        commentView.getReturnButton().addActionListener(new returnListener());
         createCommentPanel();
     }
 
@@ -114,21 +116,39 @@ public class CommentController {
                 User commentor = user;
                 String newCommentString = commentView.getCommentArea().getText();
 
-                CommentModel newComment = new CommentModel(newCommentId, newProject,commentor, newCommentString);
-                commentList.addItem(newComment);
+                if(!newCommentString.isBlank()){
+                    CommentModel newComment = new CommentModel(newCommentId, newProject,commentor, newCommentString);
+                    commentList.addItem(newComment);
+    
+                    // Clear commentfield and error message if any
+                    commentView.getErrorMessageLabel().setText("");
+                    commentView.getCommentArea().setText("");
+                    updateCommentPanel();
+                }else{
+                    commentView.getErrorMessageLabel().setText("Error: Textbox cannot be empty");
+                    commentView.getCommentArea().setText("");
+                    updateCommentPanel();
+                }
 
-                // Clear commentfield
-                commentView.getCommentArea().setText("");
 
-                updateCommentPanel();
 
             }
         }
     }
     
     /**
-     * Kam Kar Hou
+     * Yaw Boon Zhe
+     * Purpose: Return to the project screen when the return button is clicked
      */
+    class returnListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            //TODO
+        }
+    }
+
+    // SETTERS AND GETTERS
+    // Kam Kar Hou
     public JPanel getCommentView(){
         return commentView;
     }
