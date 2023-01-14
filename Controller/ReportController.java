@@ -17,21 +17,25 @@ import java.io.IOException;
 import java.io.BufferedWriter;
 
 /*
-* Purpose: Controller for obtaining information ProjectView to manipulate Project data 
+* Iven Low
+* Purpose: Controller for obtaining information of filtered projects list to generate text file report
 */
 
 public class ReportController {
-    private Administrator user;
+    //private Administrator user;
     private ProjectList projectList;
     private ProjectView projectView;
     private CommentList commentList = new CommentList();;
     private LecturerList lecturerList = new LecturerList();
-    private ArrayList<String> selectionWheelOptions = new ArrayList<String>();
+    //private ArrayList<String> selectionWheelOptions = new ArrayList<String>();
     private ArrayList<String> specializationWheelOptions = new ArrayList<String>();
     
-
+/*
+* Iven Low
+* Purpose: Controller for obtaining information of filtered projects list to generate text file report
+*/
     public ReportController(Administrator user, ProjectView view){
-        this.user = user;
+        //this.user = user;
         this.projectView = new ProjectView(user);
         this.projectList = new ProjectList();
     }
