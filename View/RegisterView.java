@@ -14,20 +14,22 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.GridBagConstraints;
 
-import Model.Student;
 import Model.StudentList;
 
+/*
+ * Chua Hui Yi
+ * Purpose: A view class for the register system
+ */
 public class RegisterView extends JPanel{
 
     // Initializing instances
-    private Student studentModel = new Student();
     private StudentList studentList = new StudentList();
 
-    String studentId = "S" + studentModel.generateCode(studentList.getSize());
+    String studentId = "S" + studentList.generateCode(studentList.getSize());
 
     // Arrays that contain choices to be set into the combobox
     private String[] userList = {"Student", "Lecturer", "Admin"};
-    private String[] specializationList = {"Data Science", "Software Engineering", "Game Development", "Cybersecurity"};
+    private String[] specializationList = {"Data Science", "Software Engineering", "Game Development", "Cybersecurity", "Artificial Intelligence"};
     
     // Register View Components
     private JComboBox<String> userType = new JComboBox<>(userList);
@@ -46,7 +48,10 @@ public class RegisterView extends JPanel{
 
     private GridBagConstraints gbc = new GridBagConstraints();
     
-    // Construct Register View
+    /*
+    * Chua Hui Yi
+    * Constructor to build the view for register system
+    */
     public RegisterView() {
         userType.setSelectedItem("Student");
         this.setLayout(new BorderLayout());
@@ -54,7 +59,7 @@ public class RegisterView extends JPanel{
 
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        // Arrange the component by using the addComponent method
+        // RegisterView Components Setup
         addComponent(registerPanel, userTypeLabel, userType, gbc,0,1);
         addComponent(registerPanel, userIDLabel, userID, gbc,0,2);
         addComponent(registerPanel, usernameLabel, usernameField, gbc,0,3);
@@ -72,7 +77,10 @@ public class RegisterView extends JPanel{
         this.add(registerPanel, BorderLayout.CENTER);
     }
     
-    // Method to set the gridbagconstraints to add the components to the panel
+    /*
+     * Chua Hui Yi
+     * Purpose: To set the gridbagconstraints to add the components to the panel
+     */
     private void addComponent(JPanel panel, JLabel label, JComponent component, GridBagConstraints gbc, int gridx, int gridy) {
         gbc.gridx = gridx;
         gbc.gridy = gridy;
@@ -81,12 +89,12 @@ public class RegisterView extends JPanel{
         panel.add(component, gbc);
     }
 
-    // Method to add the action listener to the combobox
+    // Chua Hui Yi
     public void addUserTypeListener(ActionListener listenForUserType){
         userType.addActionListener(listenForUserType);
     }
 
-    // Method to add the action listener to the register button
+    // Chua Hui Yi
     public void addRegisterButtonListener(ActionListener listenforRegisterButton){
         registerButton.addActionListener(listenforRegisterButton);
     }
@@ -95,32 +103,33 @@ public class RegisterView extends JPanel{
         cancelButton.addActionListener(listenforCancelButton);
     }
 
-    // Set the user ID
+    // GETTERS AND SETTERS
+    // Chua Hui Yi
     public void setID(String userId){
         userID.setText(userId);
     }
 
-    // Get the combobox for specialization
+    // Chua Hui Yi
     public JComboBox<String> getComboBox(){
         return specialization;
     }
 
-    // Get the specialization from the combobox
+    // Chua Hui Yi
     public String getSpecialization(){
         return specialization.getSelectedItem().toString();
     }
 
-    // Get user type
+    // Chua Hui Yi
     public String getUserType(){
         return userType.getSelectedItem().toString();
     }
 
-    // Get username
+    // Chua Hui Yi
     public String getUsername(){
         return usernameField.getText();
     }
 
-    // Get password
+    // Chua Hui Yi
     public String getPassword(){
         return passwordField.getText();
     }
