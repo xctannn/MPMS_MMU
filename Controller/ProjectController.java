@@ -463,7 +463,8 @@ public class ProjectController {
     class ProjectCommentsButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            // insert event handler here
+            String selectedProjectId = projectModel.getId();
+            mainController.switchCommentView(selectedProjectId, user);
         }
     }
 
