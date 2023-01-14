@@ -6,7 +6,6 @@ package Model;
  * Purpose: A comment will contain the project id of a project, the user who is commenting and the commented string
  */ 
 public class CommentModel {
-    private String commentID;
     private String userID;
     private String username;
     private String commentString;
@@ -20,10 +19,9 @@ public class CommentModel {
      
     /**
      * Kam Kar Hou
-     * Purpose: This constructor creates a new Comment object with the given commentID, projectID, user and commentString 
+     * Purpose: This constructor creates a new Comment object with the given projectID, user and commentString 
      */
-    public CommentModel(String commentID, String projectID, User user , String commentString){
-        this.commentID = commentID;
+    public CommentModel( String projectID, User user , String commentString){
         this.projectID = projectID;
         this.userID = user.getId();
         this.username = user.getUsername();
@@ -31,11 +29,6 @@ public class CommentModel {
     }
     
     // SETTERS AND GETTERS
-    // Kam Kar Hou
-    public String getCommentID() {
-        return commentID;
-    }
-     
     // Kam Kar Hou
     public String getUserID(){
         return userID;

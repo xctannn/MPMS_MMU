@@ -110,14 +110,13 @@ public class CommentController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == commentView.getSubmitButton()) {
-                // Get comment from field and add to model
-                String newCommentId = "C" + commentList.generateCommentIdNum();
+                // Get comment from field and add to object model
                 String newProject = currentProjectID;
                 User commentor = user;
                 String newCommentString = commentView.getCommentArea().getText();
 
                 if(!newCommentString.isBlank()){
-                    CommentModel newComment = new CommentModel(newCommentId, newProject,commentor, newCommentString);
+                    CommentModel newComment = new CommentModel( newProject,commentor, newCommentString);
                     commentList.addItem(newComment);
     
                     // Clear commentfield and error message if any
