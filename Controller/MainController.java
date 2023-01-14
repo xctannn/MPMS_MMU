@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import Model.Administrator;
 import Model.Lecturer;
 import Model.Student;
+import Model.User;
 
 /*
  * Purpose: Redirect user to different pages of the system
@@ -30,11 +31,12 @@ public class MainController {
         this.loginController = new LoginController(this);
         this.registerController = new RegisterController(this);
         this.projectController = new ProjectController(this, new Administrator());
-        // this.commentController = new CommentController(this);
+        this.commentController = new CommentController(this, new Administrator(), "");
 
         mainView.add(loginController.getLoginView(), "login", 0);
         mainView.add(registerController.getRegisterView(), "register", 1);
         mainView.add(projectController.getProjectView(), "startProjectView", 2);
+        mainView.add(commentController.getCommentView(), "startCommentView", 3);
     }
 
     // Yaw Boon Zhe
@@ -90,13 +92,16 @@ public class MainController {
         cardLayout.show(mainView, "student");
     }
 
-    // pseudo code for how to switch to comment view
-    // public void switchCommentView(String projectId, User user){
-    //     mainView.remove(3);
-    //     this.commentController = new CommentController(this, projectId, user);
-    //     mainView.add(projectController.getProjectView(), "student", 2);
-    //     cardLayout.show(mainView, "comment");
-    // }
+    /*
+     * Yaw Boon Zhe
+     * Purpose: redirect user to comment view
+     */
+    public void switchCommentView(String projectId, User user){
+        mainView.remove(3);
+        this.commentController = new CommentController(this, user, projectId);
+        mainView.add(commentController.getCommentView(), "comment", 3);
+        cardLayout.show(mainView, "comment");
+    }
 
     // Yaw Boon Zhe
     public void init(){
@@ -111,6 +116,5 @@ public class MainController {
     public static void main(String[] args){
         MainController main = new MainController();
         main.init();
-
     } 
 }

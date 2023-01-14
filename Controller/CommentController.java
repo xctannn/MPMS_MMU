@@ -27,6 +27,7 @@ import View.CommentView;
  * Purpose: CommentController handles the method updating and creating commentblocks, revalidating scrollpane from commentView.java
  */
 public class CommentController {
+    private MainController mainController;
     private User user;
     private String currentProjectID;
     private CommentView commentView;
@@ -37,8 +38,8 @@ public class CommentController {
      * Purpose: Creates a new CommentController with the given user and projectID
      * also adds an action listener and also handles the creation of commentBlocks.
      */
-    public CommentController( User currentUser ,String currentProjectID){
-
+    public CommentController(MainController mainController, User currentUser, String currentProjectID){
+        this.mainController = mainController;
         this.commentList = new CommentList();
         this.commentView = new CommentView();
         this.currentProjectID = currentProjectID;
@@ -143,7 +144,7 @@ public class CommentController {
     class returnListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            //TODO
+            mainController.returnProjectView();
         }
     }
 
