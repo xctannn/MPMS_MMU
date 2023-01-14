@@ -1,21 +1,11 @@
 import javax.swing.JFrame;
 
 import Controller.ProjectController;
-import Controller.ReportController;
 import Model.Administrator;
 import Model.Lecturer;
 import Model.Project;
-//import Model.Report;
 import Model.Student;
 import View.ProjectView;
-//import View.ReportView;
-import Controller.CommentController;
-import Controller.MainController;
-import Model.CommentModel;
-import Model.Lecturer;
-import Model.Project;
-import View.ProjectView;
-//import View.CommentView;
 
 public class Main {
     public static void main(String[] args){
