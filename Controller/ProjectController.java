@@ -16,6 +16,7 @@ import Model.Lecturer;
 import Model.LecturerList;
 import Model.Project;
 import Model.ProjectList;
+//import Model.Report;
 import Model.Student;
 import Model.StudentList;
 import Model.User;
@@ -30,17 +31,22 @@ public class ProjectController {
     private ProjectView projectView;
     private LecturerList lecturerList = new LecturerList();
     private StudentList studentList = new StudentList();
+    private ReportController reportController;
+    private ArrayList<String> selectionWheelOptions = new ArrayList<String>();
+    //private ArrayList<String> specializationWheelOptions = new ArrayList<String>();
 
-    public ProjectController(MainController mainController, Administrator user){
-        this.mainController = mainController;
+    public ProjectController(Administrator user, ProjectView view){
+    //public ProjectController(MainController mainController, Administrator user){
+        //this.mainController = mainController;
         this.user = user;
         this.projectView = new ProjectView(user);
         this.filteredProjectList = new ArrayList<>(projectList.getProjects());
+        this.reportController = new ReportController(user, view);
 
         projectView.addLogoutButtonListener(new LogoutButtonListener());
         projectView.addRegisterAccountButtonListener(new RegisterAccountButtonListener());
         projectView.addAdminAddProjectButtonListener(new AdminAddProjectButtonListener());
-        // projectView.addFilterProjectsButtonListener(new GenerateButtonListener());
+        projectView.addGenerateReportButtonListener(new GenerateReportButtonListener());
         projectView.addProjectLecturerSelectorListener(new ProjectLecturerSelectorListener());
         projectView.addAssignButtonListener(new AssignButtonListener());
         projectView.addTableSelectionListener(new TableSelectionListener());
@@ -202,22 +208,45 @@ public class ProjectController {
         }
     }
 
-    // class FilterProjectsButtonListener implements ActionListener{
-    //     @Override
-    //     public void actionPerformed(ActionEvent e){
-    //        // implement what happens after the filter projects button is clicked
-    //        String reportID = reportModel.getId();
+    class GenerateReportButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            if(selectionWheelOptions.isEmpty()){
+                projectView.getGenerateReportList(selectionWheelOptions);
+            }
 
-    //        try{
-    //             ArrayList<String> viewListArray = reportList.getViewList();
-    //            //
-    //            // get the report list i think? by who blabla
-    //        }catch(IllegalArgumentException exception){
-    //            ProjectView.displayErrorMessage("There are no projects to generate report");
+            try{
+                String selectedOptions = projectView.getGenerateReportOptions(selectionWheelOptions);
+                if (selectedOptions.equals(selectionWheelOptions.get(1))){
+                    reportController.allProjectList();
+                }
+                else if (selectedOptions.equals(selectionWheelOptions.get(2))){
+                    reportController.specializationProjectList();
+                }
+                else if (selectedOptions.equals(selectionWheelOptions.get(3))){
+                    reportController.lecturerProjectList();
+                }
+                else if (selectedOptions.equals(selectionWheelOptions.get(4))){
+                    reportController.inactiveProjectList();
+                }
+                else if (selectedOptions.equals(selectionWheelOptions.get(5))){
+                    reportController.activeProjectList();
+                }
+                else if (selectedOptions.equals(selectionWheelOptions.get(6))){
+                    reportController.assignedProjectList();
+                }
+                else if (selectedOptions.equals(selectionWheelOptions.get(7))){
+                    reportController.unassignedProjectList();
+                }
+                else if (selectedOptions.equals(selectionWheelOptions.get(8))){
+                    reportController.commentProjectList();
+                }
 
-    //        }
-    //     }
-    // }
+            }catch (IllegalArgumentException exception){
+                ProjectView.displayErrorMessage("No projects found, report will not be generated");
+            }
+        }
+    }
 
     class ConfirmLecturerAddProjectButtonListener implements ActionListener{
         @Override

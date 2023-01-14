@@ -29,6 +29,8 @@ import Model.Student;
 
 public class ProjectView extends JPanel{
     private static final String[] projectSpecializationOptions = {"---Select Here---", "Software Engineering", "Game Development", "Data Science" , "Cybersecurity", "Artificial Intelligence"};
+    //private ArrayList<String> selectionWheelOptions = new ArrayList<String>();
+    
 
     // Projects Table View Components
     public JPanel wrapper = new JPanel();
@@ -39,7 +41,7 @@ public class ProjectView extends JPanel{
     private JButton registerAccountButton = new JButton("Register Account");
     private JButton lecturerAddProjectButton = new JButton("Add Project");
     private JButton adminAddProjectButton = new JButton("Add Project");
-    private JButton filterProjectsButton = new JButton("Generate Projects Report");
+    private JButton generateReportButton = new JButton("Generate Projects Report");
 
     // Project Detail View Components
     JPanel projectPanel = new JPanel(new BorderLayout());
@@ -176,7 +178,7 @@ public class ProjectView extends JPanel{
 
         projectTableButtons.add(adminAddProjectButton);
         projectTableButtons.add(Box.createHorizontalGlue());
-        projectTableButtons.add(filterProjectsButton);
+        projectTableButtons.add(generateReportButton);
         return projectTableButtons;
     }
 
@@ -482,6 +484,83 @@ public class ProjectView extends JPanel{
         assignStudentButton.setVisible(false);
     }
 
+    public void getGenerateReportList(ArrayList<String> selectionWheelOptions){
+        selectionWheelOptions.add("---Select Here---");
+        selectionWheelOptions.add("All Project");
+        selectionWheelOptions.add("According to Specialization");
+        selectionWheelOptions.add("According to Lecturers");
+        selectionWheelOptions.add("Inactive Projects");
+        selectionWheelOptions.add("Active Projects");
+        selectionWheelOptions.add("Projects Assigned to Students");
+        selectionWheelOptions.add("Projects Unassigned to Students");
+        selectionWheelOptions.add("Projects With Comments");
+    }
+
+    public void getSpecializationList(ArrayList<String> specializationWheelOptions){
+        specializationWheelOptions.add("---Select Here---");
+        specializationWheelOptions.add("Software Engineering");
+        specializationWheelOptions.add("Game Development");
+        specializationWheelOptions.add("Data Science");
+        specializationWheelOptions.add("Cybersecurity");
+        specializationWheelOptions.add("Artficial Intelligence");
+    }
+
+    //gen report options
+    public String getGenerateReportOptions(ArrayList<String> selectionWheelOptions){
+        Object[] wheelOptions = selectionWheelOptions.toArray();
+
+        Object selected =  JOptionPane.showInputDialog(null,
+                                                        "Please Select Options",
+                                                        "Project List Report Generation", 
+                                                        JOptionPane.QUESTION_MESSAGE, 
+                                                        null, 
+                                                        wheelOptions, 
+                                                        wheelOptions[0]);
+        
+        if (selected == null){
+            return "";
+        }else return selected.toString();
+    }
+
+    //specialization wheel options
+    public String getSpecializationOptions(ArrayList<String> specializationWheelOptions){
+        Object[] specializationOptions = specializationWheelOptions.toArray();
+
+        Object selected =  JOptionPane.showInputDialog(null,
+                                                        "Select Specialization",
+                                                        "Specialization Options", 
+                                                        JOptionPane.QUESTION_MESSAGE, 
+                                                        null, 
+                                                        specializationOptions, 
+                                                        specializationOptions[0]);
+        
+        if (selected == null){
+            return "";
+        }else return selected.toString();
+    }
+
+    //Lecturer wheel options
+    public String getLecturerOptions(ArrayList<String> lecturerWheelOptions){
+    
+        Object[] wheelOptions = lecturerWheelOptions.toArray();
+
+        Object selected =  JOptionPane.showInputDialog(null,
+                                                        "Select Lecturer",
+                                                        "Lecturer Options",  
+                                                        JOptionPane.QUESTION_MESSAGE, 
+                                                        null, 
+                                                        wheelOptions, 
+                                                        wheelOptions[0]);
+        
+        if (selected == null){
+            return "";
+        }else return selected.toString();
+    }
+
+    public static void displaySuccessMessage(String message){
+        JOptionPane.showMessageDialog(null, message, "Success", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     public int getSelectedRow(){
         return projectTable.getSelectedRow();
     }
@@ -590,8 +669,8 @@ public class ProjectView extends JPanel{
         adminAddProjectButton.addActionListener(adminAddProjectButtonListener);
     } 
 
-    public void addFilterProjectsButtonListener(ActionListener filterProjectsButtonListener){
-        filterProjectsButton.addActionListener(filterProjectsButtonListener);
+    public void addGenerateReportButtonListener(ActionListener generateReportButtonListener){
+        generateReportButton.addActionListener(generateReportButtonListener);
     }
 
     public void addConfirmLecturerAddProjectButtonListener(ActionListener confirmLecturerAddProjectButtonListener){
