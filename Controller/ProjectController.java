@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import Model.Administrator;
+import Model.CommentList;
+import Model.CommentModel;
 import Model.Lecturer;
 import Model.LecturerList;
 import Model.Project;
@@ -33,6 +35,7 @@ public class ProjectController {
     private ProjectView projectView;
     private LecturerList lecturerList = new LecturerList();
     private StudentList studentList = new StudentList();
+    private CommentList commentList = new CommentList();
 
      /*
      * Yaw Boon Zhe
@@ -181,6 +184,15 @@ public class ProjectController {
 
         filteredProjectList.remove(selectedRow);
         populateTable();
+    }
+
+    /**
+     * Kam Kar Hou
+     * Purpose: Removes all the comments which contains the same 
+     * projectID as the selected row and remove all of them
+     */
+    public void deleteAllCommentsForProject(String projectId){
+        commentList.removeCommentsWithProjectID(projectId);
     }
 
     // Event handler methods
@@ -439,6 +451,7 @@ public class ProjectController {
             String projectStudentId = projectModel.getStudentAssignedId();
 
             deleteProjectFromTable();
+            deleteAllCommentsForProject(projectId);
             if (projectModel.getIsAssigned()) studentList.saveProjectDeletion(projectStudentId);
             lecturerList.saveProjectDeletion(projectLecturerId, projectId);
             projectList.saveProjectDeletion(projectId);

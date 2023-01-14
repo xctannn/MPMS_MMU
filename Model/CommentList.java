@@ -40,16 +40,22 @@ public class CommentList implements JsonList<CommentModel> {
             e.printStackTrace();
         }    
     }
-    
+
     /**
      * Kam Kar Hou
-     * Purpose: This is to return a comment id with the format 0001 to 9999
-     * to be added with a string "C" to produce a unique ID e.g. C0001
+     * Purpose: To remove the comments in the database which contains
+     * the specific ProjectID
      */
-    public String generateCommentIdNum(){
-        return String.format("%04d", comments.size() + 1);
+    public void removeCommentsWithProjectID(String projectID){
+        for (int i = 0; i < comments.size(); i++){
+            if (comments.get(i).getProjectID().equals(projectID)){
+                comments.remove(comments.get(i));
+                i--;
+            }
+        }
+        save();
     }
-
+    
     /**
      * Kam Kar Hou
      * Purpose: While adding a new comment, it will set the comments list again 
@@ -64,13 +70,13 @@ public class CommentList implements JsonList<CommentModel> {
 
     /**
      * Kam Kar Hou
-     * Purpose: A getter for a specific comment id in an arraylist of comments
+     * Purpose: A getter for a specific project id in an arraylist of comments
      */
     @Override
-    public CommentModel getItem(String id) {
+    public CommentModel getItem(String projectID) {
         for (int i = 0; i < comments.size(); i++){
             CommentModel tempComment = comments.get(i);
-            if (tempComment.getCommentID() == id){
+            if (tempComment.getProjectID().equals(projectID)){
                 return tempComment;
             }
         }
@@ -130,7 +136,7 @@ public class CommentList implements JsonList<CommentModel> {
         return comments;
     }
 
-}
+}   
 
 
 
