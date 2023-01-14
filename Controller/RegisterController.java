@@ -14,20 +14,24 @@ import Model.LecturerList;
 import Model.AdministratorList;
 import View.RegisterView;
 
+/*
+ * Chua Hui Yi
+ * Purpose: Controller for obtaining the register information and handling the registration
+ */
 public class RegisterController {
 
     // Initializing instances
     private MainController mainController;
-    private Lecturer lecturerModel = new Lecturer();
-    private Student studentModel = new Student();
-    private Administrator adminModel = new Administrator();
     private StudentList studentList = new StudentList();
     private LecturerList lecturerList = new LecturerList();
     private AdministratorList adminList = new AdministratorList();
 
     private RegisterView registerView;
 
-    // Construct register controller
+     /*
+      * Chua Hui Yi
+      * Purpose: Constructor to build the register system view
+      */
     public RegisterController(MainController mainController){
         this.mainController = mainController;
         this.registerView = new RegisterView();
@@ -37,11 +41,15 @@ public class RegisterController {
         registerView.addCancelButtonListener(new cancelButtonListener());
     }
 
+    // Chua Hui Yi
     public JPanel getRegisterView(){
         return registerView;
     }
 
-    // Implementing the action listener to the user type combobox
+    /*
+     * Chua Hui Yi
+     * Purpose: Check the user type to enable or disable the specialization combobox
+     */
     class userTypeListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -58,7 +66,10 @@ public class RegisterController {
         }
     }
 
-    // Implementing the action listener to the register button
+    /*
+     * Chua Hui Yi
+     * Purpose: Save the user data to database if the inputs are valid
+     */
     class registerBtnListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -73,7 +84,7 @@ public class RegisterController {
             
                 if(userType == "Student"){
                     String specialization = registerView.getSpecialization();
-                    Student newStudent = new Student(id, newUsername, newPassword, specialization, "");
+                    Student newStudent = new Student(id, newUsername, newPassword, specialization, null);
                     studentList.addItem(newStudent);
                 }else if(userType == "Lecturer"){
                     Lecturer newLecturer = new Lecturer(id, newUsername, newPassword);
@@ -91,6 +102,10 @@ public class RegisterController {
         }
     }
 
+    /*
+      * Chua Hui Yi
+      * Purpose: return to project view
+      */
     class cancelButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -98,7 +113,10 @@ public class RegisterController {
         }
     }
     
-    // Validating the inputs
+     /*
+      * Chua Hui Yi
+      * Purpose: Check if the username and password field are empty
+      */
     private void checkNamePassword(String username, String password) throws IllegalArgumentException{
         if(username.isEmpty()){
             throw new IllegalArgumentException("Username must not be empty");
@@ -107,27 +125,33 @@ public class RegisterController {
         }
     }
 
-    // Generate the user ID
+     /*
+      * Chua Hui Yi
+      * Purpose: Get the user id
+      */
     private String getUserID(String userType){
         if(userType == "Student"){
-            return "S" + studentModel.generateCode(studentList.getSize());
+            return "S" + studentList.generateCode(studentList.getSize());
         }else if(userType == "Lecturer")
         {
-            return "L" + lecturerModel.generateCode(lecturerList.getSize());
+            return "L" + lecturerList.generateCode(lecturerList.getSize());
         }else{
-            return "A" + adminModel.generateCode(adminList.getSize());
+            return "A" + adminList.generateCode(adminList.getSize());
         }
     }
 
-    // Update the user ID whenever a new account is created
+     /*
+      * Chua Hui Yi
+      * Purpose: Update the user id whenever a new account is created
+      */
     private String updateID(String userType){
         if(userType == "Student"){
-            return "S" + studentModel.generateCode(studentList.getSize()+1);
+            return "S" + studentList.generateCode(studentList.getSize()+1);
         }else if(userType == "Lecturer")
         {
-            return "L" + lecturerModel.generateCode(lecturerList.getSize()+1);
+            return "L" + lecturerList.generateCode(lecturerList.getSize()+1);
         }else{
-            return "A" + adminModel.generateCode(adminList.getSize()+1);
+            return "A" + adminList.generateCode(adminList.getSize()+1);
         }
     }
 }

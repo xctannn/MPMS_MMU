@@ -14,6 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+/*
+ * Chua Hui Yi
+ * Purpose: A view class for the login system
+ */
 public class LoginView extends JPanel{
     private String[] userList = {"Student", "Lecturer", "Admin"};
     GridBagConstraints gbc = new GridBagConstraints();
@@ -27,7 +31,10 @@ public class LoginView extends JPanel{
     private JPasswordField passwordField = new JPasswordField(20);
     private JButton loginButton = new JButton("Login");
 
-    // Construct Login View
+    /*
+    * Chua Hui Yi
+    * Constructor to build the view for login system
+    */
     public LoginView(){
 
         JPanel loginForm = new JPanel();
@@ -35,7 +42,7 @@ public class LoginView extends JPanel{
         loginForm.setLayout(new GridBagLayout());
         gbc.insets = new Insets(3,3,3,3);
         
-        // Arrange the component by using the addComponent method
+        // LoginView Components Setup
         addComponent(loginForm, userTypeLabel, userType, gbc, 0, 0);
         addComponent(loginForm, userIDLabel, userIDField, gbc, 0, 1);
         addComponent(loginForm, passwordLabel, passwordField, gbc, 0,2);
@@ -49,8 +56,10 @@ public class LoginView extends JPanel{
         this.add(loginForm, BorderLayout.CENTER);
     }
 
-
-    // Method to set the gridbagconstraints to add the components to the panel
+    /*
+     * Chua Hui Yi
+     * Purpose: To set the gridbagconstraints to add the components to the panel
+     */
     private void addComponent(JPanel panel, JLabel label, JComponent component, GridBagConstraints gbc, int gridx, int gridy) {
         gbc.gridx = gridx;
         gbc.gridy = gridy;
@@ -59,27 +68,28 @@ public class LoginView extends JPanel{
         panel.add(component, gbc);
     }
 
-    // Method to display the error message
+    // Chua Hui Yi
     public static void displayErrorMessage(String message){
         JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    // Method to add the action listener to the login button
+    // Chua Hui Yi
     public void addLoginButtonListener(ActionListener listenforLoginButton){
         loginButton.addActionListener(listenforLoginButton);
     }
 
-    // Get the user type based on the selection on the JComboBox
+    // GETTERS AND SETTERS
+    // Chua Hui Yi
     public String getUserType(){
         return userType.getSelectedItem().toString();
     }
 
-    // Get the user ID
+    // Chua Hui Yi
     public String getUserID(){
         return userIDField.getText();
     }
 
-    // Get the password
+    // Chua Hui Yi
     public char[] getPassword(){
         return passwordField.getPassword();
     }

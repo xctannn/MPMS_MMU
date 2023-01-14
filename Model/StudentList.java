@@ -3,18 +3,34 @@ package Model;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/*
+ * Chua Hui Yi
+ * Purpose: Implemented the JsonList to the class to manipulate the list of student objects in Student.json
+ */
 public class StudentList implements JsonList<Student> {
     JsonParser<Student> parser = new JsonParser<>("/Database/student.json", Student.class);
     private ArrayList<Student> students;
 
+    /* 
+     * Chua Hui Yi
+     * No-Arg Constructor
+     */
     public StudentList() {
         setList();
     }
 
+    /* 
+     * Chua Hui Yi
+     * Purpose: Return the arraylist of student
+     */
     public ArrayList<Student> getStudents(){
         return students;
     }
     
+    /* 
+     * Chua Hui Yi
+     * Purpose: Filter out the student that matched the specialization and has not assigned to a project yet
+     */
     private ArrayList<Student> getFilteredStudents(String specialization){
         ArrayList<Student> filteredStudents = new ArrayList<>(students);
         
@@ -29,6 +45,10 @@ public class StudentList implements JsonList<Student> {
         return filteredStudents;
     }
 
+    /* 
+     * Chua Hui Yi
+     * Purpose: Get the studen id of the student that is filtered out
+     */
     public ArrayList<String> getFilteredStudentsIds(String specialization){
         ArrayList<Student> filteredStudents = getFilteredStudents(specialization);
         ArrayList<String> filteredStudentIds = new ArrayList<>();
@@ -43,6 +63,10 @@ public class StudentList implements JsonList<Student> {
         return filteredStudentIds;
     }
 
+    /* 
+     * Chua Hui Yi
+     * Purpose: Save the assigned project to student to the database
+     */
     public void saveProjectAssignedToStudent(String studentId, String projectId){
         Student student = getItem(studentId);
         student.setAssignedProjectID(projectId);
@@ -50,6 +74,10 @@ public class StudentList implements JsonList<Student> {
         save();
     }
 
+    /* 
+     * Chua Hui Yi
+     * Purpose: Save the unassigned student to the database, the project assigned will be null
+     */
     public void saveUnassignedStudent(String studentId){
         Student student = getItem(studentId);
         student.setAssignedProjectID(null);
@@ -57,6 +85,10 @@ public class StudentList implements JsonList<Student> {
         save();
     }
 
+    /* 
+     * Chua Hui Yi
+     * Purpose: Remove the assigned project if the project is being deleted
+     */
     public void saveProjectDeletion(String studentId){
         Student student = getItem(studentId);
         student.removeAssignedProject();
@@ -64,6 +96,18 @@ public class StudentList implements JsonList<Student> {
         save();
     }
 
+    /*
+     * Chua Hui Yi
+     * Purpose: Generate the user id
+     */
+    public String generateCode(int listSize){
+        return String.format("%04d", listSize + 1);
+    }
+
+    /* 
+     * Chua Hui Yi
+     * Purpose: Save the student into Student.json
+     */
     @Override
     public void save(){
         try {
@@ -72,7 +116,11 @@ public class StudentList implements JsonList<Student> {
             e.printStackTrace();
         }
     }
-
+    
+    /* 
+     * Chua Hui Yi
+     * Purpose: Reads the student and populates data into the studentList
+     */
     @Override
     public void setList(){
         try {
@@ -82,6 +130,10 @@ public class StudentList implements JsonList<Student> {
         }
     }
 
+    /* 
+     * Chua Hui Yi
+     * Purpose: Add new student object into the arraylist Student
+     */
     @Override
     public void addItem(Student item) {
         setList();
@@ -91,6 +143,10 @@ public class StudentList implements JsonList<Student> {
         save();
     }
 
+    /* 
+     * Chua Hui Yi
+     * Purpose: To get the student object based on the id
+     */
     @Override
     public Student getItem(String id) {
         for (int i = 0; i < students.size(); i++){
@@ -102,6 +158,10 @@ public class StudentList implements JsonList<Student> {
         return null;
     }
 
+    /* 
+     * Chua Hui Yi
+     * Purpose: To get the size of the arraylist
+     */
     @Override
     public int getSize(){
         ArrayList<Student> tempList;
