@@ -14,6 +14,7 @@ import Model.AdministratorList;
 public class LoginController{
 
     // Initializing instances
+    private MainController mainController;
     private StudentList studentList = new StudentList();
     private LecturerList lecturerList = new LecturerList();
     private AdministratorList adminList = new AdministratorList();
@@ -21,7 +22,8 @@ public class LoginController{
     private LoginView loginView;
 
     // Construct login controller
-    public LoginController() {
+    public LoginController(MainController mainController) {
+        this.mainController = mainController;
         this.loginView = new LoginView();
 
         loginView.addLoginButtonListener(new loginButtonListener());
@@ -37,20 +39,20 @@ public class LoginController{
         public void actionPerformed(ActionEvent e){
             try{
                 String userID = loginView.getUserID();
-                String password = loginView.getPassword();
+                String password = new String(loginView.getPassword());
                 String userType = loginView.getUserType();
 
                 checkNamePassword(userID, password);
                 checkUserExists(userType, password);
                 JOptionPane.showMessageDialog(null, "Login Successful");
                 
-                // if(userType == "Student"){
-                //     mainController.switchProjectView(studentList.getItem(userID));
-                // }else if(userType == "Lecturer")
-                //     mainController.switchProjectView(lecturerList.getItem(userID));
-                // else{
-                //     mainController.switchProjectView(adminList.getItem(userID));
-                // }
+                if(userType == "Student"){
+                    mainController.switchProjectView(studentList.getItem(userID));
+                }else if(userType == "Lecturer")
+                    mainController.switchProjectView(lecturerList.getItem(userID));
+                else{
+                    mainController.switchProjectView(adminList.getItem(userID));
+                }
 
             }catch(IllegalArgumentException exception){
                 LoginView.displayErrorMessage(exception.getMessage());
@@ -85,9 +87,7 @@ public class LoginController{
         if(model == null){
             throw new IllegalArgumentException("User account does not exist");
         }else if(!(password.equals(((User) model).getPassword()))){
-            throw new IllegalArgumentException("Password do no match");
+            throw new IllegalArgumentException("Password does no match");
         }
     }
-
-
 }

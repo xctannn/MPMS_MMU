@@ -17,6 +17,7 @@ import View.RegisterView;
 public class RegisterController {
 
     // Initializing instances
+    private MainController mainController;
     private Lecturer lecturerModel = new Lecturer();
     private Student studentModel = new Student();
     private Administrator adminModel = new Administrator();
@@ -27,11 +28,13 @@ public class RegisterController {
     private RegisterView registerView;
 
     // Construct register controller
-    public RegisterController(){
+    public RegisterController(MainController mainController){
+        this.mainController = mainController;
         this.registerView = new RegisterView();
 
         registerView.addRegisterButtonListener(new registerBtnListener());
         registerView.addUserTypeListener(new userTypeListener());
+        registerView.addCancelButtonListener(new cancelButtonListener());
     }
 
     public JPanel getRegisterView(){
@@ -88,10 +91,13 @@ public class RegisterController {
         }
     }
 
-    // class cancelButtonListener implements ActionListener{
-    //      mainController.switchProjectView(adminList.getItem(userID));
-    // }
-
+    class cancelButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            mainController.returnProjectView();
+        }
+    }
+    
     // Validating the inputs
     private void checkNamePassword(String username, String password) throws IllegalArgumentException{
         if(username.isEmpty()){

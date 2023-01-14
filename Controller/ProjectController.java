@@ -21,7 +21,11 @@ import Model.StudentList;
 import Model.User;
 import View.ProjectView;
 
+/*
+ * Purpose: Controller for obtaining information ProjectView to manipulate Project data 
+ */
 public class ProjectController {
+    private MainController mainController;
     private User user;
     private Project projectModel;
     private ProjectList projectList = new ProjectList();
@@ -30,7 +34,12 @@ public class ProjectController {
     private LecturerList lecturerList = new LecturerList();
     private StudentList studentList = new StudentList();
 
-    public ProjectController(Administrator user){
+     /*
+     * Yaw Boon Zhe
+     * Constructor to build view for Administrator users
+     */
+    public ProjectController(MainController mainController, Administrator user){
+        this.mainController = mainController;
         this.user = user;
         this.projectView = new ProjectView(user);
         this.filteredProjectList = new ArrayList<>(projectList.getProjects());
@@ -47,10 +56,14 @@ public class ProjectController {
         projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
 
         populateTable();
-        // projectView.defaultProjectView(user);
     }
 
-    public ProjectController(Lecturer user){
+     /*
+     * Yaw Boon Zhe
+     * Constructor to build view for Lecturer users
+     */
+    public ProjectController(MainController mainController, Lecturer user){
+        this.mainController = mainController;
         this.user = user;
         this.projectView = new ProjectView(user);
         this.filteredProjectList = projectList.getFilteredProjects(user);
@@ -70,10 +83,14 @@ public class ProjectController {
         projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
         
         populateTable();
-        // projectView.defaultProjectView(user);
     }
 
-    public ProjectController(Student user){
+     /*
+     * Yaw Boon Zhe
+     * Constructor to build view for Student users
+     */
+    public ProjectController(MainController mainController, Student user){
+        this.mainController = mainController;
         this.user = user;
         this.projectView = new ProjectView(user);
         this.filteredProjectList = projectList.getFilteredProjects(user);
@@ -84,14 +101,17 @@ public class ProjectController {
         projectView.addProjectCommentsButtonListener(new ProjectCommentsButtonListener());
 
         populateTable();
-        // projectView.defaultProjectView(user);
     }
 
+    // Yaw Boon Zhe
     public JPanel getProjectView(){
         return projectView;
     }
 
-
+    /*
+     * Yaw Boon Zhe
+     * Purpose: Populate panel on the right of ProjectView with information of the project selected in the table
+     */
     public void populateModelView(){
         String projectName = projectModel.getName();
         String projectLecturerName = projectModel.getLecturerName();
@@ -111,6 +131,10 @@ public class ProjectController {
         projectView.setAssignMode(isProjectAssigned);
     }
 
+    /*
+     * Yaw Boon Zhe
+     * Purpose: Populate table on the left of ProjectView
+     */
     public void populateTable(){
         DefaultTableModel projectTableModel = new DefaultTableModel(projectView.getColumnNames(), 0){
             @Override
@@ -139,6 +163,7 @@ public class ProjectController {
         columnModel.getColumn(2).setPreferredWidth(100);
     }
 
+    // Yaw Boon Zhe
     public void addNewProjectToTable(Project newProject){
         JTable projectTable = projectView.getProjectTable();
         DefaultTableModel projectTableModel = (DefaultTableModel) projectTable.getModel();
@@ -150,6 +175,7 @@ public class ProjectController {
         projectTableModel.addRow(row);
     }
 
+    // Yaw Boon Zhe
     public void deleteProjectFromTable(){
         int selectedRow = projectView.getSelectedRow();
 
@@ -157,6 +183,8 @@ public class ProjectController {
         populateTable();
     }
 
+    // Event handler methods
+    // Yaw Boon Zhe
     public class LogoutButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -164,17 +192,19 @@ public class ProjectController {
                 return;
             }
 
-            // MainController.toLoginView
+            mainController.switchLoginView();
         }
     }
 
+    // Yaw Boon Zhe
     public class RegisterAccountButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            // MainController.toRegisterView
+            mainController.switchRegisterView();
         }
     }
 
+    // Yaw Boon Zhe
     public class LecturerAddProjectButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -184,6 +214,7 @@ public class ProjectController {
         }
     }
 
+    // Yaw Boon Zhe
     class AdminAddProjectButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -201,6 +232,7 @@ public class ProjectController {
         }
     }
 
+    // Yaw Boon Zhe
     class FilterProjectsButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -208,6 +240,7 @@ public class ProjectController {
         }
     }
 
+    // Yaw Boon Zhe
     class ConfirmLecturerAddProjectButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -236,6 +269,7 @@ public class ProjectController {
         }
     }
 
+    // Yaw Boon Zhe
     class ConfirmAdminAddProjectButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -263,18 +297,21 @@ public class ProjectController {
         }
     }
 
+    // Yaw Boon Zhe
     private void checkNameValidity(String name) throws IllegalArgumentException{
         if(name.isEmpty()){
             throw new IllegalArgumentException("Missing Project Name");
         }
     }
 
+    // Yaw Boon Zhe
     private void checkSpecializationValidity(int index) throws IllegalArgumentException{
         if(index == 0){
             throw new IllegalArgumentException("Please pick a Specialization");
         }
     }
     
+    // Yaw Boon Zhe
     class ProjectLecturerSelectorListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -282,6 +319,7 @@ public class ProjectController {
             projectView.setProjectLecturerLabel(selectedLecturer);
         }
     }
+    // Yaw Boon Zhe
     class ProjectSpecializationSelectorListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -290,6 +328,7 @@ public class ProjectController {
         }
     }
 
+    // Tan Xiao Chin
     class EditButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -297,6 +336,7 @@ public class ProjectController {
         }
     }
 
+    // Tan Xiao Chin
     class SaveEditButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -328,6 +368,7 @@ public class ProjectController {
         }
     }
 
+    // Tan Xiao Chin
     class ToggleProjectButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -336,6 +377,7 @@ public class ProjectController {
         }
     }
 
+    // Tan Xiao Chin
     class AssignButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -364,6 +406,7 @@ public class ProjectController {
         }
     }
 
+    // Tan Xiao Chin
     class UnassignButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -383,6 +426,7 @@ public class ProjectController {
         }
     }
 
+    // Yaw Boon Zhe
     class DeleteProjectButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -402,6 +446,7 @@ public class ProjectController {
         }
     }
 
+    // Tan Xiao Chin
     class ProjectCommentsButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -409,6 +454,7 @@ public class ProjectController {
         }
     }
 
+    // Tan Xiao Chin
     class TableSelectionListener implements ListSelectionListener{
         @Override
         public void valueChanged(ListSelectionEvent e) {
@@ -427,4 +473,27 @@ public class ProjectController {
             projectView.disableContentEditMode();
         }
     }
+
+    // public static void main(String[] args){
+        // ProjectList projectList = new ProjectList();
+        // Lecturer lecturer2 = new Lecturer("L0001", "Tan", "l01");
+        // Administrator admin = new Administrator("A0001", "Admin", "a01");
+
+        // lecturer2.addproject("P0001");
+        // lecturer2.addproject("P0002");
+        // Student student = new Student("S001", "S1", "s01", "Data Science", "P0002");
+
+        // lecturer2.addproject("P0001");
+        // lecturer2.addproject("P0002");
+        // lecturer2.addproject("P0004");
+        // projectList.addItem(new Project("P0003", "Final Year", "Data", "Build this game for me or else you fail your FYP and spend another 10k on your degree", lecturer2));
+
+        // JFrame frame = new JFrame();
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setSize(1200, 700);
+        
+        // ProjectController projectController = new ProjectController(this, student);
+        // frame.add(projectController.getProjectView());
+        // frame.setVisible(true);
+    // }
 }
