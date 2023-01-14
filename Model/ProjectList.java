@@ -220,7 +220,6 @@ public class ProjectList implements JsonList<Project>{
      */
     @Override
     public int getSize(){
-        ArrayList<Project> tempList;
         try {
             parser.deserialize();
             return projects.size();
