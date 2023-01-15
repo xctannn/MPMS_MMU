@@ -53,7 +53,7 @@ public class ProjectList implements JsonList<Project>{
     //start gere
     public ArrayList<Project> getAllProjects(){
         setList();
-        ArrayList<Project> allProjectList = new ArrayList<>(projects);
+        ArrayList<Project> allProjectList = new ArrayList<Project>();
         
         allProjectList = getProjects();
         
@@ -110,7 +110,7 @@ public class ProjectList implements JsonList<Project>{
     public ArrayList<Project> getInactiveProjectList(){
         setList();
         ArrayList<Project> projects = getProjects();
-        ArrayList<Project> inActiveProjectsList = new ArrayList<>(projects);
+        ArrayList<Project> inActiveProjectsList = new ArrayList<Project>();
         for(int i=0; i< projects.size(); i++){
                 Project project = projects.get(i);
                 if(project.getIsActive() == false){

@@ -1,5 +1,2 @@
 Project Name                                             Specialization             Lecturer            Active        Assigned Student
-Mini-project Management System                     Software Engineering              L0001               true              S0001
-Final Year Project                                         Data Science              L0001               true              S0001
-New Project                                        Software Engineering              L0002              false               null
 New Project                                        Software Engineering              L0002              false               null
