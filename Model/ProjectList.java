@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class ProjectList implements JsonList<Project>{
     JsonParser<ProjectData> parser = new JsonParser<>("/Database/project.json", ProjectData.class);
     private ProjectData projectData;
+    private Project project;
     private ArrayList<Project> projects;
     private int projectCount;
     private LecturerList lecturerList = new LecturerList();
@@ -63,18 +64,23 @@ public class ProjectList implements JsonList<Project>{
         return filteredProjects;
     }
 
-
-    //start gere
+    /* 
+     * Iven Low 
+     * Purpose: Get all projects that are entered into the system and returns the list of projects
+     *          
+     */
     public ArrayList<Project> getAllProjects(){
         setList();
         ArrayList<Project> allProjectList = new ArrayList<Project>();
-        
         allProjectList = getProjects();
         
         return allProjectList;
     }
 
-    //Contains filtered specialization to generate the report
+    /* 
+     * Iven Low
+     * Purpose: Filter out projects with selected specialization and returns the list of projects         
+     */
     public ArrayList<Project> getFilteredSpecialization(String specialization){
         setList();
         ArrayList<Project> filteredSpecialization = new ArrayList<>(projects);
@@ -82,20 +88,23 @@ public class ProjectList implements JsonList<Project>{
             for (int i = 0; i < filteredSpecialization.size(); i++){
                 Project project = filteredSpecialization.get(i);
                 String tempSpecialization = project.getSpecialization();
-            if (!(tempSpecialization.equals(specialization))){
-                filteredSpecialization.remove(i);
-                i--;
+                if (!(tempSpecialization.equals(specialization))){
+                    filteredSpecialization.remove(i);
+                    i--;
                 }
             }
         
         return filteredSpecialization;
     }
 
+    /* 
+     * Iven Low
+     * Purpose: Get the list of lecturers that are able for user choose lecturer option and returns the list of lecturers      
+     */
     public ArrayList<String> getLecturerOptions()
     {
         lecturerList.setList();
         ArrayList<String> lecturerOptions = new ArrayList<String>();
-       
 
             ArrayList<Lecturer> lecturers = lecturerList.getLecturers();
             for(int i=0; i< lecturers.size(); i++){
@@ -105,7 +114,10 @@ public class ProjectList implements JsonList<Project>{
         return lecturerOptions;
     }
 
-    //Contains filtered lecturer to generate the report
+    /* 
+     * Iven Low
+     * Purpose: Filter out projects with selected lecturer and returns the list of projects
+     */
     public ArrayList<Project> getFilteredLecturer(String lecturerName){
         setList();
         ArrayList<Project> filteredLecturersProjects = new ArrayList<>(projects);
@@ -121,6 +133,10 @@ public class ProjectList implements JsonList<Project>{
         return filteredLecturersProjects;
     }
 
+    /* 
+     * Iven Low
+     * Purpose: Filter out projects that are inactive and returns the list of projects
+     */
     public ArrayList<Project> getInactiveProjectList(){
         setList();
         ArrayList<Project> projects = getProjects();
@@ -134,6 +150,10 @@ public class ProjectList implements JsonList<Project>{
         return inActiveProjectsList;
     }
 
+    /* 
+     * Tan Xiao Chin
+     * Purpose: filter out projects that are active and returns the list of projects
+     */
     public ArrayList<Project> getActiveProjectList(){
         setList();
         ArrayList<Project> projects = getProjects();
@@ -147,6 +167,10 @@ public class ProjectList implements JsonList<Project>{
         return activeProjectList;
     }
 
+    /* 
+     * Iven Low
+     * Purpose: filter out projects that are assigned to student and returns the list of projects
+     */
     public ArrayList<Project> getAssignedProjectList(){
         setList();
         ArrayList<Project> projects = getProjects();
@@ -160,6 +184,10 @@ public class ProjectList implements JsonList<Project>{
         return assignedProjectList;
     }
 
+    /* 
+     * Iven Low
+     * Purpose: Filter out projects that are unassigned to the student and returns the list of projects
+     */
     public ArrayList<Project> getUnassignedProjectList(){
         setList();
         ArrayList<Project> projects = getProjects();
@@ -173,6 +201,10 @@ public class ProjectList implements JsonList<Project>{
         return unassignedProjectList;
     }
 
+    /* 
+     * Iven Low & Kam Kar Hou
+     * Purpose: Filter out projects that contains the comment by any user and returns the list of projects
+     */
     public ArrayList<Project> getCommentProjectList(){
         CommentList commentList = new CommentList();
         setList();

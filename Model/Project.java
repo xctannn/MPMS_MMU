@@ -156,17 +156,4 @@ public class Project{
     public void setIsActive(boolean isActive){
         this.isActive = isActive;
     }
-
-    @Override // pending to see if remove or not
-    public String toString(){
-        return "Project{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", specialization='" + specialization + '\'' +
-                ", content='" + content + '\'' +
-                ", lecturerId='" + lecturerId + '\'' +
-                ", lecturerName='" + lecturerName + '\'' +
-                '}';
-    }
-
 }

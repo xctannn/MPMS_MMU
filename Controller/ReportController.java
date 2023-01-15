@@ -3,14 +3,8 @@ package Controller;
 import java.util.ArrayList;
 
 import Model.Administrator;
-import Model.CommentList;
-import Model.CommentModel;
-import Model.Lecturer;
-import Model.LecturerList;
 import Model.Project;
-import Model.ProjectData;
 import Model.ProjectList;
-//import Model.ReportList;
 import View.ProjectView;
 
 
@@ -24,11 +18,8 @@ import java.io.BufferedWriter;
 */
 
 public class ReportController {
-    //private Administrator user;
     private ProjectList projectList;
     private ProjectView projectView;
-    //private ReportList reportList;
-    //private ArrayList<String> selectionWheelOptions = new ArrayList<String>();
     private ArrayList<String> specializationWheelOptions = new ArrayList<String>();
     
     /*
@@ -36,21 +27,15 @@ public class ReportController {
     * Constructor to build view for Administrator users
     */
     public ReportController(Administrator user, ProjectView view){
-        //this.user = user;
         this.projectView = new ProjectView(user);
         this.projectList = new ProjectList();
-        //this.reportList = new ReportList();
     }
     
     /*
     * Iven Low
-    * Purpose: Function to get all projects entered into the system and call generate text file writeToFile()
+    * Purpose: Function to call get all projects entered into the system in projectList and generate text file writeToFile() for report
     */
     public void allProjectList(){
-        //projectList.setList();
-        // ArrayList<Project> allProjects = projectList.getProjects();
-        
-        //ArrayList<Project> allProjects = projectList.getProjects();
         ArrayList<Project> allProjects = projectList.getAllProjects();
         if(allProjects.size() == 0) throw new IllegalArgumentException();
         String fileName = "Report\\AllProjectsReport.txt";
@@ -64,8 +49,6 @@ public class ReportController {
     */
     public void specializationProjectList(){
         projectList.setList();
-        //call function to open another joptionpanel and ask for the speciliazation
-        //generate a textfile according to specialization
         if(specializationWheelOptions.isEmpty()){
             projectView.getSpecializationList(specializationWheelOptions);
         }
@@ -85,7 +68,7 @@ public class ReportController {
     
     /*
     * Iven Low
-    * Purpose: Function to filter out and get inactive projects list to generate text file report
+    * Purpose: Function to call get inactive projects list and generate text file report
     */
     public void inactiveProjectList(){
         ArrayList<Project> inactiveProjects = projectList.getInactiveProjectList();
@@ -97,7 +80,7 @@ public class ReportController {
 
     /*
     * Iven Low
-    * Purpose: Function to filter out and get active projects list to generate text file report
+    * Purpose: Function to call get active projects list and generate text file report
     */
     public void activeProjectList(){
         ArrayList<Project> activeProjects = projectList.getActiveProjectList();
@@ -109,7 +92,7 @@ public class ReportController {
 
     /*
     * Iven Low
-    * Purpose: Function to filter out and get assigned student projects list to generate text file report
+    * Purpose: Function to call get filter assigned student projects list to generate text file report
     */
     public void assignedProjectList(){
         ArrayList<Project> assignedProjects = projectList.getAssignedProjectList();
@@ -121,7 +104,7 @@ public class ReportController {
 
     /*
     * Iven Low
-    * Purpose: Function to filter out and get active projects list to generate text file report
+    * Purpose: Function to call get filter active projects list to generate text file report
     */
     public void unassignedProjectList(){
         ArrayList<Project> unAssignedProjects = projectList.getUnassignedProjectList();
@@ -133,7 +116,7 @@ public class ReportController {
 
     /*
     * Iven Low
-    * Purpose: Function to filter out and get projects with comments to generate text file report
+    * Purpose: Function to call get filter projects with comments to generate text file report
     */
     public void commentProjectList(){
         ArrayList<Project> commentProjects = projectList.getCommentProjectList();
@@ -145,10 +128,10 @@ public class ReportController {
 
     /*
     * Iven Low
-    * Purpose: Get projects by specialization and generate text file report
+    * Purpose: Filter out and get projects by specialization and generate text file report
     */
     public void actionForSelectedSpecOption(String specialization){
-        projectList.setList();
+        //projectList.setList();
         ArrayList<Project> filteredSpecialization = projectList.getFilteredSpecialization(specialization);
         if(filteredSpecialization.size() == 0) throw new IllegalArgumentException();
         String fileName = "Report\\SpecializationReport.txt";
@@ -158,7 +141,7 @@ public class ReportController {
     
     /*
     * Iven Low
-    * Purpose: Filter out projects by lecturer and call generate text file report
+    * Purpose: Filter out and get projects by lecturer and call generate text file report
     */
     public void actionForSelectedLecOption(String lecturerName){
        ArrayList<Project> filteredLecturer = projectList.getFilteredLecturer(lecturerName);
@@ -176,11 +159,11 @@ public class ReportController {
         try{
             FileWriter fileWriter = new FileWriter(fileName);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            String writeTitle = String.format("%-50s %20s %20s %17s %23s", "Project Name", "Specialization", "Lecturer", "Active", "Assigned Student");
+            String writeTitle = String.format("%-50s %25s %20s %15s %23s", "Project Name", "Specialization", "Lecturer", "Active", "Assigned Student");
             bufferedWriter.write(writeTitle);
             for(int i = 0 ; i < projectData.size(); i++){
             Project project = projectData.get(i);
-            String writeContent = String.format("%-50s %20s %18s %18s %18s", project.getName(), project.getSpecialization(), project.getLecturerId(), project.getIsActive(), project.getStudentAssignedId());
+            String writeContent = String.format("%-50s %25s %18s %16s %20s", project.getName(), project.getSpecialization(), project.getLecturerId(), project.getIsActive(), project.getStudentAssignedId());
             bufferedWriter.write("\n" + writeContent);
             }
             bufferedWriter.close();

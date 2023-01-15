@@ -567,6 +567,10 @@ public class ProjectView extends JPanel{
         assignStudentButton.setVisible(false);
     }
 
+    /*
+     * Iven Low
+     * Purpose: Option name for administrator to choose when generating report
+     */
     public void getGenerateReportList(ArrayList<String> selectionWheelOptions){
         selectionWheelOptions.add("---Select Here---");
         selectionWheelOptions.add("All Project");
@@ -579,16 +583,23 @@ public class ProjectView extends JPanel{
         selectionWheelOptions.add("Projects With Comments");
     }
 
+    /*
+     * Iven Low
+     * Purpose: Option name for administrator to choose when selecting specialization to generate the report
+     */
     public void getSpecializationList(ArrayList<String> specializationWheelOptions){
         specializationWheelOptions.add("---Select Here---");
         specializationWheelOptions.add("Software Engineering");
         specializationWheelOptions.add("Game Development");
         specializationWheelOptions.add("Data Science");
         specializationWheelOptions.add("Cybersecurity");
-        specializationWheelOptions.add("Artficial Intelligence");
+        specializationWheelOptions.add("Artificial Intelligence");
     }
 
-    //gen report options
+    /*
+     * Iven Low
+     * Purpose: Populate comboBox with generate report options, for the administrator to choose when generating the report
+     */
     public String getGenerateReportOptions(ArrayList<String> selectionWheelOptions){
         Object[] wheelOptions = selectionWheelOptions.toArray();
 
@@ -605,7 +616,10 @@ public class ProjectView extends JPanel{
         }else return selected.toString();
     }
 
-    //specialization wheel options
+    /*
+     * Iven Low
+     * Purpose: Populate comboBox with specializations, for the administrator to choose when selecting a specialization to generate report
+     */
     public String getSpecializationOptions(ArrayList<String> specializationWheelOptions){
         Object[] specializationOptions = specializationWheelOptions.toArray();
 
@@ -622,7 +636,10 @@ public class ProjectView extends JPanel{
         }else return selected.toString();
     }
 
-    //Lecturer wheel options
+    /*
+     * Iven Low
+     * Purpose: Populate comboBox with all lecturers, for the administrator to choose when selecting a lecturer to generate report
+     */
     public String getLecturerOptions(ArrayList<String> lecturerWheelOptions){
     
         Object[] wheelOptions = lecturerWheelOptions.toArray();
@@ -640,6 +657,10 @@ public class ProjectView extends JPanel{
         }else return selected.toString();
     }
 
+    /*
+     * Iven Low
+     * Purpose: Display a success message dialog to the administrator when the report is generated successfully
+     */
     public static void displaySuccessMessage(String message){
         JOptionPane.showMessageDialog(null, message, "Success", JOptionPane.INFORMATION_MESSAGE);
     }
