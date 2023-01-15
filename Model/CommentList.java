@@ -1,32 +1,29 @@
 package Model;
 
 import java.util.ArrayList;
-
-import java.io.File;
 import java.io.IOException;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 /**
- * A list of comments will have several comments from comments.json which implements a parser from JsonList.java
- * @author Kam Kar Hou
- * @version 1.0
+ * Kam Kar Hou
+ * Purpose: A list of comments will have several comments from comments.json which implements a parser from JsonList.java
  */
 public class CommentList implements JsonList<CommentModel> {
     JsonParser<CommentModel> parser = new JsonParser<>("/Database/comments.json", CommentModel.class);
     private ArrayList<CommentModel> comments;
 
     /**
-     * A default constructors that creates an arraylist object with the model of CommentModel.java
+     * Kam Kar Hou
+     * Purpose: A default constructors that creates an arraylist object with the model of CommentModel.java
      * and reads the comments.java file into the arraylist comments.
      */
     public CommentList(){
         setList();
     }
+    
     /**
-     * A contructor that filters out the projects which are not the current project
+     * Kam Kar Hou
+     * Purpose: A contructor that filters out the projects which are not the current project
      * to see the current project's comments
-     * @param currentProject represents the project that is current viewed
      */
     public CommentList(Project currentProject){
         try {
@@ -45,23 +42,23 @@ public class CommentList implements JsonList<CommentModel> {
     }
 
     /**
-     * Getter for Arraylist of comments
-     * @return Arraylist of comments
+     * Kam Kar Hou
+     * Purpose: To remove the comments in the database which contains
+     * the specific ProjectID
      */
-    public ArrayList<CommentModel> getComments(){
-        return comments;
+    public void removeCommentsWithProjectID(String projectID){
+        for (int i = 0; i < comments.size(); i++){
+            if (comments.get(i).getProjectID().equals(projectID)){
+                comments.remove(comments.get(i));
+                i--;
+            }
+        }
+        save();
     }
+    
     /**
-     * This is to return a comment id with the format 0001 to 9999
-     * to be added with a string "C" to produce a unique ID e.g. C0001
-     * @return Comment Id Number
-     */
-    public String generateCommentIdNum(){
-        return String.format("%04d", comments.size() + 1);
-    }
-
-    /**
-     * While adding a new comment, it will set the comments list again 
+     * Kam Kar Hou
+     * Purpose: While adding a new comment, it will set the comments list again 
      * and add a new comment then save into comments.json
      */
     @Override
@@ -72,22 +69,24 @@ public class CommentList implements JsonList<CommentModel> {
     }
 
     /**
-     * A getter for a specific comment id in an arraylist of comments
-     * @return comment, null
+     * Kam Kar Hou
+     * Purpose: A getter for a specific project id in an arraylist of comments
      */
     @Override
-    public CommentModel getItem(String id) {
+    public CommentModel getItem(String projectID) {
         for (int i = 0; i < comments.size(); i++){
             CommentModel tempComment = comments.get(i);
-            if (tempComment.getCommentID() == id){
+            if (tempComment.getProjectID().equals(projectID)){
                 return tempComment;
             }
         }
         return null;
     }
 
+
     /**
-     * reads the comments.java file into the arraylist comments
+     * Kam Kar Hou
+     * Purpose: Reads the comments.java file into the arraylist comments
      */
     @Override
     public void setList() {
@@ -100,7 +99,8 @@ public class CommentList implements JsonList<CommentModel> {
     }
     
     /**
-     * A method that saves the commentList into the database comments.json
+     * Kam Kar Hou
+     * Purpose: A method that saves the commentList into the database comments.json
      */
     @Override
     public void save() {
@@ -113,6 +113,11 @@ public class CommentList implements JsonList<CommentModel> {
 
         
     }
+    
+    /**
+     * Kam Kar Hou
+     * Purpose: A method gets the size of the array
+     */
     @Override
     public int getSize() {
         ArrayList<CommentModel> tempList;
@@ -125,7 +130,13 @@ public class CommentList implements JsonList<CommentModel> {
         return 0;
     }
 
-}
+    // SETTERS AND GETTERS
+    // Kam Kar Hou
+    public ArrayList<CommentModel> getComments(){
+        return comments;
+    }
+
+}   
 
 
 

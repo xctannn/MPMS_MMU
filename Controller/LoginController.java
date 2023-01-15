@@ -11,6 +11,10 @@ import Model.LecturerList;
 import Model.StudentList;
 import Model.AdministratorList;
 
+/*
+ * Chua Hui Yi
+ * Purpose: Controller for obtaining the login information and handling the login
+ */
 public class LoginController{
 
     // Initializing instances
@@ -21,7 +25,10 @@ public class LoginController{
 
     private LoginView loginView;
 
-    // Construct login controller
+     /*
+      * Chua Hui Yi
+      * Purpose: Constructor to build the login system view
+      */
     public LoginController(MainController mainController) {
         this.mainController = mainController;
         this.loginView = new LoginView();
@@ -29,11 +36,15 @@ public class LoginController{
         loginView.addLoginButtonListener(new loginButtonListener());
     }
 
+    // Chua Hui Yi
     public JPanel getLoginView(){
         return loginView;
     }
 
-    // Implementing the action listener to the login button
+    /*
+     * Chua Hui Yi
+     * Purpose: Handle the user login if inputs are valid and redirect to the project view according to the user type
+     */
     class loginButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -60,7 +71,10 @@ public class LoginController{
         }
     }
 
-    // Get the usertype and return the object
+     /*
+      * Chua Hui Yi
+      * Purpose: Check the user type and return the object according to the user type
+      */
     private Object getModel(String userType){
         String userID = loginView.getUserID();
         if(userType == "Student"){
@@ -72,7 +86,10 @@ public class LoginController{
         }
     }
 
-    // Validating the inputs
+    /*
+     * Chua Hui Yi
+     * Purpose: Check if the username and password field are empty
+     */
     private void checkNamePassword(String userID, String password) throws IllegalArgumentException{
         if(userID.isEmpty()){
             throw new IllegalArgumentException("Username must not be empty");
@@ -81,7 +98,10 @@ public class LoginController{
         }
     }
 
-    // Check if the user existed in database and validate the password
+     /*
+      * Chua Hui Yi
+      * Purpose: Check if the user exists in database and check if the password match
+      */
     private void checkUserExists(String userType, String password){
         Object model = getModel(userType);
         if(model == null){

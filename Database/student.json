@@ -3,13 +3,22 @@
   "username" : "S1",
   "password" : "s01",
   "specialization" : "Data Science",
+<<<<<<< HEAD
   "assignedProjectID" : null,
   "favourites" : null
+=======
+  "assignedProjectID" : "P0002"
+>>>>>>> main
 }, {
   "id" : "S0002",
   "username" : "s2",
   "password" : "s02",
   "specialization" : "Cybersecurity",
+<<<<<<< HEAD
   "assignedProjectID" : null,
   "favourites" : null
 } ]
+=======
+  "assignedProjectID" : null
+}]
+>>>>>>> main

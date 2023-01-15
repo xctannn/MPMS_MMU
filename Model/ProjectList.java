@@ -3,23 +3,37 @@ package Model;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/*
+ * Purpose: Handles and manipulates the "projects" field in Project.json, an ArrayList of the projects stored in the system
+ */
 public class ProjectList implements JsonList<Project>{
     JsonParser<ProjectData> parser = new JsonParser<>("/Database/project.json", ProjectData.class);
     private ProjectData projectData;
     private ArrayList<Project> projects;
     private int projectCount;
+<<<<<<< HEAD
     private LecturerList lecturerList = new LecturerList();
     private ProjectList projectList;
     private CommentList commentList;
 
     //projectList will contain every project in the database， can be used for adminUser
+=======
+    
+    /* 
+     * Tan Xiao Chin
+     * No-Arg Constructor
+     */
+>>>>>>> main
     public ProjectList(){   
         setList();
         this.projectCount = projectData.getProjectCount();
     }
 
-    //projectList will contain all the projects of the lecturerUser
+    /* 
+     * Tan Xiao Chin
+     * Purpose: filter out projects that aren't created by the lecturerUser,
+     *          and returns the remaining projects
+     */
     public ArrayList<Project> getFilteredProjects(Lecturer lecturerUser){
         ArrayList<Project> filteredProjects = new ArrayList<>(projects);
 
@@ -34,7 +48,11 @@ public class ProjectList implements JsonList<Project>{
         return filteredProjects;
     }
 
-    //projectList will contain all the projects with the same specialization to the user
+    /* 
+     * Tan Xiao Chin
+     * Purpose: filter out projects that aren't activated, and dont have the same specialization as the studentUser,
+     *          and returns the remaining projects
+     */
     public ArrayList<Project> getFilteredProjects(Student studentUser){
         ArrayList<Project> filteredProjects = new ArrayList<>(projects);
 
@@ -49,6 +67,7 @@ public class ProjectList implements JsonList<Project>{
         return filteredProjects;
     }
 
+<<<<<<< HEAD
 
     //start gere
     public ArrayList<Project> getAllProjects(){
@@ -176,10 +195,19 @@ public class ProjectList implements JsonList<Project>{
         }
         return commentProjectList;
     }
+=======
+    /* 
+     * Tan Xiao Chin
+     * Purpose: generate the number code for a new project
+     */
+>>>>>>> main
     public String generateCode(){
         return String.format("%04d", projectCount + 1);
     }
 
+    /* 
+     * Tan Xiao Chin
+     */
     public void saveProjectCountIncrement(){
         projectCount++;
         projectData.setProjectCount(projectCount);
@@ -187,6 +215,9 @@ public class ProjectList implements JsonList<Project>{
         save();
     }
 
+    /* 
+     * Tan Xiao Chin
+     */
     public void saveProjectName(String projectId, String name){
         Project editedProject = getItem(projectId);
         editedProject.setName(name);
@@ -194,6 +225,9 @@ public class ProjectList implements JsonList<Project>{
         save();
     }
 
+    /* 
+     * Tan Xiao Chin
+     */
     public void saveProjectSpecialization(String projectId, String specialization){
         Project editedProject = getItem(projectId);
         editedProject.setSpecialization(specialization);
@@ -201,6 +235,9 @@ public class ProjectList implements JsonList<Project>{
         save();
     }
 
+    /* 
+     * Tan Xiao Chin
+     */
     public void saveProjectContent(String projectId, String content){
         Project editedProject = getItem(projectId);
         editedProject.setContent(content);
@@ -208,6 +245,9 @@ public class ProjectList implements JsonList<Project>{
         save();
     }
 
+    /* 
+     * Tan Xiao Chin
+     */
     public void saveProjectStudentAssigned(String projectId, String studentId, String studentName){
         Project assignedProject = getItem(projectId);
         assignedProject.setStudent(studentId, studentName);
@@ -216,6 +256,9 @@ public class ProjectList implements JsonList<Project>{
         save();
     }
 
+    /* 
+     * Tan Xiao Chin
+     */
     public void saveProjectUnassigned(String projectId){
         Project assignedProject = getItem(projectId);
         assignedProject.setStudent(null, null);
@@ -223,8 +266,10 @@ public class ProjectList implements JsonList<Project>{
 
         save();
     }
-    
 
+    /* 
+     * Tan Xiao Chin
+     */
     public void toggleProject(String projectId){
         Project project = getItem(projectId);
         project.setIsActive(!(project.getIsActive()));
@@ -232,6 +277,9 @@ public class ProjectList implements JsonList<Project>{
         save();
     }
 
+    /* 
+     * Tan Xiao Chin
+     */
     public void saveProjectDeletion(String projectId){
         Project project = getItem(projectId);
         projects.remove(project);
@@ -239,14 +287,24 @@ public class ProjectList implements JsonList<Project>{
         save();
     }
 
+    /* 
+     * Tan Xiao Chin
+     */
     public ArrayList<Project> getProjects(){
         return projectData.getProjects();
     }
 
+    /* 
+     * Tan Xiao Chin
+     */
     public int getProjectCount(){
         return projectData.getProjectCount();
     } 
 
+    /* 
+     * Tan Xiao Chin
+     * Purpose: filter out projects that aren't created by the lecturer
+     */
     @Override
     public void save(){
         try {
@@ -256,6 +314,9 @@ public class ProjectList implements JsonList<Project>{
         }
     }
 
+    /* 
+     * Tan Xiao Chin
+     */
     @Override
     public void setList(){
         try {
@@ -266,6 +327,9 @@ public class ProjectList implements JsonList<Project>{
         }
     }
 
+    /* 
+     * Tan Xiao Chin
+     */
     @Override
     public void addItem(Project item) {
         setList();
@@ -275,6 +339,9 @@ public class ProjectList implements JsonList<Project>{
         save();
     }
 
+    /* 
+     * Tan Xiao Chin
+     */
     @Override
     public Project getItem(String id) {
         for (int i = 0; i < projects.size(); i++){
@@ -286,9 +353,11 @@ public class ProjectList implements JsonList<Project>{
         return null;
     }
 
+    /* 
+     * Tan Xiao Chin
+     */
     @Override
     public int getSize(){
-        ArrayList<Project> tempList;
         try {
             parser.deserialize();
             return projects.size();
