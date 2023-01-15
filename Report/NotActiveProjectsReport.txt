@@ -1,3 +1,0 @@
-Project Name                                                  Specialization             Lecturer            Status        Assigned Student
-MMU Online Mini-project Management System                       Data Science              L0001              false               null
-New Project                                             Software Engineering              L0002              false               null

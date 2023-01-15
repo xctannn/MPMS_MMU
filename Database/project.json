@@ -2,14 +2,14 @@
   "projects" : [ {
     "id" : "P0001",
     "name" : "Mini-project Management System",
-    "specialization" : "Data Science",
+    "specialization" : "Software Engineering",
     "content" : "This is a Data Science Capstone project, you better not fuck this up",
     "lecturerId" : "L0001",
     "lecturerName" : "Tan",
     "studentAssignedId" : "S0001",
     "studentAssignedName" : null,
     "isAssigned" : true,
-    "isActive" : false
+    "isActive" : true
   }, {
     "id" : "P0002",
     "name" : "Final Year Project",
@@ -33,5 +33,5 @@
     "isAssigned" : false,
     "isActive" : false
   } ],
-  "projectCount" : 3
+  "projectCount" : 5
 }

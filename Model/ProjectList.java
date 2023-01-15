@@ -9,8 +9,9 @@ public class ProjectList implements JsonList<Project>{
     private ProjectData projectData;
     private ArrayList<Project> projects;
     private int projectCount;
-    private String specialization;
-    private String id;
+    private LecturerList lecturerList = new LecturerList();
+    private ProjectList projectList;
+    private CommentList commentList;
 
     //projectList will contain every project in the database， can be used for adminUser
     public ProjectList(){   
@@ -48,38 +49,133 @@ public class ProjectList implements JsonList<Project>{
         return filteredProjects;
     }
 
+
+    //start gere
+    public ArrayList<Project> getAllProjects(){
+        setList();
+        ArrayList<Project> allProjectList = new ArrayList<>(projects);
+        
+        allProjectList = getProjects();
+        
+        return allProjectList;
+    }
+
     //Contains filtered specialization to generate the report
     public ArrayList<Project> getFilteredSpecialization(String specialization){
-        ArrayList<Project> filteredProjects = new ArrayList<>(projects);
+        setList();
+        ArrayList<Project> filteredSpecialization = new ArrayList<>(projects);
         
-        for (int i = 0; i < filteredProjects.size(); i++){
-            Project project = filteredProjects.get(i);
-            String tempSpecialization = project.getSpecialization();
+            for (int i = 0; i < filteredSpecialization.size(); i++){
+                Project project = filteredSpecialization.get(i);
+                String tempSpecialization = project.getSpecialization();
             if (!(tempSpecialization.equals(specialization))){
-                filteredProjects.remove(i);
+                filteredSpecialization.remove(i);
                 i--;
+                }
             }
-        }
-        return filteredProjects;
+        
+        return filteredSpecialization;
+    }
+
+    public ArrayList<String> getLecturerOptions()
+    {
+        lecturerList.setList();
+        ArrayList<String> lecturerOptions = new ArrayList<String>();
+       
+
+            ArrayList<Lecturer> lecturers = lecturerList.getLecturers();
+            for(int i=0; i< lecturers.size(); i++){
+                String lecturerName = lecturers.get(i).getUsername();
+                lecturerOptions.add(lecturerName);
+            }
+        return lecturerOptions;
     }
 
     //Contains filtered lecturer to generate the report
     public ArrayList<Project> getFilteredLecturer(String lecturerName){
-        ArrayList<Project> filteredLecturers = new ArrayList<>(projects);
+        setList();
+        ArrayList<Project> filteredLecturersProjects = new ArrayList<>(projects);
             
-        for (int i = 0; i < filteredLecturers.size(); i++){
-            Project lecturer = filteredLecturers.get(i);
+        for (int i = 0; i < filteredLecturersProjects.size(); i++){
+            Project lecturer = filteredLecturersProjects.get(i);
             String tempLecturers = lecturer.getLecturerName();
             if (!(tempLecturers.equals(lecturerName))){
-                filteredLecturers.remove(i);
+                filteredLecturersProjects.remove(i);
                 i--;
             }
         }
-        return filteredLecturers;
+        return filteredLecturersProjects;
     }
 
+    public ArrayList<Project> getInactiveProjectList(){
+        setList();
+        ArrayList<Project> projects = getProjects();
+        ArrayList<Project> inActiveProjectsList = new ArrayList<>(projects);
+        for(int i=0; i< projects.size(); i++){
+                Project project = projects.get(i);
+                if(project.getIsActive() == false){
+                    inActiveProjectsList.add(project);
+                }
+            }
+        return inActiveProjectsList;
+    }
 
+    public ArrayList<Project> getActiveProjectList(){
+        setList();
+        ArrayList<Project> projects = getProjects();
+        ArrayList<Project> activeProjectList = new ArrayList<Project>();
+        for(int i=0; i< projects.size(); i++){
+            Project project = projects.get(i);
+            if(project.getIsActive() == true){
+                activeProjectList.add(project);
+            }
+        }
+        return activeProjectList;
+    }
 
+    public ArrayList<Project> getAssignedProjectList(){
+        setList();
+        ArrayList<Project> projects = getProjects();
+        ArrayList<Project> assignedProjectList = new ArrayList<Project>();
+        for(int i=0; i< projects.size(); i++){
+            Project project = projects.get(i);
+            if(project.getIsAssigned() == true){
+                assignedProjectList.add(project);
+            }
+        }
+        return assignedProjectList;
+    }
+
+    public ArrayList<Project> getUnassignedProjectList(){
+        setList();
+        ArrayList<Project> projects = getProjects();
+        ArrayList<Project> unassignedProjectList = new ArrayList<Project>();
+        for(int i=0; i< projects.size(); i++){
+            Project project = projects.get(i);
+            if(project.getIsAssigned() == false){
+                unassignedProjectList.add(project);
+            }
+        }
+        return unassignedProjectList;
+    }
+
+    public ArrayList<Project> getCommentProjectList(){
+        setList();
+        commentList.setList();
+        ArrayList<Project> projects = getProjects();
+        ArrayList<CommentModel> comments = commentList.getComments();      
+        ArrayList<Project> commentProjectList = new ArrayList<Project>();                                  
+        for(int i=0; i< projects.size(); i++){
+            Project project = projects.get(i);
+            for(int j=0; j < comments.size(); j++){
+                CommentModel comment = comments.get(j);
+                if(comment.getProjectID().equals(project.getId())){
+                    commentProjectList.add(project);
+                }
+            }
+        }
+        return commentProjectList;
+    }
     public String generateCode(){
         return String.format("%04d", projectCount + 1);
     }
