@@ -36,28 +36,19 @@ public class ProjectController {
     private ProjectView projectView;
     private LecturerList lecturerList = new LecturerList();
     private StudentList studentList = new StudentList();
-<<<<<<< HEAD
+    private CommentList commentList = new CommentList();
     private ReportController reportController;
     private ArrayList<String> selectionWheelOptions = new ArrayList<String>();
-    //private ArrayList<String> specializationWheelOptions = new ArrayList<String>();
-
-    public ProjectController(Administrator user, ProjectView view){
-    //public ProjectController(MainController mainController, Administrator user){
-        //this.mainController = mainController;
-=======
-    private CommentList commentList = new CommentList();
-
      /*
      * Yaw Boon Zhe
      * Constructor to build view for Administrator users
      */
     public ProjectController(MainController mainController, Administrator user){
         this.mainController = mainController;
->>>>>>> main
         this.user = user;
         this.projectView = new ProjectView(user);
         this.filteredProjectList = new ArrayList<>(projectList.getProjects());
-        this.reportController = new ReportController(user, view);
+        this.reportController = new ReportController(user, projectView);
 
         projectView.addLogoutButtonListener(new LogoutButtonListener());
         projectView.addRegisterAccountButtonListener(new RegisterAccountButtonListener());
@@ -256,12 +247,8 @@ public class ProjectController {
         }
     }
 
-<<<<<<< HEAD
-    class GenerateReportButtonListener implements ActionListener{
-=======
     // Yaw Boon Zhe
-    class FilterProjectsButtonListener implements ActionListener{
->>>>>>> main
+    class GenerateReportButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
             if(selectionWheelOptions.isEmpty()){

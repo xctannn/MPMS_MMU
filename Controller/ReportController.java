@@ -28,9 +28,6 @@ public class ReportController {
     private ProjectList projectList;
     private ProjectView projectView;
     //private ReportList reportList;
-    private CommentList commentList = new CommentList();;
-    private LecturerList lecturerList = new LecturerList();
-    private ProjectData projectData;
     //private ArrayList<String> selectionWheelOptions = new ArrayList<String>();
     private ArrayList<String> specializationWheelOptions = new ArrayList<String>();
     

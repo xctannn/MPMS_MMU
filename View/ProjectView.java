@@ -567,7 +567,6 @@ public class ProjectView extends JPanel{
         assignStudentButton.setVisible(false);
     }
 
-<<<<<<< HEAD
     public void getGenerateReportList(ArrayList<String> selectionWheelOptions){
         selectionWheelOptions.add("---Select Here---");
         selectionWheelOptions.add("All Project");
@@ -645,10 +644,8 @@ public class ProjectView extends JPanel{
         JOptionPane.showMessageDialog(null, message, "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 
-=======
     // GETTERS AND SETTERS
     // Yaw Boon Zhe
->>>>>>> main
     public int getSelectedRow(){
         return projectTable.getSelectedRow();
     }
@@ -779,14 +776,8 @@ public class ProjectView extends JPanel{
         adminAddProjectButton.addActionListener(adminAddProjectButtonListener);
     } 
 
-<<<<<<< HEAD
     public void addGenerateReportButtonListener(ActionListener generateReportButtonListener){
         generateReportButton.addActionListener(generateReportButtonListener);
-=======
-    // Yaw Boon Zhe
-    public void addFilterProjectsButtonListener(ActionListener filterProjectsButtonListener){
-        filterProjectsButton.addActionListener(filterProjectsButtonListener);
->>>>>>> main
     }
 
     // Yaw Boon Zhe

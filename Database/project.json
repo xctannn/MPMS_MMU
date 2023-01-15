@@ -32,6 +32,7 @@
     "studentAssignedName" : null,
     "isAssigned" : false,
     "isActive" : false
-  } ],
-  "projectCount" : 5
+  }
+  ],
+  "projectCount" : 3
 }

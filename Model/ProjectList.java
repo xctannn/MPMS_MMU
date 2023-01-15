@@ -11,19 +11,16 @@ public class ProjectList implements JsonList<Project>{
     private ProjectData projectData;
     private ArrayList<Project> projects;
     private int projectCount;
-<<<<<<< HEAD
     private LecturerList lecturerList = new LecturerList();
     private ProjectList projectList;
     private CommentList commentList;
 
     //projectList will contain every project in the database， can be used for adminUser
-=======
     
     /* 
      * Tan Xiao Chin
      * No-Arg Constructor
      */
->>>>>>> main
     public ProjectList(){   
         setList();
         this.projectCount = projectData.getProjectCount();
@@ -67,7 +64,6 @@ public class ProjectList implements JsonList<Project>{
         return filteredProjects;
     }
 
-<<<<<<< HEAD
 
     //start gere
     public ArrayList<Project> getAllProjects(){
@@ -195,12 +191,10 @@ public class ProjectList implements JsonList<Project>{
         }
         return commentProjectList;
     }
-=======
     /* 
      * Tan Xiao Chin
      * Purpose: generate the number code for a new project
      */
->>>>>>> main
     public String generateCode(){
         return String.format("%04d", projectCount + 1);
     }
