@@ -184,7 +184,9 @@ public class ProjectList implements JsonList<Project>{
             for(int j=0; j < comments.size(); j++){
                 CommentModel comment = comments.get(j);
                 if(comment.getProjectID().equals(project.getId())){
-                    commentProjectList.add(project);
+                    if(!commentProjectList.contains(project)){
+                        commentProjectList.add(project);
+                    }
                 }
             }
         }
