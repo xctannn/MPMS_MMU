@@ -9,8 +9,13 @@ import java.util.ArrayList;
 public class ProjectList implements JsonList<Project>{
     JsonParser<ProjectData> parser = new JsonParser<>("/Database/project.json", ProjectData.class);
     private ProjectData projectData;
+    private Project project;
     private ArrayList<Project> projects;
     private int projectCount;
+    private LecturerList lecturerList = new LecturerList();
+
+
+    //projectList will contain every project in the database， can be used for adminUser
     
     /* 
      * Tan Xiao Chin
@@ -59,6 +64,166 @@ public class ProjectList implements JsonList<Project>{
         return filteredProjects;
     }
 
+    /* 
+     * Iven Low 
+     * Purpose: Get all projects that are entered into the system and returns the list of projects
+     *          
+     */
+    public ArrayList<Project> getAllProjects(){
+        setList();
+        ArrayList<Project> allProjectList = new ArrayList<Project>();
+        allProjectList = getProjects();
+        
+        return allProjectList;
+    }
+
+    /* 
+     * Iven Low
+     * Purpose: Filter out projects with selected specialization and returns the list of projects         
+     */
+    public ArrayList<Project> getFilteredSpecialization(String specialization){
+        setList();
+        ArrayList<Project> filteredSpecialization = new ArrayList<>(projects);
+        
+            for (int i = 0; i < filteredSpecialization.size(); i++){
+                Project project = filteredSpecialization.get(i);
+                String tempSpecialization = project.getSpecialization();
+                if (!(tempSpecialization.equals(specialization))){
+                    filteredSpecialization.remove(i);
+                    i--;
+                }
+            }
+        
+        return filteredSpecialization;
+    }
+
+    /* 
+     * Iven Low
+     * Purpose: Get the list of lecturers that are able for user choose lecturer option and returns the list of lecturers      
+     */
+    public ArrayList<String> getLecturerOptions()
+    {
+        lecturerList.setList();
+        ArrayList<String> lecturerOptions = new ArrayList<String>();
+
+            ArrayList<Lecturer> lecturers = lecturerList.getLecturers();
+            for(int i=0; i< lecturers.size(); i++){
+                String lecturerName = lecturers.get(i).getUsername();
+                lecturerOptions.add(lecturerName);
+            }
+        return lecturerOptions;
+    }
+
+    /* 
+     * Iven Low
+     * Purpose: Filter out projects with selected lecturer and returns the list of projects
+     */
+    public ArrayList<Project> getFilteredLecturer(String lecturerName){
+        setList();
+        ArrayList<Project> filteredLecturersProjects = new ArrayList<>(projects);
+            
+        for (int i = 0; i < filteredLecturersProjects.size(); i++){
+            Project lecturer = filteredLecturersProjects.get(i);
+            String tempLecturers = lecturer.getLecturerName();
+            if (!(tempLecturers.equals(lecturerName))){
+                filteredLecturersProjects.remove(i);
+                i--;
+            }
+        }
+        return filteredLecturersProjects;
+    }
+
+    /* 
+     * Iven Low
+     * Purpose: Filter out projects that are inactive and returns the list of projects
+     */
+    public ArrayList<Project> getInactiveProjectList(){
+        setList();
+        ArrayList<Project> projects = getProjects();
+        ArrayList<Project> inActiveProjectsList = new ArrayList<Project>();
+        for(int i=0; i< projects.size(); i++){
+                Project project = projects.get(i);
+                if(project.getIsActive() == false){
+                    inActiveProjectsList.add(project);
+                }
+            }
+        return inActiveProjectsList;
+    }
+
+    /* 
+     * Tan Xiao Chin
+     * Purpose: filter out projects that are active and returns the list of projects
+     */
+    public ArrayList<Project> getActiveProjectList(){
+        setList();
+        ArrayList<Project> projects = getProjects();
+        ArrayList<Project> activeProjectList = new ArrayList<Project>();
+        for(int i=0; i< projects.size(); i++){
+            Project project = projects.get(i);
+            if(project.getIsActive() == true){
+                activeProjectList.add(project);
+            }
+        }
+        return activeProjectList;
+    }
+
+    /* 
+     * Iven Low
+     * Purpose: filter out projects that are assigned to student and returns the list of projects
+     */
+    public ArrayList<Project> getAssignedProjectList(){
+        setList();
+        ArrayList<Project> projects = getProjects();
+        ArrayList<Project> assignedProjectList = new ArrayList<Project>();
+        for(int i=0; i< projects.size(); i++){
+            Project project = projects.get(i);
+            if(project.getIsAssigned() == true){
+                assignedProjectList.add(project);
+            }
+        }
+        return assignedProjectList;
+    }
+
+    /* 
+     * Iven Low
+     * Purpose: Filter out projects that are unassigned to the student and returns the list of projects
+     */
+    public ArrayList<Project> getUnassignedProjectList(){
+        setList();
+        ArrayList<Project> projects = getProjects();
+        ArrayList<Project> unassignedProjectList = new ArrayList<Project>();
+        for(int i=0; i< projects.size(); i++){
+            Project project = projects.get(i);
+            if(project.getIsAssigned() == false){
+                unassignedProjectList.add(project);
+            }
+        }
+        return unassignedProjectList;
+    }
+
+    /* 
+     * Iven Low & Kam Kar Hou
+     * Purpose: Filter out projects that contains the comment by any user and returns the list of projects
+     */
+    public ArrayList<Project> getCommentProjectList(){
+        CommentList commentList = new CommentList();
+        setList();
+        ArrayList<Project> projects = getProjects();
+        ArrayList<CommentModel> comments = commentList.getComments();      
+        ArrayList<Project> commentProjectList = new ArrayList<Project>();                                  
+        for(int i=0; i< projects.size(); i++){
+            Project project = projects.get(i);
+            for(int j=0; j < comments.size(); j++){
+                CommentModel comment = comments.get(j);
+                if(comment.getProjectID().equals(project.getId())){
+                    if(!commentProjectList.contains(project)){
+                        commentProjectList.add(project);
+                    }
+                }
+            }
+        }
+        return commentProjectList;
+    }
     /* 
      * Tan Xiao Chin
      * Purpose: generate the number code for a new project
@@ -228,4 +393,5 @@ public class ProjectList implements JsonList<Project>{
         }
         return 0;
     } 
+
 }

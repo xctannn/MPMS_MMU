@@ -1,0 +1,7 @@
+Project Name                                                  Specialization             Lecturer          Active        Assigned Student
+Mini-project Management System                          Software Engineering              L0001             true                 null
+Final Year Project                                              Data Science              L0001             true                S0001
+Project Name                                                   Cybersecurity              L0001             true                S0002
+Project Name                                                Game Development              L0001             true                 null
+Project Name                                         Artificial Intelligence              L0001             true                 null
+Project Name                                         Artificial Intelligence              L0003             true                 null

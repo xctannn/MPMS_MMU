@@ -1,0 +1,7 @@
+Project Name                                                  Specialization             Lecturer          Active        Assigned Student
+Mini-project Management System                          Software Engineering              L0001             true                 null
+New Project                                             Software Engineering              L0002            false                 null
+Project Name                                                Game Development              L0001             true                 null
+Project Name                                         Artificial Intelligence              L0001             true                 null
+Project Name                                         Artificial Intelligence              L0003            false                 null
+Project Name                                         Artificial Intelligence              L0003             true                 null

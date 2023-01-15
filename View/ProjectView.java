@@ -32,6 +32,8 @@ import Model.Student;
  */
 public class ProjectView extends JPanel{
     private static final String[] projectSpecializationOptions = {"---Select Here---", "Software Engineering", "Game Development", "Data Science" , "Cybersecurity", "Artificial Intelligence"};
+    //private ArrayList<String> selectionWheelOptions = new ArrayList<String>();
+    
 
     // Projects Table View Components
     public JPanel wrapper = new JPanel();
@@ -42,7 +44,7 @@ public class ProjectView extends JPanel{
     private JButton registerAccountButton = new JButton("Register Account");
     private JButton lecturerAddProjectButton = new JButton("Add Project");
     private JButton adminAddProjectButton = new JButton("Add Project");
-    private JButton filterProjectsButton = new JButton("Filter Projects");
+    private JButton generateReportButton = new JButton("Generate Projects Report");
 
     // Project Detail View Components
     JPanel projectPanel = new JPanel(new BorderLayout());
@@ -203,7 +205,7 @@ public class ProjectView extends JPanel{
 
         projectTableButtons.add(adminAddProjectButton);
         projectTableButtons.add(Box.createHorizontalGlue());
-        projectTableButtons.add(filterProjectsButton);
+        projectTableButtons.add(generateReportButton);
         return projectTableButtons;
     }
 
@@ -565,6 +567,104 @@ public class ProjectView extends JPanel{
         assignStudentButton.setVisible(false);
     }
 
+    /*
+     * Iven Low
+     * Purpose: Option name for administrator to choose when generating report
+     */
+    public void getGenerateReportList(ArrayList<String> selectionWheelOptions){
+        selectionWheelOptions.add("---Select Here---");
+        selectionWheelOptions.add("All Project");
+        selectionWheelOptions.add("According to Specialization");
+        selectionWheelOptions.add("According to Lecturers");
+        selectionWheelOptions.add("Inactive Projects");
+        selectionWheelOptions.add("Active Projects");
+        selectionWheelOptions.add("Projects Assigned to Students");
+        selectionWheelOptions.add("Projects Unassigned to Students");
+        selectionWheelOptions.add("Projects With Comments");
+    }
+
+    /*
+     * Iven Low
+     * Purpose: Option name for administrator to choose when selecting specialization to generate the report
+     */
+    public void getSpecializationList(ArrayList<String> specializationWheelOptions){
+        specializationWheelOptions.add("---Select Here---");
+        specializationWheelOptions.add("Software Engineering");
+        specializationWheelOptions.add("Game Development");
+        specializationWheelOptions.add("Data Science");
+        specializationWheelOptions.add("Cybersecurity");
+        specializationWheelOptions.add("Artificial Intelligence");
+    }
+
+    /*
+     * Iven Low
+     * Purpose: Populate comboBox with generate report options, for the administrator to choose when generating the report
+     */
+    public String getGenerateReportOptions(ArrayList<String> selectionWheelOptions){
+        Object[] wheelOptions = selectionWheelOptions.toArray();
+
+        Object selected =  JOptionPane.showInputDialog(null,
+                                                        "Please Select Options",
+                                                        "Project List Report Generation", 
+                                                        JOptionPane.QUESTION_MESSAGE, 
+                                                        null, 
+                                                        wheelOptions, 
+                                                        wheelOptions[0]);
+        
+        if (selected == null){
+            return "";
+        }else return selected.toString();
+    }
+
+    /*
+     * Iven Low
+     * Purpose: Populate comboBox with specializations, for the administrator to choose when selecting a specialization to generate report
+     */
+    public String getSpecializationOptions(ArrayList<String> specializationWheelOptions){
+        Object[] specializationOptions = specializationWheelOptions.toArray();
+
+        Object selected =  JOptionPane.showInputDialog(null,
+                                                        "Select Specialization",
+                                                        "Specialization Options", 
+                                                        JOptionPane.QUESTION_MESSAGE, 
+                                                        null, 
+                                                        specializationOptions, 
+                                                        specializationOptions[0]);
+        
+        if (selected == null){
+            return "";
+        }else return selected.toString();
+    }
+
+    /*
+     * Iven Low
+     * Purpose: Populate comboBox with all lecturers, for the administrator to choose when selecting a lecturer to generate report
+     */
+    public String getLecturerOptions(ArrayList<String> lecturerWheelOptions){
+    
+        Object[] wheelOptions = lecturerWheelOptions.toArray();
+
+        Object selected =  JOptionPane.showInputDialog(null,
+                                                        "Select Lecturer",
+                                                        "Lecturer Options",  
+                                                        JOptionPane.QUESTION_MESSAGE, 
+                                                        null, 
+                                                        wheelOptions, 
+                                                        wheelOptions[0]);
+        
+        if (selected == null){
+            return "";
+        }else return selected.toString();
+    }
+
+    /*
+     * Iven Low
+     * Purpose: Display a success message dialog to the administrator when the report is generated successfully
+     */
+    public static void displaySuccessMessage(String message){
+        JOptionPane.showMessageDialog(null, message, "Success", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     // GETTERS AND SETTERS
     // Yaw Boon Zhe
     public int getSelectedRow(){
@@ -697,9 +797,8 @@ public class ProjectView extends JPanel{
         adminAddProjectButton.addActionListener(adminAddProjectButtonListener);
     } 
 
-    // Yaw Boon Zhe
-    public void addFilterProjectsButtonListener(ActionListener filterProjectsButtonListener){
-        filterProjectsButton.addActionListener(filterProjectsButtonListener);
+    public void addGenerateReportButtonListener(ActionListener generateReportButtonListener){
+        generateReportButton.addActionListener(generateReportButtonListener);
     }
 
     // Yaw Boon Zhe

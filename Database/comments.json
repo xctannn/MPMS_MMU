@@ -8,4 +8,24 @@
   "username" : "Tan",
   "commentString" : "seseasdweeadsd",
   "projectID" : "P0001"
-} ]
+}, {
+  "userID" : "L0001",
+  "username" : "Tan",
+  "commentString" : "hi",
+  "projectID" : "P0002"
+}, {
+  "userID" : "A0001",
+  "username" : "Admin 1",
+  "commentString" : "comment",
+  "projectID" : "P0003"
+}, {
+  "userID" : "A0001",
+  "username" : "Admin 1",
+  "commentString" : "hello",
+  "projectID" : "P0001"
+}, {
+  "userID" : "A0001",
+  "username" : "Admin 1",
+  "commentString" : "this is a comment",
+  "projectID" : "P0003"
+}]
