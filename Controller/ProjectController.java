@@ -233,6 +233,7 @@ public class ProjectController {
     class AdminAddProjectButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
+            lecturerList.setList();
             ArrayList<String> lecturerOptions = new ArrayList<String>();
             ArrayList<Lecturer> lecturers = lecturerList.getLecturers();
             for(int i = 0; i < lecturers.size(); i++){
