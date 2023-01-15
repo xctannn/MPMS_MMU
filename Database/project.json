@@ -36,56 +36,12 @@
     "id" : "P0004",
     "name" : "Project Name",
     "specialization" : "Cybersecurity",
-    "content" : "Enter project content hereasdasdasdx",
+    "content" : "Conent project",
     "lecturerId" : "L0001",
     "lecturerName" : "Tan",
     "studentAssignedId" : "S0002",
     "studentAssignedName" : "s2",
     "isAssigned" : true,
-    "isActive" : true
-  }, {
-    "id" : "P0009",
-    "name" : "Project Name",
-    "specialization" : "Game Development",
-    "content" : "Enter project content here",
-    "lecturerId" : "L0001",
-    "lecturerName" : "Tan",
-    "studentAssignedId" : null,
-    "studentAssignedName" : null,
-    "isAssigned" : false,
-    "isActive" : true
-  }, {
-    "id" : "P0010",
-    "name" : "Project Name",
-    "specialization" : "Artificial Intelligence",
-    "content" : "Enter project content hereadsdasdaasdsad",
-    "lecturerId" : "L0001",
-    "lecturerName" : "Tan",
-    "studentAssignedId" : null,
-    "studentAssignedName" : null,
-    "isAssigned" : false,
-    "isActive" : true
-  }, {
-    "id" : "P0012",
-    "name" : "Project Name",
-    "specialization" : "Artificial Intelligence",
-    "content" : "Enter project content asdssadasdasd",
-    "lecturerId" : "L0003",
-    "lecturerName" : "L0003",
-    "studentAssignedId" : null,
-    "studentAssignedName" : null,
-    "isAssigned" : false,
-    "isActive" : false
-  }, {
-    "id" : "P0013",
-    "name" : "Project Name",
-    "specialization" : "Artificial Intelligence",
-    "content" : "Enter project content hereasdsasasdas",
-    "lecturerId" : "L0003",
-    "lecturerName" : "L0003",
-    "studentAssignedId" : null,
-    "studentAssignedName" : null,
-    "isAssigned" : false,
     "isActive" : true
   } ],
   "projectCount" : 14

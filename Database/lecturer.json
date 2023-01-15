@@ -13,14 +13,4 @@
   "username" : "L0003",
   "password" : "l03",
   "projectIDList" : [ "P0012", "P0013" ]
-}, {
-  "id" : "L0004",
-  "username" : "Diu",
-  "password" : "l04",
-  "projectIDList" : [ ]
-}, {
-  "id" : "L0005",
-  "username" : "Diulo",
-  "password" : "l05",
-  "projectIDList" : [ ]
 } ]

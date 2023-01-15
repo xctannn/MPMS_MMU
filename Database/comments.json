@@ -16,7 +16,7 @@
 }, {
   "userID" : "A0001",
   "username" : "Admin 1",
-  "commentString" : "sdwqwd",
+  "commentString" : "comment",
   "projectID" : "P0003"
 }, {
   "userID" : "A0001",
@@ -26,26 +26,6 @@
 }, {
   "userID" : "A0001",
   "username" : "Admin 1",
-  "commentString" : "asdadawdasde",
+  "commentString" : "this is a comment",
   "projectID" : "P0003"
-}, {
-  "userID" : "A0001",
-  "username" : "Admin 1",
-  "commentString" : "asxasxasxa",
-  "projectID" : "P0004"
-}, {
-  "userID" : "A0001",
-  "username" : "Admin 1",
-  "commentString" : "asxasx",
-  "projectID" : "P0004"
-}, {
-  "userID" : "A0001",
-  "username" : "Admin 1",
-  "commentString" : "asxasxa",
-  "projectID" : "P0004"
-}, {
-  "userID" : "A0001",
-  "username" : "Admin 1",
-  "commentString" : "asxas",
-  "projectID" : "P0004"
-} ]
+}]
