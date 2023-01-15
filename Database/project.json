@@ -32,7 +32,17 @@
     "studentAssignedName" : null,
     "isAssigned" : false,
     "isActive" : false
-  }
-  ],
-  "projectCount" : 3
+  }, {
+    "id" : "P0004",
+    "name" : "Project Name",
+    "specialization" : "Cybersecurity",
+    "content" : "Enter project content hereasdasdasdx",
+    "lecturerId" : "L0001",
+    "lecturerName" : "Tan",
+    "studentAssignedId" : null,
+    "studentAssignedName" : null,
+    "isAssigned" : false,
+    "isActive" : true
+  } ],
+  "projectCount" : 4
 }

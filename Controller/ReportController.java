@@ -78,16 +78,7 @@ public class ReportController {
     * Purpose: Function to generate another joptionpane and prompt user to choose a lecturer to filter projects by lecturer
     */
     public void lecturerProjectList(){
-        //call function to open another joptionpanel and ask for the lecturer list
-        //generate a textfile
-        //lecturerList.setList();
         ArrayList<String> lecturerWheelOptions = projectList.getLecturerOptions();
-        // ArrayList<String> lecturerOptions = new ArrayList<String>();
-        // ArrayList<Lecturer> lecturers = lecturerList.getLecturers();
-        // for(int i=0; i< lecturers.size(); i++){
-        //     String lecturerName = lecturers.get(i).getUsername();
-        //     lecturerOptions.add(lecturerName);
-        // }
         String selectedLecOption = projectView.getLecturerOptions(lecturerWheelOptions);
         actionForSelectedLecOption(selectedLecOption);
     }
@@ -97,16 +88,6 @@ public class ReportController {
     * Purpose: Function to filter out and get inactive projects list to generate text file report
     */
     public void inactiveProjectList(){
-        //projectList.setList();
-        //generate inactive projects textfile
-        // ArrayList<Project> projects = projectList.getProjects();
-        // ArrayList<Project> notActiveProjects = new ArrayList<Project>();
-        // for(int i=0; i< projects.size(); i++){
-        //     Project project = projects.get(i);
-        //     if(project.getIsActive() == false){
-        //         notActiveProjects.add(project);
-        //     }
-        // }
         ArrayList<Project> inactiveProjects = projectList.getInactiveProjectList();
         if(inactiveProjects.size() == 0) throw new IllegalArgumentException();
         String fileName = "Report\\InactiveProjectsReport.txt";
@@ -119,16 +100,6 @@ public class ReportController {
     * Purpose: Function to filter out and get active projects list to generate text file report
     */
     public void activeProjectList(){
-        //projectList.setList();
-        //generate active projects textfile
-        // ArrayList<Project> projects = projectList.getProjects();
-        // ArrayList<Project> activeProjects = new ArrayList<Project>();
-        // for(int i=0; i< projects.size(); i++){
-        //     Project project = projects.get(i);
-        //     if(project.getIsActive() == true){
-        //         activeProjects.add(project);
-        //     }
-        // }
         ArrayList<Project> activeProjects = projectList.getActiveProjectList();
         if(activeProjects.size() == 0) throw new IllegalArgumentException();
         String fileName = "Report\\ActiveProjectsReport.txt";
@@ -141,16 +112,6 @@ public class ReportController {
     * Purpose: Function to filter out and get assigned student projects list to generate text file report
     */
     public void assignedProjectList(){
-        //projectList.setList();
-        //generate projects assigned to students textfile
-        // ArrayList<Project> projects = projectList.getProjects();
-        // ArrayList<Project> assignedProjects = new ArrayList<Project>();
-        // for(int i=0; i< projects.size(); i++){
-        //     Project project = projects.get(i);
-        //     if(project.getIsAssigned() == true){
-        //         assignedProjects.add(project);
-        //     }
-        // }
         ArrayList<Project> assignedProjects = projectList.getAssignedProjectList();
         if(assignedProjects.size() == 0) throw new IllegalArgumentException();
         String fileName = "Report\\AssignedProjectsReport.txt";
@@ -163,16 +124,6 @@ public class ReportController {
     * Purpose: Function to filter out and get active projects list to generate text file report
     */
     public void unassignedProjectList(){
-        //projectList.setList();
-        //generate projects unassigned to students textfile
-        // ArrayList<Project> projects = projectList.getProjects();
-        // ArrayList<Project> unAssignedProjects = new ArrayList<Project>();
-        // for(int i=0; i< projects.size(); i++){
-        //     Project project = projects.get(i);
-        //     if(project.getIsAssigned() == false){
-        //         unAssignedProjects.add(project);
-        //     }
-        // }
         ArrayList<Project> unAssignedProjects = projectList.getUnassignedProjectList();
         if(unAssignedProjects.size() == 0) throw new IllegalArgumentException();
         String fileName = "Report\\UnassignedProjectsReport.txt";
@@ -185,21 +136,6 @@ public class ReportController {
     * Purpose: Function to filter out and get projects with comments to generate text file report
     */
     public void commentProjectList(){
-        //projectList.setList();
-        //generate prpkects with comments
-        //projectList.setList();
-        // ArrayList<Project> projects = projectList.getProjects();
-        // ArrayList<CommentModel> comments = commentList.getComments();      
-        // ArrayList<Project> listOfProjectsWithComments = new ArrayList<Project>();                                  
-        // for(int i=0; i< projects.size(); i++){
-        //     Project project = projects.get(i);
-        //     for(int j=0; j < comments.size(); j++){
-        //         CommentModel comment = comments.get(j);
-        //         if(comment.getProjectID().equals(project.getId())){
-        //             listOfProjectsWithComments.add(project);
-        //         }
-        //     }
-        // }
         ArrayList<Project> commentProjects = projectList.getCommentProjectList();
         if(commentProjects.size() == 0) throw new IllegalArgumentException();
         String fileName = "Report\\CommentsProjectsReport.txt";
