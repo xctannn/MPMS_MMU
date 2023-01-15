@@ -46,7 +46,7 @@ public class CommentController {
         this.user = currentUser;
         commentView.getSubmitButton().addActionListener(new commentSubmitListener());
         commentView.getReturnButton().addActionListener(new returnListener());
-        createCommentPanel();
+        createCommentBlocks();
     }
 
     /**
@@ -54,7 +54,7 @@ public class CommentController {
      * Purpose: This creates the comment blocks in the scrollable pane in the commentView.java
      * it contains the userID, userName and the commentedString.
      */
-    public void createCommentPanel(){
+    public void createCommentBlocks(){
         final Dimension EACH_ROW_DIMENSION = new Dimension(700,100);
         JPanel commentPanel = commentView.getCommentBlock();
         ArrayList<CommentModel> comments = commentList.getComments();
@@ -99,7 +99,7 @@ public class CommentController {
     public void updateCommentPanel(){
         commentView.getCommentBlock().removeAll();
 
-        createCommentPanel();
+        createCommentBlocks();
     }
 
     /**
