@@ -1,7 +1,7 @@
 {
   "projects" : [ {
     "id" : "P0001",
-    "name" : "Capstone",
+    "name" : "Mini-project Management System",
     "specialization" : "Software Engineering",
     "content" : "This is a Data Science Capstone project, you better not fuck this up",
     "lecturerId" : "L0001",
@@ -9,7 +9,7 @@
     "studentAssignedId" : null,
     "studentAssignedName" : null,
     "isAssigned" : false,
-    "isActive" : false
+    "isActive" : true
   }, {
     "id" : "P0002",
     "name" : "Final Year Project",
@@ -21,6 +21,28 @@
     "studentAssignedName" : "S1",
     "isAssigned" : true,
     "isActive" : true
+  }, {
+    "id" : "P0003",
+    "name" : "New Project",
+    "specialization" : "Software Engineering",
+    "content" : "This is a new proejct blah blah blah blah",
+    "lecturerId" : "L0002",
+    "lecturerName" : "Lee",
+    "studentAssignedId" : null,
+    "studentAssignedName" : null,
+    "isAssigned" : false,
+    "isActive" : false
+  }, {
+    "id" : "P0004",
+    "name" : "Project Name",
+    "specialization" : "Cybersecurity",
+    "content" : "Conent project",
+    "lecturerId" : "L0001",
+    "lecturerName" : "Tan",
+    "studentAssignedId" : "S0002",
+    "studentAssignedName" : "s2",
+    "isAssigned" : true,
+    "isActive" : true
   } ],
-  "projectCount" : 3
+  "projectCount" : 4
 }

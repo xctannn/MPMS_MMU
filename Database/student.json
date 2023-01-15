@@ -3,13 +3,11 @@
   "username" : "S1",
   "password" : "s01",
   "specialization" : "Data Science",
-  "assignedProjectID" : "P0002",
-  "favourites" : null
+  "assignedProjectID" : "P0002"
 }, {
   "id" : "S0002",
   "username" : "s2",
   "password" : "s02",
   "specialization" : "Cybersecurity",
-  "assignedProjectID" : null,
-  "favourites" : null
-}]
+  "assignedProjectID" : "P0004"
+} ]
