@@ -86,7 +86,7 @@ public class CommentController {
                 panel.add(inPanel);
                 panel.add(commentString);
                 commentPanel.add(panel);
-                commentView.getcommentsScrollPane().revalidate();;
+                commentView.getcommentsScrollPane().revalidate();
             }
         }
     }

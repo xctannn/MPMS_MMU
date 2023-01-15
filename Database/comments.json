@@ -28,4 +28,9 @@
   "username" : "Admin 1",
   "commentString" : "this is a comment",
   "projectID" : "P0003"
-}]
+}, {
+  "userID" : "A0001",
+  "username" : "Admin 1",
+  "commentString" : "After this assignment, lets go makan loo. ",
+  "projectID" : "P0001"
+} ]
