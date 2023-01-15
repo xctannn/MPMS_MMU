@@ -12,8 +12,7 @@ public class ProjectList implements JsonList<Project>{
     private ArrayList<Project> projects;
     private int projectCount;
     private LecturerList lecturerList = new LecturerList();
-    private ProjectList projectList;
-    private CommentList commentList;
+
 
     //projectList will contain every project in the database， can be used for adminUser
     
@@ -175,8 +174,8 @@ public class ProjectList implements JsonList<Project>{
     }
 
     public ArrayList<Project> getCommentProjectList(){
+        CommentList commentList = new CommentList();
         setList();
-        commentList.setList();
         ArrayList<Project> projects = getProjects();
         ArrayList<CommentModel> comments = commentList.getComments();      
         ArrayList<Project> commentProjectList = new ArrayList<Project>();                                  
