@@ -5,7 +5,7 @@ import java.io.IOException;
 
 /**
  * Kam Kar Hou
- * Purpose: A list of comments will have several comments from comments.json which implements a parser from JsonList.java
+ * Purpose: A list of comments consists several comments from comments.json which implements a parser from JsonList.java
  */
 public class CommentList implements JsonList<CommentModel> {
     JsonParser<CommentModel> parser = new JsonParser<>("/Database/comments.json", CommentModel.class);
@@ -83,7 +83,6 @@ public class CommentList implements JsonList<CommentModel> {
         return null;
     }
 
-
     /**
      * Kam Kar Hou
      * Purpose: Reads the comments.java file into the arraylist comments
@@ -130,7 +129,6 @@ public class CommentList implements JsonList<CommentModel> {
         return 0;
     }
 
-    // SETTERS AND GETTERS
     // Kam Kar Hou
     public ArrayList<CommentModel> getComments(){
         return comments;

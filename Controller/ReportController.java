@@ -7,7 +7,6 @@ import Model.Project;
 import Model.ProjectList;
 import View.ProjectView;
 
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedWriter;

@@ -11,6 +11,7 @@ import Model.Student;
 import Model.User;
 
 /*
+ * Yaw Boon Zhe
  * Purpose: Redirect user to different pages of the system
  */
 public class MainController {
