@@ -2,8 +2,6 @@ package Model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-// Singleton mapper object
-// To get an instance of the mapper, invoke "Mapper.INSTANCE.getMapper()"
 /*
  * Purpose: map objects or arraylist to JSON file
  * Design Pattern: Singleton, ensures that only a single instance of ObjectMapper is created, reducing space complexity

@@ -13,9 +13,6 @@ public class ProjectList implements JsonList<Project>{
     private int projectCount;
     private LecturerList lecturerList = new LecturerList();
 
-
-    //projectList will contain every project in the database， can be used for adminUser
-    
     /* 
      * Tan Xiao Chin
      * No-Arg Constructor
@@ -82,16 +79,15 @@ public class ProjectList implements JsonList<Project>{
      */
     public ArrayList<Project> getFilteredSpecialization(String specialization){
         setList();
-        ArrayList<Project> filteredSpecialization = new ArrayList<>(projects);
-        
-            for (int i = 0; i < filteredSpecialization.size(); i++){
-                Project project = filteredSpecialization.get(i);
-                String tempSpecialization = project.getSpecialization();
-                if (!(tempSpecialization.equals(specialization))){
-                    filteredSpecialization.remove(i);
-                    i--;
-                }
+        ArrayList<Project> filteredSpecialization = new ArrayList<>(projects);   
+        for (int i = 0; i < filteredSpecialization.size(); i++){
+            Project project = filteredSpecialization.get(i);
+            String tempSpecialization = project.getSpecialization();
+            if (!(tempSpecialization.equals(specialization))){
+                filteredSpecialization.remove(i);
+                i--;
             }
+        }
         
         return filteredSpecialization;
     }
@@ -105,11 +101,11 @@ public class ProjectList implements JsonList<Project>{
         lecturerList.setList();
         ArrayList<String> lecturerOptions = new ArrayList<String>();
 
-            ArrayList<Lecturer> lecturers = lecturerList.getLecturers();
-            for(int i=0; i< lecturers.size(); i++){
-                String lecturerName = lecturers.get(i).getUsername();
-                lecturerOptions.add(lecturerName);
-            }
+        ArrayList<Lecturer> lecturers = lecturerList.getLecturers();
+        for(int i=0; i< lecturers.size(); i++){
+            String lecturerName = lecturers.get(i).getUsername();
+            lecturerOptions.add(lecturerName);
+        }
         return lecturerOptions;
     }
 
@@ -141,10 +137,10 @@ public class ProjectList implements JsonList<Project>{
         ArrayList<Project> projects = getProjects();
         ArrayList<Project> inActiveProjectsList = new ArrayList<Project>();
         for(int i=0; i< projects.size(); i++){
-                Project project = projects.get(i);
-                if(project.getIsActive() == false){
-                    inActiveProjectsList.add(project);
-                }
+            Project project = projects.get(i);
+            if(project.getIsActive() == false){
+                inActiveProjectsList.add(project);
+            }
             }
         return inActiveProjectsList;
     }
@@ -359,9 +355,7 @@ public class ProjectList implements JsonList<Project>{
     @Override
     public void addItem(Project item) {
         setList();
-
         this.projects.add(item);
-         
         save();
     }
 
@@ -392,5 +386,4 @@ public class ProjectList implements JsonList<Project>{
         }
         return 0;
     } 
-
 }
