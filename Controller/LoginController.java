@@ -78,10 +78,13 @@ public class LoginController{
     private Object getModel(String userType){
         String userID = loginView.getUserID();
         if(userType == "Student"){
+            studentList.setList();
             return studentList.getItem(userID);
         }else if(userType == "Lecturer"){
+            lecturerList.setList();
             return lecturerList.getItem(userID);
         }else{
+            adminList.setList();
             return adminList.getItem(userID);
         }
     }
