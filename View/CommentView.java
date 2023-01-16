@@ -37,7 +37,6 @@ public class CommentView extends JPanel{
     private JLabel errorMessageLabel = new JLabel();
     private JPanel errorMessagePanelWrapper = new JPanel();
      
-
     /**
      * Kam Kar Hou
      * Purpose: A default constructor to call the GUI of the commenting system
@@ -80,22 +79,27 @@ public class CommentView extends JPanel{
     public JButton getSubmitButton() {
         return submitButton;
     }
+    
     // Kam Kar Hou
     public JButton getReturnButton(){
         return returnButton;
     }
+
     // Kam Kar Hou
     public JLabel getErrorMessageLabel(){
         return errorMessageLabel;
     }
+
     // Kam Kar Hou
     public JTextArea getCommentArea() {
         return commentArea;
     }
+
     // Kam Kar Hou
     public JPanel getCommentBlock(){
         return commentBlock;
     }
+
     // Kam Kar Hou
     public JScrollPane getcommentsScrollPane(){
         return commentsScrollPane;

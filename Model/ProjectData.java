@@ -22,13 +22,11 @@ public class ProjectData {
     public ArrayList<Project> getProjects() {
         return projects;
     }
-
      
     // Tan Xiao Chin
     public void setProjects(ArrayList<Project> projects) {
         this.projects = projects;
     }
-
      
     // Tan Xiao Chin
     public int getProjectCount() {
@@ -38,6 +36,5 @@ public class ProjectData {
     // Tan Xiao Chin
     public void setProjectCount(int projectCount) {
         this.projectCount = projectCount;
-    };
-
+    }
 }

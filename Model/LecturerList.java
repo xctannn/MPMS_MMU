@@ -84,9 +84,7 @@ public class LecturerList implements JsonList<Lecturer> {
     @Override
     public void addItem(Lecturer item) {
         setList();
-
-        this.lecturers.add(item);
-         
+        this.lecturers.add(item);  
         save();
     }
 

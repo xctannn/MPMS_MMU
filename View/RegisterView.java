@@ -133,5 +133,4 @@ public class RegisterView extends JPanel{
     public String getPassword(){
         return passwordField.getText();
     }
-
 }

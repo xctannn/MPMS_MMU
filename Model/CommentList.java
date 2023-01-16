@@ -94,7 +94,6 @@ public class CommentList implements JsonList<CommentModel> {
         }catch(IOException e){
             e.printStackTrace();
         }
-        
     }
     
     /**
@@ -108,9 +107,7 @@ public class CommentList implements JsonList<CommentModel> {
             parser.serialize();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        
+        } 
     }
     
     /**

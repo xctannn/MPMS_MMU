@@ -723,7 +723,7 @@ public class ProjectView extends JPanel{
         projectContent.setText(content);
     }
 
-    // tan Xiao Chin
+    // Tan Xiao Chin
     public void setToggleButtonText(boolean isActive){
         if (isActive){
             toggleProjectButton.setText("Dectivate");
