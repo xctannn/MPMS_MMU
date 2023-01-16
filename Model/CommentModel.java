@@ -3,7 +3,7 @@ package Model;
  
 /**
  * Kam Kar Hou
- * Purpose: A comment will contain the project id of a project, the user who is commenting and the commented string
+ * Purpose: A comment contains the project id of a project, the user who is commenting and the commented string
  */ 
 public class CommentModel {
     private String userID;
@@ -48,6 +48,4 @@ public class CommentModel {
     public String getCommentString(){
         return commentString;
     }
-
-
 }

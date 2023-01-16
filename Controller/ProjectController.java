@@ -13,12 +13,10 @@ import javax.swing.table.TableColumnModel;
 
 import Model.Administrator;
 import Model.CommentList;
-import Model.CommentModel;
 import Model.Lecturer;
 import Model.LecturerList;
 import Model.Project;
 import Model.ProjectList;
-//import Model.Report;
 import Model.Student;
 import Model.StudentList;
 import Model.User;

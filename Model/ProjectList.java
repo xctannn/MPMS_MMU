@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class ProjectList implements JsonList<Project>{
     JsonParser<ProjectData> parser = new JsonParser<>("/Database/project.json", ProjectData.class);
     private ProjectData projectData;
-    private Project project;
     private ArrayList<Project> projects;
     private int projectCount;
     private LecturerList lecturerList = new LecturerList();

@@ -22,7 +22,6 @@ public class LoginController{
     private StudentList studentList = new StudentList();
     private LecturerList lecturerList = new LecturerList();
     private AdministratorList adminList = new AdministratorList();
-
     private LoginView loginView;
 
      /*
@@ -59,9 +58,9 @@ public class LoginController{
                 
                 if(userType == "Student"){
                     mainController.switchProjectView(studentList.getItem(userID));
-                }else if(userType == "Lecturer")
+                }else if(userType == "Lecturer"){
                     mainController.switchProjectView(lecturerList.getItem(userID));
-                else{
+                }else{
                     mainController.switchProjectView(adminList.getItem(userID));
                 }
 
