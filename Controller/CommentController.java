@@ -44,7 +44,7 @@ public class CommentController {
         this.commentView = new CommentView();
         this.currentProjectID = currentProjectID;
         this.user = currentUser;
-        commentView.getSubmitButton().addActionListener(new commentSubmitListener());
+        commentView.getSubmitButton().addActionListener(new CommentSubmitListener());
         commentView.getReturnButton().addActionListener(new returnListener());
         createCommentBlocks();
     }
@@ -107,7 +107,7 @@ public class CommentController {
      * Purpose: A submit button listener to create a new object to be saved into the comments.json database
      * also empties the Comment Area for new comments to be entered
      */
-    class commentSubmitListener implements ActionListener{
+    class CommentSubmitListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == commentView.getSubmitButton()) {
