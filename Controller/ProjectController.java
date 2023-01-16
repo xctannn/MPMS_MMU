@@ -436,14 +436,15 @@ public class ProjectController {
                 if(availableStudentIds.size() == 0) throw new IllegalArgumentException();
 
                 String selectedStudentId = projectView.getStudentToAssign(availableStudentIds);
-                Student selectedStudent = studentList.getItem(selectedStudentId);
-                String selectedStudentName = selectedStudent.getUsername();
+                if(!selectedStudentId.isEmpty()){
+                    Student selectedStudent = studentList.getItem(selectedStudentId);
+                    String selectedStudentName = selectedStudent.getUsername();
 
-                projectList.saveProjectStudentAssigned(projectId, selectedStudentId, selectedStudentName);
-                studentList.saveProjectAssignedToStudent(selectedStudentId, projectId);
-                projectView.setProjectStudentLabel(selectedStudentName);
-                projectView.enableUnassign();
-                
+                    projectList.saveProjectStudentAssigned(projectId, selectedStudentId, selectedStudentName);
+                    studentList.saveProjectAssignedToStudent(selectedStudentId, projectId);
+                    projectView.setProjectStudentLabel(selectedStudentName);
+                    projectView.enableUnassign();
+                }
                 
             }catch(IllegalArgumentException exception){
                 ProjectView.displayErrorMessage("There are no students available to assign");
