@@ -61,7 +61,7 @@ public class MainController {
 
     /*
      * Yaw Boon Zhe
-     * Purpose: redirect Administrator user to project view
+     * Purpose: redirect user to project view
      */
     public void switchProjectView(Administrator adminUser){
         mainView.remove(2);
