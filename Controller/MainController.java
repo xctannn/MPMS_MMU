@@ -56,7 +56,7 @@ public class MainController {
 
     // Yaw Boon Zhe
     public void returnProjectView(){
-        cardLayout.show(mainView, "admin");
+        cardLayout.show(mainView, "project");
     }
 
     /*
@@ -66,8 +66,8 @@ public class MainController {
     public void switchProjectView(Administrator adminUser){
         mainView.remove(2);
         this.projectController = new ProjectController(this, adminUser);
-        mainView.add(projectController.getProjectView(), "admin", 2);
-        cardLayout.show(mainView, "admin");
+        mainView.add(projectController.getProjectView(), "project", 2);
+        cardLayout.show(mainView, "project");
     }
 
     /*
@@ -77,8 +77,8 @@ public class MainController {
     public void switchProjectView(Lecturer lecturerUser){
         mainView.remove(2);
         this.projectController = new ProjectController(this, lecturerUser);
-        mainView.add(projectController.getProjectView(), "lecturer", 2);
-        cardLayout.show(mainView, "lecturer");
+        mainView.add(projectController.getProjectView(), "project", 2);
+        cardLayout.show(mainView, "project");
     }
 
     /*
@@ -88,8 +88,8 @@ public class MainController {
     public void switchProjectView(Student studentUser){
         mainView.remove(2);
         this.projectController = new ProjectController(this, studentUser);
-        mainView.add(projectController.getProjectView(), "student", 2);
-        cardLayout.show(mainView, "student");
+        mainView.add(projectController.getProjectView(), "project", 2);
+        cardLayout.show(mainView, "project");
     }
 
     /*
