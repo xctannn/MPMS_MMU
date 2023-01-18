@@ -445,7 +445,6 @@ public class ProjectController {
                     projectView.setProjectStudentLabel(selectedStudentName);
                     projectView.enableUnassign();
                 }
-                
             }catch(IllegalArgumentException exception){
                 ProjectView.displayErrorMessage("There are no students available to assign");
             }
