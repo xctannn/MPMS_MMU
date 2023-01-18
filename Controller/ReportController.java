@@ -130,7 +130,6 @@ public class ReportController {
     * Purpose: Filter out and get projects by specialization and generate text file report
     */
     public void actionForSelectedSpecOption(String specialization){
-        //projectList.setList();
         ArrayList<Project> filteredSpecialization = projectList.getFilteredSpecialization(specialization);
         if(filteredSpecialization.size() == 0) throw new IllegalArgumentException();
         String fileName = "Report\\SpecializationReport.txt";
