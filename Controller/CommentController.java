@@ -40,9 +40,9 @@ public class CommentController {
         this.commentView = new CommentView();
         this.currentProjectID = currentProjectID;
         this.user = currentUser;
-        commentView.getSubmitButton().addActionListener(new commentSubmitListener());
+        commentView.getSubmitButton().addActionListener(new CommentSubmitListener());
         commentView.getReturnButton().addActionListener(new returnListener());
-        createCommentPanel();
+        createCommentBlocks();
     }
 
     /**
@@ -50,7 +50,7 @@ public class CommentController {
      * Purpose: This creates the comment blocks in the scrollable pane in the CommentView.java
      * it contains the userID, userName and the commentedString.
      */
-    public void createCommentPanel(){
+    public void createCommentBlocks(){
         final Dimension EACH_ROW_DIMENSION = new Dimension(700,100);
         JPanel commentPanel = commentView.getCommentBlock();
         ArrayList<CommentModel> comments = commentList.getComments();
@@ -82,7 +82,7 @@ public class CommentController {
                 panel.add(inPanel);
                 panel.add(commentString);
                 commentPanel.add(panel);
-                commentView.getcommentsScrollPane().revalidate();;
+                commentView.getcommentsScrollPane().revalidate();
             }
         }
     }
@@ -94,7 +94,8 @@ public class CommentController {
      */
     public void updateCommentPanel(){
         commentView.getCommentBlock().removeAll();
-        createCommentPanel();
+
+        createCommentBlocks();
     }
 
     /**
@@ -102,7 +103,7 @@ public class CommentController {
      * Purpose: A submit button listener to create a new object to be saved into the comments.json database
      * also empties the Comment Area for new comments to be entered
      */
-    class commentSubmitListener implements ActionListener{
+    class CommentSubmitListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == commentView.getSubmitButton()) {
