@@ -1,20 +1,16 @@
 package Controller;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-
-import java.awt.Color;
-import java.awt.Dimension;
-
 import javax.swing.JLabel;
-
-import java.awt.GridLayout;
 import javax.swing.JPanel;
 
 import Model.CommentList;
@@ -24,7 +20,7 @@ import View.CommentView;
 
 /**
  * Kam Kar Hou 
- * Purpose: CommentController handles the method updating and creating commentblocks, revalidating scrollpane from commentView.java
+ * Purpose: CommentController handles the method updating and creating commentblocks, revalidating scrollpane from CommentView.java
  */
 public class CommentController {
     private MainController mainController;
@@ -51,7 +47,7 @@ public class CommentController {
 
     /**
      * Kam Kar Hou
-     * Purpose: This creates the comment blocks in the scrollable pane in the commentView.java
+     * Purpose: This creates the comment blocks in the scrollable pane in the CommentView.java
      * it contains the userID, userName and the commentedString.
      */
     public void createCommentBlocks(){
@@ -124,14 +120,12 @@ public class CommentController {
                     commentView.getErrorMessageLabel().setText("");
                     commentView.getCommentArea().setText("");
                     updateCommentPanel();
-                }else{
+                }
+                else {
                     commentView.getErrorMessageLabel().setText("Error: Textbox cannot be empty");
                     commentView.getCommentArea().setText("");
                     updateCommentPanel();
                 }
-
-
-
             }
         }
     }
@@ -152,7 +146,5 @@ public class CommentController {
     public JPanel getCommentView(){
         return commentView;
     }
-
-
 }
 

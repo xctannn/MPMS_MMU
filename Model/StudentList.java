@@ -41,7 +41,6 @@ public class StudentList implements JsonList<Student> {
                 i--;
             }
         }
-
         return filteredStudents;
     }
 
@@ -59,7 +58,6 @@ public class StudentList implements JsonList<Student> {
             
             filteredStudentIds.add(studentId);
         }
-
         return filteredStudentIds;
     }
 
@@ -137,9 +135,7 @@ public class StudentList implements JsonList<Student> {
     @Override
     public void addItem(Student item) {
         setList();
-
-        this.students.add(item);
-         
+        this.students.add(item);  
         save();
     }
 

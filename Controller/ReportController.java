@@ -7,7 +7,6 @@ import Model.Project;
 import Model.ProjectList;
 import View.ProjectView;
 
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedWriter;
@@ -131,7 +130,6 @@ public class ReportController {
     * Purpose: Filter out and get projects by specialization and generate text file report
     */
     public void actionForSelectedSpecOption(String specialization){
-        //projectList.setList();
         ArrayList<Project> filteredSpecialization = projectList.getFilteredSpecialization(specialization);
         if(filteredSpecialization.size() == 0) throw new IllegalArgumentException();
         String fileName = "Report\\SpecializationReport.txt";
@@ -162,9 +160,9 @@ public class ReportController {
             String writeTitle = String.format("%-50s %25s %20s %15s %23s", "Project Name", "Specialization", "Lecturer", "Active", "Assigned Student");
             bufferedWriter.write(writeTitle);
             for(int i = 0 ; i < projectData.size(); i++){
-            Project project = projectData.get(i);
-            String writeContent = String.format("%-50s %25s %18s %16s %20s", project.getName(), project.getSpecialization(), project.getLecturerId(), project.getIsActive(), project.getStudentAssignedId());
-            bufferedWriter.write("\n" + writeContent);
+                Project project = projectData.get(i);
+                String writeContent = String.format("%-50s %25s %18s %16s %20s", project.getName(), project.getSpecialization(), project.getLecturerId(), project.getIsActive(), project.getStudentAssignedId());
+                bufferedWriter.write("\n" + writeContent);
             }
             bufferedWriter.close();
         }catch(IOException e) {

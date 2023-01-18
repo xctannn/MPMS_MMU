@@ -31,9 +31,7 @@ import Model.Student;
  * Purpose: For user to view a list of projects and its related details 
  */
 public class ProjectView extends JPanel{
-    private static final String[] projectSpecializationOptions = {"---Select Here---", "Software Engineering", "Game Development", "Data Science" , "Cybersecurity", "Artificial Intelligence"};
-    //private ArrayList<String> selectionWheelOptions = new ArrayList<String>();
-    
+    private static final String[] projectSpecializationOptions = {"---Select Here---", "Software Engineering", "Game Development", "Data Science" , "Cybersecurity", "Artificial Intelligence"};    
 
     // Projects Table View Components
     public JPanel wrapper = new JPanel();
@@ -138,7 +136,6 @@ public class ProjectView extends JPanel{
         this.add(projectPanel);
     }
 
-    
     // Yaw Boon Zhe    
     private JPanel adminProjectTable(){
         JPanel tableWrapper = new JPanel();
@@ -154,8 +151,7 @@ public class ProjectView extends JPanel{
 
         return tableWrapper;
     }
-
-    
+  
     // Yaw Boon Zhe    
     private JPanel lecturerProjectTable(){
         JPanel tableWrapper = new JPanel();
@@ -169,8 +165,7 @@ public class ProjectView extends JPanel{
         
         return tableWrapper;
     }
-
-    
+  
     // Yaw Boon Zhe    
     private JPanel studentProjectTable(){
         JPanel tableWrapper = new JPanel();
@@ -184,7 +179,6 @@ public class ProjectView extends JPanel{
         return tableWrapper;
     }
 
-    
     // Yaw Boon Zhe    
     private JPanel logoutButton(){
         JPanel logoutButtonWrapper = new JPanel();
@@ -222,7 +216,6 @@ public class ProjectView extends JPanel{
         return projectTableButtons;
     }
     
-    
     // Yaw Boon Zhe    
     private JPanel projectPanelTitle(){
         JPanel projectPanelTitle = new JPanel();
@@ -251,7 +244,6 @@ public class ProjectView extends JPanel{
         return projectPanelTitle;
     }
 
-    
     // Yaw Boon Zhe    
     private JPanel projectPanelContent(){
         projectBody.setLayout(new BoxLayout(projectBody, BoxLayout.PAGE_AXIS));
@@ -266,7 +258,6 @@ public class ProjectView extends JPanel{
         return projectPanelContent;
     }
 
-    
     // Tan Xiao Chin    
     private JPanel editButton(){
         JPanel projectPanelEditWrapper = new JPanel();
@@ -276,7 +267,6 @@ public class ProjectView extends JPanel{
         return projectPanelEditWrapper;
     }
 
-    
     // Tan Xiao Chin    
     private JPanel assignButton(){
         assignButtonsWrapper.add(assignStudentButton);
@@ -285,7 +275,6 @@ public class ProjectView extends JPanel{
         return assignButtonsWrapper;
     }
 
-    
     /*
      * Yaw Boon Zhe
      * Purpose: add buttons to delete project, confirm add project, and view comments at buttom of projectPanel
@@ -304,7 +293,6 @@ public class ProjectView extends JPanel{
         return projectPanelButtons;
     }
 
-    
     /*
      * Yaw Boon Zhe
      * Purpose: add buttons to assign student to project,toggle Project, confirm add project, and view comments 
@@ -324,7 +312,6 @@ public class ProjectView extends JPanel{
         return projectPanelButtons;
     }
 
-    
     /*
      * Yaw Boon Zhe
      * Purpose: add buttons to view comments at buttom of projectPanel
@@ -339,7 +326,6 @@ public class ProjectView extends JPanel{
         return projectPanelButtons;
     }
 
-    
     /*
      * Yaw Boon Zhe
      * Purpose: Show certain components, while hiding other components to setup a view for lecturer to add projects
@@ -540,9 +526,8 @@ public class ProjectView extends JPanel{
                                                         studentOptions, 
                                                         studentOptions[0]);
         
-        if (selected == null){
-            return "";
-        }else return selected.toString();
+        if (selected == null) return "";
+        else return selected.toString();
     }
 
     // Tan Xiao Chin
@@ -611,9 +596,8 @@ public class ProjectView extends JPanel{
                                                         wheelOptions, 
                                                         wheelOptions[0]);
         
-        if (selected == null){
-            return "";
-        }else return selected.toString();
+        if (selected == null) return "";
+        else return selected.toString();
     }
 
     /*
@@ -739,7 +723,7 @@ public class ProjectView extends JPanel{
         projectContent.setText(content);
     }
 
-    // tan Xiao Chin
+    // Tan Xiao Chin
     public void setToggleButtonText(boolean isActive){
         if (isActive){
             toggleProjectButton.setText("Dectivate");
@@ -797,6 +781,7 @@ public class ProjectView extends JPanel{
         adminAddProjectButton.addActionListener(adminAddProjectButtonListener);
     } 
 
+    // Yaw Boon Zhe
     public void addGenerateReportButtonListener(ActionListener generateReportButtonListener){
         generateReportButton.addActionListener(generateReportButtonListener);
     }

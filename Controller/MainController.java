@@ -11,6 +11,7 @@ import Model.Student;
 import Model.User;
 
 /*
+ * Yaw Boon Zhe
  * Purpose: Redirect user to different pages of the system
  */
 public class MainController {
@@ -56,18 +57,18 @@ public class MainController {
 
     // Yaw Boon Zhe
     public void returnProjectView(){
-        cardLayout.show(mainView, "admin");
+        cardLayout.show(mainView, "project");
     }
 
     /*
      * Yaw Boon Zhe
-     * Purpose: redirect Administrator user to project view
+     * Purpose: redirect user to project view
      */
     public void switchProjectView(Administrator adminUser){
         mainView.remove(2);
         this.projectController = new ProjectController(this, adminUser);
-        mainView.add(projectController.getProjectView(), "admin", 2);
-        cardLayout.show(mainView, "admin");
+        mainView.add(projectController.getProjectView(), "project", 2);
+        cardLayout.show(mainView, "project");
     }
 
     /*
@@ -77,8 +78,8 @@ public class MainController {
     public void switchProjectView(Lecturer lecturerUser){
         mainView.remove(2);
         this.projectController = new ProjectController(this, lecturerUser);
-        mainView.add(projectController.getProjectView(), "lecturer", 2);
-        cardLayout.show(mainView, "lecturer");
+        mainView.add(projectController.getProjectView(), "project", 2);
+        cardLayout.show(mainView, "project");
     }
 
     /*
@@ -88,8 +89,8 @@ public class MainController {
     public void switchProjectView(Student studentUser){
         mainView.remove(2);
         this.projectController = new ProjectController(this, studentUser);
-        mainView.add(projectController.getProjectView(), "student", 2);
-        cardLayout.show(mainView, "student");
+        mainView.add(projectController.getProjectView(), "project", 2);
+        cardLayout.show(mainView, "project");
     }
 
     /*
