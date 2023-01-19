@@ -1,4 +1,4 @@
-package Controller;
+package src.Controller;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,10 +13,10 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Model.CommentList;
-import Model.CommentModel;
-import Model.User;
-import View.CommentView;
+import src.Model.CommentList;
+import src.Model.CommentModel;
+import src.Model.User;
+import src.View.CommentView;
 
 /**
  * Kam Kar Hou 

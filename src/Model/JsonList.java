@@ -1,4 +1,4 @@
-package Model;
+package src.Model;
 
 /*
  * Purpose: An interface for all the model lists that parses the JSON files

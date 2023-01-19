@@ -1,4 +1,4 @@
-package View;
+package src.View;
 
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;

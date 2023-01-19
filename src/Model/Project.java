@@ -1,4 +1,4 @@
-package Model;
+package src.Model;
 
 /*
  * Purpose: Project Model, contains the atrributes of a Project in the System

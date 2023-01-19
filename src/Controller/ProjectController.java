@@ -1,4 +1,4 @@
-package Controller;
+package src.Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,16 +11,16 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import Model.Administrator;
-import Model.CommentList;
-import Model.Lecturer;
-import Model.LecturerList;
-import Model.Project;
-import Model.ProjectList;
-import Model.Student;
-import Model.StudentList;
-import Model.User;
-import View.ProjectView;
+import src.Model.Administrator;
+import src.Model.CommentList;
+import src.Model.Lecturer;
+import src.Model.LecturerList;
+import src.Model.Project;
+import src.Model.ProjectList;
+import src.Model.Student;
+import src.Model.StudentList;
+import src.Model.User;
+import src.View.ProjectView;
 
 /*
  * Purpose: Controller for obtaining information ProjectView to manipulate Project data 

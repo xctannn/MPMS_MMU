@@ -1,4 +1,4 @@
-package Model;
+package src.Model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

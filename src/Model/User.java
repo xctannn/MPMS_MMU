@@ -1,4 +1,4 @@
-package Model;
+package src.Model;
 
 /*
  * Abstract class of a User model, to be inherited to more specific user types

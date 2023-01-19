@@ -1,4 +1,4 @@
-package View;
+package src.View;
 
 import java.awt.event.ActionListener;
 
@@ -9,12 +9,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import src.Model.StudentList;
+
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.GridBagConstraints;
-
-import Model.StudentList;
 
 /*
  * Chua Hui Yi

@@ -1,15 +1,16 @@
-package Controller;
+package src.Controller;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import View.LoginView;
-import Model.User;
-import Model.LecturerList;
-import Model.StudentList;
-import Model.AdministratorList;
+
+import src.Model.AdministratorList;
+import src.Model.LecturerList;
+import src.Model.StudentList;
+import src.Model.User;
+import src.View.LoginView;
 
 /*
  * Chua Hui Yi

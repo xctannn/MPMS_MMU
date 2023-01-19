@@ -1,4 +1,4 @@
-package Model;
+package src.Model;
 
 /*
  * Chua Hui Yi

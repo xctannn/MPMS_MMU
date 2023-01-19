@@ -1,14 +1,14 @@
-package Controller;
+package src.Controller;
 
 import java.awt.CardLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import Model.Administrator;
-import Model.Lecturer;
-import Model.Student;
-import Model.User;
+import src.Model.Administrator;
+import src.Model.Lecturer;
+import src.Model.Student;
+import src.Model.User;
 
 /*
  * Yaw Boon Zhe

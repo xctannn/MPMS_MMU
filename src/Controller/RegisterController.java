@@ -1,4 +1,4 @@
-package Controller;
+package src.Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,13 +6,13 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Model.Lecturer;
-import Model.Student;
-import Model.Administrator;
-import Model.StudentList;
-import Model.LecturerList;
-import Model.AdministratorList;
-import View.RegisterView;
+import src.Model.Administrator;
+import src.Model.AdministratorList;
+import src.Model.Lecturer;
+import src.Model.LecturerList;
+import src.Model.Student;
+import src.Model.StudentList;
+import src.View.RegisterView;
 
 /*
  * Chua Hui Yi

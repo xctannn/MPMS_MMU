@@ -1,11 +1,11 @@
-package Controller;
+package src.Controller;
 
 import java.util.ArrayList;
 
-import Model.Administrator;
-import Model.Project;
-import Model.ProjectList;
-import View.ProjectView;
+import src.Model.Administrator;
+import src.Model.Project;
+import src.Model.ProjectList;
+import src.View.ProjectView;
 
 import java.io.FileWriter;
 import java.io.IOException;

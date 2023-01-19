@@ -1,4 +1,4 @@
-package View;
+package src.View;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -23,9 +23,9 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 
-import Model.Administrator;
-import Model.Lecturer;
-import Model.Student;
+import src.Model.Administrator;
+import src.Model.Lecturer;
+import src.Model.Student;
 
 /*
  * Purpose: For user to view a list of projects and its related details 
