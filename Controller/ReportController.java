@@ -10,6 +10,7 @@ import View.ProjectView;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedWriter;
+import java.io.File;
 
 /*
 * Iven Low
@@ -154,6 +155,10 @@ public class ReportController {
     * Purpose: Get the filename and filtered projects details to generate text file report
     */
     public void writeToFile(String fileName, ArrayList<Project> projectData){
+        File directory = new File("Report\\");
+        if(!directory.exists()){
+            directory.mkdir();
+        }
         try{
             FileWriter fileWriter = new FileWriter(fileName);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
