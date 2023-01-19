@@ -1,3 +1,0 @@
-Project Name                                                  Specialization             Lecturer          Active        Assigned Student
-Final Year Project                                              Data Science              L0001             true                S0001
-Project Name                                                   Cybersecurity              L0001             true                S0002
