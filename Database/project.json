@@ -1,48 +1,81 @@
 {
   "projects" : [ {
     "id" : "P0001",
-    "name" : "Mini-project Management System",
+    "name" : "Car Rental System",
     "specialization" : "Software Engineering",
-    "content" : "This is a Data Science Capstone project, you better not fuck this up",
+    "content" : "To develop a system that allow the car rental owner\nto advertise their cars and allow user to search any type of car in this system.",
     "lecturerId" : "L0001",
-    "lecturerName" : "Tan",
+    "lecturerName" : "Dr. Robert Park",
     "studentAssignedId" : null,
     "studentAssignedName" : null,
     "isAssigned" : false,
     "isActive" : true
   }, {
     "id" : "P0002",
-    "name" : "Final Year Project",
+    "name" : "Android chatbot",
     "specialization" : "Data Science",
-    "content" : "This is a Data Science Capstone project, dont fuck this up, yo.\n",
+    "content" : "To design a android chatbot giving people an automated way to communicate with your company. ",
     "lecturerId" : "L0001",
-    "lecturerName" : "Tan",
-    "studentAssignedId" : "S0001",
-    "studentAssignedName" : "S1",
-    "isAssigned" : true,
-    "isActive" : true
-  }, {
-    "id" : "P0003",
-    "name" : "New Project",
-    "specialization" : "Software Engineering",
-    "content" : "This is a new proejct blah blah blah blah",
-    "lecturerId" : "L0002",
-    "lecturerName" : "Lee",
+    "lecturerName" : "Dr. Robert Park",
     "studentAssignedId" : null,
     "studentAssignedName" : null,
     "isAssigned" : false,
-    "isActive" : false
+    "isActive" : true
+  }, {
+    "id" : "P0003",
+    "name" : "Multiplayer 3D Game",
+    "specialization" : "Game Development",
+    "content" : "To build a multipayer 3D strategic game. ",
+    "lecturerId" : "L0002",
+    "lecturerName" : "Lynna",
+    "studentAssignedId" : null,
+    "studentAssignedName" : null,
+    "isAssigned" : false,
+    "isActive" : true
   }, {
     "id" : "P0004",
-    "name" : "Project Name",
+    "name" : "Security System",
     "specialization" : "Cybersecurity",
-    "content" : "Conent project",
-    "lecturerId" : "L0001",
-    "lecturerName" : "Tan",
-    "studentAssignedId" : "S0002",
-    "studentAssignedName" : "s2",
-    "isAssigned" : true,
+    "content" : "To design and implement a security system for a small business network, including setting up a system for monitoring and logging network activity to detect and respond to security incidents.",
+    "lecturerId" : "L0003",
+    "lecturerName" : " Eliza Ariston",
+    "studentAssignedId" : null,
+    "studentAssignedName" : null,
+    "isAssigned" : false,
+    "isActive" : true
+  }, {
+    "id" : "P0005",
+    "name" : "Medical Store System",
+    "specialization" : "Software Engineering",
+    "content" : "To design a Medical Store Management System for reducing the complexities of record keeping and documentation in the inventory management, payments and list of suppliers.",
+    "lecturerId" : "L0002",
+    "lecturerName" : "Lynna",
+    "studentAssignedId" : null,
+    "studentAssignedName" : null,
+    "isAssigned" : false,
+    "isActive" : true
+  }, {
+    "id" : "P0006",
+    "name" : "ATM System",
+    "specialization" : "Cybersecurity",
+    "content" : "To build a ATM System which offer the ability to deposit funds, check your balance and transfer money between accounts.",
+    "lecturerId" : "L0002",
+    "lecturerName" : "Lynna",
+    "studentAssignedId" : null,
+    "studentAssignedName" : null,
+    "isAssigned" : false,
+    "isActive" : true
+  }, {
+    "id" : "P0007",
+    "name" : "Online Admission System",
+    "specialization" : "Software Engineering",
+    "content" : "Online Admission System is a web portal of admission for computerization of all pre and post admission activities of an Institution.",
+    "lecturerId" : "L0003",
+    "lecturerName" : " Eliza Ariston",
+    "studentAssignedId" : null,
+    "studentAssignedName" : null,
+    "isAssigned" : false,
     "isActive" : true
   } ],
-  "projectCount" : 4
+  "projectCount" : 7
 }

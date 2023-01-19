@@ -1,16 +1,16 @@
 [ {
   "id" : "L0001",
-  "username" : "Tan",
+  "username" : "Dr. Robert Park",
   "password" : "l01",
-  "projectIDList" : [ "P0001", "P0002", "P0004", "P0006", "P0009", "P0010" ]
+  "projectIDList" : [ "P0001", "P0002" ]
 }, {
   "id" : "L0002",
-  "username" : "Lee",
+  "username" : "Lynna",
   "password" : "l02",
-  "projectIDList" : [ ]
+  "projectIDList" : [ "P0003", "P0005", "P0006" ]
 }, {
   "id" : "L0003",
-  "username" : "L0003",
+  "username" : " Eliza Ariston",
   "password" : "l03",
-  "projectIDList" : [ "P0012", "P0013" ]
+  "projectIDList" : [ "P0004", "P0007" ]
 } ]

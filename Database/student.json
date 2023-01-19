@@ -1,13 +1,61 @@
 [ {
   "id" : "S0001",
-  "username" : "S1",
+  "username" : "Anita",
   "password" : "s01",
   "specialization" : "Data Science",
-  "assignedProjectID" : "P0002"
+  "assignedProjectID" : null
 }, {
   "id" : "S0002",
-  "username" : "s2",
+  "username" : "Kumar",
   "password" : "s02",
   "specialization" : "Cybersecurity",
-  "assignedProjectID" : "P0004"
+  "assignedProjectID" : null
+}, {
+  "id" : "S0003",
+  "username" : "Jermaine",
+  "password" : "s03",
+  "specialization" : "Software Engineering",
+  "assignedProjectID" : null
+}, {
+  "id" : "S0004",
+  "username" : "Safiya",
+  "password" : "s04",
+  "specialization" : "Data Science",
+  "assignedProjectID" : null
+}, {
+  "id" : "S0005",
+  "username" : "Trinity",
+  "password" : "s05",
+  "specialization" : "Game Development",
+  "assignedProjectID" : null
+}, {
+  "id" : "S0006",
+  "username" : "Nora",
+  "password" : "s06",
+  "specialization" : "Cybersecurity",
+  "assignedProjectID" : null
+}, {
+  "id" : "S0007",
+  "username" : "Diana",
+  "password" : "s07",
+  "specialization" : "Software Engineering",
+  "assignedProjectID" : null
+}, {
+  "id" : "S0008",
+  "username" : "Todd",
+  "password" : "s08",
+  "specialization" : "Software Engineering",
+  "assignedProjectID" : null
+}, {
+  "id" : "S0009",
+  "username" : "Lance",
+  "password" : "s09",
+  "specialization" : "Cybersecurity",
+  "assignedProjectID" : null
+}, {
+  "id" : "S0010",
+  "username" : "Lexie",
+  "password" : "s10",
+  "specialization" : "Software Engineering",
+  "assignedProjectID" : null
 } ]
