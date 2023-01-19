@@ -1,0 +1,8 @@
+Project Name                                                  Specialization             Lecturer          Active        Assigned Student
+Car Rental System                                       Software Engineering              L0001             true                 null
+Android chatbot                                                 Data Science              L0001             true                 null
+Multiplayer 3D Game                                         Game Development              L0002             true                 null
+Security System                                                Cybersecurity              L0003             true                 null
+Medical Store System                                    Software Engineering              L0002             true                 null
+ATM System                                                     Cybersecurity              L0002             true                 null
+Online Admission System                                 Software Engineering              L0003             true                 null
